@@ -132,7 +132,8 @@ and standardized notation, decades after Euler's exploratory work \cite{DUTKA84}
 the hypergeometric function eventually came to be seen as a crown accomplishment of classical 
 function theory and a \textit{sine qua non} of period analysis \cite{KZ2001}. 
 
-Up to a scale degree of freedom, the two ordinary differential equations,
+Up to a scale degree of freedom or an initial value, the two ordinary 
+differential equations,
 \begin{eqnarray}
 3\;T-2\;\alpha \;\partial_{\alpha}T=0 \;\;\;\;\;\;\;\; \text{vs.} \nonumber
  \;\;\;\;\;\;\;\; T-\partial_{\alpha}(4\;\alpha\;(1-\alpha)\;\partial_{\alpha}T)=0,
@@ -775,13 +776,13 @@ alternative normal form, $x^2+y^2 = a^2+a^2 x^2 y^2$. The crucial elliptic funct
 \psi(t)= \chi(t+\tfrac{1}{2})= \frac{2\sum_{n=1}^{\infty}e^{i \pi(2n-1)^2 \tau/2}\cos\big((2 n-1)\pi t \big) 
 }{1+2\sum_{n=1}^{\infty} e^{i \pi(2n)^2 \tau/2}\cos\big(2 n \pi t \big)},\nonumber
 \end{eqnarray}
-allows a solution $x(t)=\chi(t)$, and $y(t)=\psi(t)$ of
-the coupled differential equations\footnote{Edwards's normalization of 
-the time domain requires chain rule, $\dot{\psi}=(2/T) d\psi/dt  $, with real period $T$.}
-${\dot{x}=y(1-a^2 x^2)}$ and $\dot{y}=-x(1-a^2 y^2)$,
-as is proven in Part III of the original article \cite{EDWARDS2007}. Translation of Edwards's 
-solution to the simple pendulum context encounters two difficulties. First, a  
-transformation is needed to go from math coordinates $(x,y)$ to physical coordinates 
+allows a solution, $x(t)=\chi(t)$ and $y(t)=\psi(t)$, of the coupled differential 
+equations\footnote{Edwards's normalization of the time domain requires chain rule, 
+$\dot{\psi}=(2/T) d\psi/dt  $, with real period $T$.}, ${\dot{x}=y(1-a^2 x^2)}$ and 
+$\dot{y}=-x(1-a^2 y^2)$, and the solution must adhere to the normal form. Edwards already 
+proves this statement in Part III of the original article \cite{EDWARDS2007}. 
+Translation of his solution to the simple pendulum context encounters two difficulties. 
+First, a  transformation is needed to go from math coordinates $(x,y)$ to physical coordinates 
 $(p,q)$\textemdash but this follows quickly from the previous developments. Second,
 and with more effort, calculation of the correct value for the period ratio $\tau$ 
 depends upon ascertainment of the double-periodicity notion. To this end, the Wick rotation, 
@@ -808,24 +809,25 @@ a canonical transformation.}. Angle doubling allows exact solution,
 \lambda(t) = \frac{\sqrt{\alpha}}{2}\Big(\chi(\tfrac{t}{2})^2 + \psi(\tfrac{t}{2})^2\Big), \;\;\;\;\; 
 \phi(t)   =  \arctan\big(\chi(\tfrac{t}{2})/\psi(\tfrac{t}{2})\big),  \nonumber 
 \end{eqnarray}
-of the earlier pendulum model, $H = \lambda-\frac{1}{2}\lambda^2\sin(\phi)^2$, or in Cartesian 
-coordinates, 
+of the earlier pendulum model, $H = \lambda-\frac{1}{2}\lambda^2\sin(\phi)^2$.
+Time parameterization for pendulum variables $\theta$ and $\dot{\theta}$ then follows by 
+walking back $(\lambda,\phi)$ through the sequence of canonical transformations\textemdash 
+first through the cartesian coordinates,
 \begin{eqnarray}
 p(t)   =  \frac{ \; \psi(\tfrac{t}{2})^2-\chi(\tfrac{t}{2})^2 
 }{\Big(1+\chi(\tfrac{t}{2})^2  \psi(\tfrac{t}{2})^2\Big)^{\frac{1}{2}}},  \;\;\;\;\; 
 q(t)  = \frac{2 \;  \chi(\tfrac{t}{2})\;\psi(\tfrac{t}{2}) 
-}{\Big(1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2\Big)^{\frac{1}{2}}}. \nonumber 
+}{\Big(1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2\Big)^{\frac{1}{2}}}, \nonumber 
 \end{eqnarray}
-Time parameterization for pendulum variables $\theta$ and $\dot{\theta}$ then follows by 
-walking back $(\lambda,\phi)$ through the sequence of canonical transformations,
+of $2H=(p^2+q^2)(1-\frac{1}{4}q^2)$, then to the pendulum coordinates,
 \begin{eqnarray}
-\theta(t) &=& 2 \arcsin\bigg(\frac{2\;\chi(\tfrac{t}{2})\; \psi(\tfrac{t}{2})
-}{1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2 }\bigg), \nonumber \\
-\dot{\theta}(t) &=& 2\bigg(\frac{\psi(\tfrac{t}{2})^2 - \chi(\tfrac{t}{2})^2
+\theta(t) = 2 \arcsin\bigg(\frac{2\;\chi(\tfrac{t}{2})\; \psi(\tfrac{t}{2})
+}{1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2 }\bigg), \;\;\;\;\; 
+\dot{\theta}(t) = 2\bigg(\frac{\psi(\tfrac{t}{2})^2 - \chi(\tfrac{t}{2})^2
 }{1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2 }\bigg). \nonumber 
 \end{eqnarray}
-The expression for $\theta(t)$ reduces according to a special case of the $X$ addition 
-rule, proven in Part II of \cite{EDWARDS2007}. The addition rules act linearly along 
+The expression for $\theta(t)$ reduces again according to a special case of the $X$ 
+addition rule, proven in Part II of \cite{EDWARDS2007}. The addition rules act linearly along 
 the time dimension, so the choice of $x'=x=\chi(\tfrac{t}{2})$ and 
 $y'=y=\psi(\tfrac{t}{2})$ sets $X=\chi(t)$, and also, 
 \begin{eqnarray}
@@ -918,8 +920,8 @@ while loosing only a phase degree of freedom via the map $(v,w) \rightarrow z=\p
 More explicitly, $\mathcal{S}_{\alpha}$ is obtained from $\mathcal{R}_{\alpha}$ after considering 
 rotational symmetry in the $(p,q)$-plane. Coordinates $x=w=0$ and $z=v$ may be chosen such that 
 $\widetilde{\mathcal{C}}_{\alpha}=\{(y,z): \alpha=-z^2+y^2 \}$ is a hyperbola connected to the base circle 
-$\mathcal{C}_{\alpha}=\{(x,y): \alpha=x^2+y^2 \}$ at the branch points ${(p, q)=(0,\pm \sqrt{\alpha})}$. 
-Any other point $(p,q)=(x_0,y_0)$ along $\mathcal{C}_{\alpha}$ is yet again a branch point; however, 
+$\mathcal{C}_{\alpha}=\{(x,y): \alpha=x^2+y^2 \}$ at the turning points ${(p, q)=(0,\pm \sqrt{\alpha})}$. 
+Any other point $(p,q)=(x_0,y_0)$ along $\mathcal{C}_{\alpha}$ is yet again a turning point; however, 
 in a rotated coordinate system. Point $(x_0,y_0)$ connects circular $\mathcal{C}_{\alpha}$ to a 
 \textit{rotated copy} of hyperbolic $\widetilde{\mathcal{C}}_{\alpha}$, which
 falls in the hyperplane determined by  $(x_0 \;u+y_0 \;v)(x_0 \;y-y_0 \;x)=0$.
@@ -1004,8 +1006,23 @@ with $+$ chosen for $z \ge 0$ and $-$ chosen otherwise.
 \end{center}
 \end{figure*}
 
-With two invariant time-translations rather than just one, a genus one elliptic curve 
-differs qualitatively from the genus zero harmonic hyperboloid. In general, the two periods may describe the 
+\begin{figure*}[t] 
+\begin{center}
+\begin{overpic}[width=0.55\textwidth]{./Figures/ToricSlices.eps}\end{overpic}
+\;\;\;\; \begin{overpic}[width=0.3\textwidth]{./Figures/SecKey.eps}
+ \put (18,86) {$2H=p^2+q^2-p^2 q^2$}
+ \put (10,68) {\Large\rotatebox[origin=c]{90}{$\longleftarrow$}}
+ \put (15,68) { Wick Rotation}
+  \put (18,49.5) {$  2\widetilde{H} =  -p^2+q^2+p^2 q^2 $}
+ \put (18,31.5) {$   2\widetilde{H} = -p^2+q^2 - \tfrac{1}{4}(p^2 + q^2)^2 $}
+\end{overpic}
+\caption{Toric Cross Sections via Wick Rotation.}
+\label{fig:ToricSecs}
+\end{center}
+\end{figure*}
+
+With two periods rather than just one, a genus one elliptic curve differs qualitatively 
+from the genus zero harmonic hyperboloid. In general, the two periods may describe the 
 boundaries of a \textit{period parallelogram} in the complex $t$-plane; however, in Edwards's normal 
 form, a choice of real $\alpha \in (0,1)$ amounts to choosing a \textit{period rectangle} with entirely 
 complex $\tau$ and $\mathfrak{I}(\tau) \in (0,\infty)$. To calculate $\tau$ explicitly, we transform 
@@ -1036,21 +1053,6 @@ as to \textit{why}, but for now we are more concerned with the ever-pressing
 
 \begin{figure*}[t] 
 \begin{center}
-\begin{overpic}[width=0.55\textwidth]{./Figures/ToricSlices.eps}\end{overpic}
-\;\;\;\; \begin{overpic}[width=0.3\textwidth]{./Figures/SecKey.eps}
- \put (18,86) {$2H=p^2+q^2-p^2 q^2$}
- \put (10,68) {\Large\rotatebox[origin=c]{90}{$\longleftarrow$}}
- \put (15,68) { Wick Rotation}
-  \put (18,49.5) {$  2\widetilde{H} =  -p^2+q^2+p^2 q^2 $}
- \put (18,31.5) {$   2\widetilde{H} = -p^2+q^2 - \tfrac{1}{4}(p^2 + q^2)^2 $}
-\end{overpic}
-\caption{Toric Cross Sections via Wick Rotation.}
-\label{fig:ToricSecs}
-\end{center}
-\end{figure*}
-
-\begin{figure*}[t] 
-\begin{center}
 \begin{overpic}[width=0.45\textwidth]{./Figures/ToricRibbons.eps}\end{overpic}
 \;\;\;\;\;\;\;\;\;\;\;\;
 \begin{overpic}[width=0.4\textwidth]{./Figures/TorusDomain.eps}
@@ -1068,9 +1070,9 @@ as to \textit{why}, but for now we are more concerned with the ever-pressing
 \end{figure*}
 
 
-Unlike their trigonometric counterparts, the shape of functions $\chi(t)$ and $\psi(t)$ 
-depends on the amplitude parameter $\alpha$ via the period ratio $\tau=i\frac{K(1-\alpha)}{2K(\alpha)}$. 
-Shape variation with $\alpha$ carries over to the Riemann surface,
+Unlike their trigonometric counterparts, the shape of $\chi(t)$ or $\psi(t)$ depends 
+on the amplitude parameter $\alpha$ via the period ratio $\tau=i\frac{K(1-\alpha)}{2K(\alpha)}$,
+now justly derived. Shape variation with $\alpha$ carries over to the Riemann surface,
 \begin{eqnarray}
 \mathcal{R}_{\alpha} = \Big\{\big(p,q\big)
 =\big(\alpha^{\frac{1}{4}} \;\psi(t), \; \alpha^{\frac{1}{4}} \;\chi(t)\big) 
@@ -1093,53 +1095,116 @@ preserves the euclidean metric: $p^{\star}p+q^{\star}q=x^2+y^2+z^2$.},
 Subscripts $\mathfrak{R}$ and $\mathfrak{I}$ indicate either the real or the imaginary 
 component of complex-valued functions $\psi(t)$ and $\chi(t)$. Hyperbolic sections also 
 expand over thin strip domains of width $\Delta t =1/4$, centered on vertical lines 
-$\mathfrak{R}(t)=(2n+1)/4, \; n \in \mathbb{Z}$. These four sections separately approach a 
-harmonic hyperboloid in the limit $\alpha \rightarrow 1$. In the right panel of Fig. \ref{fig:ToricRibbons},
-the partial domain of all five hyperbolic sections covers a full three-quarters of $\mathbb{C}$
-while avoiding points $\tau + n/2, \; n\in \mathbb{Z}$. At these points, either $\chi$ or $\psi$ has 
-a pole. Arranging the disjoint pieces and coloring by the real component of time, we expand from 
-the skeleton of Fig. \ref{fig:ToricSecs} to the compact surfaces nested in the left of 
-Fig. \ref{fig:ToricRibbons}. Admittedly, the patchwork surfaces look sketchy, but so far we have 
-yet to find a better depiction of the $\alpha$-dependent complex tori associated to genus one. 
+$\mathfrak{R}(t)=(2n+1)/4, \; n \in \mathbb{Z}$. Four sections in the range $\mathbb{C}^2$ 
+separately approach a harmonic hyperboloid in the limit $\alpha \rightarrow 1$. In the 
+right panel of Fig. \ref{fig:ToricRibbons}, the partial domain of all five hyperbolic 
+sections covers a full three-quarters of $\mathbb{C}$ while avoiding points 
+$\tau + n/2, \; n\in \mathbb{Z}$. At these points, either $\chi$ or $\psi$ has 
+a pole. Projecting the disjoint pieces of $\mathcal{R}_{\alpha}$ to three dimensions 
+and coloring by the real component of time, we expand from the skeleton of Fig. \ref{fig:ToricSecs} 
+to the patchwork surfaces nested in the left of Fig. \ref{fig:ToricRibbons}. Admittedly, the 
+result looks sketchy, but so far we have yet to do any better. 
+
+\begin{figure*}[p!] 
+\begin{center}
+\vspace{1.5cm}
+\begin{overpic}[width=.95\textwidth]{./Figures/ThreeFlows3T.eps}
+\end{overpic}
+
+\vspace{1.5cm}
+
+\begin{overpic}[width=.95\textwidth]{./Figures/TimeSeries.eps}
+ \put (28,22) {$t$} \put (28,5.5) {$t$}
+ \put (63.5,22) {$t$} \put (63.5,5.5) {$t$}
+ \put (99,22) {$t$} \put (99,5.5) {$t$}
+
+ \put (1,29) {$p$} \put (1,12.5) {$q$}
+ \put (36.5,29) {$p$} \put (36.5,14) {$q$}
+ \put (72,29) {$p$} \put (72,14.5) {$q$}
+
+ \put (-1.5,27.5) {$1$} \put (-1.5,11) {$1$}
+ \put (34,27.5) {$1$} \put (31.5,12) {$\sqrt{2}$}
+ \put (69.5,27.5) {$1$} \put (69,13) {$\tfrac{\pi}{2}$}
+
+
+\end{overpic}
+\caption{Hamiltonian Flows and Their Vertical Projections Over One Period.}
+\label{fig:ThreeFlows}
+\end{center}
+\end{figure*}
+
 
 Depiction of complex tori flexes impressive strength, but actually requires considerably more 
 effort than is necessary for applications in physics. With only values of $\psi(t)$ above the
-real axis, we can graph sections of a Hamiltonian flow and make a wide range of experimental 
-predictions\textemdash the two tasks are not really any different. Fig. XXX depicts the 
-pendulum's Hamiltonian flow,
+real time axis, we can graph sections of a Hamiltonian flow and make a wide range of experimental 
+predictions\textemdash the two tasks are not really any different. Fig. \ref{fig:ThreeFlows} depicts 
+a section of the pendulum's Hamiltonian flow,
 \begin{eqnarray}
-adsf , \nonumber 
+\mathcal{F}_{\alpha} = \bigg\{ \Big(\tfrac{1}{2}\theta(t),\tfrac{1}{2}\dot{\theta}(t),2 K(\alpha)t \Big)
+ \in \mathbb{R}^3 : t \in \mathbb{R} \bigg\} , \nonumber 
 \end{eqnarray}
-along with two other related flows. These graphs are the end desire of any textbook exercise,
-but no excercise is complete without double check. Need convergence of the $t$-independent 
-zero-sums, 
+along with equivalent flows conformed to the algebraic models. In terms of textbook expectations, 
+these graphs leave nothing to be desired, save a few numerical double-checks. The following zero 
+sums, 
 \begin{eqnarray}
-0 = 2 H(q(t),q(t))-\alpha = \dot{p}(t) + \partial_{q} H|_t = \dot{q}(t) - \partial_{p} H|_t, 
-\;\;\; 0 < \alpha < .99, \;\;\;t \in \mathbb{R},  \nonumber
+0 = 2 H(q(t),q(t))-\alpha , \;\;\;\;\;\;\;\; 
+0 = \dot{p}(t) + \partial_{q} H|_t, \;\;\;\;\;\;\;\; 
+0  = \dot{q}(t) - \partial_{p} H|_t, \nonumber
 \end{eqnarray}
-to floating-point precision $(\sim 10^{16})$. This can and should be verified numerically. 
+can be evaluated for real sample points $t \in [0,2]$ and $\alpha \in(0.99)$. A truncation of 
+$\psi$ after five 
+summation terms is sufficient to converge to machine precision, $0 \approx 10^{-15}$. This 
+agreement should dispel any remaining doubt about veracity of the solution, but if necessary, 
+testing can be extended to higher values $\alpha \in (.99,1)$ and to arbitrary precision 
+simply by including more summation terms.
 
+Even then, those more inclined to standard methodology can be expected to issue an obstinate 
+argument that "Hamilton's equations have a unique solution. For the simple pendulum, that 
+solution is written in terms of the Jacobian Elliptic functions". Certainly this is also true,
+and by comparison of \textit{equally valid} solutions, we find that,
+\begin{eqnarray}
+\text{sn}\big(2K(\alpha)t\big|\alpha\big) = \alpha^{-\frac{1}{4}}\chi(t)  , \;\;\;\;\;\;\;\;\;\; 
+\text{cn}\big(2K(\alpha)t\big|\alpha\big) = \frac{\psi(\tfrac{t}{2})^2 - \chi(\tfrac{t}{2})^2
+}{\chi(\tfrac{t}{2})^2 + \psi(\tfrac{t}{2})^2 },\nonumber
+\end{eqnarray}
+only where $\alpha \in (0,1)$ and $\tau = i\frac{K(1-\alpha)}{2K(\alpha)} \in (0,\infty)$.
+Any equations solvable in terms of the Jacobian elliptic functions are also solvable 
+in terms of $\psi(t)$ with entirely imaginary $\tau$. Allowing that 
+$\tau \in \mathbb{C}$, the function $\psi(t)$ becomes fully as powerful as Weierstrass's 
+$\wp(t)$, i.e. it is the most general elliptic function possible. More work remains to 
+be done. Wherever a standard solutions exists and is known, another alternative solution 
+in terms of $\psi(t)$ is waiting to be found. What we have seen so far encourages the 
+hope that new derivations will lead to even more new insight!
 
 \section{Conclusion}
 
-Hamiltonian mechanics powerful method for analyzing periods, 
-especially with transform theory. It is nice to go to 
-algebraic form, then surfaces can be analyzed in terms of 
-homology and diff. Eqs. Many future directions. Comparison 
-with quartic oscillator and addition rules. Certificates 
-must be related to addition rules, but this has yet to 
-be adressed. Other plane curve geometries, curves of higher 
-genus, and curves on a sphere. Modular forms and modular 
-functions, but these are all interesting mathematical 
-offshoots, but we are more interested in physics.
+Hamiltonian mechanics teaches us to appreciate the truth and the beauty of classical mechanics 
+through geometric abstractions such as phase portraits, energy landscapes, and time-evolving flows. 
+Even more impressive, insightful geometry arises when incorporating complex time. The value inherent 
+to one particular solution or sculptural model only increases through real and complex transformation 
+theory, which enables proliferation of equivalent forms. In mathematics and physics, choice of 
+coordinates always matters, as we have seen yet again in this problem about the simple pendulum. 
+Transformation of the energy constraint from transcendental to algebraic form enables rapid analysis 
+of period integrals in terms of an ordinary differential equation.  This is an important lesson to 
+learn, especially as part of an effort to analyze a wide variety of oscillation disks.
 
-The main result is that it is somewhat easy to derive 
-diff Eqs. for periods, this is useful technique. In fact
-period is first order observable in experiments, and 
-even determines spectral observables in the semi-classics.
-We pland to expand on these topics in a sequence of subsequent 
-articles. The immediate next will be experimental.
+The harmonic hyperboloid of genus zero and the anharmonic tori of genus one are the first 
+examples on a magnificent bridge between physics and mathematics. The dream of "Hamilton-Abel" 
+theory is to see more pedestrian and commercial traffic crossing this bridge. There are plenty 
+of opportunities left to exchange valuable ideas. One exciting prospect resides in the quantum
+interpretation of complex time. In quantum mechanics, position and momentum are wavefunctions with 
+hidden, complex amplitudes. Consequently, extensive surfaces such as seen in Fig. \ref{fig:GZeroHom} 
+and Fig. \ref{fig:ToricRibbons} may sneak into semi-classical approximations as wavefunction 
+integration domains. However, we will avoid an impetuous rush to quantum theory, and prefer first 
+to give more due diligence to experiment and data analysis.
 
+Scientists place so much importance on calculations as seen in Fig. \ref{fig:ThreeFlows} because 
+they are observable. However, as mentioned in in introduction and preliminary analysis, this is 
+not always easy, we might have difficulty taking data and there might be frictional loses. These 
+are not the days of galileo, and new technology suppresses these issues. We will have another 
+article for measuring pendulum period function.
+
+ 
 \bibliographystyle{unsrtnat}
 \bibliography{biblio}
 
