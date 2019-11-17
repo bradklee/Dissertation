@@ -15,6 +15,7 @@
 \usepackage{algorithm2e}
 \usepackage{url}
 \usepackage{hyperref}
+\hypersetup{colorlinks=true}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx,wrapfig} 
 \usepackage[percent]{overpic}
@@ -45,7 +46,7 @@
 
 \begin{abstract}
 Integration along the transcendental Hamiltonian function $\alpha=2H(p,q)=p^2+\sin(q)^2$ 
-predicts the time-dependence of simple pendulum libration when $\alpha \in (0,1)$. By 
+predicts the time dependence of simple pendulum libration when $\alpha \in (0,1)$. By 
 equivalence via canonical transformation, the same can be said for the 
 algebraic Hamiltonian function,
 $$\alpha=2H(p,q)=\Big(p^2+q^2\Big)\Big(1-\frac{1}{4}q^2\Big),$$ 
@@ -75,7 +76,8 @@ motion.
 \end{center}
 \end{wrapfigure}
 
-The universal law of gravitation guarantees an analogy between the 
+The universal law of gravitation\footnote{For an introduction, try \textit{Feynman 
+Lectures on Physics}, Vol. I, Ch. 7 \cite{FEYNMAN1963}.} guarantees an analogy between the 
 libration of a pendulum around its fixed axis and the orbital motion of 
 a planet around its central star. The entire analogy goes deeper than to simply
 describe a planet and a pendulum bob as massive objects affected by 
@@ -92,9 +94,8 @@ About a century before the advent of
 integral calculus, Galileo (1564-1642) made the simple observation that two 
 pendulums of the same characteristic length will undergo isochronous 
 oscillations. The observation does not hold true outside the small angle limit, 
-as Galileo may very well have known\footnote{This speculation comes from Gosper:
-"Do you think Galileo actually believed that pendulum periods are insensitive to 
-amplitude?  I don't." on Sunday July 7, 2019, 05:33:49 UTC.}. A counterpoint to this 
+as Galileo may very well have known\footnote{As Bill Gosper speculates
+in an email from Sunday July 7, 2019, 05:33:49 UTC.}. A counterpoint to this 
 story occurs in the researches of Kepler (1571-1630), who first discovered the three 
 laws of planetary motion. The third law asserts that the square of a planet's yearly 
 period is proportional to the cube of the orbital ellipse's semi-major axis length. 
@@ -104,8 +105,9 @@ obstacles in theory and experiment stood between renaissance scientists and a be
 understanding of pendulum dynamics.  
 
 Though the planets can not be controlled in a laboratory as can a pendulum bob, the 
-planetary period function is sometimes easier to measure than that of a simple pendulum\footnote{For 
-a popular historical discussion of Galileo, Kepler, and early measurements see Ref. \cite{STROGATZ2019}.}. 
+planetary period function is sometimes easier to measure than that of a simple 
+pendulum\footnote{For a popular discussion of Galileo, Kepler, and early measurements, 
+try \textit{Infinite Powers} \cite{STROGATZ2019}.}. 
 Using only XVI century implements, an astronomer can chart the day-to-day motion of a 
 planet at a resolution of tens or hundreds of data points per yearly cycle. 
 Without digital acquisition of data, a similar sampling of pendulum motion at $10$ to 
@@ -119,7 +121,10 @@ only a few free parameters.
 
 Among hundreds of other topics, Euler initiated the general study of elliptic integrals and 
 hypergeometric series, and subsequently solved exactly for the simple pendulum's amplitude 
-dependence\footnote{Cf. Euler Archive: E028, E366, E503. http://eulerarchive.maa.org/.}. Careful 
+dependence\footnote{Cf. Euler Archive \cite{EULER2019}:  
+\href{http://eulerarchive.maa.org/pages/E028.html}{E028}, 
+\href{http://eulerarchive.maa.org/pages/E366.html}{E366},
+\href{http://eulerarchive.maa.org/pages/E503.html}{E503}.}. Careful 
 examination of publication records reveals yet another example of Arnold's principle that 
 "discoveries are rarely attributed to the correct person". Euler could already understand 
 the hypergeometric function $\,_2 F_1(a,b;c;z)$ in terms of its characteristic differential 
@@ -127,7 +132,7 @@ equation,
 \begin{eqnarray}
 a \;b\; F - \big(c-(a+b+1)z\big) \partial_{z}F - z(1-z)\partial_{z}^2 F = 0,  \nonumber
 \end{eqnarray}
-yet most authors credit the later Gauss (1777-1855), who gave a more systematic treatment 
+yet most authors credit the later Gauss (1777-1855), who gave a more extensive treatment 
 and standardized notation, decades after Euler's exploratory work \cite{DUTKA84}. In any case, 
 the hypergeometric function eventually came to be seen as a crown accomplishment of classical 
 function theory and a \textit{sine qua non} of period analysis \cite{KZ2001}. 
@@ -176,12 +181,12 @@ pendulum's period (Cf. Ref. \cite{GRAHAM1994}, Ch. 5).
 \end{wrapfigure}
 
 Euler and Gauss developed a fine characterization of the gross dynamics of a simple pendulum, 
-but left exact solution of the time-parameterization problem mostly an open question 
+but left exact solution of the time parameterization problem mostly an open question 
 for the next few generations of researchers. The answering involved an honor roll 
 of European patriarchs\textemdash Legendre, Riemann, Jacobi, Weierstrass and many others. Especially 
 through the efforts of Abel (1802-1829), a central theme emerged that the time parameter 
-can also take on complex values\footnote{For another closely related historical account
-see Ref. \cite{POPESCU2016}.}. Subsequently during XX 
+can also take on complex values\footnote{For another closely related historical account,
+try \textit{What is the Genus?}\cite{POPESCU2016}.}. Subsequently during XX 
 century the pendulum's exact solution in terms of standardized, doubly-periodic 
 elliptic functions became a lauded final product of the classical era.
 
@@ -212,13 +217,13 @@ somewhat odd counterparts in the quantum regime. Initial attempts to describe qu
 built upon the concept of phase space. The mathematical prehistory of phase space goes back to Poincar\'{e} 
 (1854-1912), but the work of Ehrenfest (1880-1933) marks the first occurrence of the the Deutsch 
 word \textit{Phasenraum}\cite{NOLTE2010}. Thereafter Sommerfeld (1868-1951) included early depictions 
-of two equivalent phase plane geometries in his famous text \textit{Atombau Und Spektrallinien}. 
-To the uninitiate, the two drawings\textemdash reproduced here in Fig. ~\ref{fig:Sommerfeld}\textemdash 
+of two equivalent phase plane geometries in his famous text \textit{Atombau Und Spektrallinien} \cite{SOMMERFELD1921}. 
+To the uninitiate, the two drawings\, reproduced here in Fig. ~\ref{fig:Sommerfeld}, 
 are only curious works of abstract art. It is not immediately apparent that they describe harmonic 
 oscillation, nor that they relate by a special coordinate transformation, nor that they can be deformed 
 to account for non-linearity. These few basic facts of Hamiltonian Mechanics were widely understood by 
 the last generation of classical analysts, and they are still important 
-today\footnote{Especially in the development of Heller's "The Semiclassical Way" \cite{HELLER2018}.}. 
+today\footnote{Especially in the development of \textit{The Semiclassical Way}\cite{HELLER2018}.}. 
 
 Modern texts follow and expound upon the figure drawing of Sommerfeld and others, making Hamiltonian
 mechanics an attractive and delightful subject, especially for visual learners and abstract 
@@ -252,7 +257,7 @@ its followings. In cryptography, the simplified addition rule helps to optimize 
 the widely-used Diffie-Hellman key-exchange protocol. Thus computer scientists have been among the 
 first to accept and utilize the alternative paradigm. Edwards's normal form also presents physicists 
 with an opportunity to break free from the confines of disciplinary boundaries and standard 
-formulae\footnote{As hinted by D. Bernstein and T. Lange at Chaos Communication Congress 2015 \cite{}.}. 
+formulae\footnote{As hinted during "ECCHacks" at Chaos Communication Congress 2014 \cite{DBTL2014}.}. 
 Perhaps the future will have a better role for "Hamilton-Abel theory" than that of a clever joke or 
 an idle dream. We will now commence an effort to synthesize physical Hamiltonian theory with the 
 complex mathematics present in Harold Edwards's original masterpiece.
@@ -360,15 +365,22 @@ integral of the first kind} \cite{LL1982}. By formally verifying that $T(\alpha)
 part $(a)$ of the typical textbook exercise is already completed. More challenging part 
 $(b)$ asks for a closed form for the coefficients $c_n$. Term-by-term integration of 
 the series expansion\footnote{Using that $(1-4\Phi)^{-1/2} = \sum \binom{2n}{n}\Phi^n $ 
-and that $\oint (2\cos(\phi))^{2n} = \binom{2n}{n}$.} yields an exact solution in 
-series,
+and that $\oint (2\cos(\phi))^{2n} = \binom{2n}{n}$. Cf. OEIS \cite{SLOANE2019},  
+\href{https://oeis.org/A000984}{A000984}.} 
+yields an exact solution in series,
 \begin{eqnarray}
-T(\alpha)= \oint \frac{d\phi}{\sqrt{1-\alpha \sin(\phi)^2}}=\sum \frac{1}{4^n}\binom{2n}{n} \alpha^n \oint\sin(\phi)^{2n}= 
-2\pi \sum \frac{1}{16^n}\binom{2n}{n}^2 \alpha^n. \nonumber 
+T(\alpha)= \oint \frac{d\phi}{\sqrt{1-\alpha \sin(\phi)^2}}
+=\sum_{0}^{2\pi} \frac{1}{4^n}\binom{2n}{n} \alpha^n \oint\sin(\phi)^{2n}
+= 2\pi \sum_{0}^{2\pi} \frac{1}{16^n}\binom{2n}{n}^2 \alpha^n. \nonumber 
 \end{eqnarray}
-Unfortunately the answer $c_n=\frac{2\pi}{16^n}\binom{2n}{n}^2 $ does not contribute at all 
-to intuition for the mysterious variable $\phi$. It is not really an answer, but instead
-a placeholder for many more questions. Why does change of variables from $z$ to $\phi$ 
+If parts $(a)$ and $(b)$ are too easy, part $(c)$ asks for proof that 
+$c_n=\frac{2\pi}{16^n}\binom{2n}{n}^2$ satisfies ${(n+1)^2 c_{n+1}=(n+1/2)^2c_n}$, and 
+consequently that $K(\alpha)$ satisfies a particular hypergeometric differential 
+equation\footnote{We leave this as an exercise for the reader. Cf. OEIS \cite{SLOANE2019}, 
+\href{https://oeis.org/A002894}{A002894}.}. Unfortunately the 
+answers to parts $(a)$, $(b)$, and $(c)$, do not contribute at all to intuition for 
+the mysterious variable $\phi$. They are not so much answers, but instead a distraction
+from deeper inquisition. Why does change of variables from $z$ to $\phi$ 
 work so well? Does simplicity indicate a hidden meaning for $\phi$? Is $\phi$ actually
 the angle of some particular geometric figure? 
 
@@ -398,12 +410,11 @@ looks hopelessly complicated. It is about to get even worse. Conservation of
 energy, ${4 \alpha=\dot{\theta}^2+4 \sin(\theta/2)^2}$, 
 determines $r$ as a function of $\sin(\phi)$ and $\alpha$ by reversion of the series,
 \begin{eqnarray}
-4\alpha = r^2 + 2\sum_{n>0}\frac{(-1)^n }{(2n+2)!} \big(r \sin(\phi)\big)^{2n+2} .  
-\text{\;\;\;\;\;\;(DC later!)}\nonumber
+4\alpha = r^2 + 2\sum_{n>0}\frac{(-1)^n }{(2n+2)!} \big(r \sin(\phi)\big)^{2n+2} . \nonumber
 \end{eqnarray}
-Fortunately, the current argument depends only on the linear variation of $T(\alpha)$. The 
-inverse series takes a form $r^2=4\alpha + \mathcal{O}(\alpha^2)$, and substitution to $\dot{\phi}$
-partially solves $T(\alpha)$, 
+Fortunately, the current argument depends only on the 
+linear variation of $T(\alpha)$. The inverse series takes a form $r^2=4\alpha + \mathcal{O}(\alpha^2)$, 
+and substitution to $\dot{\phi}$ partially solves $T(\alpha)$, 
 \begin{eqnarray}
 T(\alpha)= \oint \frac{d\phi}{\dot{\phi}} = \oint d\phi\bigg(1+\frac{2}{3}\alpha\sin(\phi)^4 + \mathcal{O}(\alpha^2) \bigg).\nonumber
 \end{eqnarray}
@@ -465,25 +476,6 @@ which solves the linear constraint equation. The integral $t=\int dt$ determines
 $t$ of $\mathcal{C}_{\alpha}$ and, by inversion, solutions $q(t)$ and $p(t)$ to the equations of motion. 
 At critical points where $(\dot{p},\dot{q})=(0,0)$, a tangent does not exist. Instead, the solution,  
 $p(t)=p(0)$ and $q(t)=q(0)$, follows from the constant value theorem. 
- 
-In a case-by-case exposition of Hamiltonian mechanics, harmonic oscillation usually shows within 
-the first few examples. The Hamiltonian, 
-\begin{eqnarray}
-2H(p,q)=\kappa_p \; p^2 + \kappa_q \; q^2,  \;\;\;\;\;\;\;\;\;\Big(\kappa_p>0,\;\kappa_q>0\Big)\nonumber
-\end{eqnarray}
-describes a paraboloid $\mathcal{H}$, and the phase curves $\mathcal{C}_{\alpha}$ 
-are concentric ellipses when $\alpha>0$. At the point $(p,q)=(0,0)$, the system reaches a stable minimum 
-with $\alpha=0$, positive principal curvatures, $\kappa_p$ and $\kappa_q$, and harmonic 
-frequency $\omega = \sqrt{\kappa_p \;\kappa_q}$. Up to an initial condition $\phi_0$, trigonometric 
-functions,
-\begin{eqnarray}
-p(t) = \sqrt{\alpha/\kappa_p} \; \cos(\omega \; t + \phi_0)  
-\;\;\;\;\;\;\;\;\; \text{and} \;\;\;\;\;\;\;\;\;
-q(t) = \sqrt{\alpha/\kappa_q} \; \sin(\omega \; t + \phi_0),  \nonumber 
-\end{eqnarray}
-solve Hamilton's equations, $(\dot{p},\dot{q})=(-\kappa_q \;q,\kappa_p \;p)$. A guess-and-check 
-strategy works fine when the derivatives of sine and cosine are already known; however, repeating
-the solution in polar coordinates helps to develop better insight.
 
 \begin{wrapfigure}{R}{7cm}
 \begin{center}
@@ -497,6 +489,27 @@ the solution in polar coordinates helps to develop better insight.
   \label{fig:CircPara}
 \end{center}
 \end{wrapfigure}
+ 
+In a case-by-case exposition of Hamiltonian mechanics, harmonic oscillation usually shows within 
+the first few examples. The Hamiltonian, 
+\begin{eqnarray}
+2H(p,q)=\kappa_p \; p^2 + \kappa_q \; q^2,  \;\;\;\;\;\; \Big(\kappa_p>0,\;\kappa_q>0\Big)\nonumber
+\end{eqnarray}
+describes a paraboloid $\mathcal{H}$, and the phase curves $\mathcal{C}_{\alpha}$ 
+are concentric ellipses when $\alpha>0$. At the point $(p,q)=(0,0)$, the system reaches a stable minimum 
+with $\alpha=0$, positive principal curvatures, $\kappa_p$ and $\kappa_q$, and harmonic 
+frequency $\omega = \sqrt{\kappa_p \;\kappa_q}$. Up to an initial condition $\phi_0$, trigonometric 
+functions,
+\begin{eqnarray}
+p(t) &=& \sqrt{\alpha/\kappa_p} \; \cos(\omega \; t + \phi_0)   \nonumber \\
+%\;\;\;\;\;\;\;\;\; \text{and} \;\;\;\;\;\;\;\;\;
+q(t) &=& \sqrt{\alpha/\kappa_q} \; \sin(\omega \; t + \phi_0),  \nonumber 
+\end{eqnarray}
+solve Hamilton's equations, $(\dot{p},\dot{q})=(-\kappa_q \;q,\kappa_p \;p)$. A guess-and-check 
+strategy works fine when the derivatives of sine and cosine are already known; however, repeating
+the solution in polar coordinates helps to develop better insight.
+
+
 
 
 Choosing dimensions $\kappa_p = \kappa_q=\omega$ puts paraboloid $\mathcal{H}$ into a most 
@@ -812,7 +825,7 @@ a canonical transformation.}. Angle doubling allows exact solution,
 of the earlier pendulum model, $H = \lambda-\frac{1}{2}\lambda^2\sin(\phi)^2$.
 Time parameterization for pendulum variables $\theta$ and $\dot{\theta}$ then follows by 
 walking back $(\lambda,\phi)$ through the sequence of canonical transformations\textemdash 
-first through the cartesian coordinates,
+first to the cartesian coordinates,
 \begin{eqnarray}
 p(t)   =  \frac{ \; \psi(\tfrac{t}{2})^2-\chi(\tfrac{t}{2})^2 
 }{\Big(1+\chi(\tfrac{t}{2})^2  \psi(\tfrac{t}{2})^2\Big)^{\frac{1}{2}}},  \;\;\;\;\; 
@@ -884,10 +897,9 @@ The hint seems to have paid off, but leaves room for doubt and suspicion.
 
 We do not yet have a physical reason to complexify the time variable by extending from a one-dimensional
 real axis to a two-dimensional complex plane; however, mathematical function theory calls ahead of 
-schedule for just such an abstraction. To account for additional complex degrees of freedom, we will build out a Riemann 
-surface\footnote{The nomenclature "Kleinian Surface" may be better.
-According to Jeremy Gray, Felix Klein was the first to make full use of a four-dimensional 
-perspective. }, 
+schedule for just such an abstraction. To account for additional complex degrees of freedom, we will build 
+out a Riemann surface\footnote{The nomenclature "Kleinian Surface" may be better. Jeremy Gray claims that 
+Felix Klein was the first to think of an algebraic curve as "a closed surface in its own right" \cite{GRAY2010}. }, 
 \begin{eqnarray}
 \mathcal{R}_{\alpha} = \{(p,q) \in \mathbb{C}^2: \alpha=2H(p,q) \} 
 \simeq \{(v,w,x,y) \in \mathbb{R}^4: \alpha=2H(x+i v,y+i w) \},\nonumber
@@ -913,8 +925,7 @@ changes constraints, from circular $\alpha=2H=p^2+q^2$ to hyperbolic $\alpha=2\w
 and \textit{vice versa}. It is possible to embed the entire \textit{harmonic hyperboloid} 
 into three dimensions,
 \begin{eqnarray}
-\mathcal{R}_{\alpha}&=&\{(p,q)\in \mathbb{C}^2: \alpha  =p^2+q^2 \} \nonumber \\
-&\rightarrow& \mathcal{S}_{\alpha}=\{(x,y,z) \in \mathbb{R}^3: \alpha + z^2 =x^2+y^2 \}, \nonumber
+\mathcal{R}_{\alpha}&=&\{(p,q)\in \mathbb{C}^2: \alpha  =p^2+q^2 \} \rightarrow  \mathcal{S}_{\alpha}=\{(x,y,z) \in \mathbb{R}^3: \alpha + z^2 =x^2+y^2 \}, \nonumber
 \end{eqnarray}
 while loosing only a phase degree of freedom via the map $(v,w) \rightarrow z=\pm \sqrt{v^2+w^2}$.
 More explicitly, $\mathcal{S}_{\alpha}$ is obtained from $\mathcal{R}_{\alpha}$ after considering 
@@ -1144,14 +1155,14 @@ a section of the pendulum's Hamiltonian flow,
  \in \mathbb{R}^3 : t \in \mathbb{R} \bigg\} , \nonumber 
 \end{eqnarray}
 along with equivalent flows conformed to the algebraic models. In terms of textbook expectations, 
-these graphs leave nothing to be desired, save a few numerical double-checks. The following zero 
+these graphs leave little to be desired, save a few numerical double-checks. The following zero 
 sums, 
 \begin{eqnarray}
 0 = 2 H(q(t),q(t))-\alpha , \;\;\;\;\;\;\;\; 
 0 = \dot{p}(t) + \partial_{q} H|_t, \;\;\;\;\;\;\;\; 
 0  = \dot{q}(t) - \partial_{p} H|_t, \nonumber
 \end{eqnarray}
-can be evaluated for real sample points $t \in [0,2]$ and $\alpha \in(0.99)$. A truncation of 
+can be evaluated for real sample points $t \in [0,2]$ and $\alpha \in(0,0.99)$. A truncation of 
 $\psi$ after five 
 summation terms is sufficient to converge to machine precision, $0 \approx 10^{-15}$. This 
 agreement should dispel any remaining doubt about veracity of the solution, but if necessary, 
@@ -1160,15 +1171,15 @@ simply by including more summation terms.
 
 Even then, those more inclined to standard methodology can be expected to issue an obstinate 
 argument that "Hamilton's equations have a unique solution. For the simple pendulum, that 
-solution is written in terms of the Jacobian Elliptic functions". Certainly this is also true,
-and by comparison of \textit{equally valid} solutions, we find that,
+solution is written in terms of the Jacobian Elliptic functions". Certainly this is also true
+\cite{WW1902,WHITTAKER1904}, and by comparison of \textit{equally valid} solutions, we find that,
 \begin{eqnarray}
 \text{sn}\big(2K(\alpha)t\big|\alpha\big) = \alpha^{-\frac{1}{4}}\chi(t)  , \;\;\;\;\;\;\;\;\;\; 
 \text{cn}\big(2K(\alpha)t\big|\alpha\big) = \frac{\psi(\tfrac{t}{2})^2 - \chi(\tfrac{t}{2})^2
 }{\chi(\tfrac{t}{2})^2 + \psi(\tfrac{t}{2})^2 },\nonumber
 \end{eqnarray}
 only where $\alpha \in (0,1)$ and $\tau = i\frac{K(1-\alpha)}{2K(\alpha)} \in (0,\infty)$.
-Any equations solvable in terms of the Jacobian elliptic functions are also solvable 
+These identities imply that any equations solvable in terms of the Jacobian elliptic functions are also solvable 
 in terms of $\psi(t)$ with entirely imaginary $\tau$. Allowing that 
 $\tau \in \mathbb{C}$, the function $\psi(t)$ becomes fully as powerful as Weierstrass's 
 $\wp(t)$, i.e. it is the most general elliptic function possible. More work remains to 
@@ -1184,27 +1195,33 @@ Even more impressive, insightful geometry arises when incorporating complex time
 to one particular solution or sculptural model only increases through real and complex transformation 
 theory, which enables proliferation of equivalent forms. In mathematics and physics, choice of 
 coordinates always matters, as we have seen yet again in this problem about the simple pendulum. 
-Transformation of the energy constraint from transcendental to algebraic form enables rapid analysis 
-of period integrals in terms of an ordinary differential equation.  This is an important lesson to 
-learn, especially as part of an effort to analyze a wide variety of oscillation disks.
+Coordinate transformation enables rapid analysis of period integrals in terms of an ordinary 
+differential equation paired with coordinate-dependent certificate functions. A wide variety of 
+oscillation disks will succumb to similar integral-differential analysis, so it is well-worth 
+learning at the start. 
 
-The harmonic hyperboloid of genus zero and the anharmonic tori of genus one are the first 
-examples on a magnificent bridge between physics and mathematics. The dream of "Hamilton-Abel" 
-theory is to see more pedestrian and commercial traffic crossing this bridge. There are plenty 
-of opportunities left to exchange valuable ideas. One exciting prospect resides in the quantum
-interpretation of complex time. In quantum mechanics, position and momentum are wavefunctions with 
-hidden, complex amplitudes. Consequently, extensive surfaces such as seen in Fig. \ref{fig:GZeroHom} 
-and Fig. \ref{fig:ToricRibbons} may sneak into semi-classical approximations as wavefunction 
-integration domains. However, we will avoid an impetuous rush to quantum theory, and prefer first 
-to give more due diligence to experiment and data analysis.
-
-Scientists place so much importance on calculations as seen in Fig. \ref{fig:ThreeFlows} because 
-they are observable. However, as mentioned in in introduction and preliminary analysis, this is 
-not always easy, we might have difficulty taking data and there might be frictional loses. These 
-are not the days of galileo, and new technology suppresses these issues. We will have another 
-article for measuring pendulum period function.
-
+Anharmonic period integrals have long been a topic of interest, not only for theorists, but also for 
+experimental scientists. The days of Kepler and Galileo are receding ever farther into the past, and 
+with them the frustrations of slow progress and low-precision measurement. Recent digital 
+technologies\textemdash including slow-motion video and image processing\textemdash 
+potentially enable the commonplace citizen scientist to begin measuring oscillation disks and 
+period functions. Non-linearity presents a serious challenge to most student analysts, as they
+are over-accustomed to the status quo of linear experiments and linear regressions. In a planned 
+followup article, we will actively address this weakness. The next article will describe an 
+easily-reproducible, high-precision pendulum experiment, and will use the techniques of phase 
+plane geometry to extract a shape parameter, which describes the similarity of the actual period 
+function to its predicted form $4K(\alpha)$.
  
+The harmonic hyperboloid and the anharmonic tori are only the first few examples on a magnificent 
+bridge between physics and mathematics. The dream of "Hamilton-Abel" theory is to see more pedestrian 
+and commercial traffic crossing this bridge. The simple pendulum affords one opportunity to exchange 
+valuable ideas, but certainly, more opportunity abounds. An exciting frontier grows out of quantum 
+Hamiltonian mechanics, and the sort of semiclassical calculations that owe back to the days of 
+Ehrenfest and Sommerfeld.  When we finally get to calculating complex-time tunneling integrals, 
+Abel's original insight will seem all the more profound and prescient. \pagebreak
+
+
+\interlinepenalty=10000
 \bibliographystyle{unsrtnat}
 \bibliography{biblio}
 
