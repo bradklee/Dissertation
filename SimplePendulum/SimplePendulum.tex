@@ -45,11 +45,11 @@
 \date{\today}
 
 \begin{abstract}
-Integration along the transcendental Hamiltonian function $\alpha=2H(p,q)=p^2+\sin(q)^2$ 
+Integration along the transcendental Hamiltonian function $\alpha=2H_{\vartheta}(p,q)=p^2+\sin(q)^2$ 
 predicts the time dependence of simple pendulum libration when $\alpha \in (0,1)$. By 
 equivalence via canonical transformation, the same can be said for the 
 algebraic Hamiltonian function,
-$$\alpha=2H(p,q)=\Big(p^2+q^2\Big)\Big(1-\frac{1}{4}q^2\Big),$$ 
+$$\alpha=2H_{\varphi}(p,q)=\Big(p^2+q^2\Big)\Big(1-\frac{1}{4}q^2\Big),$$ 
 a close relative to Harold Edwards's normal form for elliptic curves. Combining real and 
 complex transformation theory with Edwards's theory of elliptic curves and elliptic 
 functions, we derive an exact solution of the simple pendulum's librational equations of 
@@ -151,9 +151,9 @@ $(a,b,c)=(1/s,(s-1)/s,1)$, the general equation reduces to a factored form,
 (s-1)F-\partial_{z}\big(s^{2}\;z\;(1-z)\;\partial_{z}F\big)=0. \nonumber
 \end{eqnarray}
 Usually the line $a+b=1$ intersects hyperbola $a\;b=(s-1)/s^2$ at two distinct points, 
-while preserving reflection symmetry across the line $a=b$. Setting $s=2$, the line $a+b=1$ 
-lays tangent to the hyperbola $a\;b=1/4$ at the symmetry point $a=b=1/2$, as in Fig.
-~\ref{fig:abHypLin}. The choice $s=2$ also recovers the pendulum's characteristic 
+while preserving reflection symmetry across the line $a=b$. Choosing $s=2$, line $a+b=1$ 
+lays tangent to hyperbola $a\;b=1/4$ at the symmetry point $a=b=1/2$, as in Fig.
+~\ref{fig:abHypLin}. This choice also recovers the pendulum's characteristic 
 differential equation, thus the appearance of integer $4$ acquires a special meaning 
 through the hypergeometric theory. The decomposition of $4$ to $(a,b,c)=(1/2,1/2,1)$ 
 produces all the necessary parameters to construct a series solution of the simple 
@@ -186,9 +186,9 @@ for the next few generations of researchers. The answering involved an honor rol
 of European patriarchs\textemdash Legendre, Riemann, Jacobi, Weierstrass and many others. Especially 
 through the efforts of Abel (1802-1829), a central theme emerged that the time parameter 
 can also take on complex values\footnote{For another closely related historical account,
-try \textit{What is the Genus?}\cite{POPESCU2016}.}. Subsequently during XX 
-century the pendulum's exact solution in terms of standardized, doubly-periodic 
-elliptic functions became a lauded final product of the classical era.
+try \textit{What is the Genus?} \cite{POPESCU2016}.}. Subsequently during XX 
+century the pendulum's exact solution in terms of standard, doubly-periodic 
+elliptic functions became a lauded final product of the classical era \cite{WW1902,WHITTAKER1904}.
 
 \begin{figure*}[ht] 
 \begin{center}
@@ -216,22 +216,22 @@ discover that classical oscillations have
 somewhat odd counterparts in the quantum regime. Initial attempts to describe quantum oscillations 
 built upon the concept of phase space. The mathematical prehistory of phase space goes back to Poincar\'{e} 
 (1854-1912), but the work of Ehrenfest (1880-1933) marks the first occurrence of the the Deutsch 
-word \textit{Phasenraum}\cite{NOLTE2010}. Thereafter Sommerfeld (1868-1951) included early depictions 
+word \textit{Phasenraum} \cite{NOLTE2010}. Thereafter Sommerfeld (1868-1951) included early depictions 
 of two equivalent phase plane geometries in his famous text \textit{Atombau Und Spektrallinien} \cite{SOMMERFELD1921}. 
-To the uninitiate, the two drawings\, reproduced here in Fig. ~\ref{fig:Sommerfeld}, 
+To the uninitiate, the two drawings\, reproduced here in Fig. \ref{fig:Sommerfeld} 
 are only curious works of abstract art. It is not immediately apparent that they describe harmonic 
 oscillation, nor that they relate by a special coordinate transformation, nor that they can be deformed 
 to account for non-linearity. These few basic facts of Hamiltonian Mechanics were widely understood by 
 the last generation of classical analysts, and they are still important 
-today\footnote{Especially in the development of \textit{The Semiclassical Way}\cite{HELLER2018}.}. 
+today\footnote{Especially in the development of \textit{The Semiclassical Way} \cite{HELLER2018}.}. 
 
 Modern texts follow and expound upon the figure drawing of Sommerfeld and others, making Hamiltonian
 mechanics an attractive and delightful subject, especially for visual learners and abstract 
-free-thinkers. The pendulum phase portrait, here Fig. ~\ref{fig:PendPortrait}, is an iconic standard. 
+free-thinkers. The pendulum phase portrait, here Fig. \ref{fig:PendPortrait}, is an iconic standard. 
 Both popular and specialist accounts\footnote{For example: \cite{STROGATZ2019} Chapter 11; \cite{STROGATZ2018} 
-Chapter 6; \cite{HARTER2019} Unit 2, Chapter 7, etc.} usually include such a figure when developing the 
+Chapter 6; \cite{HARTER2019} Unit 2, Chapter 7, \cite{LL1982} Chapter III, etc.} usually include such a figure when developing the 
 visual language. The more demanding references typically ask the student not only to recreate the figure 
-drawing, but also to measure its dimensions in terms of a period integral. Strangely enough, the standard 
+drawing, but also to measure its dimensions in terms of a period integral. Strangely enough, the typical 
 solution does not usually involve much geometry, instead shows that a pendulum's dimensionless falling/rising 
 velocity $\dot{w}$ along the vertical coordinate $w$ satisfies an algebraic constraint, 
 $\dot{w}^2=\frac{1}{4}w(1-w)(1-\alpha w)$. Change of variables by $w=\sin(\phi)^2$ then yields the 
@@ -240,9 +240,9 @@ textbook form,
 T(\alpha) = 2 \int_{0}^{1} \frac{ dw}{\sqrt{w(1-w)(1-\alpha w)}} =
 \oint \frac{ d\phi}{\sqrt{1-\alpha \sin(\phi)^2}} . \nonumber
 \end{eqnarray}
-Avoiding standards mimicry, we will use geometric methods to find, and to prove valid, a canonical 
+Avoiding mimicry, we will use geometric methods to find, and to prove valid, a canonical 
 Hamiltonian formulation where $q/p=\tan(\phi)$ and $\dot{\phi}=\sqrt{1-\alpha\sin(\phi)^2 }$. 
-Discovery (or rediscovery) of the algebraic Hamiltonian function $2H(p,q)=(p^2+q^2)(1-\frac{1}{4}q^2)$ 
+Discovery (or rediscovery) of the algebraic Hamiltonian function $2H_{\varphi}(p,q)=(p^2+q^2)(1-\frac{1}{4}q^2)$ 
 leads not only to quick derivation of the period integral, but also to an exact solution of the time 
 parameterization problem via the Harold Edwards theory of elliptic curves and
 functions.  
@@ -254,18 +254,18 @@ and his readers to a thoughtful and self-consistent revision of elliptic functio
 by symmetry is an important theme in this work of pure mathematics, but the results are not solely the 
 product or possession of a leisure class. Interdisciplinary applications are part of the history and 
 its followings. In cryptography, the simplified addition rule helps to optimize implementations of 
-the widely-used Diffie-Hellman key-exchange protocol. Thus computer scientists have been among the 
+the widely-used Diffie-Hellman key-exchange protocol \cite{DBTL2007}. Thus computer scientists have been among the 
 first to accept and utilize the alternative paradigm. Edwards's normal form also presents physicists 
 with an opportunity to break free from the confines of disciplinary boundaries and standard 
-formulae\footnote{As hinted during "ECCHacks" at Chaos Communication Congress 2014 \cite{DBTL2014}.}. 
+formulae\footnote{As hinted during 
+\href{https://media.ccc.de/v/31c3_-_6369_-_en_-_saal_1_-_201412272145_-_ecchacks_-_djb_-_tanja_lange}{"ECCHacks" @ 31C3}, 
+Chaos Communication Congress 2014 \cite{DBTL2014}.}. 
 Perhaps the future will have a better role for "Hamilton-Abel theory" than that of a clever joke or 
-an idle dream. We will now commence an effort to synthesize physical Hamiltonian theory with the 
-complex mathematics present in Harold Edwards's original masterpiece.
+an idle dream. As a first step to actualizing H.A. theory, we will develop a synthesis between real-valued 
+Hamiltonian mechanics and the sort of complex-valued calculus present in Harold Edwards's original 
+masterpiece.\pagebreak
 
-
-\pagebreak
-
-\begin{figure*}[ht] 
+\begin{figure*}[t] 
 \begin{center}
 \begin{overpic}[width=0.75\textwidth]{./Figures/ExperimentalGeometry.eps}
  \put (8,33) {\Large$s$}
@@ -283,10 +283,7 @@ complex mathematics present in Harold Edwards's original masterpiece.
 \end{figure*}
 
 
-
 \section{Preliminary Analysis}
-
-
 \begin{wrapfigure}{Rt}{6cm}
 \begin{center}
 \captionof{table}{More Parameters.} 
@@ -322,6 +319,7 @@ maxima $\theta_n$ and $\theta_{n+1}$, with a non-zero frictional loss $\delta\th
 period $T_n=T_{n+1}$ becomes an exactly integrable observable. We shall work out the theory
 assuming that $\delta\theta_n = 0$ regardless of $n$, while postponing worries about
 fidelity to a followup article on experiment and data analysis.
+\pagebreak
 
 The simple design of Fig.~\ref{fig:PendulumGeo} involves a few free 
 parameters, collected in Table ~\ref{tab:PQList}. None of the initial parameters 
@@ -329,8 +327,8 @@ have dimension $[\;T\;]$ for time, but $[\;T\;]$ does occur as a factor in the
 dimensions of $g$. Without loss of generality, the $[\;L\;][\;M\;][\;T\;]$ dimensional 
 system allows us to fix three scale degrees of freedom, i.e. to choose the base units
 of length, mass, and time. The obvious choice $l=m=1$ scales dimensions $[\;L\;]$ and 
-$[\;M\;]$. Another sensible choice, that $g=1$, forces $l/g=1$, 
-so also sets the $[\;T\;]$-scale. Intuition can easily guess period $T$ proportional 
+$[\;M\;]$. Another sensible choice, that $g=1$, forces $l/g=1$, so also sets the 
+$[\;T\;]$-scale. By intuition, we can easily guess period $T$ proportional 
 to fixed time $\sqrt{l/g}=1$. Such a guess pays no regard to the dimensionless 
 amplitude parameter,
 \begin{eqnarray}
@@ -365,23 +363,23 @@ integral of the first kind} \cite{LL1982}. By formally verifying that $T(\alpha)
 part $(a)$ of the typical textbook exercise is already completed. More challenging part 
 $(b)$ asks for a closed form for the coefficients $c_n$. Term-by-term integration of 
 the series expansion\footnote{Using that $(1-4\Phi)^{-1/2} = \sum \binom{2n}{n}\Phi^n $ 
-and that $\oint (2\cos(\phi))^{2n} = \binom{2n}{n}$. Cf. OEIS \cite{SLOANE2019},  
+and that $\oint (2\sin(\phi))^{2n} = \binom{2n}{n}$. Cf. OEIS \cite{SLOANE2019},  
 \href{https://oeis.org/A000984}{A000984}.} 
-yields an exact solution in series,
+yields a closed form for each $c_n$,
 \begin{eqnarray}
 T(\alpha)= \oint \frac{d\phi}{\sqrt{1-\alpha \sin(\phi)^2}}
 =\sum_{0}^{2\pi} \frac{1}{4^n}\binom{2n}{n} \alpha^n \oint\sin(\phi)^{2n}
 = 2\pi \sum_{0}^{2\pi} \frac{1}{16^n}\binom{2n}{n}^2 \alpha^n. \nonumber 
 \end{eqnarray}
-If parts $(a)$ and $(b)$ are too easy, part $(c)$ asks for proof that 
+If both parts $(a)$ and $(b)$ are too easy, part $(c)$ asks for proof that 
 $c_n=\frac{2\pi}{16^n}\binom{2n}{n}^2$ satisfies ${(n+1)^2 c_{n+1}=(n+1/2)^2c_n}$, and 
 consequently that $K(\alpha)$ satisfies a particular hypergeometric differential 
-equation\footnote{We leave this as an exercise for the reader. Cf. OEIS \cite{SLOANE2019}, 
-\href{https://oeis.org/A002894}{A002894}.}. Unfortunately the 
+equation\footnote{We leave this as a worthwhile exercise for the reader. Cf. 
+OEIS \cite{SLOANE2019}, \href{https://oeis.org/A002894}{A002894}.}. Unfortunately textbook 
 answers to parts $(a)$, $(b)$, and $(c)$, do not contribute at all to intuition for 
 the mysterious variable $\phi$. They are not so much answers, but instead a distraction
 from deeper inquisition. Why does change of variables from $z$ to $\phi$ 
-work so well? Does simplicity indicate a hidden meaning for $\phi$? Is $\phi$ actually
+work so well? Does simplicity indicate hidden meaning? Is $\phi$ actually
 the angle of some particular geometric figure? 
 
 Recall that each libration cycle involves an alternating pattern of extrema,
@@ -465,27 +463,26 @@ superposes a surface,
 above the phase plane. Level sets of surface $\mathcal{H}$ project to phase 
 curves,
 \begin{eqnarray}
-\mathcal{C}_{\alpha} = \{ \; (p,q) \in \mathbb{R}^2 \; : \; \alpha = 2\;H(p,q), \;\; (\dot{p},\dot{q})\neq(0,0) \; \}. \nonumber
+\mathcal{C}(\alpha) = \{ \; (p,q) \in \mathbb{R}^2 \; : \; \alpha = 2\;H(p,q), \;\; (\dot{p},\dot{q})\neq(0,0) \; \}. \nonumber
 \end{eqnarray}
-The tangent expansion of phase curve $\mathcal{C}_{\alpha}$ at energy $\alpha$, 
+The tangent expansion of phase curve $\mathcal{C}(\alpha)$ at energy $\alpha$, 
 \begin{eqnarray}
 d\alpha = 0 = \frac{\partial H}{\partial p}\;dp+\frac{\partial H}{\partial q}\;dq = \dot{q}\;dp-\dot{p}\;dq, \nonumber
 \end{eqnarray}
 requires the existence of an \textit{invariant differential}, $dt = dp/\dot{p} = dq/\dot{q}$,
 which solves the linear constraint equation. The integral $t=\int dt$ determines the time parameter 
-$t$ of $\mathcal{C}_{\alpha}$ and, by inversion, solutions $q(t)$ and $p(t)$ to the equations of motion. 
+$t$ of $\mathcal{C}(\alpha)$ and, by integral inversion, solutions $q(t)$ and $p(t)$ to the equations of motion. 
 At critical points where $(\dot{p},\dot{q})=(0,0)$, a tangent does not exist. Instead, the solution,  
 $p(t)=p(0)$ and $q(t)=q(0)$, follows from the constant value theorem. 
 
 \begin{wrapfigure}{R}{7cm}
 \begin{center}
 \begin{overpic}[width=0.35\textwidth]{./Figures/Paraboloid.eps}
- \put (4,70) {\Large$\mathcal{H}$}
  \put (62,-2) {\Large$p$}
  \put (78,12) {\Large$q$}
  \put (45,97) {\Large$\alpha$}
 \end{overpic}
-\caption{A Circular Paraboloid $\mathcal{H}$.}
+\caption{A Circular Paraboloid $\mathcal{H}_{\circ}$.}
   \label{fig:CircPara}
 \end{center}
 \end{wrapfigure}
@@ -493,9 +490,9 @@ $p(t)=p(0)$ and $q(t)=q(0)$, follows from the constant value theorem.
 In a case-by-case exposition of Hamiltonian mechanics, harmonic oscillation usually shows within 
 the first few examples. The Hamiltonian, 
 \begin{eqnarray}
-2H(p,q)=\kappa_p \; p^2 + \kappa_q \; q^2,  \;\;\;\;\;\; \Big(\kappa_p>0,\;\kappa_q>0\Big)\nonumber
+2H_0(p,q)=\kappa_p \; p^2 + \kappa_q \; q^2,  \;\;\;\;\;\; \Big(\kappa_p>0,\;\kappa_q>0\Big)\nonumber
 \end{eqnarray}
-describes a paraboloid $\mathcal{H}$, and the phase curves $\mathcal{C}_{\alpha}$ 
+describes a paraboloid $\mathcal{H}_0$. The phase curves $\mathcal{C}_0(\alpha)$ 
 are concentric ellipses when $\alpha>0$. At the point $(p,q)=(0,0)$, the system reaches a stable minimum 
 with $\alpha=0$, positive principal curvatures, $\kappa_p$ and $\kappa_q$, and harmonic 
 frequency $\omega = \sqrt{\kappa_p \;\kappa_q}$. Up to an initial condition $\phi_0$, trigonometric 
@@ -509,34 +506,30 @@ solve Hamilton's equations, $(\dot{p},\dot{q})=(-\kappa_q \;q,\kappa_p \;p)$. A 
 strategy works fine when the derivatives of sine and cosine are already known; however, repeating
 the solution in polar coordinates helps to develop better insight.
 
-
-
-
-Choosing dimensions $\kappa_p = \kappa_q=\omega$ puts paraboloid $\mathcal{H}$ into a most 
+Choosing dimensions $\kappa_p = \kappa_q=\omega$ puts paraboloid $\mathcal{H}_0$ into a most 
 symmetrical, circular form, as in Fig. ~\ref{fig:CircPara}. In polar coordinates, 
 ${\big(p,q\big)=\big(r\;\cos(\phi),r \;\sin(\phi)\big)}$,
-the Hamiltonian $2H(r)=\omega r^2$ depends only the radial coordinate and leaves the phase angle 
+the Hamiltonian $2H_{\circ}(r)=\omega r^2$ depends only the radial coordinate and leaves the phase angle 
 unconstrained. Conservation of energy sets radius $r=\sqrt{\alpha/\omega}$. Again from 
-$\tan(\phi) = q/p$ it follows that ${\dot{\phi}=(p \dot{q}-\dot{p}q)/r^2=\omega}$ and that $\phi = \omega t + \phi_0$.
-This calculation verifies the time parameterization, but more importantly 
-allows proof, $\partial_r H(r) \neq \omega$, that $r$ and $\phi$ do not make a pair of 
-canonical coordinates. Instead, the canonical choice is $\lambda = r^2/2$, and then 
+$\tan(\phi) = q/p$ it follows that $\dot{\phi}=(p \dot{q}-\dot{p}q)/r^2=\omega(p^2+q^2)/r^2=\omega$ 
+and that $\phi = \omega t + \phi_0$. This calculation verifies the time parameterization, but more 
+importantly allows proof, $\partial_r H_{\circ}(r) \neq \omega$, that $r$ and $\phi$ do not make a 
+pair of canonical coordinates. Instead, the canonical choice is $\lambda = r^2/2$, and then 
 Hamilton's equations work perfectly well, 
 \begin{eqnarray}
-\dot{\phi}=\partial_{\lambda} H(\lambda) = \omega \;\;\;\;\;\;\; 
-\text{and} 
-\;\;\;\;\;\;\; \dot{\lambda}=-\partial_{\phi} H(\lambda) = 0 . \nonumber
+\dot{\phi}=\partial_{\lambda} H_{\circ}(\lambda) = \omega 
+\;\;\;\;\;\;\; \text{and} \;\;\;\;\;\;\; 
+\dot{\lambda}=-\partial_{\phi} H_{\circ}(\lambda) = 0 . \nonumber
 \end{eqnarray}
 This observation unlocks the secret of Sommerfeld's second drawing. It is a particularly
 plain picture of the harmonic oscillator phase curves in \textit{action-angle}
 coordinates $(p,q)=(\lambda,\phi)$. Action-angle coordinates are an extremely useful
 tool, and worthy of a proper introduction.
 
-When stated without blas\'{e} language, the changing of a phase ellipse 
-into circular form gives a seminal example of canonical transformation theory. The 
-squeeze transformation $(p_i,q_i) \rightarrow (p_f,q_f)=(p_i\;k,q_i/k)$ scales the 
-phase plane by a dimensionless factor $k$. Choosing $k=(\kappa_p/\kappa_q)^{1/4}$ recovers 
-$2H(q,p)=\omega(p^2+q^2)$ from the earlier ${2H(q,p)=\kappa_p p^2+\kappa_q q^2}$. 
+When stated seriously, the changing of a phase ellipse into circular form gives a seminal 
+example of canonical transformation theory. Squeeze transformation of the phase plane,
+$(p_i,q_i) \rightarrow (p_f,q_f)=(p_i\;k,q_i/k)$, recovers $H_{\circ}(p_f,q_f)$ from the 
+earlier $H_{0}(p_i,q_i)$, when  ${k=(\kappa_p/\kappa_q)^{1/4}}$. 
 Hamilton's equations remain invariant, 
 \begin{eqnarray}
 \Big(\dot{p}_i,\dot{q}_i\Big) 
@@ -585,9 +578,9 @@ P\cdot \widetilde{J} \cdot P \cdot \bigg(-\frac{\partial H}{\partial q_i},\frac{
 \nonumber 
 \end{eqnarray}
 with permutation matrices $P$ such that $P \cdot J^{-1} \cdot P = J/\det(J)$. When 
-$\det(J)=1$, the area form and Hamilton's equations remain invariant. The change of 
-coordinates is then said to be a \textit{canonical transformation}. For example, the 
-pair of Jacobians,
+$\det(J)=1$, the area form and Hamilton's equations remain invariant
+\footnote{This proof is adapted from \cite{RALSTON1989}.}. The change of coordinates is 
+then said to be a \textit{canonical transformation}. For example, the pair of Jacobians,
 \begin{eqnarray}
 J =  \begin{bmatrix} p_i & q_i \\
 -q_i/(p_i^2+q_i^2) & p_i/(p_i^2+q_i^2)
@@ -596,27 +589,28 @@ J =  \begin{bmatrix} p_i & q_i \\
 \sin(q_f)/\sqrt{2p_f} & \sqrt{2p_f}\cos(q_f) \end{bmatrix}\nonumber,
 \end{eqnarray}
 satsify $\det(J)=\det(\widetilde{J})=1$, thus action-angle coordinates 
-$(p_f,q_f\big)=(\lambda,\phi)$ are proven canonical relative to position-momentum 
-coordinates $(p_i,q_i)=(p,q)$. This fact also follows quite 
-obviously from the simple calculation, $d\lambda \wedge d\phi = r dr\wedge d\phi$, 
-because the right hand side reproduces the well-known area form of a polar 
-coordinate system.
+$(p_f,q_f\big)=(\lambda,\phi)$ are proven canonical\footnote{This fact 
+also follows quite obviously from the simple calculation, 
+$d\lambda \wedge d\phi = r dr\wedge d\phi$, because the right hand side 
+reproduces the well-known area form of a polar coordinate system.} relative 
+to position-momentum coordinates $(p_i,q_i)=(p,q)$.
 
 
-\begin{wrapfigure}{R}{7cm}
+\begin{wrapfigure}{R}{6.5cm}
 \begin{center}
 \begin{overpic}[width=0.35\textwidth]{./Figures/Helicoid.eps}
- \put (8,70) {\Large$\mathcal{F}$}
  \put (62,-2) {\Large$p$}
  \put (78,12) {\Large$q$}
  \put (45,95) {\Large$t$}
- \put (75,63) {\Large\rotatebox[origin=c]{90}{$\longrightarrow$}}
- \put (79,60) {\Large$T$}
- \put (75,42) {\Large\rotatebox[origin=c]{90}{$\longrightarrow$}}
- \put (79,39) {\Large$T$}
+ \put (77,69) {\Large\rotatebox[origin=c]{90}{$\longrightarrow$}}
+ \put (81,66) {\Large$T$}
+ \put (77,48) {\Large\rotatebox[origin=c]{90}{$\longrightarrow$}}
+ \put (81,45) {\Large$T$}
+ \put (77,27) {\Large\rotatebox[origin=c]{90}{$\longrightarrow$}}
+ \put (81,24) {\Large$T$}
  
 \end{overpic}
-\caption{A Helicoid Flow $\mathcal{F}$.}
+\caption{A Helicoid Flow $\mathcal{F}_{\circ}$.}
   \label{fig:Helicoid}
   \phantom{space}
   \phantom{space}
@@ -625,66 +619,66 @@ coordinate system.
 \end{wrapfigure}
 
 
-Though Jacobian matrices simplify validation of coordinate transformations, 
-their content excludes any mention of time, energy, or the Hamiltonian 
-function. The integral identity,
+Jacobian matrices simplify validation of coordinate transformations, but they are no 
+substitute for Hamilton's equations. The integral form,
 \begin{eqnarray}
 t = \int_{0}^{t} dt' = 2\partial_{\alpha}\int\!\!\!\!\int_{H} dp\wedge dq
 =2 \partial_{\alpha} S(\alpha,p,q), \nonumber
 \end{eqnarray}
 tells more, that time $t$ depends on the area $S(\alpha,p,q)$
-beneath curve $\mathcal{C}_{\alpha}$ and between a valid initial and final 
+interior to curve $\mathcal{C}(\alpha)$, between a valid initial and final 
 condition, $(p_0,q_0)$ and $(p,q)$ respectively. The Hamiltonian flow, 
 \begin{eqnarray}
 \mathcal{F} = \big\{\big(p,q,t\big) \in \mathbb{R}^3 : t= 2 \partial_{\alpha} S(\alpha,p,q)  \big\}, \nonumber
 \end{eqnarray}
 equates time evolution with a solid geometry in phase-space-time 
 (Deutsch: \textit{phasenraumzeit}). For harmonic oscillation, we can choose initial conditions such that 
-$2 S(\alpha,\lambda,\phi) = (\phi/\omega)\;\alpha$, and then the flow goes along a helicoid spiral over 
-circular phase curves. In Fig. \ref{fig:Helicoid}, both flows repeat after a vertical time-translation 
-of ${T=2\pi/\omega}$, because any closed curve $\mathcal{C}_{\alpha}$ bounds an entire area, 
-${S(\alpha)=\pi r^2=(\pi/\omega)\alpha}$. Amplitude independence of period $T$ characterizes 
-harmonic oscillation. Usually amplitude dependence 
-cannot be avoided, so the harmonic equations of motion are, at best, only valid and useful as an 
-approximation in the infinitesimal limit. More generally, \textit{anharmonic oscillation} along curve 
-$\mathcal{C}_{\alpha}$ returns to initial condition $(p_0,q_0)$ after a period $T(\alpha)$, 
-which characteristically \textit{must vary} with energy $\alpha$.
+$2 S_{\circ}(\alpha,\lambda,\phi) = (\phi/\omega)\;\alpha$, and then the flow goes along a helicoid spiral over 
+circular phase curves. In Fig. \ref{fig:Helicoid}, the helicoid flow repeats after a vertical time-translation 
+of ${T_{\circ}=2\pi/\omega}$, because any closed curve $\mathcal{C}_{\circ}(\alpha)$ bounds an entire area, 
+${S_{\circ}(\alpha)=\pi r^2=(\pi/\omega)\alpha}$. Amplitude independence of period $T_{\circ}$ characterizes 
+harmonic oscillation. More generally, \textit{anharmonic oscillation} along curve $\mathcal{C}(\alpha)$ 
+returns to initial condition $(p_0,q_0)$ after a period $T(\alpha)$, which characteristically 
+\textit{must vary} with energy $\alpha$. Usually amplitude dependence cannot be avoided, 
+and then the harmonic equations of motion are, at best, valid and useful only as an approximation 
+in the infinitesimal limit. 
 
-In the range of possible phase plane geometries, the most interesting cases involve a spatial
-admixture of qualitatively different critical points. In local coordinates $(p,q)$ around a 
-critical point at ${(p,q)=(0,0)}$, assume the Hamiltonian becomes approximately quadratic, 
-${2H\approx \kappa_p p^2+\kappa_q q^2}$. Then the sign of $\kappa_p\kappa_q$ distinguishes between 
-circular points with $\kappa_p\kappa_q>0$ and hyperbolic points with $\kappa_p\kappa_q < 0$.
-We have already seen that circular points imply local harmonic oscillation, but have yet
-to encounter hyperbolic points or the separatrix curves they pair with. Choosing coordinates 
-where $2H=p^2-q^2$, Hamilton's equations, $(\dot{p},\dot{q})=(q,p)$, 
-are solved by hyperbolic trigonometric functions, ${p(t) = \sqrt{\alpha}\cosh(t)}$ and 
-${q(t) = \sqrt{\alpha}\sinh(t)}$. Proof does not differ significantly from the earlier case 
-of Harmonic oscillation. In fact, this similarity is the first sign of an even deeper 
-transformation theory, which we will eventually take up and explore in detail.
 
-Around a hyperbolic point, the Hamiltonian factors, $2H=(p+q)(p-q)$. Lines determined
+The most interesting phase plane geometries involve a spatial admixture of qualitatively different 
+critical points. In local coordinates $(p,q)$ around a critical point at ${(p,q)=(0,0)}$, assume the 
+Hamiltonian becomes approximately quadratic, ${2H(p,q)\approx \kappa_p p^2+\kappa_q q^2}$. Then the sign 
+of $\kappa_p\kappa_q$ distinguishes between circular points with $\kappa_p\kappa_q>0$ and hyperbolic 
+points with $\kappa_p\kappa_q < 0$. We have already seen that circular points imply local harmonic 
+oscillation, but have yet to encounter hyperbolic points or the separatrix curves they pair with. 
+Choosing coordinates where $2\widetilde{H}_{\circ}(p,q)=p^2-q^2$, hyperbolic trigonometric functions, 
+${p(t) = \sqrt{\alpha}\cosh(t)}$ and ${q(t) = \sqrt{\alpha}\sinh(t)}$ solve Hamilton's equations, 
+$(\dot{p},\dot{q})=(q,p)$. Proof does not differ significantly from the earlier case 
+of Harmonic oscillation. In fact, this similarity between $H_{\circ}$ and $\widetilde{H}_{\circ}$ 
+is the first sign of an even deeper transformation theory\footnote{The general case, 
+$H\rightarrow \widetilde{H}$, is discussed thoroughly in Section IV. Incorporating Complex Time.}.
+
+Around a hyperbolic point, the Hamiltonian factors, $2\widetilde{H}_{\circ}(p,q)=(p+q)(p-q)$. Lines determined
 by $p+q=0$ and $p-q=0$ intersect at the hyperbolic point. A separatrix curve, with $\alpha=0$, 
 extends from those two lines outwards to the wider area of the phase plane. When the Hamiltonian 
 contains terms higher than quadratic, a line leaving the hyperbolic point can possibly change 
 direction. Then the separatrix segment either goes off to infinity, or it may return along 
 another direction to the initial hyperbolic point, or it may even approach a second, distinct 
 hyperbolic point. Taking a union over disjoint segments, the \textit{separatrix} curve is so 
-named because, globally, it separates phase space into qualitatively different, non-intersecting 
+named because, globally, it separates the phase plane into qualitatively different, non-intersecting 
 subsets. For example, the red separatrix curve of Fig. \ref{fig:PendPortrait} separates the phase 
 portrait into regions where the pendulum rotates either clockwise or counterclockwise, and another 
 central region where libration occurs. 
 
-A general \textit{oscillation disk} in the phase plane is defined as a topological disk bounded by 
-a separatrix at energy $\alpha_1$, which additionally contains exactly one critical point, 
+A general \textit{oscillation disk} is here defined as a topological disk within the phase plane, 
+bounded by a separatrix at energy $\alpha_1$, and containing exactly one critical point, 
 a circular point at energy $\alpha_0$. This domain also contains anharmonic oscillation within the energy range 
 $\alpha \in (\alpha_0 , \alpha_1)$. Level curves around the circular point gradually deform away from a circular 
 shape, but must retain loop topology. When a curve accumulates non-constant variation of curvature, 
 the phase angular velocity $\dot{\phi}$ measures change of shape, as in Fig.~\ref{fig:HeatMap}. 
-Most obviously, the heatmaps show slowing around the hyperbolic points, where the limit 
-$\alpha \rightarrow \alpha_1$ causes an interval of the curve $\mathcal{C}_{\alpha}$ to pinch into a corner. 
-These extreme deformations force $\dot{\phi}$ to approach zero locally, and the integral period
-function diverges. 
+Most obviously, the heatmaps show slowing around the hyperbolic points. On a general oscillation disk, 
+the limit $\alpha \rightarrow \alpha_1$ causes at least one small interval of the curve $\mathcal{C}({\alpha})$ 
+to pinch into a corner near a hyperbolic point. Such an extreme deformation forces $\dot{\phi}$ to approach zero 
+locally, and the integral period function diverges. 
 
 \begin{figure*}[t] 
 \begin{center}
@@ -692,30 +686,31 @@ function diverges.
  \put (33,0) {$\dot{\phi}=$}
  \put (38,0) {$\{0$}
  \put (59.5,0) {$1\}$}
- \put (0,10) {$2H=p^2+q^2-p^2 q^2$}
+ \put (0,10) {$2H_1=p^2+q^2-p^2 q^2$}
  \put (2,5) {$\dot{\phi}=1-\frac{2\;p^2 q^2}{p^2+q^2}$}
- \put (33.5,10) {$2H=(p^2+q^2)(1-\frac{1}{4} q^2)$}
+ \put (33.5,10) {$2H_{\varphi}=(p^2+q^2)(1-\frac{1}{4} q^2)$}
  \put (35.5,5) {$\dot{\phi}=1-\frac{1}{2}q^2$}
- \put (74,10) {$2H=p^2+\sin(q)^2$}
+ \put (74,10) {$2H_{\vartheta}=p^2+\sin(q)^2$}
  \put (76,5) {$\dot{\phi}=\frac{p^2+q\cos(q)\sin(q)}{p^2+q^2}$}
 \end{overpic}
 \caption{A Few Oscillation Disk Heatmaps, Colored by $\dot{\phi}$.}
 \label{fig:HeatMap}
 \end{center}
 \end{figure*}
+\pagebreak 
 
-Choosing canonical coordinates $(p,q)=(\dot{\theta},\theta)/2$, the Hamiltonian function,  
+The pendulum phase portrait of Fig. \ref{fig:PendPortrait} includes an oscillation disk at low energy,
+which appears again in the right of Fig. ~\ref{fig:HeatMap}. Choosing canonical coordinates 
+$(p,q)=(\dot{\theta},\theta)/2$, the pendulum's Hamiltonian energy function is written,  
 \begin{eqnarray}
-\alpha=2H(p,q)=p^2+\sin(q)^2, \nonumber
+\alpha=2H_{\vartheta}(p,q)=p^2+\sin(q)^2, \nonumber
 \end{eqnarray}
-models the motion of a simple pendulum. In the energy range $0<\alpha<1$, the curve geometry 
-unifies to an oscillation disk, as in the left of Fig. ~\ref{fig:HeatMap}. The tangent expansion 
-fails not only at the circular point $(q,p)=(0,0)$, but also at the hyperbolic points 
-$(p,q)=(0,\pm \pi/2)$. The period function must increase from its harmonic limit at 
-$\alpha=0$ to an infinite divergence at $\alpha=1$. Limiting analysis recapitulates what we 
-should already know from preliminary analysis and laboratory experiments. At small amplitudes, 
-the pendulum oscillates harmonically around the stable minimum. Larger amplitude oscillations 
-eventually reach an inverted configuration where the force of gravity has only a small component 
+over energy domain $0<\alpha<1$. Within one period, $\pi \le 2q \le \pi$, a circular point occurs at 
+$(q,p)=(0,0)$, and hyperbolic points occur at $(p,q)=(0,\pm \pi/2)$. The period function must increase 
+from its harmonic limit at $\alpha=0$ to an infinite divergence at $\alpha=1$. Limiting analysis 
+recapitulates what we should already know from preliminary analysis and laboratory experiments. At 
+small amplitudes, the pendulum oscillates harmonically around the stable minimum. Larger amplitude 
+oscillations eventually reach an inverted configuration where the force of gravity has only a small component 
 along the direction of motion. Thus slowing occurs on approach to the unstable equilibrium point.  
 
 The mere existence of singular divergences suggests that ordinary differential equations 
@@ -734,7 +729,7 @@ T(\alpha) = \oint \frac{d\phi}{\dot{\phi}} =2 \oint d\phi\; \partial_{\alpha}\la
 This is a nice and easy trick! It gets the linear term correct, without any need for series reversion. 
 However, the sine function is bounded by $\pm 1$, so the denominator goes to zero when $\alpha=3/4$,
 and the critical points fall short at $|q|=\sqrt{3/2}<\pi/2$. After $c_0$ and $c_1$, all 
-coefficients $c_n$ with $n>1$ are overestimates\footnote{It should be possible to
+coefficients $c_n$ with $n>1$ are apparently overestimates\footnote{It should be possible to
 prove this assertion by induction on $n$.}. Instead, let us introduce an arbitrary 
 trigonometric polynomial $\Phi$ and replace $(4/3)\sin(\phi)^4 \rightarrow \Phi $.
 When $\Phi=\sin(\phi)^2$, the root solving procedure reproduces the correct period 
@@ -746,18 +741,15 @@ choice $\Phi=Q^2$ obviously does not satisfy the validity constraint, but a work
 via the Pythagorean theorem, $P^2+Q^2=1$. Multiplication of $\Phi$ by the algebraic unit $P^2+Q^2$ 
 raises the polynomial degree by $+2$. This allows a quartic choice $\Phi=(Q^2+P^2)Q^2$, 
 which may reduce to $\Phi=Q^2$, but also identifies with a valid perturbing term. The algebraic Hamiltonian 
-$2H(q,p)=(q^2+p^2)(1-\frac{1}{4}q^2)$ transforms canonically to its action-angle form, 
-$H(\lambda,\phi)=\lambda - \frac{1}{2}\lambda^2\sin(\phi)^2 $, again quadratic in the variable $\lambda$.
+$2H_{\varphi}(p,q)=(q^2+p^2)(1-\frac{1}{4}q^2)$ transforms canonically to its action-angle form, 
+$H_{\varphi}(\lambda,\phi)=\lambda - \frac{1}{2}\lambda^2\sin(\phi)^2 $, again quadratic in the variable $\lambda$.
 This geometry includes an oscillation disk in the energy range $0<\alpha<1$, which appears in 
-the center of Fig. ~\ref{fig:HeatMap}. By design, the quarter period of $H$ is $K(\alpha)$.
+the center of Fig. ~\ref{fig:HeatMap}. By design, the quarter period of $H_{\varphi}$ is $K(\alpha)$.
 
-Determination of isoperiodicity suggests that the two Hamiltonian models,
-\begin{eqnarray}
-2H_i(q,p) = p^2 + \sin(q)^2 \text{\;\;\;\;and\;\;\;\;} 2H_f(q,p) = \Big(p^2 + q^2\Big)\bigg(1-\frac{1}{4} q^2\bigg), \nonumber 
-\end{eqnarray}
-will equate, $H_i(q_i,p_i)=H_f(q_f,p_f)$, by a canonical transformation between initial and final 
-coordinates. A plausible guess that $p_i \;\dot{q}_i = p_f \;\dot{q}_f$ gives a second constraint 
-equation in two unknowns. The non-linear system can be solved for either, 
+Isoperiodicity suggests that the two Hamiltonian models, $H_{\vartheta}$ and $H_{\varphi}$, will equate, 
+$H_{\vartheta}(p_i,q_i)=H_{\varphi}(p_f,q_f)$, by a canonical transformation. A plausible guess that 
+$p_i \;\dot{q}_i = p_f \;\dot{q}_f$ gives a second constraint equation in two sets of two unknowns. 
+The non-linear system can be solved for either, 
 \begin{eqnarray}
 (p_i,q_i) &=& \bigg(\frac{1}{2}\;p_f\;\sqrt{4-q_f^2}, \;
 \arcsin\Big(\frac{1}{2}q_f \sqrt{4-q_f^2}\Big)\bigg)
@@ -774,17 +766,18 @@ J = \pm \begin{bmatrix} \sqrt{2-2\cos(q_i)} \csc(q_i) & \frac{p_i \tan(q_i/2)^2}
 \end{eqnarray}
 while requiring that $|q_f| \le \sqrt{2}$. The domain restriction is permissive enough to map 
 between entire oscillation disks. According to the determinants, $\det(J)=\det{\widetilde{J}}=1$,
-the transformation is verified canonical. This calculation shows that $\phi$ is indeed a 
-canonical coordinate of the pendulum Hamiltonian. Solution of $\theta(t)$ follows from 
-any solution of $\lambda(t)$ and $\phi(t)$, one of which we will now pursue in even 
-more detail.
- 
-% Add more pictures:  Hamiltonian Flows?
+the angle $\phi$ is indeed a canonical coordinate of the pendulum Hamiltonian. Thus solution of 
+the pendulum equations of motion follows from solution of the time parameterization problem on
+the phase curves of either $H_{\vartheta}$ or $H_{\varphi}$. We will now pursue one particular 
+solution in even more detail.
 
 \section{Incorporating Complex Time}
 
 Harold Edwards's theory of elliptic curves and elliptic functions starts with an 
-alternative normal form, $x^2+y^2 = a^2+a^2 x^2 y^2$. The crucial elliptic function,
+alternative normal form, $2G=(x^2+y^2)-a^2 x^2 y^2-a^2$, which determines a family
+of elliptic curves, $\mathcal{C}(a)=\{(x,y):2G(x,y,a)=0 \;\&\; a^4 \neq 0 \text{ or } 1\}$, 
+all non-singular according to the extra condition on modulus $a^4$. With $a$-dependence swept into 
+$\tau$, the crucial elliptic function,
 \begin{eqnarray}
 \psi(t)= \chi(t+\tfrac{1}{2})= \frac{2\sum_{n=1}^{\infty}e^{i \pi(2n-1)^2 \tau/2}\cos\big((2 n-1)\pi t \big) 
 }{1+2\sum_{n=1}^{\infty} e^{i \pi(2n)^2 \tau/2}\cos\big(2 n \pi t \big)},\nonumber
@@ -792,8 +785,8 @@ alternative normal form, $x^2+y^2 = a^2+a^2 x^2 y^2$. The crucial elliptic funct
 allows a solution, $x(t)=\chi(t)$ and $y(t)=\psi(t)$, of the coupled differential 
 equations\footnote{Edwards's normalization of the time domain requires chain rule, 
 $\dot{\psi}=(2/T) d\psi/dt  $, with real period $T$.}, ${\dot{x}=y(1-a^2 x^2)}$ and 
-$\dot{y}=-x(1-a^2 y^2)$, and the solution must adhere to the normal form. Edwards already 
-proves this statement in Part III of the original article \cite{EDWARDS2007}. 
+$\dot{y}=-x(1-a^2 y^2)$, as derived from the $\mathcal{C}(a)$ tangent geometry. 
+Edwards already proves this statement in Part III of the original article \cite{EDWARDS2007}. 
 Translation of his solution to the simple pendulum context encounters two difficulties. 
 First, a  transformation is needed to go from math coordinates $(x,y)$ to physical coordinates 
 $(p,q)$\textemdash but this follows quickly from the previous developments. Second,
@@ -802,44 +795,40 @@ depends upon ascertainment of the double-periodicity notion. To this end, the Wi
 $t \rightarrow i t$, helps to extend transformation theory,
 and to show relation between real and complex periods. 
 
-Let us introduce a function $G$ such that $2G=(x^2+y^2)-a^2 x^2 y^2-a^2$,
-and utilize $G$ to determine a family of elliptic curves, 
-$\mathcal{C}_a=\{(x,y):2G(x,y,a)=0\}$. In a sense, function $G$ is Hamiltonian 
-with canonical coordinates $x$ and $y$; however, the analogy can be improved. 
-Transforming coordinates by  $(G,a,x,y) \rightarrow (H,\alpha,p,q)=(a^2 G,a^4,a\;y,a\;x)$ 
-produces a Hamiltonian form, $\alpha=2H=p^2+q^2 - p^2 \; q^2$. In action angle 
-coordinates, the Hamiltonian becomes $H = \lambda-\frac{1}{2}\lambda^2\sin(2\phi)^2$. 
-Anharmonic oscillation occurs with real period, 
-\begin{eqnarray}
-T(\alpha) = 4K(\alpha) = \oint \frac{d\phi}{\sqrt{1-\alpha\sin(2\phi)^2}},\nonumber
-\end{eqnarray}
-and an exact parameterization $p(t)=\alpha^{1/4} \;\psi(t)$, $q(t)=\alpha^{1/4} \;\chi(t)$. 
-Another transformation, $(t_i,\phi_i)\rightarrow (t_f,\phi_f)=2(t_i,\phi_i)$, is not
-canonical, but nevertheless preserves Hamilton's equations  covariantly\footnote{Covariant: 
-$|J|=\frac{\partial t_f}{\partial t_i}$. Two non-canonical transformations act together as 
-a canonical transformation.}. Angle doubling allows exact solution, 
+In a sense, function $G$ is Hamiltonian with canonical coordinates $x$ and $y$. The analogy can be 
+improved. Rewriting $(G,a,x,y) \rightarrow (H_1,\alpha,p,q)=(a^2 G,a^4,a\;y,a\;x)$
+produces a Hamiltonian form, $\alpha=2H_1(p,q)=p^2+q^2 - p^2 \; q^2$, with an exact parameterization 
+${p(t)=\alpha^{1/4} \;\psi(t)}$, ${q(t)=\alpha^{1/4} \;\chi(t)}$. The transformation does not leave 
+the energy scale invariant from $G$ to $H$, so cannot be canonnical \textit{per se}. Instead, it is a 
+\textit{covariant transformation}, $(\alpha_i,t_i,p_i,q_i) \rightarrow (\alpha_f,t_f,p_f,q_f)$, 
+which requires \textit{balanced} scale change\footnote{The more liberal 
+condition on $|J|$ follows again from transforming Hamilton's equations. }, 
+$|J| = \frac{\partial\alpha_f}{\partial \alpha_i}\frac{\partial t_f}{\partial t_i}$. In action angle 
+coordinates, the Hamiltonian becomes $H_1(\lambda,\phi) = \lambda-\frac{1}{2}\lambda^2\sin(2\phi)^2$.
+Similarity between $H_{1}$ and $H_{\varphi}$ suggests another covariant transformation, 
+$(t_i,\phi_i)\rightarrow (t_f,\phi_f)=2(t_i,\phi_i)$.  Angle doubling transfers the exact 
+solution from $H_{1}$ to $H_{\varphi}$, where, 
 \begin{eqnarray}
 \lambda(t) = \frac{\sqrt{\alpha}}{2}\Big(\chi(\tfrac{t}{2})^2 + \psi(\tfrac{t}{2})^2\Big), \;\;\;\;\; 
 \phi(t)   =  \arctan\big(\chi(\tfrac{t}{2})/\psi(\tfrac{t}{2})\big),  \nonumber 
 \end{eqnarray}
-of the earlier pendulum model, $H = \lambda-\frac{1}{2}\lambda^2\sin(\phi)^2$.
-Time parameterization for pendulum variables $\theta$ and $\dot{\theta}$ then follows by 
-walking back $(\lambda,\phi)$ through the sequence of canonical transformations\textemdash 
-first to the cartesian coordinates,
+Time parameterization for pendulum variables then follows by walking back $(\lambda,\phi)$ through 
+the sequence of canonical transformations\textemdash first to the Cartesian coordinates of $H_{\varphi}$,
 \begin{eqnarray}
 p(t)   =  \frac{ \; \psi(\tfrac{t}{2})^2-\chi(\tfrac{t}{2})^2 
 }{\Big(1+\chi(\tfrac{t}{2})^2  \psi(\tfrac{t}{2})^2\Big)^{\frac{1}{2}}},  \;\;\;\;\; 
 q(t)  = \frac{2 \;  \chi(\tfrac{t}{2})\;\psi(\tfrac{t}{2}) 
 }{\Big(1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2\Big)^{\frac{1}{2}}}, \nonumber 
 \end{eqnarray}
-of $2H=(p^2+q^2)(1-\frac{1}{4}q^2)$, then to the pendulum coordinates,
+then to the Cartesian coordinates of $H_{\vartheta}$,
 \begin{eqnarray}
-\theta(t) = 2 \arcsin\bigg(\frac{2\;\chi(\tfrac{t}{2})\; \psi(\tfrac{t}{2})
-}{1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2 }\bigg), \;\;\;\;\; 
-\dot{\theta}(t) = 2\bigg(\frac{\psi(\tfrac{t}{2})^2 - \chi(\tfrac{t}{2})^2
-}{1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2 }\bigg). \nonumber 
+p(t)   = \tfrac{1}{2} \dot{\theta}(t) = \frac{\psi(\tfrac{t}{2})^2 - \chi(\tfrac{t}{2})^2
+}{1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2 }, \;\;\;\;\; 
+q(t)   = \tfrac{1}{2} \theta(t) =  \arcsin\bigg(\frac{2\;\chi(\tfrac{t}{2})\; \psi(\tfrac{t}{2})
+}{1+\chi(\tfrac{t}{2})^2 \psi(\tfrac{t}{2})^2 }\bigg), \nonumber 
 \end{eqnarray}
-The expression for $\theta(t)$ reduces again according to a special case of the $X$ 
+and finally to $\theta$ and $\dot{\theta}$, after multiplying by a factor of two. The expression 
+for $\theta(t)$ reduces again according to a special case of the $X$ 
 addition rule, proven in Part II of \cite{EDWARDS2007}. The addition rules act linearly along 
 the time dimension, so the choice of $x'=x=\chi(\tfrac{t}{2})$ and 
 $y'=y=\psi(\tfrac{t}{2})$ sets $X=\chi(t)$, and also, 
@@ -870,25 +859,29 @@ $\tau = \big\{ i , \tfrac{i}{3},
 \end{center}
 \end{figure*}
 
-The real period $T(\alpha)$ itself gives a first hint of double-periodicity, because 
-it satisfies a second order differential equation. A proof of the assertion depends upon 
-an annihilator $\mathcal{A}$ and its certificate function $\Xi$, 
+The real period,
 \begin{eqnarray}
-\mathcal{A}=1-4(1-2\alpha)\partial_{\alpha}-4\alpha(1-\alpha)\partial^2_{\alpha}  
+T(\alpha) = 4K(\alpha) = \oint \frac{d\phi}{\sqrt{1-\alpha\sin(2\phi)^2}},\nonumber
+\end{eqnarray}
+gives a first hint of double-periodicity, because it satisfies a second order differential 
+equation. A proof of the assertion depends upon an annihilator $\widehat{\mathcal{A}}$ and its certificate 
+function $\Xi$, 
+\begin{eqnarray}
+\widehat{\mathcal{A}}=1-4(1-2\alpha)\partial_{\alpha}-4\alpha(1-\alpha)\partial^2_{\alpha}  
  \;\;\;\;\;\;\; \text{and} \;\;\;\;\;\;\;
 \Xi_n = \frac{\sin(2 \; n \; \phi)}{2\;n\;\big(1-\alpha \sin(n\;\phi)^2\big)^{3/2}}. \nonumber
 \end{eqnarray}
 The zero sum,
 \begin{eqnarray}
-\mathcal{A}\circ \bigg(\frac{1}{\sqrt{1-\alpha\;\sin(n\;\phi)^2}}\bigg) 
+\widehat{\mathcal{A}}\circ \bigg(\frac{1}{\sqrt{1-\alpha\;\sin(n\;\phi)^2}}\bigg) 
 -\partial_{\phi}\Xi_n =0 \nonumber, 
 \end{eqnarray}
 is trivial to verify by applying chain rule and reducing trigonometric terms. 
 Integration of any exact differential along a complete cycle yields a zero, 
 including $\oint \; d\phi \; \partial_{\phi} \Xi_n=0$, thus the claim, 
-$\mathcal{A}\circ T(\alpha)=0$, stands true. The transformation 
-$\alpha \rightarrow 1-\alpha$ leaves $\mathcal{A}$ invariant, so the general solution 
-of the second order differential equation can be written as 
+$\widehat{\mathcal{A}}\circ T(\alpha)=T(\alpha)-\partial_{\alpha}(4\alpha(1-\alpha)\partial_{\alpha}T(\alpha))=0$, 
+stands true. Transformation $\alpha \rightarrow 1-\alpha$ leaves $\widehat{\mathcal{A}}$ invariant, 
+so the general solution of the second order differential equation can be written as 
 $T(\alpha)=c_1 K(\alpha)+ c_2 K(1-\alpha)$. This solution space includes two special 
 solutions, the real and complex periods, $T_{\mathfrak{R}}(\alpha)=4\;K(\alpha)$ and 
 $T_{\mathfrak{I}}(\alpha)=i 2K(1-\alpha)$, whose ratio reproduces the suggested 
@@ -896,15 +889,16 @@ form $\tau=T_{\mathfrak{I}}(\alpha)/T_{\mathfrak{R}}(\alpha)$.
 The hint seems to have paid off, but leaves room for doubt and suspicion. 
 
 We do not yet have a physical reason to complexify the time variable by extending from a one-dimensional
-real axis to a two-dimensional complex plane; however, mathematical function theory calls ahead of 
+real axis to a two-dimensional complex plane; however, mathematical function theory after Abel calls ahead of 
 schedule for just such an abstraction. To account for additional complex degrees of freedom, we will build 
 out a Riemann surface\footnote{The nomenclature "Kleinian Surface" may be better. Jeremy Gray claims that 
-Felix Klein was the first to think of an algebraic curve as "a closed surface in its own right" \cite{GRAY2010}. }, 
+Felix Klein (1849-1925) was the first to think of a complexified algebraic curve as "a closed surface in 
+its own right" \cite{GRAY2010}. }, 
 \begin{eqnarray}
-\mathcal{R}_{\alpha} = \{(p,q) \in \mathbb{C}^2: \alpha=2H(p,q) \} 
+\mathcal{R}(\alpha) = \{(p,q) \in \mathbb{C}^2: \alpha=2H(p,q) \} 
 \simeq \{(v,w,x,y) \in \mathbb{R}^4: \alpha=2H(x+i v,y+i w) \},\nonumber
 \end{eqnarray}
-around each phase curve $\mathcal{C}_{\alpha}$. If transformation of canonical $p$ and $q$ 
+around each phase curve $\mathcal{C}(\alpha)$. If transformation of canonical $p$ and $q$ 
 variables introduces determinant $|J| \in \mathbb{C}/\{0,1\}$, then neither the two-form 
 $dp \wedge dq$, nor the time scale $dt$, nor Hamilton's equations will preserve. However, 
 it is possible to cancel the extra factor $|J|$ by scaling time covariantly, 
@@ -912,29 +906,30 @@ $t_i \rightarrow t_f = |J|\;t_i$. Any transformation with unit modulus $|J|$ act
 rotation on the complex $t$-plane. In particular, the Wick rotation,  
 $t_i\rightarrow t_f = i \; t_i$, goes by $\pi/2$ radians through the time plane, 
 thus permutes real and complex axes. The simplest covariant coordinate transformation
-having $|J|=i$ takes $p_i\rightarrow p_f=i\;p_i$ and rotates $\mathcal{R}_{\alpha}$  by 
+having $|J|=i$ takes $p_i\rightarrow p_f=i\;p_i$ and rotates $\mathcal{R}(\alpha)$  by 
 $\pi/2$ radians through a four dimensional space $\mathbb{C}^2 \simeq \mathbb{R}^4$.
 Covariant Wick rotation is another neat trick, which ultimately allows calculation of 
-the complex period on doubly-periodic $\mathcal{R}_{\alpha}$ by integration along a 
-real-valued level curve $\widetilde{\mathcal{C}}_{\alpha}$. Before moving ahead to non-trivial 
-topology, it is worthwhile to work through the simplest example in genus zero.
+the complex period on doubly-periodic $\mathcal{R}(\alpha)$ by integration along a 
+real-valued level curve $\widetilde{\mathcal{C}}(\alpha)$. Before moving ahead to non-trivial 
+topology, it is worthwhile to work through an easy example.
 
 Real-valued theory distinguishes between circular points and hyperbolic points, while 
 complex-valued theory does not. Any transformation such as $(p_i,q_i) \rightarrow (p_f,q_f)=(i\;p_i,q_i)$ 
-changes constraints, from circular $\alpha=2H=p^2+q^2$ to hyperbolic $\alpha=2\widetilde{H}=-p^2+q^2$,
+changes constraints, from circular $H_{\circ}$ to hyperbolic $\widetilde{H}_{\circ}$,
 and \textit{vice versa}. It is possible to embed the entire \textit{harmonic hyperboloid} 
 into three dimensions,
 \begin{eqnarray}
-\mathcal{R}_{\alpha}&=&\{(p,q)\in \mathbb{C}^2: \alpha  =p^2+q^2 \} \rightarrow  \mathcal{S}_{\alpha}=\{(x,y,z) \in \mathbb{R}^3: \alpha + z^2 =x^2+y^2 \}, \nonumber
+\mathcal{R}_{\circ}(\alpha)&=&\{(p,q)\in \mathbb{C}^2: \alpha =2H_{\circ}(p,q) \}  \nonumber \\ 
+&&\longrightarrow  \mathcal{S}_{\circ}(\alpha)=\{(x,y,z) \in \mathbb{R}^3: \alpha + z^2 =x^2+y^2 \}, \nonumber
 \end{eqnarray}
-while loosing only a phase degree of freedom via the map $(v,w) \rightarrow z=\pm \sqrt{v^2+w^2}$.
-More explicitly, $\mathcal{S}_{\alpha}$ is obtained from $\mathcal{R}_{\alpha}$ after considering 
-rotational symmetry in the $(p,q)$-plane. Coordinates $x=w=0$ and $z=v$ may be chosen such that 
-$\widetilde{\mathcal{C}}_{\alpha}=\{(y,z): \alpha=-z^2+y^2 \}$ is a hyperbola connected to the base circle 
-$\mathcal{C}_{\alpha}=\{(x,y): \alpha=x^2+y^2 \}$ at the turning points ${(p, q)=(0,\pm \sqrt{\alpha})}$. 
-Any other point $(p,q)=(x_0,y_0)$ along $\mathcal{C}_{\alpha}$ is yet again a turning point; however, 
-in a rotated coordinate system. Point $(x_0,y_0)$ connects circular $\mathcal{C}_{\alpha}$ to a 
-\textit{rotated copy} of hyperbolic $\widetilde{\mathcal{C}}_{\alpha}$, which
+while losing only a phase degree of freedom via the map $(v,w) \rightarrow z=\pm \sqrt{v^2+w^2}$.
+More explicitly, $\mathcal{S}_{\circ}(\alpha)$ is obtained by considering rotational symmetry in the $(p,q)$-plane. 
+Coordinates $x=w=0$ and $z=v$ may be chosen such that 
+$\widetilde{\mathcal{C}}_{\circ}(\alpha)=\{(y,z): \alpha=-z^2+y^2 \}$ is a hyperbola connected to the base circle 
+$\mathcal{C}_{\circ}(\alpha)=\{(x,y): \alpha=x^2+y^2 \}$ at the turning points ${(p, q)=(0,\pm \sqrt{\alpha})}$. 
+Any other point $(p,q)=(x_0,y_0)$ along $\mathcal{C}_{\circ}(\alpha)$ is yet again a turning point; however, 
+in a rotated coordinate system. Point $(x_0,y_0)$ connects circular $\mathcal{C}_{\circ}(\alpha)$ to a 
+\textit{rotated copy} of hyperbolic $\widetilde{\mathcal{C}}_{\circ}(\alpha)$, which
 falls in the hyperplane determined by  $(x_0 \;u+y_0 \;v)(x_0 \;y-y_0 \;x)=0$.
 
 \begin{figure*}[t] 
@@ -963,29 +958,27 @@ falls in the hyperplane determined by  $(x_0 \;u+y_0 \;v)(x_0 \;y-y_0 \;x)=0$.
 
 Two equivalent parameterizations,  
 \begin{eqnarray}
-&\mathcal{R}_{\alpha} =& \bigg\{
-(p,q)=\Big(\sqrt{\alpha}\sin(t),\sqrt{\alpha}\cos(t)\Big) \in \mathbb{C}^2
+&\mathcal{R}_{\circ}(\alpha) =& \bigg\{
+(p,q)=\sqrt{\alpha} \Big(\sin(t),\cos(t)\Big) \in \mathbb{C}^2
 : t \in \mathbb{C} \bigg\},  \nonumber  \\
 \text{and} \;\;\;\;\;
-&\widetilde{\mathcal{R}}_{\alpha} =& \bigg\{
-(p,q)=\Big(\sqrt{\alpha}\sinh(u),\sqrt{\alpha}\cosh(u)\Big)  \in \mathbb{C}^2
+&\widetilde{\mathcal{R}}_{\circ}(\alpha) =& \bigg\{
+(p,q)=\sqrt{\alpha}\Big(\sinh(u),\cosh(u)\Big)  \in \mathbb{C}^2
 : u \in \mathbb{C} \bigg\},  
  \nonumber
 \end{eqnarray}
 of the harmonic hyperboloid follow from the solution of Hamilton's equations, 
 around a circular point and a hyperbolic point respectively. Wick rotation $t\rightarrow u= i\;t$ 
-equates $\mathcal{R}_{\alpha}$ and $\widetilde{\mathcal{R}}_{\alpha}$ up to a $\pi/2$-radian rotation 
-through the complex $p$-plane. While the usual trigonometric functions are periodic, 
-their hyperbolic counterparts certainly are not. Taken together periodicity along 
-$\mathfrak{R}(t)$ and non-periodicity along $\mathfrak{R}(u)$ implies genus zero. 
+equates $\mathcal{R}_{\circ}(\alpha)$ and $\widetilde{\mathcal{R}}_{\circ}(\alpha)$ up to 
+a $\pi/2$-radian rotation through the complex $p$-plane. While the usual trigonometric functions 
+are periodic, their hyperbolic counterparts certainly are not. Taken together, periodicity along 
+$\mathfrak{R}t$ and non-periodicity along $\mathfrak{R}u$ implies genus zero. 
 This identification introduces some cognitive dissonance, because the sphere is 
 usually given as the standard form of a genus zero surface. In three dimensions, 
 the hyperboloid,
 \begin{eqnarray}
-&\mathcal{S}_{\alpha} =& \bigg\{
-(x,y,z)=\Big(\sqrt{\alpha}\sin(t)\cosh(u),
-\sqrt{\alpha}\cos(t)\cosh(u),
-\sqrt{\alpha}\sinh(u)\Big) \in \mathbb{R}^3
+&\mathcal{S}_{\circ}(\alpha) =& \bigg\{
+(x,y,z)=\sqrt{\alpha} \Big(\sin(t)\cosh(u), \cos(t)\cosh(u), \sinh(u)\Big) \in \mathbb{R}^3
 : (t,u) \in \mathbb{R}^2 \bigg\},  \nonumber
 \end{eqnarray}
 transforms into the Riemann sphere by stereographic projection,
@@ -1021,27 +1014,27 @@ with $+$ chosen for $z \ge 0$ and $-$ chosen otherwise.
 \begin{center}
 \begin{overpic}[width=0.55\textwidth]{./Figures/ToricSlices.eps}\end{overpic}
 \;\;\;\; \begin{overpic}[width=0.3\textwidth]{./Figures/SecKey.eps}
- \put (18,86) {$2H=p^2+q^2-p^2 q^2$}
+ \put (18,86) {$2H_1=p^2+q^2-p^2 q^2$}
  \put (10,68) {\Large\rotatebox[origin=c]{90}{$\longleftarrow$}}
  \put (15,68) { Wick Rotation}
-  \put (18,49.5) {$  2\widetilde{H} =  -p^2+q^2+p^2 q^2 $}
- \put (18,31.5) {$   2\widetilde{H} = -p^2+q^2 - \tfrac{1}{4}(p^2 + q^2)^2 $}
+  \put (18,49.5) {$  2\widetilde{H}_1 =  -p^2+q^2+p^2 q^2 $}
+ \put (18,31.5) {$   2\widetilde{H}_1 = -p^2+q^2 - \tfrac{1}{4}(p^2 + q^2)^2 $}
 \end{overpic}
 \caption{Toric Cross Sections via Wick Rotation.}
 \label{fig:ToricSecs}
 \end{center}
 \end{figure*}
 
-With two periods rather than just one, a genus one elliptic curve differs qualitatively 
+By having two periods rather than just one, a genus one elliptic curve differs qualitatively 
 from the genus zero harmonic hyperboloid. In general, the two periods may describe the 
 boundaries of a \textit{period parallelogram} in the complex $t$-plane; however, in Edwards's normal 
 form, a choice of real $\alpha \in (0,1)$ amounts to choosing a \textit{period rectangle} with entirely 
 complex $\tau$ and $\mathfrak{I}(\tau) \in (0,\infty)$. To calculate $\tau$ explicitly, we transform 
-by a Wick rotation, $H \rightarrow \widetilde{H}$, as in Fig. \ref{fig:ToricSecs}. Both transforms 
+by a Wick rotation, $H_1 \rightarrow \widetilde{H}_1$, as in Fig. \ref{fig:ToricSecs}. Both transforms 
 introduce a factor $|J|=i$ relative to the initial choice of coordinates\footnote{
 Easy Exercise: Prove $|J|=i$ explicitly, then prove the two alternatives canonically equivalent.}.
-Constraint $\alpha=2\widetilde{H}$, for either $\widetilde{H}$, cuts out a real-valued curve 
-$\widetilde{\mathcal{C}}_{\alpha}$. Hamilton's equations determine the complex period, 
+Constraint $\alpha=2\widetilde{H}_1$, for either $\widetilde{H}_1$, cuts out a real-valued curve 
+$\widetilde{\mathcal{C}}(\alpha)$. Hamilton's equations determine the complex period, 
 up to a missing factor $i$. One choice leads to an easier integral,
 \begin{eqnarray}
 T_{\mathfrak{I}}(\alpha) = i \oint dt = i \int_{-\infty}^{\infty} \frac{dp}{\sqrt{(1+p^2)(\alpha+p^2)}},  \nonumber 
@@ -1049,18 +1042,19 @@ T_{\mathfrak{I}}(\alpha) = i \oint dt = i \int_{-\infty}^{\infty} \frac{dp}{\sqr
 on a non-compact contour, while the other offers compactness with a harmonic limit 
 $\omega=2$ as $\alpha \rightarrow 1$. Integral value $T_{\mathfrak{I}}(1) = i \pi$ also 
 implies that $\omega = 2\pi i/T_{\mathfrak{I}}(1) =2$.  More importantly, the zero sum, 
-\begin{eqnarray}\mathcal{A} \circ \frac{1}{\sqrt{(1+p^2)(\alpha+p^2)}} 
+\begin{eqnarray}\widehat{\mathcal{A}} \circ \frac{1}{\sqrt{(1+p^2)(\alpha+p^2)}} 
 + \partial_p \; \widetilde{\Xi} = 0, \;\;\;\text{with}\;\;\; 
 \widetilde{\Xi} = \frac{p\;(1+p^2)^{1/2}}{(\alpha+p^2)^{3/2}},  \nonumber
 \end{eqnarray}
-certifies that $\mathcal{A} \circ T_{\mathfrak{I}}(\alpha)=0$, because
+certifies that $\widehat{\mathcal{A}} \circ T_{\mathfrak{I}}(\alpha)=0$, because
 $\int_{-\infty}^{\infty} dp \; \partial_{p} \widetilde{\Xi}=0$. The harmonic 
 limit determines the constants of integration, and $T_{\mathfrak{I}}(\alpha) = i 2K(1-\alpha)$,
 as desired. Depending on the reader's naivet\'{e}, it is either astounding or mundane that 
 both real and complex solutions should satisfy the same differential equation. The 
 cohomological theory of algebraic varieties gives a standard mathematical explanation
-as to \textit{why}, but for now we are more concerned with the ever-pressing 
-\textit{what for}.
+as to \textit{why}\footnote{Along any homology $1$-cycle, integral $\oint dt$ is rational, so
+satisfies a "Picard-Fuchs type" ODE \cite{LAIREZ2016}.}, but for now we are more concerned 
+with the ever-pressing \textit{what for}.
 
 \begin{figure*}[t] 
 \begin{center}
@@ -1085,41 +1079,42 @@ Unlike their trigonometric counterparts, the shape of $\chi(t)$ or $\psi(t)$ dep
 on the amplitude parameter $\alpha$ via the period ratio $\tau=i\frac{K(1-\alpha)}{2K(\alpha)}$,
 now justly derived. Shape variation with $\alpha$ carries over to the Riemann surface,
 \begin{eqnarray}
-\mathcal{R}_{\alpha} = \Big\{\big(p,q\big)
-=\big(\alpha^{\frac{1}{4}} \;\psi(t), \; \alpha^{\frac{1}{4}} \;\chi(t)\big) 
+\mathcal{R}_1(\alpha) = \Big\{\big(p,q\big)
+=\alpha^{\frac{1}{4}} \big( \psi(t), \; \chi(t)\big) 
 \in \mathbb{C}^2 : t \in \mathbb{C} \Big\}, \nonumber
 \end{eqnarray}
 which limits to a central harmonic hyperboloid when $\alpha \rightarrow 0$ 
 and $\mathfrak{I}(t) \rightarrow 2n\; i\; \tau, \; n \in \mathbb{Z}$. Around 
-$\mathfrak{I}(t)=0$, surface $\mathcal{R}_{\alpha}$ looks sufficiently like the 
+$\mathfrak{I}(t)=0$, surface $\mathcal{R}_1(\alpha)$ looks sufficiently like the 
 harmonic hyperboloid to allow a similar embedding\footnote{The map  
-$(p,q) \rightarrow (x,y,z)$, from $\mathcal{R}_{\alpha}$ to $\mathcal{S}_{\alpha}$, 
+$(p,q) \rightarrow (x,y,z)$, from $\mathcal{R}$ to $\mathcal{S}$, 
 preserves the euclidean metric: $p^{\star}p+q^{\star}q=x^2+y^2+z^2$.},
 \begin{eqnarray}
-\mathcal{S}_{\alpha} = \Big\{\big(x,y,z\big)
-=\big(
-\alpha^{\frac{1}{4}}\;\psi_{\mathfrak{R}}(t),
-\; \alpha^{\frac{1}{4}}\;\chi_{\mathfrak{R}}(t), 
-\;\pm \alpha^{\frac{1}{4}} \sqrt{\chi_{\mathfrak{I}}(t)^2+\psi_{\mathfrak{I}}(t)^2} \; \big) 
+\mathcal{S}_1(\alpha) = \Big\{\big(x,y,z\big)
+=\alpha^{\frac{1}{4}} \big(
+\psi_{\mathfrak{R}}(t), \;\chi_{\mathfrak{R}}(t),\;\pm \sqrt{\chi_{\mathfrak{I}}(t)^2+\psi_{\mathfrak{I}}(t)^2} \; \big) 
 \in \mathbb{R}^3 : t \in \mathbb{R} \times[0,\pm \tfrac{\tau}{2}] \Big\}. \nonumber
 \end{eqnarray}
 Subscripts $\mathfrak{R}$ and $\mathfrak{I}$ indicate either the real or the imaginary 
 component of complex-valued functions $\psi(t)$ and $\chi(t)$. Hyperbolic sections also 
-expand over thin strip domains of width $\Delta t =1/4$, centered on vertical lines 
+expand over thin-strip domains of width $\Delta t =1/4$, centered on vertical lines 
 $\mathfrak{R}(t)=(2n+1)/4, \; n \in \mathbb{Z}$. Four sections in the range $\mathbb{C}^2$ 
 separately approach a harmonic hyperboloid in the limit $\alpha \rightarrow 1$. In the 
 right panel of Fig. \ref{fig:ToricRibbons}, the partial domain of all five hyperbolic 
 sections covers a full three-quarters of $\mathbb{C}$ while avoiding points 
-$\tau + n/2, \; n\in \mathbb{Z}$. At these points, either $\chi$ or $\psi$ has 
-a pole. Projecting the disjoint pieces of $\mathcal{R}_{\alpha}$ to three dimensions 
+$(2m+1)\tau + n/2, \; (m,n)\in \mathbb{Z}^2$. At these points, either $\chi(t)$ or $\psi(t)$ 
+has a simple pole. Embedding the disjoint pieces of $\mathcal{R}_1(\alpha)$ into three dimensions 
 and coloring by the real component of time, we expand from the skeleton of Fig. \ref{fig:ToricSecs} 
-to the patchwork surfaces nested in the left of Fig. \ref{fig:ToricRibbons}. Admittedly, the 
-result looks sketchy, but so far we have yet to do any better. 
+to the patchwork surfaces nested in the left of Fig. \ref{fig:ToricRibbons}. 
 
 \begin{figure*}[p!] 
 \begin{center}
 \vspace{1.5cm}
 \begin{overpic}[width=.95\textwidth]{./Figures/ThreeFlows3T.eps}
+ \put (21,-2) {\Large$\mathcal{F}_1$} 
+ \put (55,-2) {\Large$\mathcal{F}_{\varphi}$} 
+ \put (89,-2) {\Large$\mathcal{F}_{\vartheta}$} 
+
 \end{overpic}
 
 \vspace{1.5cm}
@@ -1136,27 +1131,25 @@ result looks sketchy, but so far we have yet to do any better.
  \put (-1.5,27.5) {$1$} \put (-1.5,11) {$1$}
  \put (34,27.5) {$1$} \put (31.5,12) {$\sqrt{2}$}
  \put (69.5,27.5) {$1$} \put (69,13) {$\tfrac{\pi}{2}$}
-
-
 \end{overpic}
-\caption{Hamiltonian Flows and Their Vertical Projections Over One Period.}
+\caption{Hamiltonian Flows and their vertical Projections over one Period.}
 \label{fig:ThreeFlows}
 \end{center}
 \end{figure*}
 
 
 Depiction of complex tori flexes impressive strength, but actually requires considerably more 
-effort than is necessary for applications in physics. With only values of $\psi(t)$ above the
-real time axis, we can graph sections of a Hamiltonian flow and make a wide range of experimental 
-predictions\textemdash the two tasks are not really any different. Fig. \ref{fig:ThreeFlows} depicts 
+effort than is necessary for applications in classical physics. With only values of $\psi(t)$ above 
+the real time axis, we can graph sections of a Hamiltonian flow and make a wide range of experimental 
+predictions\textemdash the two tasks are not entirely different. Fig. \ref{fig:ThreeFlows} depicts 
 a section of the pendulum's Hamiltonian flow,
 \begin{eqnarray}
-\mathcal{F}_{\alpha} = \bigg\{ \Big(\tfrac{1}{2}\theta(t),\tfrac{1}{2}\dot{\theta}(t),2 K(\alpha)t \Big)
+\mathcal{F}_{\vartheta} = \bigg\{ \Big(\tfrac{1}{2}\theta(t),\tfrac{1}{2}\dot{\theta}(t),2 K(\alpha)t \Big)
  \in \mathbb{R}^3 : t \in \mathbb{R} \bigg\} , \nonumber 
 \end{eqnarray}
-along with equivalent flows conformed to the algebraic models. In terms of textbook expectations, 
-these graphs leave little to be desired, save a few numerical double-checks. The following zero 
-sums, 
+along with the flows $\mathcal{F}_{\varphi}$ and $\mathcal{F}_{1}$ associated with $H_{\varphi}$ and
+$H_{1}$. In terms of textbook expectations, these graphs leave little to be desired, save a few 
+numerical double-checks. The following zero sums, 
 \begin{eqnarray}
 0 = 2 H(q(t),q(t))-\alpha , \;\;\;\;\;\;\;\; 
 0 = \dot{p}(t) + \partial_{q} H|_t, \;\;\;\;\;\;\;\; 
@@ -1187,8 +1180,8 @@ be done. Wherever a standard solutions exists and is known, another alternative 
 in terms of $\psi(t)$ is waiting to be found. What we have seen so far encourages the 
 hope that new derivations will lead to even more new insight!
 
+\pagebreak 
 \section{Conclusion}
-
 Hamiltonian mechanics teaches us to appreciate the truth and the beauty of classical mechanics 
 through geometric abstractions such as phase portraits, energy landscapes, and time-evolving flows. 
 Even more impressive, insightful geometry arises when incorporating complex time. The value inherent 
@@ -1216,9 +1209,9 @@ The harmonic hyperboloid and the anharmonic tori are only the first few examples
 bridge between physics and mathematics. The dream of "Hamilton-Abel" theory is to see more pedestrian 
 and commercial traffic crossing this bridge. The simple pendulum affords one opportunity to exchange 
 valuable ideas, but certainly, more opportunity abounds. An exciting frontier grows out of quantum 
-Hamiltonian mechanics, and the sort of semiclassical calculations that owe back to the days of 
-Ehrenfest and Sommerfeld.  When we finally get to calculating complex-time tunneling integrals, 
-Abel's original insight will seem all the more profound and prescient. \pagebreak
+Hamiltonian mechanics, and the sort of semiclassical calculations that owe back to the Wiemar time 
+of Ehrenfest and Sommerfeld. When we finally get to calculating complex-time tunneling integrals 
+along Riemannian tori, Abel's original insight will seem all the more profound and prescient. \pagebreak
 
 
 \interlinepenalty=10000
