@@ -336,10 +336,10 @@ amplitude parameter,
 \end{eqnarray}
 Parameter $\alpha$ presents a difficulty to dimensional analysis by allowing that $T$ 
 is a function and not just a single number. For any integer $n$, the quantity 
-$\sqrt{l/g}\;\alpha^n$ has time dimension, as does any quantity $T \in \sqrt{l/g}\;\mathbb{Q}[\![\alpha]\!]$. 
-An Ansatz for the period function, 
+$\sqrt{l/g}\;\alpha^n$ has time dimension, as does any quantity 
+$T \in 2\pi \sqrt{l/g}\;\mathbb{Q}[\![\alpha]\!]$. An Ansatz for the period function, 
 \begin{eqnarray}
-T(\alpha)=\sqrt{\frac{l}{g}}\sum_{n\ge 0}c_n \alpha^n, \nonumber
+T(\alpha)=2\pi\sqrt{\frac{l}{g}}\sum_{n\ge 0}c_n \alpha^n, \nonumber
 \end{eqnarray} 
 includes infinitely many undetermined coefficients $c_n \in \mathbb{Q}$. These coefficients 
 are not constrained by dimensional analysis. The task of determining them calls for a 
@@ -363,7 +363,7 @@ integral of the first kind} \cite{LL1982}. By formally verifying that $T(\alpha)
 part $(a)$ of the typical textbook exercise is already completed. More challenging part 
 $(b)$ asks for a closed form for the coefficients $c_n$. Term-by-term integration of 
 the series expansion\footnote{Using that $(1-4\Phi)^{-1/2} = \sum \binom{2n}{n}\Phi^n $ 
-and that $\oint (2\sin(\phi))^{2n} = \binom{2n}{n}$. Cf. OEIS \cite{SLOANE2019},  
+and that $\tfrac{1}{2\pi}\oint (2\sin(\phi))^{2n} =  \binom{2n}{n}$. Cf. OEIS \cite{SLOANE2019},  
 \href{https://oeis.org/A000984}{A000984}.} 
 yields a closed form for each $c_n$,
 \begin{eqnarray}
@@ -372,7 +372,7 @@ T(\alpha)= \oint \frac{d\phi}{\sqrt{1-\alpha \sin(\phi)^2}}
 = 2\pi \sum_{0}^{2\pi} \frac{1}{16^n}\binom{2n}{n}^2 \alpha^n. \nonumber 
 \end{eqnarray}
 If both parts $(a)$ and $(b)$ are too easy, part $(c)$ asks for proof that 
-$c_n=\frac{2\pi}{16^n}\binom{2n}{n}^2$ satisfies ${(n+1)^2 c_{n+1}=(n+1/2)^2c_n}$, and 
+$c_n=\frac{1}{16^n}\binom{2n}{n}^2$ satisfies ${(n+1)^2 c_{n+1}=(n+1/2)^2c_n}$, and 
 consequently that $K(\alpha)$ satisfies a particular hypergeometric differential 
 equation\footnote{We leave this as a worthwhile exercise for the reader. Cf. 
 OEIS \cite{SLOANE2019}, \href{https://oeis.org/A002894}{A002894}.}. Unfortunately textbook 
@@ -416,7 +416,7 @@ and substitution to $\dot{\phi}$ partially solves $T(\alpha)$,
 \begin{eqnarray}
 T(\alpha)= \oint \frac{d\phi}{\dot{\phi}} = \oint d\phi\bigg(1+\frac{2}{3}\alpha\sin(\phi)^4 + \mathcal{O}(\alpha^2) \bigg).\nonumber
 \end{eqnarray}
-Integral identity $\oint d\phi \sin(\phi)^4=3/8$ ensures the correct value $c_1=1/4$. More 
+Integral identity $\tfrac{1}{2\pi}\oint d\phi \sin(\phi)^4=3/8$ ensures the correct value $c_1=1/4$. More 
 importantly, the expansion shows by contradiction that $\tan(\phi) \neq \theta/\dot{\theta}$ 
 because the linear term of $T(\alpha)$ is an integral of $\sin(\phi)^4$ rather than $\sin(\phi)^2$.
 The false hypothesis is not entirely a loss. Similarity between alternative calculations of 
@@ -563,23 +563,23 @@ J= \begin{bmatrix}
 \nonumber 
 \end{eqnarray}
 After characterizing the inverse transform $(p_f,q_f) \rightarrow \big(p_i,q_i\big)$ 
-with an analogous matrix $\widetilde{J}$, action on the tangent vectors,
+with an analogous matrix ${\widetilde{J}=1/J^{T}}$, action on the tangent vectors,
 \begin{eqnarray}
 (dp_f,dq_f)= J \cdot (dp_i,dq_i) 
 \;\;\;\;\;\;\;\; \text{and} \;\;\;\;\;\;\;\;
 (dp_i,dq_i)= \widetilde{J} \cdot (dp_f,dq_f). \nonumber
 \end{eqnarray}
-ensures a product to identity, $\widetilde{J}J=\mathbb{I}$. Hamilton's equations 
+ensures a product to identity, $\widetilde{J}\cdot J=\mathbb{I}$. Hamilton's equations 
 transform accordingly,
 \begin{eqnarray}
 \big(\dot{p}_f,\dot{q}_f \big) = \bigg(-\frac{\partial H}{\partial q_f},\frac{\partial H}{\partial p_f}\bigg)   
 \longrightarrow J \cdot \big(\dot{p}_i,\dot{q}_i \big) = 
-P\cdot \widetilde{J} \cdot P \cdot \bigg(-\frac{\partial H}{\partial q_i},\frac{\partial H}{\partial p_i}\bigg),
+P^{T}\cdot \widetilde{J}^{\;T} \cdot P \cdot \bigg(-\frac{\partial H}{\partial q_i},\frac{\partial H}{\partial p_i}\bigg),
 \nonumber 
 \end{eqnarray}
-with permutation matrices $P$ such that $P \cdot J^{-1} \cdot P = J/\det(J)$. When 
-$\det(J)=1$, the area form and Hamilton's equations remain invariant
-\footnote{This proof is adapted from \cite{RALSTON1989}.}. The change of coordinates is 
+with permutation matrix $P$ such that $P^{T} \cdot \widetilde{J}^{\;T} \cdot P = \det(\widetilde{J})\widetilde{J}^{-1} = J/\det(J) $. 
+When $\det(J)=1$, the area form and Hamilton's equations remain invariant\footnote{This 
+proof is adapted from \cite{RALSTON1989}.}. The change of coordinates is 
 then said to be a \textit{canonical transformation}. For example, the pair of Jacobians,
 \begin{eqnarray}
 J =  \begin{bmatrix} p_i & q_i \\
@@ -796,7 +796,7 @@ $t \rightarrow i t$, helps to extend transformation theory,
 and to show relation between real and complex periods. 
 
 In a sense, function $G$ is Hamiltonian with canonical coordinates $x$ and $y$. The analogy can be 
-improved. Rewriting $(G,a,x,y) \rightarrow (H_1,\alpha,p,q)=(a^2 G,a^4,a\;y,a\;x)$
+improved. Rewriting $(G,a^2,x,y) \rightarrow (H_1,\alpha,p,q)=(a^2 G,a^4,a\;y,a\;x)$
 produces a Hamiltonian form, $\alpha=2H_1(p,q)=p^2+q^2 - p^2 \; q^2$, with an exact parameterization 
 ${p(t)=\alpha^{1/4} \;\psi(t)}$, ${q(t)=\alpha^{1/4} \;\chi(t)}$. The transformation does not leave 
 the energy scale invariant from $G$ to $H$, so cannot be canonnical \textit{per se}. Instead, it is a 
