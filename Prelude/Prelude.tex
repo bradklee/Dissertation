@@ -1,0 +1,1824 @@
+\documentclass[nofootinbib,preprint]{revtex4-1} 
+\usepackage[utf8]{inputenc}
+\usepackage[fleqn]{amsmath}
+\usepackage[title]{appendix}
+ \usepackage[none]{hyphenat}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\usepackage{skak}
+\usepackage{capt-of}
+\usepackage{afterpage}
+\usepackage{placeins}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,wrapfig} 
+\usepackage[percent]{overpic}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{setspace}
+\usepackage{rotating}
+%\usepackage{footmisc}
+\setdisplayskipstretch{}
+
+
+%\usepackage{footmisc}
+%\DefineFNsymbols{mySymbols}{{\ensuremath\dagger}{\ensuremath\ddagger}\S\P
+%   *{**}{\ensuremath{\dagger\dagger}}{\ensuremath{\ddagger\ddagger}}}
+%\setfnsymbol{mySymbols}
+
+\renewcommand{\arraystretch}{1.3}
+%\renewcommand\footnotelayout{\fontsize{10}{12}\selectfont}
+
+\newcommand{\tFo}[3]{\,_2F_1 \bigg[ 
+\genfrac.|{0pt}{}{#1}{#2} #3 \bigg]} 
+
+\newcommand{\tFoIn}[3]{\,_2F_1 \Big[ 
+\genfrac.|{0pt}{}{#1}{#2} #3 \Big]} 
+
+\newcommand{\rev}[1]{\text{\reflectbox{$#1$}}} 
+
+
+\begin{document}
+\title{Prelude to a Well-Integrable Function Theory}
+\author{Bradley Klee}
+\email{bjklee@email.uark.edu, bradklee@gmail.com} % optional
+\affiliation{Department of Physics, University of Arkansas, Fayetteville, AR 72701}
+
+\date{\today}
+
+\begin{abstract}
+Quite often in physics we encounter a question about nature, which can only be answered by taking 
+an integral. A formalism for writing such integrals does not guarantee quality answers nor appreciable 
+progress. Difficulties abound, especially when working with function-valued integrals, whose integrands 
+involve one or more auxiliary parameters. Yet such parameters allow differentiation under the integral 
+sign, so can be turned into an advantage. In many cases, a difficult-looking integral function is 
+also the solution to a relatively simple ordinary differential equation. Playing through a few 
+fundamental problems about ellipses and elliptic curves, we begin to hear intertwined themes 
+from physics and mathematics. These themes will recur in more substantial followup works. 
+\end{abstract}
+
+\maketitle 
+
+\section{History and Introduction}
+Lest we look all the way back to the geometric works of antiquity 
+(circa 200-300BC), it seems unlikely that we could find 
+a better starting place than the musical works of Johannes Kepler (1571-1630).
+Kepler advanced the heliocentric theory by refining it to maximum-available 
+precision. He did not do so by over-specializing
+in data analysis, rather by accomplishing superlative mastery of the 
+\textit{quadrivium}\textemdash a generalist curriculum of medieval Europe, 
+one that placed arithmetic, geometry, astronomy, and music on even footing.
+As continental Europe transitioned into the brutal thirty-years war (1618-1648), 
+Kepler published his brilliant assay in two parts, first 
+in \textit{Astronomia Nova} (1609) and subsequently in \textit{Harmonices Mundi} 
+(1619). Despite hundreds of years 
+elapsed, Kepler's three laws are still remembered today\footnote{These
+are quoted verbatim from Wikipedia, see:
+\href{https://en.wikipedia.org/wiki/Kepler's_laws_of_planetary_motion
+}{"Kepler's Laws of planetary motion"}.}:
+
+\begin{itemize}
+\item[\textbf{I.} ] The orbit of a planet is an ellipse with the 
+     Sun at one of the two foci.  
+\item[\textbf{II.} ] A line segment joining a planet and the Sun sweeps
+     out equal areas during equal intervals of time.  
+\item[\textbf{III.} ] The square of the orbital period of a planet is directly
+     proportional to the cube of the semi-major axis of its orbit.
+\end{itemize}
+Kepler's original "proof" of the three laws relied upon a beautiful but doubtful musical 
+analogy. More development was both desirable and necessary, so Kepler's laws gave way to 
+the \textit{Kepler Problem}. It asks for a derivation of the three laws from a more 
+fundamental physical theory, and subsequently for an adherent solution of the time-variant 
+planetary equations of motion. This task can not be accomplished by harmony alone. It requires 
+another paradigm change, which first came about during the European enlightenment\footnote{Do not confuse 
+European and Asian enlightenment! At the very least, they happened at different times, 
+in different geographical regions. (When considering whole and indivisible spacetime, 
+confuse freely away!)}.
+
+With the publication of \textit{Principia Mathematica} (1687), Isaac Newton (1642-1727)
+made a significant contribution toward the initiation of European Enlightenment.
+In this effort to defeat the specter of irrational religiosity, 
+Newton's work was like a clarion, calling all subsequent generations to the front lines
+of scientific research. Newton's three laws are also remembered to this day:
+\begin{itemize}
+\item[\textbf{I.} ] Absent of an external force, an object in motion stays in motion, 
+while an object at rest stays at rest.  
+\item[\textbf{II.} ] A net force $\mathbf{F}$ applied to a massive object causes an 
+acceleration $\mathbf{a}$. The two dynamical variables are linearly proportional 
+by the mass $m$, i.e. $\mathbf{F} = m \mathbf{a}$.  
+\item[\textbf{III.} ] For every force from one body to another, there is an equal 
+and opposite response force from the later body to the former (It is often written, 
+$\mathbf{F}_{21} = -\mathbf{F}_{12} )$.
+\end{itemize}
+To these three, Newton also gave an important addendum regarding the particular case of 
+gravitating bodies, the \textit{Universal Law of Gravitation}, 
+\begin{itemize}
+\item[\textbf{G}. ] The attractive force between two point masses is 
+directly proportional to the product of masses, and is inversely 
+proportional to the square of the distance between them.  
+\end{itemize}
+If $m_1$ and $m_2$ are the masses, and $\mathbf{r}$ the distance vector, the 
+gravitational force vector $\mathbf{F}$ is usually written 
+$\mathbf{F} =G \frac{m_1 m_2}{\mathbf{r}\cdot\mathbf{r}}\hat{r}$,
+with gravitational constant $G$. The adjective "universal" indicates that law
+\textbf{G} applies to the orbits of planets, to the orbit of the moon, to the 
+tides between the moon and the oceans, as well to the oscillation of various 
+types of mechanical pendulums. In fact, universal law \textbf{G} applies to any 
+pair of gravitating bodies, anywhere in the universe\footnote{We are not disregarding Einstein's theory of general relativity, 
+so must also say that Newton's universal laws are not exactly universal. 
+In some parts of the universe, they completely fail, e.g. black holes.}. Accepting 
+\textbf{I}, \textbf{II}, \textbf{III}, and \textbf{G} as all valid and applicable,
+Kepler's laws can be proven mathematically using only the geometrical techniques of 
+Newton's day and age. Richard Feynman (1918-1988) took this as a challenge when 
+he gave a lecture on planetary motion, March 13, 1964. The lecture stands
+on its own as an active and imaginative contribution to the history of science, 
+and it is quite different from anything that we would readily recognize as a 
+typical solution to the Kepler problem. 
+
+\begin{figure}[t]
+\begin{center}
+\begin{overpic}[width=0.9\textwidth]{./Figures/pandemic.eps}
+ \put (1,25) {\scriptsize N}
+ \put (25,25) {\scriptsize I}
+ \put (17,25) {\scriptsize II}
+ \put (11,25) {\scriptsize III}
+ \put (18,3.5) {\scriptsize t (days)}
+ \put (-3,24) {\scriptsize $10^6$}
+ \put (-1.5,5) {\scriptsize $0$}
+ \put (5,3.5) {\scriptsize $20$}
+ \put (11,3.5) {\scriptsize $40$}
+ \put (8,3.5) {\scriptsize $t_0$}
+
+ \put (44,27) {\scriptsize (log-linear)}
+ \put (34.8,24.5) {\scriptsize N}
+ \put (66,12.5) {\scriptsize I}
+ \put (66,18) {\scriptsize II}
+ \put (66,22) {\scriptsize III}
+ \put (57.5,6.2) {\scriptsize t (days)}
+ \put (54,3.5) {\scriptsize $t_0$}
+ \put (48.5,3.5) {\scriptsize $20$}
+ \put (64,3.5) {\scriptsize $40$}
+ \put (30.5,10.5) {\scriptsize $10^2$}
+ \put (30.5,15.8) {\scriptsize $10^4$}
+ \put (30.5,20.8) {\scriptsize $10^6$}
+
+ \put (2,0){\scriptsize LEGEND:}
+ \put (15,0){\scriptsize I. Deaths}
+ \put (27,0){\scriptsize II. 100 $\times$ Deaths}
+ \put (45,0){\scriptsize III. Infection Estimate}
+ \put (75,25){\scriptsize \underline{ENVELOPE CALCULATION}}
+ \put (73,22){\scriptsize Mortality Rate:}
+ \put (93,22){\scriptsize $R=1/100$}
+ \put (73,19){\scriptsize Time to Double:}
+ \put (93.4,19){\scriptsize  $\tau =4$ days}
+ \put (73,16){\scriptsize Infection $\rightarrow$ Death:}
+ \put (91.4,16){ \scriptsize $\Delta t = 20$ days}
+ \put (75,10){ $\frac{N_{III}}{N_{I}} \approx R^{-1}\;2^{\Delta t/ \tau}$ }
+ \put (80.75,6.5){  $\approx 3200$ }
+ \put (90,7){  $\frac{\text{infected}}{\text{death}}$ }
+ \put (72,3){ \scriptsize source: 
+ \href{https://twitter.com/ColinTheMathmo/status/1238136811857346560}{twitter: @ColinTheMathmo } }
+
+
+\end{overpic}
+\caption{Onset of a pandemic: exponential curves $N(t)=N_0 e^{\log(2)\frac{t}{\tau}}$ plotted over time $t$.}
+  \label{fig:pandemic}
+\end{center}
+\end{figure}
+
+Famously, Newton wrote "if I have seen further it is by standing on the shoulders of Giants." 
+In so doing he became a part of the gigantic scientific enterprise, as did his follower 
+Leonhard Euler (1707-1783). Perhaps no one worked more than Euler to raise this 
+giant into its present-day stance. Encyclopedic works typically credit Euler for originating 
+(or at least co-originating) the first abstract definition of what a function 
+is, and for giving the first important examples\footnote{Be careful if studying Wikipedia. 
+The article \href{https://en.wikipedia.org/wiki/History_of_the_function_concept}{"History 
+of the function concept"} \textit{at least} needs a section on pre-history, starting with 
+compass and straightedge, the \underline{functional implements} of antiquity. Also,
+don't forget to read primary source documents. Hundreds of Euler's works are available online
+through the Euler archive[cite], see \href{http://eulerarchive.maa.org/pages/E101.html}{E101}
+Ch. 7-8 for early definitions of $e^x$, $\cos(x)$, and $\sin(x)$ and more. }.
+Most noteably, the functions $e^x$, $\cos(x)$, and $\sin(x)$, were written by 
+Euler in series expansion, 
+\begin{eqnarray}
+e^x &=& 1+x+\frac{1}{2}x^2+\frac{1}{2\cdot 3}x^3  +\frac{1}{2\cdot 3 \cdot 4}x^4  +\frac{1}{2\cdot 3\cdot 4\cdot 5}x^5  + etc.     \nonumber \\
+\cos(x) &=& 1-\frac{1}{2}x^2 +\frac{1}{2\cdot 3\cdot 4}x^4 - \frac{1}{2\cdot 3\cdot 4\cdot 5\cdot 6}x^6 + etc.  \nonumber \\ 
+\sin(x) &=& x-\frac{1}{2\cdot 3}x^3 +\frac{1}{2\cdot 3\cdot 4\cdot 5}x^5  - \frac{1}{2\cdot 3\cdot 4\cdot 5\cdot 6\cdot 7}x^7 + etc.     \nonumber 
+\end{eqnarray}
+with "$+ etc.$" indicating continuation of the numerical pattern to infinity. From this 
+definition it is straightforward to infer all the following annihilating relations,
+\begin{eqnarray}
+\partial_x e^x - e^x = 0, \;\;\;\;\;\;\;\; \partial_x^2 \cos(x) + \cos(x) = 0, 
+\;\;\;\;\;\;\;\; \text{and} \;\;\;\;\;\;\;\; \partial_x^2 \sin(x) + \sin(x) = 0. \nonumber
+\end{eqnarray}
+The important composition identity $e^x = \cos(i x) - i \sin(i x)$, where $i^2=-1$, 
+also follows, as does the beautiful and profitable \textit{Euler's identity} that $e^{i\pi}=-1$.
+It is apparent from his collected works that Euler understood the practical value of 
+transcendental functions, and intended for subsequent generations to use these tools 
+to continue solving new and interesting problems. The three functions $e^x$, $\sin(x)$ 
+and $\cos(x)$ are among the best specialized tools a scientist ever receives. When 
+used together with statistical analysis, these tools are often enough to predicate 
+an entire career, even in practical disciplines or the so-called "real world". The 
+infographic Fig. \ref{fig:pandemic}, gives one example related to the COVID-19 
+pandemic of 2020. Meanwhile, sine and cosine contribute an essential part 
+to subsequent analyses. 
+
+Euler was also interested in calculus as a theory, regardless of the material or 
+the mundane. He thought abstractly, made numerical analogies, and ventured into 
+lesser known realms of mathematics to find and analyze other important functions. 
+The Euler archive records early series definitions for elliptic integrals,
+\begin{eqnarray}
+\frac{2}{\pi}E(x) = 1 -\frac{1}{2^2}x  
+-\frac{1^2 \cdot 3}{2^2 \cdot 4^2}x^2 
+-\frac{1^2 \cdot 3^2 \cdot 5}{2^2 \cdot 4^2 \cdot 6^2}x^3 - etc., \nonumber \\
+\frac{2}{\pi}K(x) = 1 +\frac{1^2}{2^2}x 
++\frac{1^2 \cdot 3^2}{2^2 \cdot 4^2}x^2 
++\frac{1^2 \cdot 3^2 \cdot 5^2}{2^2 \cdot 4^2 \cdot 6^2}x^3 + etc., \nonumber 
+\end{eqnarray}
+under entry numbers     
+\href{http://eulerarchive.maa.org/pages/E028.html}{E028} and
+\href{http://eulerarchive.maa.org/pages/E503.html}{E503}  respectively\footnote{The 
+notation here is similar, not identical, to notation used originally by Euler. Standard
+usage of letters $K$ and $E$ is a more recent development attributed to A.M. Legendre (1752-1833).}.  
+These basic examples eventually led Euler to an early discovery of the general hypergeometric 
+series, in his notation, 
+\begin{eqnarray}
+s = 1 + \frac{ab}{1\cdot c} x + \prod \frac{(a+1)(b+1)}{2\cdot(c+1)} x^2
+ + \prod \frac{(a+2)(b+2)}{2\cdot(c+2)} x^3 + etc.,  \nonumber
+\end{eqnarray}
+where recursive symbol $\prod$ stands for multiplication by the previous series 
+coefficient. This equation appears verbatim in 
+\textit{Specimen transformationis singularis serierum}, 
+archive entry \href{http://eulerarchive.maa.org/pages/E710.html}{E710}, alongside
+its defining differential equation 
+"$0=x(1-x)\partial\partial s +[c-(a+b+1)x]\partial s - a b s$". We no longer 
+use Euler's notation or ordering, and instead write an annihilating operator, 
+\begin{eqnarray}
+\mathcal{A}_F &=& z(1-z)\partial^2_z  +\big(c-(a+b+1)z\big)\partial_z  - a b 
+ \nonumber \\
+\text{such that} \;\;\;\; \mathcal{A}_F \circ F &=& z(1-z)\partial^2_z F  
++\big(c-(a+b+1)z\big)\partial_z F  - a b F = 0, \nonumber
+\end{eqnarray}
+which constrains all possible solutions. The putative simplest series solution,
+\begin{eqnarray}
+\tFo{a,b}{c}{z} = \sum_{n\ge 0} f_n z^n 
+\;\;\;\; \text{with} \;\;\;\; f_0=1 \;\;\;\text{and} 
+\;\;\; (n+1)(n+c)f_{n+1}=(n+a)(n+b)f_n , \nonumber
+\end{eqnarray}
+introduces a concise notation where, for example, 
+elliptic integrals are easy to define, 
+\begin{eqnarray}
+\frac{2}{\pi} E(z) = \tFo{-\frac{1}{2},\frac{1}{2}}{1}{z}
+\;\;\;\;\;\; \text{and} \;\;\;\;\;\;
+\frac{2}{\pi} K(z) = \tFo{\frac{1}{2},\frac{1}{2}}{1}{z}.  \nonumber   
+\end{eqnarray}
+However nice it may be to get rid of Euler's "$etc.$", the simple hypergeometric 
+solution is not a unique or final definition. Sections IV and V of this work 
+will explore alternative definitions of $E$ and $K$, targeted toward precise 
+and efficient calculation.
+
+Reversing the order of presentation, we mean to portray the hypergeometric 
+differential equation as more fundamental than any one particular 
+solution\footnote{In fact, the second-order H.D.E. must 
+have a solution-space with two degrees of freedom.}. This reversal raises 
+a question about procedure: if $\,_2F_1$ is to follow from $\mathcal{A}_F$, 
+what shall precede $\mathcal{A}_F$? For special values $(a,b,c)$ it is 
+possible that $\mathcal{A}_F$ has a natural geometric origin. This is the 
+case for functions $E$ and $K$, which may also be written as,
+\begin{eqnarray}
+ E(z) = \int_0^{\pi/2} \sqrt{1-z \sin(\phi)^2} \; d\phi
+\;\;\;\;\;\; \text{and} \;\;\;\;\;\;
+ K(z) =  \int_0^{\pi/2} \frac{1}{\sqrt{1-z \sin(\phi)^2}} \; d\phi.  \nonumber   
+\end{eqnarray}
+Euler already knew how to derive these integral forms (or similar)
+from geometry and/or Newtonian physics, and he took them as a fundamental starting place. 
+However, Euler did not have a rigorous procedure for analyzing partial 
+derivatives of the integrands, so he could not derive the corresponding 
+cases of $\mathcal{A}_F$ without resorting to series expansion methods.
+
+In present times, the related fields of Creative Telescoping and Holonomic Functions 
+can add rigor where it may be missing\footnote{For broad summaries, see xxx.}. 
+Algorithms from these theories help to analyze the sort of integrals typified by 
+elliptic $E$ and $K$. For simplicity sake, let us 
+take the one-dimensional case, where  $I(\alpha)=\oint_{\mathcal{X}(\alpha)}\frac{dI}{dt}dt$
+over domain $\mathcal{X}(\alpha)$, an algebraic plane curve, also a Jordan curve\footnote{See 
+also Mathworld:
+\href{https://mathworld.wolfram.com/AlgebraicCurve.html}{Algebraic Curve},
+\href{https://mathworld.wolfram.com/JordanCurve.html}{Jordan Curve}.}. Integral $I(\alpha)$ is sensitive 
+to how the shape of curve $\mathcal{X}(\alpha)$ depends on the auxiliary parameter $\alpha$.
+If $\mathcal{X}(\alpha)$ and $dI/dt$ are both sufficiently simple, then there will exist 
+an annihilating operator $\mathcal{A}_I \in \mathbb{Q}[\![\alpha, \partial_{\alpha}]\!]$ 
+(also called a "telescoper"), which satisfies $\mathcal{A}_I \circ I(\alpha)=0$
+because  $\mathcal{A}_I \circ \frac{dI}{dt} = \frac{d}{dt}(\Xi^{t}_I)$. An annihilator 
+$\mathcal{A}_I$ and its certificate $\Xi^t_{I}$ can sometimes be calculated 
+concurrently using only a combination of partial-fraction decomposition and the 
+Ostrogradsky-Hermite reduction. This is the case for elliptic $E$ and $K$, as 
+well for many other geometries to appear in our sustained research effort.
+
+An expression such as $\mathcal{A}_I \circ I(\alpha) = 0$ tells us that $I(\alpha)$ 
+is the solution of an ordinary differential equation. How should we understand 
+certificates such as $\Xi^{t}_I$? Can we calculate certificates, and should we? If so, 
+how? These are motivating questions for the present work. Using an empirical, 
+example-driven style, we will go from Kepler's laws and Newton's laws in sections II 
+and III, to ellipses, elliptic curves, and elliptic integrals in sections IV and 
+V, while stopping only briefly to solve a few problems in section VI. Finally in 
+section VII, we take a closer look at certificate geometry. As with any prelude, the 
+progression from start to start is a right of passage, a test of technical 
+skill, and ultimately only a hint of what is to come next. Rather than concluding 
+entirely, section VIII gives the prospectus to a dissertation where physical and 
+mathematical themes will cipher 'round again.
+\pagebreak
+
+\section{Ellipse Area Integrals}
+
+\begin{wrapfigure}{R}{7cm}
+\begin{center}
+\begin{overpic}[width=0.4\textwidth]{./Figures/EllipseCoords.eps}
+ \put (4,90.5) {$\widetilde{A}(P_1)$}
+ \put (30,90.5) {$A'(P_1)$}
+ \put (53,90.5) {$A(P_1)$}
+ \put (55.5,76.5) {$P_1$}
+ \put (85,52) {$P_0$}
+ \put (8,52) {$P_a$}
+ \put (63,45) {$x_1$}
+ \put (52,58) {$y_1$}
+ \put (65,63.5) {\rotatebox[origin=c]{30}{$r_1$}}
+ \put (37,63.5) {\rotatebox[origin=c]{38}{$\widetilde{r}_1$}}
+ \put (73,51.5) {$\theta_1$}
+ \put (38,51.5) {$\widetilde{\theta}_1$}
+ \put (31,5) {$ \longleftarrow \;\; 2e \;\; \longrightarrow$}
+ \put (5,31) {\rotatebox[origin=c]{90}{$\leftarrow \;\; 1 \;\; \rightarrow$}}
+\end{overpic}
+\caption{An Ellipse $\mathcal{E}$ with $e=2/3$.}
+  \label{fig:EllipseCoords}
+  \phantom{space}
+\end{center}
+\end{wrapfigure}
+
+Kepler's second law asks for the area swept out by a point moving on the circumference 
+of an ellipse, from $P_1=(x_1,y_1)$ to  $P_2=(x_2,y_2)$. We choose all points from the 
+ellipse,
+\begin{eqnarray}
+\mathcal{E}=\{(x,y):(1-e^2)(x+a e)^2+y^2=a^2(1-e^2)\}, \nonumber
+\end{eqnarray} 
+with eccentricity $e \in [0,1)$ and semi-major axis length typically set to $a=1$ 
+(without loss of generality). These conventions for ellipse $\mathcal{E}$ 
+place one focus at the origin and another at $x=-2e$, as in Fig. \Ref{fig:EllipseCoords}. By 
+the integral property that ${\int_{P_1}^{P_2} dA = \int_{P_0}^{P_2} dA - \int_{P_0}^{P_1} dA}$, 
+a standard reference point $P_0$ can be chosen to simplify analysis. Either the apogee or 
+perigee is a natural choice. Between the two, we choose the perigee at ${P_0=(x_0,y_0)=(1-e,0)}$.
+In Cartesian coordinates, the trigonometric area integral,\FloatBarrier\noindent  
+\begin{eqnarray}
+A_{\mathcal{E}}^{x}(P_1) = \int_{P_0}^{P_1} dA_{\mathcal{E}}^{x} 
+= \int_{x_1}^{1-e} y\;dx = \int_{x_1}^{1-e}\sqrt{(1-e^2)(1-(x+e)^2)} \;dx, \nonumber
+\end{eqnarray}
+has a simple and well-known\footnote{Mathematica produces this evaluation 
+automatically and within a few seconds.} closed-form,
+\begin{eqnarray}
+A_{\mathcal{E}}^{x}(P_1) = \frac{1}{2} \Big(\sqrt{1-e^2} \arccos(e+x_1) - (e+x_1)y_1 \Big). \nonumber
+\end{eqnarray}
+However, area $A_{\mathcal{E}}^{x}(P_1)$ is the \textit{Cartesian area}, so does not immediately help with 
+the Kepler problem. Instead we need to calculate the \textit{sectorial area},
+\begin{eqnarray}
+A_{\mathcal{E}}^{\theta}(P_1)= \int_{P_0}^{P_1}dA_{\mathcal{E}}^{\theta} 
+=\frac{1}{2} \int_{0}^{\theta_1} r^2 d\theta = 
+\frac{1}{2} \int_{0}^{\theta_1} \Big( \frac{1-e^2}{1+e\cos(\theta)}\Big)^2 d\theta, \nonumber
+\end{eqnarray}
+in polar coordinates where $x = r\cos(\theta)$ and $y=r\sin(\theta)$. The integrand of 
+$A_{\mathcal{E}}^{\theta}(P_1)$ is prohibitively complicated\footnote{Mathematica takes a 
+long time thinking, and returns an over-complicated answer.}. From Fig. \ref{fig:EllipseCoords}, 
+sectorial area equals to Cartesian area plus or minus the area of a triangle with base 
+length $|x_1|$ and height $|y_1|$, 
+$A_{\mathcal{E}}^{\theta}(P_1) = A_{\mathcal{E}}^{x}(P_1) + \tfrac{1}{2} x_1 y_1 \nonumber$ 
+($x_1$ is negative to the left of the origin). 
+There is another way to derive this identity, but without using trigonometry. The following 
+exercise in calculus may seem superfluous, but it is worthwhile training when the goal 
+is to progress to more complicated integrals, as in subsequent sections of this 
+paper.
+
+Choosing $P_1$ as the apogee point $P_a=(x_a,y_a)=(-1-e,0)$, the total ellipse area is written,
+$A(e)=2A_{\mathcal{E}}^{\theta}(P_a)=\pi\sqrt{1-e^2}$. Complete area $A(e)$ is an algebraic function, which
+ satisfies ${\mathcal{A}_A\circ A(e) =  \big((1-e^2)\partial_e + e\big)\circ A(e) = (1-e^2)\partial_e A(e) + e A(e)=0}$.
+ Moving the  annihilating operator $\mathcal{A}_A =  (1-e^2)\partial_e + e$ under the integral sign of either 
+$A_{\mathcal{E}}^{\theta}(P_1)$ or $A_{\mathcal{E}}^{x}(P_1)$ we obtain two checks on 
+the validity of $\mathcal{A}_A$, 
+\begin{eqnarray}
+\mathcal{A}_A\circ \frac{dA_{\mathcal{E}}^{\theta}}{d\theta} &=&  \frac{d\Xi_{A}^{\theta}}{d\theta}
+ = -\Big(\tfrac{3}{2}e+\cos(\theta)+\tfrac{1}{2}e^2\cos(\theta)^2\Big)\frac{(1-e^2)^2}{(1+e \cos(\theta))^3}, \nonumber \\
+\mathcal{A}_A\circ \frac{dA_{\mathcal{E}}^{x}}{dx}   &=& \frac{d\Xi_{A}^{x}}{dx}
+= \frac{-(1-e^2)^2(x+e)}{\sqrt{(1-e^2)(1-(x+e)^2)}} .\nonumber 
+\end{eqnarray}
+Certificate functions $\Xi_{A}^{\theta}$ and $\Xi_{A}^{x}$  must exist and contribute 
+to an exact differential\footnote{Exact differentials integrate to zero on any complete cycle, 
+$\oint df = 0$ implies $df$ exact.} so that $\mathcal{A}_A\circ \oint dA_{\mathcal{E}}^{\theta}$ 
+and $\mathcal{A}_A\circ \oint dA_{\mathcal{E}}^{x}$ will equal zero, as necessary. The 
+certificate functions follow from indefinite integration\footnote{If these integrals are too difficult
+by the usual deductive procedures, try a guess-and-check strategy.},
+\begin{eqnarray}
+\Xi^{\theta}_A &=& \int \Big(\frac{d\Xi^{\theta}_A}{d\theta}\Big)d\theta
+= -\sin(\theta)\big(1+\tfrac{e}{2}\cos(\theta)\big)\Big(\frac{1-e^2}{1+e\cos(\theta)}\Big)^2, \nonumber \\
+\Xi^{x}_A &=& \int \Big(\frac{d\Xi^{x}_A}{dx}\Big)dx  
+= (1-e^2)\sqrt{(1-e^2)(1-(x+e)^2)}. \nonumber 
+\end{eqnarray}
+Upon another integration to $P_1$, in terms of 
+$\Delta A(e)=A^{\theta}_{\mathcal{E}}(P_1)-A^{x}_{\mathcal{E}}(P_1)$, 
+we have that 
+\begin{eqnarray}
+(1-e^2)\partial_e \Delta A(e) + e \Delta A(e) = \int_{0}^{\theta_1}\frac{d\Xi^{\theta}_A}{d\theta} d\theta 
+- \int_{x_1}^{1-e}\frac{d\Xi^{x}_A}{dx} dx. \nonumber
+\end{eqnarray}
+Terms on the right-hand side are evaluations of $\Xi^{\theta}_A$ and $\Xi^{x}_A$,
+\begin{eqnarray}
+\int_{0}^{\theta_1}\frac{d\Xi^{\theta}_A}{d\theta} d\theta
+= \Xi^{\theta}_A(P_1) = -(r_1+\tfrac{e}{2}x_1)y_1, 
+\;\;\;\; \text{and} \;\;\;\;
+ \int_{x_1}^{1-e}\frac{d\Xi^{x}_A}{dx} dx
+= \Xi^{x}_A(P_1)  =  - (r_1+ex_1)y_1,   \nonumber
+\end{eqnarray}
+while the term $\partial_e \Delta A(e)$ may safely be ignored as equal to 
+zero\footnote{Point $P_1$ is fixed, thus boundaries $x_1$ and $\theta_1$ are fixed.
+Variation of $e$ by $de$ allows for disagreement on another triangular area, 
+$\Delta A(e+de)-\Delta A(e) \propto de^2$, thus $\partial_e \Delta A(e) = 0$. 
+See also Section VII and  Fig. \ref{fig:TangentGeo}.}. 
+Putting it all together,  
+$\Delta A(e)  = \big(\Xi^{\theta}_A(P_1)-\Xi^{x}_A(P_1)\big)/e= \tfrac{1}{2}x_1 y_1$,
+we find again the product $\frac{1}{2}x_1 y_1$. Taken separately the certificates seem 
+like nothing too special. Combined via subtraction, they are a circuitous 
+means to determine the green triangular area of Fig. \ref{fig:EllipseCoords}. 
+We will return to this idea in Section VII, but presently need to 
+continue solving.
+
+
+\begin{wrapfigure}{R}{7cm}
+\begin{center}
+\begin{overpic}[width=0.4\textwidth]{./Figures/EllipseCoords2.eps}
+ \put (2,92) {$\frac{1}{2}$}
+ \put (5.5,90) {$\widetilde{\Theta}(P_1)$}
+ \put (29,92) {$\frac{1}{2}$}
+ \put (32.5,90) {$\Theta(P_1)$}
+ \put (55.5,67) {$P_1$}
+ \put (85,52) {$P_0$}
+ \put (8,52) {$P_a$}
+ \put (52,51.5) {$\vartheta_1$}
+ \put (31,5) {$ \longleftarrow \;\; 2e \;\; \longrightarrow$}
+ \put (5,31) {\rotatebox[origin=c]{90}{$\leftarrow \;\; 1 \;\; \rightarrow$}}
+\end{overpic}
+\caption{Keplerian Coordinates.}
+  \label{fig:KeplerCoords}
+  \phantom{space}
+\end{center}
+\end{wrapfigure}
+
+Yet another important coordinate system exists, the Keplerian coordinates, 
+\begin{eqnarray}
+x=\cos(\vartheta)-e \;\;\;\;\; \text{and} \;\;\;\;\; y=\sqrt{1-e^2}\sin(\vartheta),  \nonumber
+\end{eqnarray}
+written in terms of the \textit{eccentric anomaly} $\vartheta$, also the polar 
+angle of Fig. \ref{fig:KeplerCoords}. Introducing the \textit{mean anomaly}, 
+$\Theta(P_1) = 2 A^{\theta}_{\mathcal{E}}(P_1)/\sqrt{1-e^2}$, and combining various equations, 
+we finally arrive at Kepler's equation $\Theta = \vartheta - e \sin(\vartheta)$. 
+If instead we measure sectorial area from the second focus, Kepler's equation would read 
+$\widetilde{\Theta} = \widetilde{\vartheta} + e\sin(\widetilde{\vartheta})$. 
+Choosing $\widetilde{\Theta}=-\Theta$, 
+the points $P(\Theta)$ and $P(\widetilde{\Theta})$ fall onto the intersection of ellipse $\mathcal{E}$ 
+with a sine wave, \FloatBarrier \noindent
+\begin{eqnarray}
+\mathcal{W}(\Theta) = \Bigg\{ \Bigg( \cos\bigg(\frac{e\;y}{\sqrt{1-e^2}}+\Theta\bigg)-e, y \Bigg)
+ : y \in \mathbb{R} \Bigg\}, \nonumber 
+\end{eqnarray}
+traveling at constant velocity $v_y \propto dy/d\Theta$ along the $y$-axis, as in Fig. \ref{fig:Intersect}
+(for more details, see ref. []).
+This geometric fact, though neat, is not entirely satisfying from a physicist's 
+point of view.
+
+
+\begin{figure}
+\begin{center}
+\begin{overpic}[width=.93\textwidth]{./Figures/EllipseIntersect.eps}
+ \put (5,38){\large $e=2/3$ }
+ \put (43,38) {\Large $\Delta \Theta = \frac{\pi}{5}$ } 
+ \put (31.5,1) {\Large$\longleftarrow \;\;\;\;\; 
+ \frac{\sqrt{1-e^2}}{e}\pi \;\;\;\;\; \longrightarrow$}
+\end{overpic}
+\caption{Asymmetric Intersection Geometry for 
+$\{P(\Theta),P(\widetilde{\Theta})\}= \mathcal{W}(\Theta) \cap \mathcal{E} $.
+}\label{fig:Intersect}
+  \phantom{space}
+\end{center}
+\end{figure}
+
+
+
+\section{The Kepler Problem}
+
+
+\begin{wrapfigure}{R}{8cm}
+\begin{center}
+\begin{overpic}[width=0.4\textwidth]{./Figures/GravityOrbit.eps}
+\put (81,82){$\frac{1}{20}\frac{L_0}{m}$}
+\put (94,81){\large $T$ }
+\end{overpic}
+\caption{A Strong Gravitational Force Field.}
+  \label{fig:GravityOrbit}
+\end{center}
+\end{wrapfigure}
+
+Classical mechanics determines planetary orbits according to a gravitational force field, which 
+sums over contributions from all masses within a particular region of space. As the masses
+move through space, generally the gravitational force field changes with time. However, when 
+one body dominates the gravitational field we may assume a time-independent force field 
+where the dominant body has zero velocity. In the Kepler problem, a star of mass $M$ 
+generates a fixed gravitational field, which determines the classical orbit of a planet 
+whose mass $m$ satisfies $m\ll M$, as in Fig. \ref{fig:GravityOrbit}. We choose a 
+system of cylindrical coordinates which places the star at the origin, and then we can 
+solve the Kepler problem by combining Newton's law of gravitation, $\mathbf{F} = -\frac{GMm}{r^2}\hat{r}$, 
+with his second law of motion, $\mathbf{F} = \frac{d}{dt} \mathbf{p}$.
+
+Isotropic symmetry around the sun immediately suggests a few well-known shortcuts. 
+Throughout time, an isolated, classically orbiting planet falls into a plane 
+${\{(x,y,z): z=0\}}$ with normal vector $\hat{z} \propto \mathbf{r} \times \mathbf{\dot{r}}dt$.
+The necessary condition, $\dot{z}=0$, follows from conservation of momentum along the vertical, 
+$F_z = 0 = \frac{d}{dt}p_z$. The in-plane angular component $F_{\theta}$ of gravitational 
+force $\mathbf{F}$ also equals zero, thus conservation of angular momentum, 
+${r F_{\theta} = 0 = \frac{d}{dt}L_{\theta} }$, constrains angular motion by 
+$L_{\theta} = m r^2 \dot{\theta} = L_0$. The vector identity
+$\mathbf{L} = \mathbf{r} \times \mathbf{p} = m (\mathbf{r} \times \dot{\mathbf{r}}) = L_0 \hat{z}$ 
+conceals a hint to Kepler's second law. Vector $\mathbf{\dot{r}}\;dt$ translates $\mathbf{r}$ along 
+a tangent line, $\mathbf{r}_2 = \mathbf{r}_1 + \mathbf{\dot{r}}_1 dt$. In the infinitesimal limit, 
+sectorial area takes a triangular shape such that ${dA \; \hat{z} = \frac{1}{2}\mathbf{r}_1 \times\mathbf{r}_2 
+=\frac{1}{2}\mathbf{r}\times\mathbf{\dot{r}} \; dt } = \frac{1}{2}\frac{L_0}{m} \; dt \; \hat{z}$,
+or $\frac{dA}{dt}=\frac{1}{2}\frac{L_0}{m}$.
+
+Newton's law along the radial dimension, 
+$F_r = -\frac{GMm}{r^2} + m r\dot{\theta}^2 = m \ddot{r} $, 
+has an extra term for the fictitious force of centripetal acceleration.
+A standard approach substitutes for $\dot{\theta}$ and changes 
+variables by $r \rightarrow u = 1/r$ and $dt \rightarrow d\theta =  \frac{L_0}{m}u^2 dt$.
+Then we obtain a recognizable form, 
+$\frac{d^2u}{d\theta^2}+u=\frac{GMm^2}{L_0^2}=c_0$,
+essentially the defining differential equation for $\sin(\theta)$ 
+and $\cos(\theta)$. The general solution is written as 
+$u = c_0 + c_1 \cos(\theta) + c_2 \sin(\theta) $, with initial conditions
+$c_1$ and $c_2$. In terms of radial coordinate $r$ the solution becomes 
+$1 = r\big(c_0+c_1\cos(\theta)+c_2\sin(\theta)\big)$, or in Cartesian 
+coordinates $x=r \cos(\theta)$ and $y=r \sin(\theta)$, 
+$(1-c_1 x-c_2 y)^2=c_0^2 (x^2+y^2)$. This $x$-$y$ constraint equation 
+has no terms higher than quadratic, so its locus of points determines 
+a conic section. Of the conic sections, only the circle and the ellipse 
+will bind the orbiting planet to the sun. A rotation of the ellipse 
+is chosen by setting $c_2=0$. Upon rearranging terms we finally reach an 
+almost-canonical form, $c_0^2 = (c_1+(c_0^2-c_1^2)x)^2  + c_0^2(c_0^2-c_1^2) y^2 $.   
+
+Section II already goes through sufficient detail on how to calculate ellipse 
+area integrals, so completing the Kepler solution only requires a bit of 
+dimensional analysis. Comparing ellipse constraints determines integral 
+constants in terms of eccentricty,  $1/c_0 = 1-e^2$ and $e/c_1=1-e^2$. 
+In units of length and time where $GM=1$ and $a=1$, constant $c_0$ entirely 
+determines sectorial velocity 
+$\frac{dA}{dt} = \frac{1}{2}\frac{L_0}{m}=\frac{1}{2}c_0^{-1/2}=\frac{1}{2}(1-e^2)^{1/2}$.
+The yearly period does not depend on eccentricity, for 
+$Y = \frac{dt}{dA}A(e) = 2\pi$. According to Kepler's third law, yearly
+period does depend on semi-major axis length, $Y(a) = 2\pi a^{3/2}$.
+This is exactly the result we find by restoring scale $a^2$ to total area,
+and $a^{1/2}$ to sectorial velocity. With the three laws proven, all 
+that's left is to invert Kepler's equation and make another plot or two.
+
+\begin{wrapfigure}{L}{6cm}
+\begin{center}
+\begin{overpic}[width=0.3\textwidth]{./Figures/EllipseError.eps}
+\put (5,90){\large $e=2/3$ }
+\end{overpic}
+\caption{Error of $\vartheta_1(\Theta)$.}
+  \label{fig:EllipseError}
+\end{center}
+\end{wrapfigure}
+
+Whenever $\vartheta$ is an integer multiple of $\pi$ the perturbing term $e \sin(\vartheta)$ 
+equals to zero and $\vartheta=\Theta$. The slope of the inverse function, $d\vartheta/d\Theta$ 
+is then easy to determine, ${d\vartheta/d\Theta = (1-e)^{-1}}$ for even $n$, $(1+e)^{-1}$ for 
+odd $n$. These boundary conditions are sufficient data to build a decent 
+\textit{ad hoc} approximation. Identity $\vartheta(n\pi) = \Theta$ suggests the form 
+$\vartheta(\Theta) = \Theta + f(\Theta) \sin(\Theta)$, with either 
+\begin{eqnarray}
+&f(\Theta) =& \frac{e}{1-e}\Big(1-\frac{2e}{(1+e)} \frac{ \Theta(2\pi-\Theta)}{\pi^2}\Big), \nonumber \\
+\text{or\;\;\;\;\;\;} &f(\Theta) =& \frac{e}{1-e}\Big(\frac{1}{1+e}+\frac{e}{1+e}\cos(\Theta) \Big), \nonumber
+\end{eqnarray}
+chosen to fit the slopes. The former approximation (with $\Theta$ evaluated 
+modulo $2\pi$) achieves $99\%$ accuracy\footnote{Here accuracy is defined as 
+$\frac{100}{2\pi}|\vartheta_{Approximate}-\vartheta_{Exact}|$, in percentages of circular circumference.} 
+for any eccentricity satisfying $e \le 0.5$. Both approximations have better than $99.5\%$ 
+accuracy when $e \le 0.25$ and worse than $5\%$ error when $e>0.7$. In our solar system, 
+Mercury has the highest eccentricity at $e \approx 0.2$, so either 
+\textit{ad hoc} approximation will work just fine. Calculation of planetary
+orbits to much greater accuracy would require the entire physical theory to be 
+reworked with fewer simplifying assumptions. Kepler's laws do not hold out 
+in general, and even Newton's laws, famously, have trouble with Mercury.  
+
+\begin{wrapfigure}{L}{7.5cm}
+\begin{center}
+\begin{overpic}[width=0.4\textwidth]{./Figures/spacetime.eps}
+\put (12,4){$y$}
+\put (46,7){$x$}
+\put (21,2){$e=0,\; \frac{1}{2}, \; \frac{2}{3}, \;\frac{9}{10}.$ }
+\put (23,95){$t$ }
+ \put (45,21) {\Large \rotatebox[origin=c]{90}{$\longrightarrow$}}
+ \put (48,20) {\Large $Y$}
+
+ \put (45,44) {\Large \rotatebox[origin=c]{90}{$\longrightarrow$}}
+ \put (48,43) {\Large $Y$}
+
+ \put (45,70) {\Large \rotatebox[origin=c]{90}{$\longrightarrow$}}
+ \put (48,69) {\Large $Y$}
+
+\end{overpic}
+\caption{Kepler Orbits in Spacetime.}
+  \label{fig:spacetime}
+\end{center}
+\end{wrapfigure}
+
+
+In ranges of eccentricity where \textit{ad hoc} approximations begin to fail,
+a higher precision solution to Kepler's equation is desirable and necessary. 
+Assuming $\Theta$ a fixed constant, Newton's iterative method will find 
+$\vartheta(\Theta)$ as 
+root of $\Theta-(\vartheta-e \sin(\vartheta))=0$, according to the recursive equation,
+\begin{eqnarray}
+\vartheta_{i+1} = \vartheta_i + \frac{\Theta-(\vartheta_i-e \sin(\vartheta_i))}{1-e\cos(\vartheta_i)}, 
+\;\;  \vartheta_0 = \Theta. \nonumber
+\end{eqnarray}
+A first approximation $\vartheta_1$ satisfies the boundary conditions above, and reaches 
+about the same accuracy as either \textit{ad hoc} approximation. Iteration to
+higher values of $i$ converges the estimate $\vartheta_i(\Theta)$ toward it's actual value, 
+such that $\Theta-(\vartheta_i-e \sin(\vartheta_i))$ approaches zero, but only at the cost of 
+increased complexity for the functions $\vartheta_i(\Theta)$. Other references such as [cite] discuss
+convergence and error analysis, here we are content simply to use function 
+$\vartheta_4(\Theta)$ and plot a few spacetime trajectories in Fig. \ref{fig:spacetime}.  
+\FloatBarrier \noindent
+
+The spacetime diagram is a graphical solution of the Kepler problem.
+It shows isoperiodic orbits of varying eccentricity, all with fixed length 
+scale $a=1$. Solutions with $a \neq 1$ simply scale the vertical axis by a factor
+$a^{3/2}$, so have entirely similar shapes. When $e=0$, the worldline is a circular 
+helix. For any other $e \in (0,1)$, the worldline is an almost-helix with 
+anisotropic vertical stretching via $\vartheta(\Theta)$. Green or blue coloring indicates 
+where an \textit{ad hoc} solution of $\vartheta(\Theta)$ will or will not work decently well. A 
+dividing wordline of $e=1/2$ appears in red (also compare green $e=2/3$ worldline
+with errors of Fig. \ref{fig:EllipseError}).
+
+\section{Ellipse Circumference}
+\begin{figure}[t]
+\begin{center}
+{\huge \fontfamily{lmdh}\selectfont S P E C I M E N}
+
+CONSTRVCTIONE AEQVATIONVM DIFFERENTIALIVM 
+
+SINE INDETERMINATARVM SEPARATIONE
+\caption{Transcription of the Latin title to Euler's \href{http://eulerarchive.maa.org/pages/E028.html}{E28}.}
+\end{center}
+\end{figure}
+
+Euler's difficult but comprehensive approach to mathematics and physics is useful 
+even when asking seemingly simple questions, for example: What is the average velocity 
+$\bar{v}$ of a Kepler orbit? In the special case of a circular orbit, instantaneous 
+velocity $v$ is a constant of motion, for $ L_0 = m \; a \; v$, and this implies 
+$\bar{v}= v = a^{-1/2}$ (again in units where $GM=1$). 
+The $a^{-1/2}$ scaling of average velocity also follows from its definition as 
+distance-over-time, ${\bar{v}=C_0/Y}$, with circular circumference $C_0 = 2\pi a$. 
+The circumference $C(e^2)$ of a general ellipse, of course, depends intricately on 
+eccentricity $e$, so too must average velocity, ${\bar{v}(e) = C(e^2)/Y}$. Thus
+to answer the deceptively simple question about average velocity, we must follow 
+Euler and find the function $C(e^2)$ by arclength integration. It is not too easy a 
+task, and perhaps not worthwhile if the Kepler problem is our only motivation. 
+We entreat the wary reader to keep in mind the richness of nature, and to have 
+faith that mathematics will continue to prevail in other interesting circumstances.
+
+We choose coordinates\footnote{Compare with Keplerian coordinates by
+$\varphi=\pi/2-\vartheta$ and $q=x+e$.} and redefine that  
+$\mathcal{E}=\{(p,q):p^2+(1-\alpha)q^2=1-\alpha \}$ with $\alpha = e^2$ and
+a parametric solution $q = \sin(\varphi)$ and $p=\sqrt{1-\alpha}\cos(\varphi)$.
+The arclength integral, already assuming $a=1$, takes a concise form in terms 
+of angle $\varphi$,
+\begin{eqnarray}
+C(\alpha) = \oint dl = \oint \sqrt{dp^2+dq^2} 
+= \oint \sqrt{\bigg(\frac{dp}{d\varphi}\bigg)^2+\bigg(\frac{dq}{d\varphi}\bigg)^2}d\varphi 
+= \oint \sqrt{1-\alpha\sin(\varphi)^2} d\varphi . \nonumber
+\end{eqnarray}
+Over a complete domain, $\varphi \in [0,2\pi]$, term-by-term integration of the 
+$\alpha$-series expansion yields a solution,
+\begin{eqnarray}
+C(\alpha) = \sum_{n \ge 0}\frac{1}{1-2n}\binom{2n}{n}\bigg(\frac{\alpha}{4}\bigg)^{n}\oint \sin(\varphi)^{2n} d\varphi
+= \sum_{n \ge 0}\frac{2\pi}{1-2n}\binom{2n}{n}^2\bigg(\frac{\alpha}{16}\bigg)^{n}. \nonumber  
+\end{eqnarray}
+This is not the only solution of $C(\alpha)$, nor even the best. Practically speaking,
+values of $C(\alpha)$ become difficult to calculate at large $\alpha$ where convergence of the 
+series expansion slows to a crawl. Fortunately, there is a stronger analysis, one that 
+owes back to Euler himself.
+
+Euler was among the first to realize that the function $C(\alpha)$ could be defined as 
+the solution of an ordinary differential equation. Though it produces the correct
+answer, his intuitive method of solution leaves some doubt and room for improvement. 
+A more rigorous approach starts by observing that the first two $\alpha$-derivatives of 
+the arclength element $dl$ can be written in terms of the trigonometric polynomial 
+$\Phi = \big(\frac{dl}{d\varphi}\big)^2 = 1-\alpha \sin(\varphi)^2$,
+\begin{eqnarray}
+\partial_{\alpha} dl = \frac{1}{2\alpha}\bigg(\Phi^{\frac{1}{2}} - \Phi^{-\frac{1}{2}} \bigg)d\varphi,
+ \;\;\;\;\;\;
+\partial_{\alpha}^2 dl = -\frac{1}{4\alpha^2}\bigg(\Phi^{\frac{1}{2}}
+- 2\Phi^{-\frac{1}{2}} + \Phi^{-\frac{3}{2}} \bigg)d\varphi, 
+ \nonumber
+\end{eqnarray}
+after decomposing to partial fractions\footnote{By inspection, 
+$\partial_{\alpha}^n dl= -(\tfrac{-1}{2\alpha})^n \big( (2n-3)!! \big)
+\sum_{m=0}^n(-1)^m\binom{n}{m} \Phi^{1/2-m}$, see also OEIS: \href{https://oeis.org/A330797}{A330797}.}. 
+Each term is of the 
+form $w\;\Phi^{n/2}$, with odd $n$ and $w$ a ratio of polynomials in variable $\alpha$. 
+For every such integrand, the technique of Hermite reduction produces a canonical least 
+form by the addition of exact $\varphi$-differentials.  With $u$, $v$, and $w$ all undetermined 
+functions of angle $\varphi$, a first reduction $[w]$ of $w$ is written as, 
+\begin{eqnarray}
+\frac{[w]}{\Phi^{m-1}}=\Big(u-\frac{dv/d\varphi}{m-1}\Big)\frac{1}{\Phi^{m-1}} = 
+\frac{w}{\Phi^{m}}-\frac{d}{d\varphi}\bigg( \frac{v}{(m-1)\Phi^{m-1}}\bigg). \nonumber
+\end{eqnarray}
+This equation can be iterated to find successive reductions of $w$, but only when $u$,$v$, 
+and $w$ satisfy a closure requirement. The closure requirement follows from analysis of the consequential 
+identity $w=\Phi u - \frac{d\Phi}{d\varphi} v$. Notice that $\Phi=1-\alpha \sin(\varphi)^2$ 
+is a quadratic polynomial of $\sin(\varphi)$ and an even function, while 
+$\frac{d\Phi}{d\varphi}=-2 \alpha \sin(\varphi)\cos(\varphi)$ is quadratic and odd\footnote{ 
+Even functions satisfy $f(\varphi)=f(-\varphi)$; odd functions satisfy $f(\varphi)=-f(-\varphi)$.}. When 
+$u$ and $w$ are even, $v$ must be odd. Imposing a degree bound $d$, we have that,
+\begin{eqnarray}
+\sum_{n=0}^{d} w_n \sin(\varphi)^{2n} =  \Phi \sum_{n=0}^{d} u_n \sin(\varphi)^{2n}
+-\frac{d\Phi}{d\varphi}\sum_{n=1}^{d} v_n \cos(\varphi)\sin(\varphi)^{2n-1}, \nonumber
+\end{eqnarray}
+with $d+2$ coefficients to powers of $\sin(\varphi)^2$ and $2d+1$ undetermined 
+coefficients on the right hand side. Choosing $d=1$, the system of linear equations
+is exactly solvable for $u_0$, $u_1$ and $v_1$ in terms of $w_0$ and $w_1$.
+
+The existence of a degree bounded Hermite reduction guarantees an annihilating
+operator $\mathcal{A}_{E}$ for $C(\alpha)$ with no more than three terms. We
+will use a matrix method to calculate this operator directly from the solution,
+\begin{eqnarray}
+u = w_0 + \frac{w_0\alpha + w_1}{1-\alpha}\sin(\varphi)^2, \;\;\;\;\;\; 
+v = -\frac{w_0\alpha + w_1}{2(1-\alpha)}\sin(\varphi)\cos(\varphi).  \nonumber 
+\end{eqnarray}
+Functions $u$ and $v$ determine a set of invariants for $\Phi$, which collect 
+in reduction matrices,
+\begin{eqnarray}
+\mathbf{U} = \begin{bmatrix} 1 & 0  \\ \frac{\alpha}{1-\alpha} & \frac{1}{1-\alpha} \end{bmatrix}, \;\;\;\;\;\; 
+\mathbf{V'} = \begin{bmatrix} \frac{-\alpha}{2(1-\alpha)} & \frac{-1}{2(1-\alpha)}  \\ \frac{\alpha}{1-\alpha} & \frac{1}{1-\alpha} \end{bmatrix}.  \nonumber
+\end{eqnarray}
+These two matrices allow us to simplify the reductive process to 
+mere matrix multiplication, 
+$[\mathbf{w}] = (\mathbf{U}-\frac{1}{m-1}\mathbf{V'})\cdot \mathbf{w}= \mathbf{R}(m) \cdot \mathbf{w}$,
+with column vector $\mathbf{w}=[w_0,w_1]^T$. In terms of $\mathbf{w}(dl) = [1,0]^T$, 
+derivatives $\partial_{\alpha}dl$ and $\partial_{\alpha}^2 dl$ reduce according to,
+\begin{eqnarray}
+[\mathbf{w}(\partial_{\alpha}dl)] \;\;
+=& \frac{1}{2\alpha}\Big(\mathbf{I}-\mathbf{R}\big(\tfrac{1}{2}\big)\Big) \cdot \mathbf{w}(dl) 
+&= \;\; \bigg[\frac{1}{2(1-\alpha)},\frac{-3}{2(1-\alpha)}\bigg]^T, \nonumber \\
+{[[ \mathbf{w}(\partial_{\alpha}^2dl) ]]} \;\;
+=& \;\; -\frac{1}{4\alpha^2}\Big(\mathbf{I}-2\;\mathbf{R}\big(\tfrac{1}{2}\big)
+ + \mathbf{R}\big(\tfrac{1}{2}\big)\cdot  \mathbf{R}\big(\tfrac{3}{2}\big) \Big) \cdot \mathbf{w}(dl) \;\; 
+&= \bigg[\frac{-3}{4(1-\alpha)\alpha},\frac{3}{2(1-\alpha)\alpha}\bigg]^T, \nonumber 
+\end{eqnarray} 
+with $2\times2$ identity matrix $\mathbf{I}$. Three column vectors with 
+two components each must admit at least one zero-sum. In this case,
+the identity,
+\begin{eqnarray}
+[0,0]^T = \mathbf{w}(dl) + 4(1-\alpha)\;[\mathbf{w}(\partial_{\alpha}dl)]
++ 4(1-\alpha)\alpha\;[[\mathbf{w}(\partial_{\alpha}^2dl)]]. \nonumber
+\end{eqnarray}
+reveals an annihilator 
+$\mathcal{A}_E = 1 + 4(1-\alpha)\partial_{\alpha} + 4(1-\alpha)\alpha\partial_{\alpha}^2$ such
+that $\mathcal{A}_E \circ \frac{dl}{d\varphi} = \frac{d\Xi_E^{\varphi}}{d\varphi}$ and consequentially
+$\mathcal{A}_E \circ E(\alpha) = 0$. Certificate function $\Xi_E^{\varphi}$ need not be calculated; 
+however, when known, it provides a worthwhile quality check on $\mathcal{A}_E$. Indefinite 
+integration, 
+\begin{eqnarray}
+\Xi_E^{\varphi} = \int \bigg(\mathcal{A}_E \circ \frac{dl}{d\varphi}\bigg) d\varphi 
+=\int \frac{1-2\sin(\varphi)^2+\alpha \sin(\varphi)^4}{\big(1-\alpha \sin(\varphi)^2\big)^{3/2}} d\varphi
+=  \frac{\cos(\varphi)\sin(\varphi)}{\sqrt{1-\alpha \sin(\varphi)^2}}, \nonumber
+\end{eqnarray}
+after careful bookkeeping, must agree with a total of exact differentials. The row vector,
+\begin{eqnarray}
+\mathbf{V}(m)=\frac{-\cos(\varphi)\sin(\varphi)}{2(m-1)\Phi^{m-1}}\bigg[\frac{\alpha}{1-\alpha},\frac{1}{1-\alpha}\bigg], \nonumber
+\end{eqnarray}
+of function $v$ determines the certificate by a recursive calculation,
+\begin{eqnarray}
+\Xi_E^{\varphi} = \Bigg(\frac{-2(1-\alpha)}{\alpha}\mathbf{V}(\tfrac{1}{2})
++\frac{1-\alpha}{\alpha}\Big(2\mathbf{V}(\tfrac{1}{2})
+-\mathbf{V}(\tfrac{3}{2})-\mathbf{V}(\tfrac{1}{2})\cdot
+\mathbf{R}(\tfrac{3}{2}) \Big) \Bigg) \cdot \mathbf{w}(dl), 
+\nonumber
+\end{eqnarray}
+which follows from the reductions above. The zero sum, 
+$\mathcal{A}_E \circ \frac{dl}{d\varphi}-\frac{d\Xi_E^{\varphi}}{d\varphi}=0$, is 
+easy to check, and verifies $\mathcal{A}_E$ against $\Xi_E^{\varphi}$.
+Although the preceding derivation looks formidable, it is actually an 
+easy, $n=2$ case of a general $n$-dimensional 
+method. Such calculations are not usually carried out by hand. In practice, a 
+computer algebra system such as Mathematica routinely automates the details 
+(Cf. Appendix). If there is any doubt about the veracity of an algorithmic 
+derivation, the annihilating relation can be checked again on the output. 
+
+After centuries of development, analysis and solution of $\mathcal{A}_E$ 
+now follows a widely-known, standard schedule: "The regular singular points 
+of $\mathcal{A}_E$ are correctly aligned, so that it is possible to read out hypergeometric
+parameters $(a,b,c)=(-1/2,1/2,1)$, which define a general solution around $\alpha=0$". 
+That solution\footnote{Mathworld: 
+\href{http://mathworld.wolfram.com/HypergeometricFunction.html}{Hypergeometric Function}, 
+\href{http://mathworld.wolfram.com/Second-OrderOrdinaryDifferentialEquationSecondSolution.html}{Second-Order ODE Second Solution}.}, 
+\begin{eqnarray}
+C(\alpha) = (C_0) \tFo{-\frac{1}{2},\frac{1}{2}}{1}{\alpha} 
++ (C_1) \tFo{-\frac{1}{2},\frac{1}{2}}{1}{\alpha}\int  \alpha^{-1} 
+\tFo{-\frac{1}{2},\frac{1}{2}}{1}{\alpha}^{-2} d\alpha, \nonumber
+\end{eqnarray}
+agrees with the earlier term-by-term expansion when $C(0)=C_0=2\pi$ and $C_1=0$. 
+The function  $\tFoIn{-\frac{1}{2},\frac{1}{2}}{1}{\alpha} = \sum f_n \alpha^n$
+sums over $n \ge 0$, with coefficients $f_n$ defined according to a hypergeometric 
+recursion, 
+\begin{eqnarray}
+f_0=1, \; (n+1)^2 f_{n+1} = (n-\tfrac{1}{2})(n+\tfrac{1}{2})f_n
+\iff f_n = \frac{1}{1-2n}\binom{2n}{n}^2\bigg(\frac{1}{16}\bigg)^{n}. \nonumber 
+\end{eqnarray}
+Yet nothing much is gained by changing notation. The solution, so far, has not 
+diversified enough to avoid convergence difficulty around the regular singular 
+point at $\alpha=1$. We will forge a way forward by taking advantage of flexibility 
+inherent to the operator $\mathcal{A}_E$.
+
+Change of variables $\alpha \rightarrow \rev{\alpha} = 1-\alpha$ produces 
+another, reversed annihilating operator, $\mathcal{A}_E \rightarrow \rev{\mathcal{A}_{E}} 
+= 1-4\rev{\alpha} \partial_{\rev{\alpha}}
++4(1-\rev{\alpha})\rev{\alpha}\partial_{\rev{\alpha}}^2$,
+with a differing solution $\rev{C(\alpha)}$ around $\rev{\alpha}=0$. 
+Operator $\rev{\mathcal{A}_{E}}$ is again hypergeometric, but it is not as easy 
+to solve. The parameters ${(a,b,c)=(-1/2,1/2,0)}$ set $c$ equal to zero, and consequently 
+$a_1 = a_0/0$, utter nonsense. We resort to a second solution, similar to the first above,
+\begin{eqnarray}
+\rev{C(\alpha)}
+ = \rev{C}_1 \rev{\alpha} \tFo{\frac{1}{2},\frac{3}{2}}{2}{\rev{\alpha}}
++ \rev{C}_0 \rev{\alpha} \tFo{\frac{1}{2},\frac{3}{2}}{2}{\rev{\alpha}}
+\int \frac{-1}{1-\rev{\alpha}}
+\bigg(\rev{\alpha} \tFo{\frac{1}{2},\frac{3}{2}}{2}{\rev{\alpha}}\bigg)^{-2}d\rev{\alpha}
+ .  \nonumber 
+\end{eqnarray}
+In this case, $\rev{\alpha}=0$ corresponds to a completely collapsed ellipse with 
+$\rev{C(0)}=4$, thus the second term can not be ignored. Rather than go into detail 
+repeating a proof from \textit{Mathworld}, let us derive the same solution using 
+Frobenius's method. An Ansatz that,
+\begin{eqnarray}
+\rev{C(\alpha)} = \rev{C}_0 
++ \bigg(\rev{C}_1+\frac{3}{8}\rev{C}_0\bigg) \rev{\alpha} 
+-\frac{\rev{C}_0}{4}\log(\rev{\alpha}) \rev{\alpha} 
+\tFo{\frac{1}{2},\frac{3}{2}}{2}{\rev{\alpha}}
++ \sum_{n>1}\rev{C}_n\;\rev{\alpha}^n , \nonumber  
+\end{eqnarray}
+allows two degrees of freedom by $\rev{C}_0$ and $\rev{C}_1$, while 
+the other $\rev{C}_n$ coefficients with $n>1$ are entirely constrained by the 
+differential equation $\rev{\mathcal{A}_{E}} \circ \rev{C(\alpha)}=0$,
+as in table \ref{tab:ConsC}. Choosing that $\rev{C}_0 = 4$ 
+and $\rev{C}_1 = 4\log(2)-5/2$ 
+defines an $\alpha$-reversed circumference function such that 
+$\rev{C(\alpha)}=C(\alpha)$ over the domain $\rev{\alpha} = 1-\alpha \in [0,1]$.
+
+\begin{wrapfigure}{R}{7cm}
+\begin{center}
+\captionof{table}{Constraints on \protect\reflectbox{$C(\alpha)$}}
+\begin{tabular}{ c | c }
+\hline \hline
+\multicolumn{2}{c}{
+\;\;\;$\rev{\mathcal{A}_E} \circ \rev{C(\alpha)}
+= \sum c_n \rev{\alpha}^n, n\ge 0$\;\;\; } \\
+\hline 
+$\;\;n\;\;$& $0=c_n=$ \\
+\hline
+$0$ & $0$  \\
+$1$ & $32 \rev{C}_2-12\rev{C}_1-\rev{C}_0$  \\
+$2$ & $512 \rev{C}_3-320\rev{C}_2+7\rev{C}_0$  \\
+$\vdots$ & $\vdots$  \\
+$n$ & determines $\rev{C}_{n+1}$  
+\label{tab:ConsC}
+\end{tabular}
+\end{center}
+\end{wrapfigure}
+
+The appearance of $\log(2)$ in $\rev{C}_1$ is an unresolved mystery
+of this presentation. In practice, the zero sum 
+${C(\tfrac{1}{2})-(\tfrac{1}{2})\rev{C}=0}$ determines $\rev{C}_1$ 
+to an arbitrary precision, which depends on $N$, the number of summed terms. 
+Choosing a large value such as $N=100$, we calculate that
+${\rev{C}_1 \approx 0.27258872223978123766892848583271}$,
+with error creeping in only on the very last digit. Such precision is 
+overkill for many use cases. Instead, the choice of $N$ should be 
+tuned to specific precision goals. Any value of the piecewise function,
+\begin{eqnarray}
+\underset{^{pw}}{C}(\alpha) = \begin{cases} 
+C(\alpha) & \alpha \le 1/2 \\
+(1-\alpha)\rev{C} & \alpha > 1/2  \end{cases}, \nonumber
+\end{eqnarray}
+is expected to reach roughly the same precision as $C(\frac{1}{2})=(\frac{1}{2})\rev{C}$. 
+An $N=60$ approximation already reaches double precision 
+of ${\mathcal{A}_E \circ \underset{^{pw}}{C}(\alpha)<10^{-16}}$ on the domain $
+\alpha \in (0,1)$. This check assures the quality of $\underset{^{pw}}{C}(\alpha)$,
+which we can now begin to use in calculations about average orbital velocity or
+whatever else. More importantly, the process of finding an answer has introduced 
+concepts and techniques that we will have occasion to use again, when building 
+computable realizations for other similar integral functions. 
+
+Thus far we have deliberately avoided standard nomenclature by neglecting 
+to mention the tautology that $C(\alpha)=4E(\alpha)$, 
+in terms of $E(\alpha)$, the \textit{complete elliptic integral of the second kind}. 
+In so doing, we might have skipped over another integral function, $K(\alpha)$, the 
+\textit{complete elliptic integral of the first kind}. There is no 
+deductive reason why one should precede the other, for it is possible to define 
+that either $K(\alpha)=(1-2\alpha \partial_{\alpha})\circ E(\alpha)$ or  
+$E(\alpha) =\big( (1-\alpha) + 2(1-\alpha)\alpha \partial_{\alpha} \big) \circ K(\alpha)$.
+The reason for nomenclature to ignore historical ordering is apparently more subtle. 
+In the modern theory of elliptic curves and elliptic functions, as well in the theory 
+of pendulum motion, function $K(\alpha)$ is a period not too dissimilar from Kepler's 
+orbital period $Y(a)$. Neither are these periods too similar. Again $K(\alpha)$ is 
+hypergeometric whereas $Y(a)$ is only algebraic. Before we get a chance to classify
+in more detail, we will show how elliptic integral $K(\alpha)$ 
+measures a family of elliptic curves.
+
+\pagebreak
+
+\section{Elliptic Curves}
+\begin{wrapfigure}{R}{7cm}
+\begin{center}
+\begin{overpic}[width=0.39\textwidth]{./Figures/EllipticCurves.eps}
+ \put (18,92) {\Large$\longleftarrow \Delta q = 2 \longrightarrow $}
+ \put (1,47.5) {\rotatebox[origin=c]{90}{\Large$\longleftarrow \Delta p = 2 \longrightarrow $}}
+ \put (24.5,0) {$S(\alpha) = \tfrac{1}{2}(2n+1) $}
+ \put (48,-9) {$n \in  \{0,1,2,3\}. $}
+\end{overpic}
+ \phantom{space}
+ \caption{A few Elliptic Curves $C(\alpha)$.}
+ \label{fig:EllipticCurves}
+ \end{center}
+\end{wrapfigure}
+
+
+Another worthwhile geometric problem asks for the total area $S(\alpha)$ within a 
+deformable, closed elliptic curve $\mathcal{C}(\alpha)$. An answer to this problem 
+contributes a key fact to the construction of elliptic functions, or sometimes, even 
+to an exact solution of the simple pendulum's motion [cite]. Yet various acceptable 
+choices of $\mathcal{C}(\alpha)$ are not exactly equivalent from a metrical perspective. 
+In particular, enclosed area $S(\alpha)$ depends explicitly on the shape of curve 
+$\mathcal{C}(\alpha)$. Pursuant to finding the integral function $K(\alpha)$,
+we will use a variant of Edwards's normal form and select square-symmetric curves,
+\begin{eqnarray}
+\mathcal{C}(\alpha) = \Big\{(p,q) : \alpha = p^2 + q^2 - p^2 q^2 \Big\}, \nonumber
+\end{eqnarray}
+with $\alpha \in [0,1)$. A few of these curves are depicted in Fig. \ref{fig:EllipticCurves}. 
+The selection constraint, $\alpha = p^2 +q^2 - p^2q^2$, must be solved to obtain 
+integrands of the area integrals, \FloatBarrier \noindent
+\begin{eqnarray}
+\text{either}\;\;\;\;\;\; S^{p}_{\mathcal{C}}(P_1)
+ =  \int_{P_1}^{P_0}dS^{p}_{\mathcal{C}} 
+&=& \int^{\sqrt{\alpha}}_{p_1} q \;dp  
+= \int^{\sqrt{\alpha}}_{p_1} \sqrt{\frac{\alpha-p^2}{1-p^2}}\;dp  \nonumber \\
+\text{or} \;\;\;\;\;\; S^{q}_{\mathcal{C}}(P_1) =  \int_{P_0}^{P_1}dS^{q}_{\mathcal{C}} 
+&=& \int_{0}^{q_1} p \;dq  
+= \int_{0}^{q_1} \sqrt{\frac{\alpha-q^2}{1-q^2}}\;dq  \nonumber \\
+\text{or} \;\;\;\;\;\;  S^{\phi}_{\mathcal{C}}(P_1) 
+= \int_{P_0}^{P_1} dS^{\phi}_{\mathcal{C}}
+&=& \int_{0}^{\phi_1} \lambda \;d\phi
+= \int_{0}^{\phi_1} \frac{1-\sqrt{1-\alpha \sin(2\phi)^2}}{\sin(2\phi)^2} \; d\phi,   \nonumber 
+\end{eqnarray}
+with boundaries $P_0=(p_0,q_0)=(\sqrt{\alpha},0)$ and 
+$P_1=(p_1,q_1)=\Big(\sqrt{2\lambda_1}\cos(\phi_1),\sqrt{2\lambda_1}\sin(\phi_1)\Big)$. 
+The third alternative is written in action-angle coordinates\footnote{Letters 
+$p$, $q$, and $\lambda$ allude to momentum, position, and 
+action quantities of Hamiltonian mechanics.} 
+$(\lambda,\phi)$, defined relative to Cartesian $(p,q)$ by $p=\sqrt{2\lambda}\cos(\phi)$, 
+$q=\sqrt{2\lambda}\sin(\phi)$, or relative to polar coordinates $(r,\phi)$, 
+by $\lambda = \tfrac{1}{2} r^2$, $\phi$ identical. After perigee $P_0$, the 
+next nearest apogee $P_{a}$ falls onto a diagonal line of symmetry where 
+$p_a=q_a=\sqrt{1-\sqrt{1-\alpha}}$ or $\phi_a = \pi/4$. According to dihedral 
+symmetry, this choice determines the total area 
+$S(\alpha)=8S^{p}_\mathcal{C}(P_a)=8S^{q}_\mathcal{C}(P_a)=8S^{\phi}_\mathcal{C}(P_a)$.
+
+Differentiating the third area function once with respect to $\alpha$ produces a
+period integral in action-angle coordinates,  
+\begin{eqnarray}
+T^{\phi}_\mathcal{C}(P_1) = \int_{P_0}^{P_1} dt
+=  \int_{0}^{\phi_1} 2(\partial_{\alpha} \lambda) \;d\phi
+= \int_{0}^{\phi_1} \frac{1}{\sqrt{1-\alpha \sin(2\phi)^2}} \;d\phi,   \nonumber 
+\end{eqnarray}
+where $T(\alpha)= 8T^{q}_\mathcal{C}(P_a) = 8T^{\phi}_\mathcal{C}(P_a)=4K(\alpha)$. 
+After scaling $\phi$ and $t$ by factors of two, we 
+obtain a more comparable integrand, $dt/d\phi = \Phi^{-1/2}$ with 
+$\Phi=1-\alpha\sin(\phi)^2$. Again, the matrices $\mathbf{R}(m)$
+can be used to reduce the first two $\alpha$-derivatives,
+\begin{eqnarray}
+\partial_{\alpha} dt = -\frac{1}{2\alpha}\bigg(\Phi^{-\frac{1}{2}} - \Phi^{-\frac{3}{2}} \bigg)d\phi,
+ \;\;\;\;\;\;
+\partial_{\alpha}^2 dt = \frac{3}{4\alpha^2}\bigg(\Phi^{-\frac{1}{2}}
+- 2\Phi^{-\frac{3}{2}} + \Phi^{-\frac{5}{2}} \bigg)d\phi,  \nonumber
+\end{eqnarray}
+As above, let $\mathbf{w}(dt) = [1,0]^T$. Canonical, least 
+coefficient vectors may be written out by recursion of Hermite reduction,
+\begin{eqnarray}
+[\mathbf{w}(\partial_{\alpha}dt)] \;\;
+=& -\frac{1}{2\alpha}\Big(\mathbf{I}-\mathbf{R}\big(\tfrac{3}{2}\big)\Big) \cdot \mathbf{w}(dt) 
+&= \;\; \bigg[\frac{1}{2(1-\alpha)},\frac{-1}{2(1-\alpha)}\bigg]^T, \nonumber \\
+{[[ \mathbf{w}(\partial_{\alpha}^2dt) ]]} \;\;
+=& \;\; \frac{3}{4\alpha^2}\Big(\mathbf{I}-2\;\mathbf{R}\big(\tfrac{3}{2}\big)
+ + \mathbf{R}\big(\tfrac{3}{2}\big)\cdot  \mathbf{R}\big(\tfrac{5}{2}\big) \Big) \cdot \mathbf{w}(dt) \;\; 
+&= \bigg[\frac{-(1-3\alpha)}{4(1-\alpha)^2\alpha},\frac{1-2\alpha}{2(1-\alpha)^2\alpha}\bigg]^T. \nonumber 
+\end{eqnarray} 
+In this next case the zero sum,
+\begin{eqnarray}
+[0,0]^T = \mathbf{w}(dt) - 4(1-2\alpha)\;[\mathbf{w}(\partial_{\alpha}dt)]
+- 4(1-\alpha)\alpha\;[[\mathbf{w}(\partial_{\alpha}^2dt)]], \nonumber
+\end{eqnarray}
+determines an annihilating operator. 
+$\mathcal{A}_K = 1 - 4(1-2\alpha)\partial_{\alpha} - 4(1-\alpha)\alpha\partial_{\alpha}^2$,
+The corresponding certificate function,
+\begin{eqnarray}
+\Xi^{\phi}_K &=& \int \bigg(\mathcal{A}_E \circ \frac{dt}{d\phi}\bigg) d\phi 
+=\int \frac{1-2\sin(\phi)^2+\alpha \sin(\phi)^4}{\big(1-\alpha \sin(\phi)^2\big)^{3/2}} d\phi
+=  \frac{\cos(\phi)\sin(\phi)}{\sqrt{1-\alpha \sin(\phi)^2}} \nonumber \\
+&=& \Bigg(\frac{-2(1-2\alpha)}{\alpha}\mathbf{V}(\tfrac{3}{2})
++\frac{3(1-\alpha)}{\alpha}\Big(2\mathbf{V}(\tfrac{3}{2})
+-\mathbf{V}(\tfrac{5}{2})-\mathbf{V}(\tfrac{3}{2})\cdot
+\mathbf{R}(\tfrac{5}{2}) \Big) \Bigg) \cdot \mathbf{w}(dt), \nonumber
+\end{eqnarray}
+allows verification of the necessary zero sum, 
+$\mathcal{A}_K \circ \frac{dt}{d\phi}-\frac{d\Xi^{\phi}_K}{d\phi}=0$.
+It is easy to check this identity when the derivation is unavailable, 
+misunderstood, or otherwise in doubt.
+
+Hypergeometric annihilator $\mathcal{A}_K$, with parameters $(a,b,c)=(\frac{1}{2},\frac{1}{2},1)$,
+bears at least a superficial similarity to $\mathcal{A}_E$. Even qualitatively, the functions 
+$E(\alpha)$ and $K(\alpha)$ differ at their limits, with $K(\alpha)$ diverging to infinity on 
+approach to the singular point $\alpha=1$. From the geometric standpoint, the analogy is more 
+clear between perimeter function $C(\alpha)$ and area function $S(\alpha)$. The existence of 
+$\mathcal{A}_K$ implies existence of another, similar annihilator, 
+$\mathcal{A}_S= 1 -4(1-\alpha)\alpha \partial_{\alpha}^2$, whose exact form can be calculated by 
+solving a simple system of linear equations. By inspection, we can immediately see that $\mathcal{A}_S$
+is hypergeometric with parameters ${(a,b,c)=(-\frac{1}{2},-\frac{1}{2},0)}$, and that $\mathcal{A}_S$
+admits reflection around $\alpha = 1/2$ as an invariant transformation. The fact that $c=0$ strengthens
+the analogy to $\mathcal{A}_E$ and suggests that piecewise construction of $S(\alpha)$ will involve no 
+new difficulties.
+
+
+A general form for the solution is written out as,
+\begin{eqnarray}
+S(\alpha) &=& S_1 \alpha \tFo{\frac{1}{2},\frac{1}{2}}{2}{\alpha}
+- S_0 \alpha \tFo{\frac{1}{2},\frac{1}{2}}{2}{\alpha}
+\int  \bigg(\alpha \tFo{\frac{1}{2},\frac{1}{2}}{2}{\alpha}\bigg)^{-2}d\alpha  \nonumber \\
+ &=& S_0 
++ \bigg(S_1+\frac{1}{8}S_0\bigg) \alpha 
++\frac{S_0}{4}\log(\alpha) \alpha 
+\tFo{\frac{1}{2},\frac{1}{2}}{2}{\alpha}
++ \sum_{n>1}S_n\;\alpha^n. \nonumber  
+\end{eqnarray}
+
+\begin{wrapfigure}{R}{7cm}
+\begin{center}
+\captionof{table}{Constraints on $S(\alpha)$}
+\begin{tabular}{ c | c }
+\hline \hline
+\multicolumn{2}{c}{
+\;\;\;$\mathcal{A}_E \circ S(\alpha)
+= \sum c_n \alpha^n, n\ge 0$\;\;\; } \\
+\hline 
+$\;\;n\;\;$& $0=c_n=$ \\
+\hline
+$0$ & $0$  \\
+$1$ & $32 S_2-4 S_1-3 S_0$  \\
+$2$ & $512 S_3-192 S_2-3 S_0$  \\
+$\vdots$ & $\hdots$  \\
+$n$ & determines $S_{n+1}$ \\
+\multicolumn{2}{c}{(and same for $S_n \rightarrow \rev{S}_n$) }
+\label{tab:ConsS}
+\end{tabular}
+\end{center}
+\end{wrapfigure}
+
+\noindent As $S(\alpha)$ satisfies a second-order ODE, the coefficients $S_n$ with $n>1$ are entirely determined
+by the choice of $S_0$ and $S_1$. Table \ref{tab:ConsS} lists the first few constraints. 
+According to reflection symmetry, the reversed function $\rev{S(\alpha)}$ has the same
+formal expansion, but with integral constants $\rev{S}_0$ and $\rev{S}_1$. The harmonic limit 
+toward ${\alpha=0}$
+requires that  $S(\alpha)=\pi \alpha$, thus ${S_0=0}$ and $S_1=\pi$. The opposite and strongly 
+anharmonic limit toward ${\alpha=1}$ determines ${\rev{S}_0=4}$, 
+the area of a $2\times2$ square, but leaves $\rev{S}_1$ undetermined. 
+Rogue constant $\log(2)$ returns to 
+cause more trouble, and we find by reference that ${\rev{S}_1 = -4\log(2)-3/2}$, 
+again without a decently intelligible explanation. Proceeding pragmatically
+instead, we match functions at $\alpha = \rev{\alpha}=\frac{1}{2}$, sum to cutoff $N=100$,
+and calculate numerically that ${\rev{S}_1 \approx -4.2725887222397812376689284858327063}$.
+As in the previous case of $\underset{^{pw}}{E}$, we do not need to increase precision, and instead 
+expand a piecewise solution $\underset{^{pw}}{S}(\alpha)$ 
+only to $N=60$. Already the approximation $\underset{^{pw}}{S}(\alpha)$ reaches double precision of 
+${\mathcal{A}_S \circ \underset{^{pw}}{S}(\alpha) <10^{-16}}$ everywhere on the domain 
+$\alpha \in [0,1]$. In subsequent analyses, we will put computable functions 
+$\underset{^{pw}}{S}(\alpha)$ and $\underset{^{pw}}{C}(\alpha)$ to good use, but for 
+now we are satisfied to have shown, by explicit calculation, exactly how solution techniques 
+generalize from one specimen to the next.
+
+\section{Example Calculations}
+Having built both computable functions $\underset{^{pw}}{C}(\alpha)$ and 
+$\underset{^{pw}}{S}(\alpha)$, we can also test relative convergence
+according to the mutual definitions of $E(\alpha)$ and $K(\alpha)$,
+\begin{eqnarray}
+  10^{-16} &>& (1-2\alpha \partial_{\alpha})\circ \underset{^{pw}}{C}(\alpha) 
+- 2\partial_{\alpha}\underset{^{pw}}{S}(\alpha) , \nonumber \\
+  10^{-16} &>& \big( (1-\alpha) + 2(1-\alpha)\alpha \partial_{\alpha} \big) \circ (2\partial_{\alpha}\underset{^{pw}}{S}(\alpha))
+-\underset{^{pw}}{C}(\alpha), \nonumber
+\end{eqnarray}
+
+\begin{wrapfigure}{L}{7cm}
+\begin{center}
+\begin{overpic}[width=0.33\textwidth]{./Figures/EllSE.eps}
+ \put (3,97) {$E$, $S$}
+ \put (58,3) {$\alpha$}
+ \put (55.5,-4) {$1$}
+ \put (0,-4) {$0$}
+ \put (-3,-1) {$0$}
+ \put (-3,60) {$4$}
+ \put (-6,94) {$2\pi$}
+ \put (3,39.5) {$2.5$}
+ \put (3,78.5) {$5.105$}
+ \put (32,67) {\rotatebox[origin=c]{90}{$0.64$}}
+ \put (35.5,7) {\rotatebox[origin=c]{90}{$0.706$}}
+ \put (38,-4) {$\alpha_2$}
+\end{overpic}
+\caption{$E(\alpha)$ and $S(\alpha)$.}
+  \label{fig:FunctionPlot}
+\end{center}
+\end{wrapfigure}
+\noindent where the inequality holds for $\alpha \in [0,1]$. As is reasonable to expect after Sections IV \& V, 
+these quality-assurance calculations 
+reach double precision after summing only up to $\mathcal{O}(\alpha^{60})$. In fact, the 
+sums above exactly equal zero on every coefficient of $\alpha^n$ when $C_0 - 2 S_1 = 0$
+and $\rev{C}_1+\rev{S}_1=-\rev{C}_0 = -\rev{S}_0$. Somewhat strangely, the geometric interpretation 
+of identity ${\rev{C}_0=\rev{S}_0=4}$ says that a linear distance equals an area, as 
+does identity ${C_0 = 2 S_1 =2\pi}$  between circular circumference and area.
+More to the point, precise verification of interrelations between $C(\alpha)$ 
+and $S(\alpha)$ allows us to choose just one function to investigate in detail. Derived function
+${\underset{^{pw}}{T}(\alpha)=2\partial_{\alpha}\underset{^{pw}}{S}(\alpha)}$
+is the best to work with, because there exists another, computationally-distinct means 
+to calculate particular values.
+
+The \textit{arithmetic-geometric mean}\footnote{Another 
+definition is that $1/\text{agm}(x,y) = \frac{2}{\pi} \int_{0}^{\pi/2}
+d\theta\big(x^2 \cos(\theta)^2+y^2 \sin(\theta)^2\big)^{-1/2}$. }, 
+$\text{agm}(a_0,b_0)=\lim_{n\rightarrow \infty}a_n =\lim_{n\rightarrow \infty}b_n$,
+is a recursive function of two variables, which rapidly converges on a number between 
+successive arithmetic and geometric means, $a_{n+1}=\tfrac{1}{2}(a_{n}+b_{n})$ and 
+$b_{n+1}=\sqrt{a_{n} b_{n}}$ respectively. Elsewhere it is proven that 
+$T(\alpha)\;\text{agm}(1+\sqrt{\alpha},1-\sqrt{\alpha})-2\pi=0$ (Ref. []). This 
+identity defines a numerical reference function $\underset{^{agm}}{T}(\alpha)$, with 
+convergence dependent upon recursion depth $M=n_{max}$. As a first test, let us 
+calculate for a difficult value $\alpha=1/2$ that,
+\begin{eqnarray}
+\tfrac{1}{2\pi}\underset{^{pw}}{T}(\tfrac{1}{2}) &=& 1.1803405990160962260363,  \;\;\;\;\;\;\;\;\;\; (N=60)    \nonumber \\
+\tfrac{1}{2\pi}\underset{^{agm}}{T}(\tfrac{1}{2}) &=& 1.1803405990160962260453, \;\;\;\;\;\;\;\;\;\; (M=7)    \nonumber 
+\end{eqnarray}
+with error beginning to show around the $20^{th}$ digit (Cf. OEIS: 
+\href{https://oeis.org/A175574}{A175574}). For the same termination parameters,
+$N=60$ and $M=7$, we find that 
+$10^{-20} > |\underset{^{pw}}{T}(\alpha)/\underset{^{agm}}{T}(\alpha)-1|$
+over the domain $\alpha \in [0,1)$. Considering that uncertainties tend to 
+worsen as they propagate through calculations, it is not at all surprising to 
+observe that a direct test of function values yields a tighter bound on the 
+error due to series truncation. Ignoring more conservative tests, a 
+sum to $N=50$ already allows $\underset{^{pw}}{T}(\alpha)$ to reach double 
+precision. To show off the utility of double-precision computable functions 
+$\underset{^{pw}}{C}(\alpha)$ and $\underset{^{pw}}{S}(\alpha)$, we
+will now go through two short example calculations, only at a superficial 
+level of detail. 
+
+A problem in high-school physics asks for the magnetic field at the center of 
+a circular loop of radius $a$. The answer, found by a simple Biot-Savart integral, 
+is that $\mathbf{B}_{\circ} = \frac{\mu_0 I_{\circ}}{2a} \hat{z}$, with current $I_{\circ}$
+and $\hat{z}$ normal to the plane of the loop. A generalization of this question 
+concerns the magnetic field at the center of a charge conducting ellipse of eccentricity 
+$e$ and semi-major axis $a$. The field is directed along the vertical, and its strength 
+depends linearly on current strength $I_0$ according to another not-too-difficult integral,
+\begin{eqnarray}
+\mathbf{B}_{0} = \mathbf{B}_{\circ}\frac{I_0}{I_{\circ}}\frac{a}{2\pi} \oint \frac{d\theta}{r} = 
+\mathbf{B}_{\circ}\frac{I_0}{I_{\circ}}\frac{a}{2\pi} \oint \frac{dl}{a^2} = 
+\mathbf{B}_{\circ}\frac{I_0}{I_{\circ}}\frac{C(e^2)}{2\pi} \nonumber .
+\end{eqnarray}
+The magnetic field at the origin can be canceled to zero by superimposing left and right 
+handed currents. For example, cancellation occurs between two fields $\mathbf{B}_{\circ}$
+and $\mathbf{B}_{0}$ when $\mathbf{B}_{0} \cdot \mathbf{B}_{\circ} = -\mathbf{B}_{\circ} \cdot \mathbf{B}_{\circ}$,
+or equivalently when $I_0/I_{\circ} = -(2 \pi)/C(e^2)$. Say that we choose to work with 
+an ellipse of eccentricity $e=4/5, \alpha = 16/25$. Field cancellation requires
+a ratio $I_0/I_{\circ} \approx -(2 \pi)/\underset{^{pw}}{C}(16/25) \approx -1.23$ 
+(and we could get more digits of precision if necessary).
+
+
+
+\begin{figure}[t]
+\begin{center}
+\captionof{table}{Semiclassical quantization of the elliptic curves $\mathcal{C}(\alpha)$.}
+\begin{tabular}{ c | c | c | c }
+\hline \hline
+ \;\;\;$n$\;\;\; 
+ & \;\;\;\;\;\;\;\;\;\;\;\; $ S(\alpha_n)=\frac{1}{2}(2n+1) $ \;\;\;\;\;\;\;\;\;\;\;\;  
+ & \;\;\;\;\;\;\;\;   Eigenvalues \;\;\;\;\;\;\;\;   & \;\; Percent Difference \;\; \\
+\hline
+$0$ & $0.1559223091638732\ldots$   & $0.15627\ldots$ & $0.223\%$ \\
+$1$ & $0.4469484490110412\ldots$   & $0.44719\ldots$ & $0.056\%$ \\
+$2$ & $0.7057110691134417\ldots$   & $0.70573\ldots$ & $0.003\%$ \\
+$3$ & $0.9212998367788911\ldots$   & $0.92011\ldots$ & $0.129\%$
+\label{tab:SolvedVals}
+\end{tabular}
+\end{center}
+\end{figure}
+
+In semi-classical quantum mechanics, another problem asks for an estimate of 
+quantum pendulum energy eigenvalues. The period function of a simple pendulum is $T(\alpha)$,
+and its action function is the corresponding $S(\alpha)$. Eigenvalues $\alpha_n$ are 
+found by solving a qunatization condition\footnote{For more explanation, see: xxx.} 
+such as ${S(\alpha_n)=\frac{1}{2}(2n+1)}$, with $n=0,1,2,3$. To find the 
+"quantum values" ${\alpha_n = S^{-1}\big(\frac{1}{2}(2n+1)\big)}$, an 
+inverse problem needs to be solved. Function $S^{-1}(s)$ can be found by 
+series reversion, but this is not the most sensible approach. As we do not need 
+an entire function, it is more expedient to simply apply a root-solving method 
+to the zero sum $\underset{^{pw}}{S}(\alpha_n)-\frac{1}{2}(2n+1)=0$. 
+In so doing, we calculate the numerical values  in the second column of 
+Tab. \ref{tab:SolvedVals}, and these values are used to plot the four teal 
+blue curves of Fig. \ref{fig:EllipticCurves}.
+
+Alternatively, constraint $\alpha=p^2+q^2-p^2 q^2$ suggests the form 
+of a quantum mechanical Hamiltonian matrix $H$, which may be written by exchanging 
+coordinate variables $p$ and $q$ for their corresponding matrix representations
+\footnote{see also: xxx.}. 
+Due to non-commutation of $p$ and $q$ matrices, quantization is a non-unique 
+procedure. Consequently, there are many different Hamiltonian matrices, whose 
+eigenvalues overlap $S(\alpha)$ within a similar range of error. We have 
+chosen, somewhat arbitrarily, the matrix $H$ with elements:
+\begin{eqnarray}
+h_{i,j}= h_{j,i}= \begin{cases} 
+      \frac{1 - 2 i - 2 i^2 + 40 (2 i + 1) \pi}{ 400 \pi^2} & i=j \\
+       \frac{1}{400\pi^2}\sqrt{24\binom{i}{4}} & i=j+4 \\
+       \frac{1}{400\pi^2}\sqrt{24\binom{j}{4}} & j=i+4 \\
+      0 & \text{otherwise} 
+   \end{cases}, \nonumber
+\end{eqnarray} 
+A few of the eigenvalues\footnote{We calculate $H$ as a $100 \times 100$ matrix with $100$ eigenvalues, 
+and select only $19$ of the lowest lying. Due to duplicate values, accurate selection requires a criterion 
+in terms of eigenvector elements.} of $H$ determine equally-spaced black points on the green 
+curve of Fig. \ref{fig:FunctionPlot}, four of which are written in the second column 
+of Tab. \ref{tab:SolvedVals}. Although enumeration of roots $\alpha_n$ to arbitrary precision 
+shows off computational prowess, comparison with matrix eigenvalues gives apprehension as to 
+when such efforts would actually be necessary. If the task is to approximate quantum
+pendulum eigenvalues to 99\% accuracy, the expansion of $\underset{^{pw}}{S}(\alpha_n)$
+needs far fewer than $N=60$ terms. Instead of having a bikeshed digression about significant
+figures, let us get back to analysis of the theory itself.
+
+\pagebreak
+\section{Comparing Certificates}
+\begin{wrapfigure}{R}{8cm}
+\begin{center}
+\begin{overpic}[width=0.42\textwidth]{./Figures/TangentGeo.eps}
+ \put (29.5,5) {$(p_1,q_1)$}
+ \put (40,-2) {$=r_1\big(\cos(\phi_1),\sin(\phi_1)\big)$}
+ \put (19,-2) {$\phi_1$}
+ \put (0,6) {$\frac{\pi}{2}-\phi_1$}
+ \put (78,54.5) {$\frac{1}{2}p_1 q_1  $}
+ \put (83,47) {$ = $}
+ \put (40,76) {$\frac{1}{2} \; \Delta p \; \Delta q $}
+ \put (3,76) {$\frac{1}{2} \; \frac{q_1}{r_1} \; \Delta r \; \Delta p$}
+ \put (72,76) {$\frac{1}{2} \; \frac{p_1}{r_1} \; \Delta r \; \Delta q$}
+ \put (55,14) {$\Delta q$}
+ \put (33,25) {\rotatebox[origin=c]{45}{$\Delta r$}}
+ \put (20,30) {\rotatebox[origin=c]{90}{$\Delta p$}}
+ \put (-2,17) {\rotatebox[origin=c]{-30}{$\mathcal{X}(\alpha)$}}
+\put (-2,50) {\rotatebox[origin=c]{-30}{$\mathcal{X}(\alpha+d\alpha)$}}
+
+\put (30,33) {\rotatebox[origin=c]{-30}{
+$\longleftarrow \;\;\;\; \sqrt{\Delta p^2+\Delta q^2} \;\;\;\; \longrightarrow $}}
+% \put (8,17) {\rotatebox[origin=c]{-30}{$\alpha$}}
+\end{overpic}
+\caption{Tangent Geometry of curve $\mathcal{\mathcal{X}}(\alpha)$.}
+  \label{fig:TangentGeo}
+\end{center}
+\end{wrapfigure}
+
+Recall from Section II that alternative area integrals $A^{x}_{\mathcal{E}}(P_1)$ 
+and $A^{\theta}_{\mathcal{E}}(P_1)$ relate to one another according the difference between 
+certificate functions $\Xi^{x}_{A}$ and $\Xi^{\theta}_{A}$. To continue developing the 
+theory of certificates by an inductive process, we ask: does the derived identity 
+$\Delta A(e)=(\Xi^{\theta}_{A}-\Xi^{x}_{A})/e$ have any analog for the elliptic integrals 
+discussed in Sections IV \& V? And if so, how do these analogs differ from $\Delta A(e)$
+of the first example? The answers have curious nuances, so deserve a close look.
+
+\FloatBarrier \noindent
+
+An incomplete arclength integral along $\mathcal{E}$, from initial point 
+$P_0 = (p_0,q_0) = (\sqrt{1-\alpha},0)$ to final point 
+$P_1 = (p_1,q_1) = \big(\sqrt{1-\alpha}\cos(\varphi_1),\sin(\varphi_1)\big)$ 
+is written as,
+\begin{eqnarray}
+ \text{either} \;\;\;\;  
+ C^{p}_{\mathcal{E}}(P_1) &=& \int_{P_1}^{P_0} dC^{p}_{\mathcal{E}} 
+ =\int^{\sqrt{1-\alpha}}_{p_1} \sqrt{\frac{(1-\alpha)^2 +\alpha p^2}{(1-\alpha)(1-\alpha-p^2)}} \;dp   \nonumber \\ 
+ \text{or} \;\;\;\;  
+ C^{q}_{\mathcal{E}}(P_1) &=& \int_{P_0}^{P_1} dC^{q}_{\mathcal{E}} 
+ =\int_{0}^{q_1} \sqrt{\frac{1-\alpha q^2}{1-q^2}} \;dq   \nonumber \\
+ \text{or} \;\;\;\;  
+ C^{\varphi}_{\mathcal{E}}(P_1) &=& \int_{P_0}^{P_1} dC^{\varphi}_{\mathcal{E}} 
+ =\int_{0}^{\varphi_1} \sqrt{1-\alpha \sin(\varphi)^2} \;d\varphi .   \nonumber 
+\end{eqnarray}
+Applying change of coordinates $(\cos(\varphi),\sin(\varphi))\rightarrow (\sqrt{1-q^2},q)$ and  
+$d\varphi \rightarrow dq/\cos(\varphi)$, the later two of these integrals are proven 
+equal, with ${\frac{dq}{d\varphi}\frac{dC^{q}_{\mathcal{E}}}{dq}
+=\frac{dC^{\varphi}_{\mathcal{E}}}{d\varphi}}$. Differential $\frac{dq}{d\varphi} = \cos(\varphi)$ 
+depends not on $\alpha$, thus $\partial_{\alpha}$ commutes with  $\frac{dq}{d\varphi}$, and  
+${\frac{dq}{d\varphi}\partial_{\alpha}^n \frac{dC^{q}_{\mathcal{E}}}{dq}
+=\partial_{\alpha}^n\frac{dC^{\varphi}_{\mathcal{E}}}{d\varphi}}$.
+Consequently, integrals are not merely equal. They are also identical under 
+$\alpha$-differentiation, 
+${\partial_{\alpha}^nC^{q}_{\mathcal{E}}(P_1)=\partial_{\alpha}^nC^{\varphi}_{\mathcal{E}}(P_1)}$, 
+${n \ge 0}$. Next, certificates must equate, 
+${\mathcal{A}_E \circ \big(C^{q}_{\mathcal{E}}(P_1)-C^{\varphi}_{\mathcal{E}}(P_1)\big)
+=\Xi^{q}_{E}-\Xi^{\varphi}_{E}=0}$. After changing coordinates, 
+$\Xi_E^{\varphi} \rightarrow \Xi_E^{q} = q(dq/dC^{q}_{\mathcal{E}})= q\sqrt{(1-q^2)/(1-\alpha q^2)}$,
+we can verify that $\mathcal{A}_E \circ \big(\frac{dC^{q}_{\mathcal{E}}}{dq}\big) - \frac{d\Xi_E^{q}}{dq} = 0$ 
+by explicit calculation (again, using a computer algebra system).
+ 
+Had we first chosen $p$ rather than $q$, the calculation would have been much worse, 
+for ${dp/d\varphi = -\sqrt{1-\alpha}\sin(\varphi)}$, and certificates do not equate,
+$\Xi^{p}_{E} \neq \Xi^{\varphi}_{E}$. The situation is not much better when comparing 
+$p$ and $q$, except that the Pythagorean theorem directly determines the  
+hypotenuse length $\Delta C(\alpha + d\alpha)=\sqrt{\Delta p^2 + \Delta q^2}$. 
+The series expansion\footnote{The same expressions apply to any 
+valid endpoint, so we omit subscript $1$ on $p$ and $q$ variables.},
+\begin{eqnarray}
+\Delta C(\alpha + d\alpha) = \sqrt{\Big(\frac{\partial p}{\partial \alpha}\Big)^2
++\Big(\frac{\partial q}{\partial \alpha}\Big)^2}\Bigg(
+ d\alpha + \frac{1}{2}\frac{
+\frac{\partial p}{\partial \alpha}\frac{\partial^2 p}{\partial \alpha^2}
++\frac{\partial q}{\partial \alpha}\frac{\partial^2 q}{\partial \alpha^2} 
+ }{\Big( \big(\frac{\partial p}{\partial \alpha}\big)^2
++\big(\frac{\partial q}{\partial \alpha}\big)^2 \Big)}d\alpha^2
+\Bigg) + \mathcal{O}(d\alpha^3),  \nonumber 
+\end{eqnarray}
+follows the variational geometry of Fig. \ref{fig:TangentGeo},
+after defining 
+$\Delta C(\alpha) = C^{q}_{\mathcal{E}}(P_1) - C^{p}_{\mathcal{E}}(P_1)$,
+with point $P_1$ held independent of $d\alpha$. Partial derivatives in 
+the first line can all be written as polynomial ratios,
+\begin{eqnarray}
+\frac{\partial p}{\partial \alpha} = \frac{q^2-1}{2\;p}, \;\;\;\;
+\frac{\partial^2 p}{\partial \alpha^2} = -\frac{(1-q^2)^2}{4\;p^3}
+\;\;\; \text{and} \;\;\;
+\frac{\partial q}{\partial \alpha} = -\frac{(1-q^2)^2}{2 \; p^2 \; q}, \;\;\;\;
+\frac{\partial^2 q}{\partial \alpha^2} = \frac{(q^2-1)^3(1+3q^2)}{4\;p^4 \;q^3}.
+\nonumber
+\end{eqnarray}
+Comparison of the explicit series with a formal expansion, 
+\begin{eqnarray}
+\Delta C(\alpha + d\alpha) = \Big(\partial_{\alpha}\Delta C(\alpha)\Big)d\alpha
++\frac{1}{2}\Big(\partial_{\alpha}^2 \Delta C(\alpha)\Big)d\alpha^2
++\mathcal{O}(d\alpha^3), \nonumber  
+\end{eqnarray}
+determines first and second variations of the arclength difference,
+\begin{eqnarray}
+\partial_{\alpha}\Delta C(\alpha) &=& \frac{(1-q^2)\sqrt{(1-q^2)^2+p^2 q^2}}{2\;p^2\;q} 
+\nonumber \\ \text{and} \;\;\;\;
+ \partial_{\alpha}^2\Delta C(\alpha) 
+ &=& \frac{(1-q^2)^2(1+q^2-5q^4+p^2 q^4+3 q^6)
+ }{4 \; p^4 \; q^3 \;\sqrt{(1-q^2)^2+p^2 q^2}}.
+ \nonumber 
+\end{eqnarray}
+These data are what we need to determine the certificate difference,
+\begin{eqnarray}
+\mathcal{A}_{E} \circ \Delta C(\alpha) 
+= \Xi^{q}_{\mathcal{E}}-\Xi^{p}_{\mathcal{E}} 
+= \frac{(1-q^2)^3(1+3 q^2) - p^2(1-q^2-2 q^4+2 q^6) +p^4 q^4 
+}{p^2 \; q^3 \; \sqrt{(1-q^2)^2+p^2 q^2}}, \nonumber 
+\end{eqnarray}
+and subsequently, the missing certificate function,
+\begin{eqnarray}
+\Xi^{p}_{\mathcal{E}} = \Xi^{q}_{\mathcal{E}}  - \mathcal{A}_{E} \circ \Delta C(\alpha) 
+= \frac{p(1-\alpha)^4+2p^3(3-\alpha)(1-\alpha)\alpha - p^5(1+3\alpha-\alpha^2) 
+}{ \sqrt{(1-\alpha)^3(1-\alpha-p^2)^3
+\big((1-\alpha^2)+\alpha p^2\big)}}, \nonumber
+\end{eqnarray}
+a truly monstrous expression! Despite gruesome details, the zero sums 
+$\mathcal{A}_E \circ \big(\frac{dC^{p}_{\mathcal{E}}}{dp}\big) - \frac{d\Xi_E^{p}}{dp} = 0$
+can be checked via symbolic computation.
+
+Transferring analysis from ellipses to elliptic curves, we can guess that 
+dependence of differential $dp/dq$ on parameter $\alpha$ causes area integrals 
+$S^{p}_{\mathcal{C}}(P_1)$ and $S^{q}_{\mathcal{C}}(P_1)$ to have non-identical 
+certificates. As in Fig. \ref{fig:TangentGeo}, the interior area
+is rectangular, with area 
+${\Delta S(\alpha)= S^{q}_{\mathcal{C}}(P_1) - S^{p}_{\mathcal{C}}(P_1)=q p}$, 
+while the exterior triangle has area,
+\begin{eqnarray}
+\Delta S(\alpha+d\alpha)-\Delta S(\alpha)
+= - \frac{1}{2}\;\frac{\partial p}{\partial \alpha}
+\;\frac{\partial q}{\partial \alpha} d\alpha^2 + \mathcal{O}(d\alpha^3)\nonumber 
+= - \frac{d\alpha^2}{8 (1-p^2) (1-q^2) p q}  + \mathcal{O}(d\alpha^3), \nonumber
+\end{eqnarray}
+to second order in $d\alpha$. Comparison with a formal expansion determines 
+ $\partial_{\alpha}^2\Delta S(\alpha)$, and next,
+\begin{eqnarray}
+\mathcal{A}_S \circ \Delta S(\alpha)  
+=\frac{p^2+q^2}{p q}=\frac{p}{q}+\frac{q}{p}. \nonumber
+\end{eqnarray}
+Since the curve $\mathcal{C}(\alpha)$ transforms invariantly by
+$(p,q) \rightarrow (q,p)$, it is quite obvious to guess that either 
+$\Xi^{p}_S=1/\Xi^{q}_S=p/q$  or $\Xi^{p}_S=1/\Xi^{q}_S=q/p$.
+In fact, the first alternative is correct, and the two zero sums,
+$\mathcal{A}_s \circ \big(\frac{dS^{p}_{\mathcal{C}}}{dp}\big) - \frac{d\Xi_S^{p}}{dp} = 0$
+and $\mathcal{A}_s \circ \big(\frac{dS^{q}_{\mathcal{C}}}{dq}\big) - \frac{d\Xi_S^{q}}{dq} = 0$,
+are relatively easy to check thereafter. A third certificate $\Xi^{\phi}_S$ can be found
+by applying a similar analysis to triangular areas of Fig. \ref{fig:TangentGeo}. This 
+analysis is left as an exercise for the interested reader.
+
+Having gone through a few examples of Creative Telescoping in thorough
+detail, the notion of a certificate function can not be as foreign. Let
+us now offer a summary:
+\begin{itemize}
+ \item [1. ] If Ostrogradsky-Hermite reduction closes, invariant matrices
+ $\mathbf{U}$ and $\mathbf{V'}$  determine annihilator $\mathcal{A}_I$,
+ without needing to calculate the corresponding certificate $\Xi_I^t$.
+ \item [2. ] When certificate $\Xi_I^t$ can be efficiently calculated, 
+ it is useful for quality analysis. Verification of 
+ $\mathcal{A}_I \circ \frac{dI}{dt} - \frac{d}{dt}\Xi_I^t=0$ implies
+ that $\mathcal{A}_I \circ I(\alpha) = 0$.
+\item [3. ] Two certificates $\Xi_I^t$  and $\Xi_I^u$ can be identical 
+ under change of coordinates, but generally they are not equal, and depend 
+ on choice of coordinates.
+\item [4. ] If the integral is geometric, then the certificate difference
+ $\Xi_I^t-\Xi_I^u$ can be calculated by trigonometric means, after expanding 
+ the tangent geometry in powers of $d\alpha$.
+\end{itemize}
+The first two observations are already well known theorems in Creative Telescoping,
+while the last two, if not novel, are at least lesser known. It would be interesting
+to generalize upon the geometric interpretation and to promote points 3 and 4 to 
+proper theorems; however, this is outside of our present scope. 
+
+We have a pragmatic perspective, and can agree that certificates are essential 
+only at the level of extra rigor. Following point 1, knowledge of certificate 
+$\Xi_I^t$ is not necessary when constructing a function $I(\alpha)$, nor 
+when evaluating $I(\alpha)$ at a particular value. In physics, it is 
+often the case that a complete period $I(\alpha)$ is much easier to 
+measure than any partial integral $\int_{t_0}^{t_1} dI/dt$. A few 
+theorists will need to derive and verify $\mathcal{A}_I$. Once 
+$\mathcal{A}_I$ is known as fact, any scientist can use the 
+well-developed theory of ordinary differential equations to 
+construct convergence-rated approximations to $I(\alpha)$. 
+The business of calculating values to $I(\alpha)$ then requires 
+much less thought on the user's end. How fortunate for them! 
+\section{Prospectus}
+During XVIII century, Latin was a \textit{lingua franca} between scientific researchers 
+throughout Europe. According to the Euler archive, Euler wrote at least nine articles 
+under titles starting with the word \textit{specimen}, two of which are immediate 
+to the analysis above. Around the same time, Carl Linnaeus (1707-1788) began to publish
+\textit{Systema Natur\ae} (1735-1758), one of the founding documents of the modern 
+taxonomic system in biology. Presently, the word specimen is more familiar in the 
+Linnaen context, where it usually refers to a particular plant or animal, 
+as collected from the wild. In mathematics, translation of specimen to "example" 
+is now a ubiquitous preference, but we hope that the imperfect analogy between math 
+and biology will not be entirely forgotten, and that collection and analysis of 
+specimens will continue to contribute an important part to scientific research. 
+
+
+\begin{figure}[p]
+\begin{center}
+\begin{overpic}[width=\textwidth]{./Figures/cladogram.eps}
+ \put (3.5,5.7) {\scriptsize $2\pi / 96$ }
+ \put (0,25) {\scriptsize sp. Archimedes's}
+ \put (1,23) {\scriptsize base case, $n=6$}
+
+ \put (0,42) {\scriptsize Numbers, Shapes,}
+ \put (0,40) {\scriptsize Functions \& Sets.}
+ \put (0,36) {\scriptsize sp. $0+1+2<\pi$}
+ \put (0,33) {\scriptsize sp. }
+ \put (3,33) {$\bigcirc\!\!\!\!\!\bigcirc
+ \!\!\!\!\!\!\!\!\!\!\!-\!\!\!-\!\!\!- $}
+ \put (7.4,33.2) {\scriptsize $\rightarrow$ }
+ \put (10,33) {$\bigcirc\!\!\!\!\!\bigcirc
+ \!\!\!\!\!\!\!\!\!\!\!-\!\!\!-\!\!\!-\!\!\!\!\!\! | $}
+ \put (0,30) {\scriptsize sp. $6 \times 2^4=96$}
+
+
+ \put (38,33) {\scriptsize Integrals, spp. ellipse area, circle arclength. }
+ \put (43,26.75) {\scriptsize Series Expansions, sp. $4\arctan(1)$.  }
+ \put (52,21) {\scriptsize sp. Euler's $\arctan$ identity.  }
+ \put (50,15.5) {\scriptsize ODE's, sp. Legendre's identity.  }
+ \put (51,8) { Algebraic Geometry }
+ \put (26,38.75) { Physical Science  }
+  \put (24,20) { Calculus }
+% \put (81,25.5) {\Huge $\pi$  }
+% \put (81,18.5) {\Large $T$  }
+% \put (81,14) {\Large $S$  }
+% \put (78.5,9.5) {\Large$\,_2F_1$  }
+ \put (80,42) { Contemporary }
+ \put (79,39) { Function Theory }
+ \put (83,33) {\small $\circ$ Energy}
+ \put (87,30) {\small Surfaces}
+ \put (83,26) {\small $\circ$ Integral}
+ \put (87,23) {\small Periods}
+ \put (83,19) {\small $\circ$ Holonomic}
+ \put (87,16) {\small Functions}
+ \put (83,12) {\small $\circ$ Creative}
+ \put (87,9) {\small Telescoping}
+  
+
+ \put (32,1) {\Large European Enlightenment  }
+ \put (0,1) { \Large 250 BC }
+ \put (79,1) { \Large  $\longrightarrow$ Today }
+ \put (16,20) { \rotatebox[origin=c]{90}{Roman Empire, Islamic Golden Age,} }
+ \put (19,22) { \rotatebox[origin=c]{90}{Dark/Middle Ages up to Renaissance} }
+ 
+
+\end{overpic}
+
+\phantom{\;}
+
+\caption{Evolution of ideas about $\pi$ (above). A drawer of closely related specimens (below).}
+  \label{fig:specimens}
+
+\phantom{\;}
+
+\phantom{\;}
+
+
+\begin{overpic}[width=\textwidth]{./Figures/species.eps}
+ \put (12,52) {\small I. Pendulum Phase Portraits}
+ \put (52.5,30) {\small II. "Flowers from Ramanujan's Garden"}
+  \put (6.5,6.5) {\small III. Quartic Strata}
+ \put (28.5,9) {\small IV. Intersection of }
+ \put (28.5,6.5) {\small Sphere \& Ellipsoid}
+ \put (57,8) {\small V. Intersection of}
+ \put (62,5.5) {\small   Sphere \& Goursat Surface }
+
+ \put (11.5,69) {\small A.1}
+ \put (21,69) {\small A.2}
+ \put (35,69) {\small A.3}
+
+ \put (57,69) {\small B.1}
+ \put (68,69) {\small C.1}
+ \put (85.5,69) {\small D.1}
+
+ \put (57,48) {\small B.2}
+ \put (72,48) {\small C.2}
+ \put (85.5,48) {\small D.2}
+
+ \put (9.5,9.5) {\small E.1} 
+ \put (20,9.5) {\small E.2}
+ \put (36,47.5) {\small E.3}
+ 
+ \put (57,24) {\small B.3}
+ \put (71,24) {\small F.1}
+ \put (85,24) {\small G.1}
+
+\end{overpic}
+\end{center}
+\end{figure}
+
+Ideas evolve as do plants and animals, though with entirely different constraints
+and rates of change. As it turns out, on planet Earth, a time sequence of accidental 
+occurrences leads just as well to a tree of knowledge as to a tree of life. The locution 
+that "every new answer, leads to a few new questions" is itself a suggestion of 
+branching structure implied by the tree-of-knowledge metaphor. Should we attempt 
+to transfer the techniques of phylogeny\textemdash the study of evolutionary 
+relationships\textemdash from biology to domains of pure idea? There are reasonable
+arguments yes and no. Before dismissing the idea as completely impossible, let us 
+attempt to justify an evolutionary diagram such as in Fig. \ref{fig:specimens}. 
+This abbreviated, evolutionary flow chart attempts to trace back the existence of 
+elliptic integrals to a momentous idea of Archimedes of Syracuse (circa 287-212 BC). 
+His specimen of a circle bounded by two, regular $96$-sided polygons is an ancestral 
+milestone and an immense progenitor. Without it, perhaps this current work would 
+not have come fully into existence.
+ 
+\begin{sidewaystable}[p]
+\begin{center}
+\captionof{table}{Well-Integrable Hamiltonian Energy Functions and their Period Constraints.}  
+\label{tab:specimens}
+\begin{tabularx}{\textwidth}{ c | c c l | c c c | r l  }
+\hline \hline
+\;\; Index \;\; & \multicolumn{3}{c|}{Hamiltonian Function} & 
+\multicolumn{3}{c|}{Diagnostic}  & & \hspace{2cm} Period Constraint \hspace{3cm} \\
+\hline 
+I.A.1  & \;\;$2H$ & $=$  & $p^2+q^2-p^2 q^2$ & 
+\;\;\texttt{Q}\;\; & \;\;\;\; & \;\;\texttt{D}\;\;& \;\;\; $0=$ & $T-\partial_{\alpha}\big(4\;\alpha(1-\alpha)T'\big)$ \\
+I.A.2  & \;\;$2H$ & $=$  & $(p^2+q^2)(1-\frac{1}{4}q^2)$ & 
+\;\;\texttt{Q}\;\; & \;\;\;\; & \;\;\texttt{D}\;\;& $0=$ & $T-\partial_{\alpha}\big(4\;\alpha(1-\alpha)T'\big)$  \\
+I.A.3  & \;\;$2H$ & $=$  & $p^2-\sin(q)^2$& &  & & $0=$ & $T-\partial_{\alpha}\big(4\;\alpha(1-\alpha)T'\big)$  \\
+\hline 
+II.B.1 & \;\;$2H$ & $=$  & $p^2+q^2+(\frac{4}{27})^{\frac{1}{2}} \; ( 3 p^2 q- q^3) $ \;\;  & 
+& & \;\;\texttt{D}\;\; & $0=$ &  $2T-\partial_{\alpha}\big(9\;\alpha(1-\alpha)T'\big)$    \\
+II.C.1 & \;\;$2H$ & $=$  & $p^2+q^2 - \frac{1}{4}q^4 $&
+\;\;\texttt{Q}\;\; & \;\;\texttt{H}\;\; & & $0=$ & $3T-\partial_{\alpha}\big(16\;\alpha(1-\alpha)T'\big)$     \\
+II.D.1 & \;\;$2H$ & $=$  & $p^2+q^2 - (\frac{4}{27})^{\frac{1}{2}}q^3 $ & 
+& \;\;\texttt{H}\;\; & & $0=$&   $5T-\partial_{\alpha}\big(36\;\alpha(1-\alpha)T'\big)$   \\
+\hline
+II.B.2 & \;\;$2H$ & $=$  & $p^2 + q^2 - \frac{4}{27} (p^2 + q^2)^3 +  \frac{4}{27} p^2 (p^2 - 3 q^2)^2$ \;\;\; &
+ & & \;\;\texttt{D}\;\; & $0=$&  $8\;\alpha\;T-\partial_{\alpha}\big(9\;\alpha(1-\alpha^2)T'\big)$   \\
+II.C.2 & \;\; $2H$ & $=$  & $p^2 + q^2  - \frac{1}{4}(p^2 + q^2)^2 +2 p^2 q^2$
+\;\;& \;\;\texttt{Q}\;\; & & \;\;\texttt{D}\;\; & $0=$&  $3\;\alpha\;T-\partial_{\alpha}\big(4\;\alpha(1-\alpha^2)T'\big)$   \\
+II.D.2 & \;\; $2H$ & $=$  &  $p^2 + q^2 - \frac{4}{27} q^6$ & 
+& \;\;\texttt{H}\;\; & & $0=$& $5\;\alpha\;T-\partial_{\alpha}\big(9\;\alpha(1-\alpha^2)T'\big)$    \\
+\hline 
+III.E.1    & \;\;$2H$ & $=$  & $ p^2 + q^2 - \frac{1}{4} (p^2 + q^2)^2 + \epsilon \; p^2 q^2  $ \;\; & 
+\;\;\texttt{Q}\;\;& & \;\;\texttt{D}\;\; & $0=$ & $\big(3\;\alpha(\epsilon-1) -\epsilon+2 \big)T$   \\
+III.E.2    & \;\;$2H$ & $=$  & $ p^2 + q^2 - \frac{1}{4} (p^2 + q^2)^2 +\frac{1}{4} \epsilon (p^2 + q^2) q^2$ & 
+\;\;\texttt{Q}\;\;& & \;\;\texttt{D}\;\; & & \hspace{1cm} $-\partial_{\alpha}\big(4\;\alpha\;(1-\alpha)(1-\alpha+\alpha \epsilon)T'  \big)$    \\
+\hline 
+IV.E.3     & \;\; $H$ &  $=$  & $ a \; J_x^2 + b \; J_y^2 + c \; J_z^2 $ & & & \;\;\texttt{D}\;\; &   $0=$ & $(a+b+c-3\alpha)T$ \\
+\scriptsize(cont.)     &  &   &  & & &  &  & \hspace{1cm} $+\partial_{\alpha}\big(4(a-\alpha)(b-\alpha)(c-\alpha)T'\big)$ \\
+\hline 
+V.B.3  & \;\; $H$ &  $=$  & $J_z^3 + \frac{\sqrt{2}}{2}(J_x^3 - 3 J_x J_y^2) - \frac{3}{2}(J_x^2 J_z + J_y^2 J_z)$ & & & \;\;\texttt{D}\;\; & $0=$&  $8\;\alpha\;T-\partial_{\alpha}\big(9\;\alpha(1-\alpha^2)T'\big)$   \\
+V.F.1  & \;\; $H$ &  $=$  & $4 (J_x J_y)^2 + 4 (J_y J_z)^2 + 4 (J_z J_x)^2$ & & & \;\;\texttt{D}\;\; & $0=$&  $9\;(4-5\;\alpha)\;T$     \\
+\scriptsize(cont.)  & &   &  & & &  & & \hspace{1cm} $-\partial_{\alpha}\big(16\;\alpha(1-\alpha)(4-3\;\alpha)T'\big)$     \\
+V.G.1  & \;\; $H$ &  $=$  & $J_z^6 - 5 (J_x^2 + J_y^2) J_z^4 + 5 (J_x^2 + J_y^2)^2 J_z^2$ & & & \;\;\texttt{D}\;\; & $0=$&  $5\;(5-21\;\alpha)\;T$   \\
+\scriptsize(cont.)  &  &   & \;\;\;\;\;\;\;\;\;\;\;\;\;\; $ -  2 (J_x^4 - 10 J_x^2 J_y^2 + 5 J_y^4) J_x J_z$ & & &  & & \hspace{1cm} $+\partial_{\alpha}\big(4\; \alpha  (1 - \alpha)(5 + 27\;\alpha)T'\big)$  \\
+\hline\hline
+\textit{Hotaru}  & \;\; $H$ & $=$  & $\frac{1}{3}(J_x^4 + J_y^4 + J_z^4) - (J_x J_y J_z)^2$ & & & \;\;\texttt{D}\;\; &  $0=$ & $5 (1190 - 13149\;\alpha + 18954\;\alpha^2)T$  \\
+\;\; \textit{mirabilis} \;\;  & \;\;  &  & \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; $ - \frac{2}{27}(J_x^2 + J_y^2 + J_z^2)$ & & &  &  &  
+$-\partial_{\alpha}\big(36 \;\alpha (1-\alpha) (7 - 27 \; \alpha) (5 - 54 \; \alpha)T'\big)$   \\
+\hline
+\end{tabularx}
+\phantom{\;}
+
+Diagnostic Key: \texttt{Q}$=$\texttt{QuarticToODE},
+\texttt{H}$=$\texttt{HyperellipticToODE}, 
+\texttt{D}$=$\texttt{DihedralToODE}. 
+See also Appendix xxx.
+\end{center}
+\end{sidewaystable} 
+ 
+During antiquity, the ratio of a circle's circumference to it's diameter, the irrational number 
+$\pi$, caused much frustration and eluded reasonable description. Finally after centuries of Greek 
+thought, Circa 250 BC, the analysis of Archimedes's \textit{Measurement of a circle} determined 
+that $\frac{223}{71}< \pi <\frac{22}{7}$. 
+This error bounded result can be refined to higher precision by choosing circumscribing 
+polygons with more than 96 sides; however, the task of doing so is prohibitively complicated. 
+By the time of Newton, Archimedes's technique eventually evolved to become arclength 
+integration, so can be considered an ancestor to the more familiar ${\pi = \int_{-1}^{1} (1-x^2)^{-1/2}dx}$. 
+In the first generation of calculus, it was also possible to expand $\pi$ in 
+series, $\pi=4\sum_{n\ge0} \frac{(-1)^n}{2n+1}$, or alternatively to write $\pi=4 \arctan(1)$. 
+These definitions, though correct, are not very fit in the sense that they converge
+too slowly. Euler subsequently gave a series with improved convergence,
+${\pi = 4\Big(4\arctan\big(\tfrac{1}{5}\big)-\arctan\big(\tfrac{1}{70}\big)
++\arctan\big(\tfrac{1}{99}\big)\Big)}$; however, even this approach was quickly 
+out-competed by another. The Legendre identity, 
+$K(\alpha)E(\rev{\alpha})+K(\rev{\alpha})E(\alpha)-K(\rev{\alpha})K(\alpha)=\frac{\pi}{2}$,
+underpins the current best-practice for computing digits of $\pi$, so falls on
+another branch of the evolutionary diagram in the upper portion of Fig. \ref{fig:specimens}.
+
+We choose to describe Legendre's identity as a consequence of differential equations, 
+because the annihilators $\mathcal{A}_E, \mathcal{A}_K,$ and $\mathcal{A}_S$
+are fundamental to its definition and proof. In our notation, it is better to replace
+$E$ and $K$ by $S$ and $T$, which puts Legendre's identity into a more symmetric 
+form,  $S(\alpha)T(\rev{\alpha})+S(\rev{\alpha})T(\alpha)=8\pi$. First, the 
+left-hand side is determined constant,
+$\partial_{\alpha}\big(S(\alpha)T(\rev{\alpha})+S(\rev{\alpha})T(\alpha)\big)=0$.
+This follows from the chain rule with $T(\alpha) = 2\partial_{\alpha}S(\alpha)$,
+$S(\alpha)= 2\alpha(1-\alpha)T(\alpha)$. Second, a limit is evaluated,
+\begin{eqnarray}
+\lim_{\alpha \rightarrow 0} S(\alpha)T(\rev{\alpha})+S(\rev{\alpha})T(\alpha)
+= \lim_{\rev{\alpha} \rightarrow 1} \Big(\rev{\alpha} \times 2 \log(\rev{\alpha}) \Big)  + 4 \times  2\pi = 8\pi,  
+\nonumber
+\end{eqnarray} 
+by canceling the first term to zero, and then by multiplying harmonic frequency
+$2\pi$ times square area $4$. The proof is complete, so we can calculate an 
+approximation of $\pi$, 
+\begin{eqnarray}
+\pi = \frac{8\pi^2}{\underset{^{pw}}{T}(\tfrac{1}{2})\underset{^{pw}}{S}(\tfrac{1}{2})}
+=4 \bigg(\tFo{\frac{1}{2},\frac{1}{2}}{1}{\frac{1}{2}} \tFo{\frac{1}{2},\frac{1}{2}}{2}{\frac{1}{2}} \bigg)^{-1}
+\approx 3.14159265358979323848..., \nonumber
+\end{eqnarray}
+with only the last digit incorrect due to truncation of the series after $60$ terms. 
+Choosing ${\alpha = 1/100}$ improves the approximation to accuracy beyond the fiftieth 
+decimal place. If more precision is necessary, it is usually better to calculate $T(\alpha)$ 
+and $S(\alpha)$ via the arithmetic-geometric mean (Cf. []). 
+
+The lineage of $\pi$ is also a good example for showing a fallacy of the analogy 
+between evolutionary trees. In zoology, it is never the case that a specimen of Coleoptera
+can identically equal a specimen of Lepidoptera, preposterous! Although both orders 
+are arthropods and hexapods, beetles have hard shells and hidden wings, while butterflies 
+are more delicate with obvious, exposed wings. At the finer level of classification by 
+species, the ultimate test is whether or not two individuals can successfully mate. 
+In science, capability to mate is not at all a criterion for identity, nor for correctness. 
+One purpose for mathematical proofs is to show that seemingly different expressions are 
+indeed identical, or \textit{isomorphisms}. Expressions equal to $\pi$ are in isomorphism 
+to one another, and this fact contradicts the basic idea of an evolutionary diagram. 
+In summary, the descent of biological species only diverges, while the descent of ideological 
+species diverges and converges with comparable rates. This is not a theorem, but
+an important observation nonetheless.
+
+When scientific ideas coalesce originally, a new field is born. Experimentation within 
+the field leads to all sorts of novelties: examples, diagnostics, 
+hypotheses, and eventually to theorems and proofs. This is currently happening with the field 
+of \textit{Integral Functions}. Here, Creative Telescoping algorithms are leading the way. 
+We have already seen a few nice examples of historical importance, the well-known elliptic 
+integrals. These are not indicative of the entire range of possibilities. According to Lairez 
+and others, Creative Telescoping applies to any rational integral, after generalizing 
+Ostrogradsky-Hermite reduction to its multivariate form, the Griffiths-Dwork reduction. 
+Development of broadly general methods counts as progress made toward answering 
+big questions such as the Hodge conjecture or the Bombieri-Dwork conjecture\footnote{totaro ref?}.
+Yet general progress comes at the expense of lost accessibility, and the general is not 
+always preferable to the special. For the purposes of widespread and public enlightenment, 
+it is also worthwhile to ask: what are the most interesting examples where the simple 
+Ostrogradsky-Hermite reduction suffices? We will continue to explore this question through
+ a dissertation in mathematical physics.
+
+So far we have not defined the phrase "well-integrable", which appears in the title
+of this article. It is not a precise scientific term, rather a witticism about XVIII 
+century history and language. Contemporary to Euler and Linnaeus lived Johan Sebastian 
+Bach (1685-1750), the famous Baroque composer. Bach's masterwork \textit{Das wohltemperierte 
+Klavier} (1722) is a source for "pr\ae ludia und Fugen durch alle Tone und Semitonia"\footnote{Almost 
+beyond belief, Andr\'{a}s Schiff plays the entire Book I by memory on 
+\href{https://www.youtube.com/watch?v=Ugc5FZsycAw}{youtube}. This is good way
+to experience music that inspired many subsequent fugues, including Hofstatder's  \textit{Godel, Escher, Bach}.}. 
+The German word "wohltemperierte" means well-tempered. It is a diagnostic term describing 
+quality and completeness of a particular musical sample. There is no reason to worry about
+the exact meaning of either term "well-tempered" or "well-integrable". 
+Instead, we give the examples of Fig. \ref{fig:specimens} and Tab. \ref{tab:specimens}, 
+and allow the observer to form his or her own opinions. It is tempting to wonder, do the 
+letters A-G have something to do with key signatures in western music? In good humor, the
+answer is yes, in sober scientific explanation, no. 
+
+Let us briefly explain one difference between musical and scientific indexing schemes. 
+According to the order of sharps, the musical keys have a second arrangement, FCGDAEB, which 
+is more telling than the alphabetic arrangement. In this arrangement, the second "Crystal Clear" 
+key of C is usually thought of as a starting place. Indeed, Bach chooses C Major as they key of 
+the first prelude and fugue in \textit{Das wohltemperierte Klavier}. In our presentation of the 
+few well-integrable geometries, the initial example, chosen as A, is followed immediately 
+by similar examples B,C, and D, subsequently generalized by the examples of E\footnote{The 
+letters A-D were also used by Almkvist and von Straten.  Letter E is the first of Euler's family 
+name. Euler was among the first to study rigid body rotations, leading eventually to IV.E.3.}. 
+Only then is it possible for us to exceed the learning curve and complete skills development 
+by transferring analysis to examples F and G. Unlike the musical system, the letter
+indices are neither finite nor cyclic. There could be an VI.H.1 (not depicted in Fig. \ref{fig:specimens}) 
+for the mysterious geometry \textit{Hotaru mirabilis}. We might have listed a few more 
+in Tab. \ref{tab:specimens}, but simply ran out of room on the page.
+  
+All jokes aside, our chosen examples A-G must belong together. Many identities between them 
+support appropriateness of the arrangement, and relative completeness can be explored through 
+combinatorial analysis. The most obvious similarity is that, according to the diagnostic
+algorithms \texttt{HyperellipticToODE} and \texttt{DihedralToODE},  all derived period
+constraints are second-order ordinary differential equations. Examples A-D are all of 
+the hypergeometric type, while examples E,F, and G are Heun equations, i.e. they have
+exactly four regular singular points. The cohesion is even stronger, because
+annihilators of the respective period functions all have the form 
+$\mathcal{A}_T=a_0(\alpha)+\big(\partial_{\alpha}a_2(\alpha)\big)\partial_{\alpha}+a_2(\alpha)\partial_{\alpha}^2$,
+with just two polynomial coefficients $a_0(\alpha)$ and $a_2(\alpha)$. This allows factoring
+of the corresponding ODE, as in Tab. \ref{tab:specimens}. Previously, Fritz Beukers and Don
+Zagier explored this form in connection with Ap\'{e}ry's proof of the irrationality of $\zeta(3)$. 
+Zagier also found the set A-D as complete, but the limited scope of his massive search precluded 
+the possibility of finding any of the subsequent examples from Tab. \ref{tab:specimens}. 
+All of the geometries listed involve "integrality miracles", most notably 
+\textit{Hotaru mirabilis}\footnote{Nomenclature: This east-meets-west name commemorates 
+discovery "by the light of the fireflies", and that the period ODE begets integrality 
+miracles around all four finite-valued, regular singular points.}.  
+
+Yet we must doubt our own bias, and act as potential naysayers to ourselves by 
+asking: Why the results of Fig. \ref{fig:specimens} and Tab. \ref{tab:specimens}? Granted, some 
+importance derives from relation to leading mathematical theories, such as the KZ-Period theory, 
+Creative Telescoping, Cohomology, etc. These theories are only part of the picture, high and far
+away from the concerns of most scientists. Ultimately our answer why derives from relation to 
+leading physical theories, where integral periods are also laboratory observables. This is true 
+throughout Hamiltonian classical mechanics, and more specifically in the subsequent theory
+of semi-classical quantum mechanics. Up until the present analysis it has not been very well
+understood that it is possible to calculate a semi-classical level spectrum by root-solving the
+solution to an ODE. This is a central "theorem" that will arise out of the subsequent exposition. 
+By developing the examples E, F, and G, we can improve upon the rigor of the original analysis 
+by Harter (cf. [] [] []), and set up the theory of Rotational Energy Surfaces to grow in 
+new directions parallel to those of pure mathematics. This will require a lot of hard work 
+and effort on the readers part, but the payoff is immense. Not only are the results useful
+in physics calculations, they are also beautiful in their own right!
+
+This prelude already gives detailed analysis of I.A.1, and in the next article, we will start 
+the development of Hamiltonian mechanics in order to prove I.A.2 and I.A.3 equivalent to I.A.1. 
+The development of Hamiltonian mechanics continues with an analysis of examples II.B.1, II.C.1, 
+and II.D.1, which finds that the periods of each obey an analog of the Legendre identity associated
+to I.A.1. We will also show a remarkable set of identities, that the period constraints of II.B.2, 
+II.C.2 and II.D.2 relate to those of their predecessors by a change of variables 
+$\alpha \rightarrow \alpha^2$. Before verifying V.B.3 isoperiodic to II.B.2, it is pertinent to
+introduce the E examples, where another amazing isoperiodicity waits to be found. Under transformation 
+$\epsilon \rightarrow \frac{c-a}{c-b}$, the period constraint of examples III.E.1 and III.E.2 transforms 
+to that of IV.E.3. Example IV.E.3 is the first case of sphere curves rather than plane curves, so 
+we will have to explain exactly how sphere curves relate rigid body or semi-rigid body rotation. More 
+symmetrical sphere curves are given in examples V.F.1 and V.G.1. These geometries should 
+be easy to master once the progression from A-E is complete. It will take more time and 
+effort. At the end of it, with time expiring, we will have to sit and watch the small mystery of 
+\textit{Hotaru mirabilis} drift away into the darkness around. Having even mentioned the 
+fireflies\textemdash actually they are usually beetles of the family Lampyridae\textemdash we 
+are already falling behind schedule! Let the voices of mathematics and physics intertwine. 
+Without further ado... 
+
+  
+\bibliographystyle{unsrtnat}
+\bibliography{biblio}
+
+\end{document}
