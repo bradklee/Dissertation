@@ -51,7 +51,7 @@
 \date{\today}
 
 \begin{abstract}
-Quite often in physics we encounter a question about nature, which can only be answered by taking 
+Quite often in physics we encounter a question about nature, which needs to be answered by taking 
 an integral. A formalism for writing such integrals does not guarantee quality answers nor appreciable 
 progress. Difficulties abound, especially when working with function-valued integrals, whose integrands 
 involve one or more auxiliary parameters. Yet such parameters allow differentiation under the integral 
@@ -74,9 +74,9 @@ in data analysis, rather by accomplishing superlative mastery of the
 one that placed arithmetic, geometry, astronomy, and music on even footing.
 As continental Europe transitioned into the brutal thirty-years war (1618-1648), 
 Kepler published his brilliant assay in two parts, first 
-in \textit{Astronomia Nova} (1609) and subsequently in \textit{Harmonices Mundi} 
-(1619). Despite hundreds of years 
-elapsed, Kepler's three laws are still remembered today\footnote{These
+in \href{https://archive.org/details/Astronomianovaa00Kepl}{\textit{Astronomia Nova}} (1609) 
+and subsequently in \href{https://archive.org/details/ioanniskepplerih00kepl/mode/2up}{\textit{Harmonices Mundi}} 
+(1619). Despite hundreds of years elapsed, Kepler's three laws are still remembered today\footnote{These
 are quoted verbatim from Wikipedia, see:
 \href{https://en.wikipedia.org/wiki/Kepler's_laws_of_planetary_motion
 }{"Kepler's Laws of planetary motion"}.}:
@@ -94,14 +94,15 @@ analogy. More development was both desirable and necessary, so Kepler's laws gav
 the \textit{Kepler Problem}. It asks for a derivation of the three laws from a more 
 fundamental physical theory, and subsequently for an adherent solution of the time-variant 
 planetary equations of motion. This task can not be accomplished by harmony alone. It requires 
-another paradigm change, which first came about during the European enlightenment\footnote{Do not confuse 
-European and Asian enlightenment! At the very least, they happened at different times, 
+another paradigm change, which first came about during the European enlightenment\footnote{Do 
+not confuse European and Asian enlightenment! At the very least, they happened at different times, 
 in different geographical regions. (When considering whole and indivisible spacetime, 
-confuse freely away!)}.
+confuse it all!)}.
 
-With the publication of \textit{Principia Mathematica} (1687), Isaac Newton (1642-1727)
-made a significant contribution toward the initiation of European Enlightenment.
-In this effort to defeat the specter of irrational religiosity, 
+With the publication of 
+\href{https://archive.org/details/philosophiaenat00newt}{\textit{Philosophi\ae \;Naturalis Principia Mathematica}} 
+(1687), Isaac Newton (1642-1727) made a significant contribution toward the initiation 
+of European Enlightenment. In this effort to defeat the specter of irrational religiosity, 
 Newton's work was like a clarion, calling all subsequent generations to the front lines
 of scientific research. Newton's three laws are also remembered to this day:
 \begin{itemize}
@@ -134,7 +135,7 @@ In some parts of the universe, they completely fail, e.g. black holes.}. Accepti
 \textbf{I}, \textbf{II}, \textbf{III}, and \textbf{G} as all valid and applicable,
 Kepler's laws can be proven mathematically using only the geometrical techniques of 
 Newton's day and age. Richard Feynman (1918-1988) took this as a challenge when 
-he gave a lecture on planetary motion, March 13, 1964. The lecture stands
+he gave a lecture on planetary motion, March 13, 1964 \cite{Feynman1964}. The lecture stands
 on its own as an active and imaginative contribution to the history of science, 
 and it is quite different from anything that we would readily recognize as a 
 typical solution to the Kepler problem. 
@@ -182,6 +183,8 @@ typical solution to the Kepler problem.
  \put (90,7){  $\frac{\text{infected}}{\text{death}}$ }
  \put (72,3){ \scriptsize source: 
  \href{https://twitter.com/ColinTheMathmo/status/1238136811857346560}{twitter: @ColinTheMathmo } }
+ \put (72,0.5){ \scriptsize see also: 
+ \href{https://demonstrations.wolfram.com/SummerInsectPandemicsInTheUnitedStates/}{Insect Pandemics in U.S.} }
 
 
 \end{overpic}
@@ -200,7 +203,7 @@ The article \href{https://en.wikipedia.org/wiki/History_of_the_function_concept}
 of the function concept"} \textit{at least} needs a section on pre-history, starting with 
 compass and straightedge, the \underline{functional implements} of antiquity. Also,
 don't forget to read primary source documents. Hundreds of Euler's works are available online
-through the Euler archive[cite], see \href{http://eulerarchive.maa.org/pages/E101.html}{E101}
+through the Euler archive\cite{EULER2019}, see \href{http://eulerarchive.maa.org/pages/E101.html}{E101}
 Ch. 7-8 for early definitions of $e^x$, $\cos(x)$, and $\sin(x)$ and more. }.
 Most noteably, the functions $e^x$, $\cos(x)$, and $\sin(x)$, were written by 
 Euler in series expansion, 
@@ -278,7 +281,7 @@ elliptic integrals are easy to define,
 \end{eqnarray}
 However nice it may be to get rid of Euler's "$etc.$", the simple hypergeometric 
 solution is not a unique or final definition. Sections IV and V of this work 
-will explore alternative definitions of $E$ and $K$, targeted toward precise 
+will explore alternative instantiations of $E$ and $K$, targeted toward precise 
 and efficient calculation.
 
 Reversing the order of presentation, we mean to portray the hypergeometric 
@@ -287,8 +290,8 @@ solution\footnote{In fact, the second-order H.D.E. must
 have a solution-space with two degrees of freedom.}. This reversal raises 
 a question about procedure: if $\,_2F_1$ is to follow from $\mathcal{A}_F$, 
 what shall precede $\mathcal{A}_F$? For special values $(a,b,c)$ it is 
-possible that $\mathcal{A}_F$ has a natural geometric origin. This is the 
-case for functions $E$ and $K$, which may also be written as,
+possible that $\mathcal{A}_F$ has a natural geometric origin\cite{KZ2001}. 
+This is the case for functions $E$ and $K$, which may also be written as,
 \begin{eqnarray}
  E(z) = \int_0^{\pi/2} \sqrt{1-z \sin(\phi)^2} \; d\phi
 \;\;\;\;\;\; \text{and} \;\;\;\;\;\;
@@ -300,8 +303,8 @@ However, Euler did not have a rigorous procedure for analyzing partial
 derivatives of the integrands, so he could not derive the corresponding 
 cases of $\mathcal{A}_F$ without resorting to series expansion methods.
 
-In present times, the related fields of Creative Telescoping and Holonomic Functions 
-can add rigor where it may be missing\footnote{For broad summaries, see xxx.}. 
+In present times, the related fields of Periods, Creative Telescoping, and Holonomic Functions 
+can add rigor where it may be missing\footnote{For background and overview, see references \cite{STANLEY1980,AZ1990,KZ2001,KP2011,KOUTSCHAN2013,BOSTAN2017}.}. 
 Algorithms from these theories help to analyze the sort of integrals typified by 
 elliptic $E$ and $K$. For simplicity sake, let us 
 take the one-dimensional case, where  $I(\alpha)=\oint_{\mathcal{X}(\alpha)}\frac{dI}{dt}dt$
@@ -376,8 +379,7 @@ In Cartesian coordinates, the trigonometric area integral,\FloatBarrier\noindent
 A_{\mathcal{E}}^{x}(P_1) = \int_{P_0}^{P_1} dA_{\mathcal{E}}^{x} 
 = \int_{x_1}^{1-e} y\;dx = \int_{x_1}^{1-e}\sqrt{(1-e^2)(1-(x+e)^2)} \;dx, \nonumber
 \end{eqnarray}
-has a simple and well-known\footnote{Mathematica produces this evaluation 
-automatically and within a few seconds.} closed-form,
+has a simple and well-known closed-form,
 \begin{eqnarray}
 A_{\mathcal{E}}^{x}(P_1) = \frac{1}{2} \Big(\sqrt{1-e^2} \arccos(e+x_1) - (e+x_1)y_1 \Big). \nonumber
 \end{eqnarray}
@@ -389,8 +391,10 @@ A_{\mathcal{E}}^{\theta}(P_1)= \int_{P_0}^{P_1}dA_{\mathcal{E}}^{\theta}
 \frac{1}{2} \int_{0}^{\theta_1} \Big( \frac{1-e^2}{1+e\cos(\theta)}\Big)^2 d\theta, \nonumber
 \end{eqnarray}
 in polar coordinates where $x = r\cos(\theta)$ and $y=r\sin(\theta)$. The integrand of 
-$A_{\mathcal{E}}^{\theta}(P_1)$ is prohibitively complicated\footnote{Mathematica takes a 
-long time thinking, and returns an over-complicated answer.}. From Fig. \ref{fig:EllipseCoords}, 
+$A_{\mathcal{E}}^{\theta}(P_1)$ is prohibitively complicated\footnote{
+Mathematica  automatically evaluates $A_{\mathcal{E}}^{x}(P_1)$ within a few seconds, 
+but takes a long time thinking on $A_{\mathcal{E}}^{\theta}(P_1)$, and returns an 
+over-complicated answer\cite{MMA2020}.}. From Fig. \ref{fig:EllipseCoords}, 
 sectorial area equals to Cartesian area plus or minus the area of a triangle with base 
 length $|x_1|$ and height $|y_1|$, 
 $A_{\mathcal{E}}^{\theta}(P_1) = A_{\mathcal{E}}^{x}(P_1) + \tfrac{1}{2} x_1 y_1 \nonumber$ 
@@ -491,7 +495,7 @@ with a sine wave, \FloatBarrier \noindent
  : y \in \mathbb{R} \Bigg\}, \nonumber 
 \end{eqnarray}
 traveling at constant velocity $v_y \propto dy/d\Theta$ along the $y$-axis, as in Fig. \ref{fig:Intersect}
-(for more details, see ref. []).
+(for more details, see ref. \cite{FRANTZ2006}).
 This geometric fact, though neat, is not entirely satisfying from a physicist's 
 point of view.
 
@@ -527,11 +531,12 @@ $\{P(\Theta),P(\widetilde{\Theta})\}= \mathcal{W}(\Theta) \cap \mathcal{E} $.
 \end{center}
 \end{wrapfigure}
 
-Classical mechanics determines planetary orbits according to a gravitational force field, which 
-sums over contributions from all masses within a particular region of space. As the masses
-move through space, generally the gravitational force field changes with time. However, when 
-one body dominates the gravitational field we may assume a time-independent force field 
-where the dominant body has zero velocity. In the Kepler problem, a star of mass $M$ 
+Classical mechanics determines planetary orbits according to a gravitational force field, 
+which sums over contributions from all masses within a particular region of space. 
+As the masses move through space, generally the gravitational force field 
+changes with time. However, when one body dominates the gravitational field we may assume a 
+time-independent force field where the dominant body has zero velocity \cite{LL1960,HARTER2019}. 
+In the Kepler problem, a star of mass $M$ 
 generates a fixed gravitational field, which determines the classical orbit of a planet 
 whose mass $m$ satisfies $m\ll M$, as in Fig. \ref{fig:GravityOrbit}. We choose a 
 system of cylindrical coordinates which places the star at the origin, and then we can 
@@ -654,7 +659,7 @@ A first approximation $\vartheta_1$ satisfies the boundary conditions above, and
 about the same accuracy as either \textit{ad hoc} approximation. Iteration to
 higher values of $i$ converges the estimate $\vartheta_i(\Theta)$ toward it's actual value, 
 such that $\Theta-(\vartheta_i-e \sin(\vartheta_i))$ approaches zero, but only at the cost of 
-increased complexity for the functions $\vartheta_i(\Theta)$. Other references such as [cite] discuss
+increased complexity for the functions $\vartheta_i(\Theta)$. Other references such as \cite{MEEUS1991} discuss
 convergence and error analysis, here we are content simply to use function 
 $\vartheta_4(\Theta)$ and plot a few spacetime trajectories in Fig. \ref{fig:spacetime}.  
 \FloatBarrier \noindent
@@ -733,8 +738,8 @@ $\Phi = \big(\frac{dl}{d\varphi}\big)^2 = 1-\alpha \sin(\varphi)^2$,
 \end{eqnarray}
 after decomposing to partial fractions\footnote{By inspection, 
 $\partial_{\alpha}^n dl= -(\tfrac{-1}{2\alpha})^n \big( (2n-3)!! \big)
-\sum_{m=0}^n(-1)^m\binom{n}{m} \Phi^{1/2-m}$, see also OEIS: \href{https://oeis.org/A330797}{A330797}.}. 
-Each term is of the 
+\sum_{m=0}^n(-1)^m\binom{n}{m} \Phi^{1/2-m}$, see also OEIS 
+\cite{SLOANE2019}: \href{https://oeis.org/A330797}{A330797}.}. Each term is of the 
 form $w\;\Phi^{n/2}$, with odd $n$ and $w$ a ratio of polynomials in variable $\alpha$. 
 For every such integrand, the technique of Hermite reduction produces a canonical least 
 form by the addition of exact $\varphi$-differentials.  With $u$, $v$, and $w$ all undetermined 
@@ -966,11 +971,12 @@ measures a family of elliptic curves.
 Another worthwhile geometric problem asks for the total area $S(\alpha)$ within a 
 deformable, closed elliptic curve $\mathcal{C}(\alpha)$. An answer to this problem 
 contributes a key fact to the construction of elliptic functions, or sometimes, even 
-to an exact solution of the simple pendulum's motion [cite]. Yet various acceptable 
+to an exact solution of the simple pendulum's motion \cite{KLEE2020Pendulum}. Yet various acceptable 
 choices of $\mathcal{C}(\alpha)$ are not exactly equivalent from a metrical perspective. 
 In particular, enclosed area $S(\alpha)$ depends explicitly on the shape of curve 
 $\mathcal{C}(\alpha)$. Pursuant to finding the integral function $K(\alpha)$,
-we will use a variant of Edwards's normal form and select square-symmetric curves,
+we will use a variant of Edwards's normal form (Cf. \cite{EDWARDS2007}) and 
+select square-symmetric curves,
 \begin{eqnarray}
 \mathcal{C}(\alpha) = \Big\{(p,q) : \alpha = p^2 + q^2 - p^2 q^2 \Big\}, \nonumber
 \end{eqnarray}
@@ -1174,8 +1180,8 @@ d\theta\big(x^2 \cos(\theta)^2+y^2 \sin(\theta)^2\big)^{-1/2}$. },
 $\text{agm}(a_0,b_0)=\lim_{n\rightarrow \infty}a_n =\lim_{n\rightarrow \infty}b_n$,
 is a recursive function of two variables, which rapidly converges on a number between 
 successive arithmetic and geometric means, $a_{n+1}=\tfrac{1}{2}(a_{n}+b_{n})$ and 
-$b_{n+1}=\sqrt{a_{n} b_{n}}$ respectively. Elsewhere it is proven that 
-$T(\alpha)\;\text{agm}(1+\sqrt{\alpha},1-\sqrt{\alpha})-2\pi=0$ (Ref. []). This 
+$b_{n+1}=\sqrt{a_{n} b_{n}}$ respectively. Elsewhere in \cite{AB2016}, it is proven that 
+$T(\alpha)\;\text{agm}(1+\sqrt{\alpha},1-\sqrt{\alpha})-2\pi=0$. This 
 identity defines a numerical reference function $\underset{^{agm}}{T}(\alpha)$, with 
 convergence dependent upon recursion depth $M=n_{max}$. As a first test, let us 
 calculate for a difficult value $\alpha=1/2$ that,
@@ -1240,7 +1246,8 @@ $3$ & $0.9212998367788911\ldots$   & $0.92011\ldots$ & $0.129\%$
 In semi-classical quantum mechanics, another problem asks for an estimate of 
 quantum pendulum energy eigenvalues. The period function of a simple pendulum is $T(\alpha)$,
 and its action function is the corresponding $S(\alpha)$. Eigenvalues $\alpha_n$ are 
-found by solving a qunatization condition\footnote{For more explanation, see: xxx.} 
+found by solving a qunatization condition\footnote{For more explanation, 
+see \cite{CHILD1991} Ch. 1-3.} 
 such as ${S(\alpha_n)=\frac{1}{2}(2n+1)}$, with $n=0,1,2,3$. To find the 
 "quantum values" ${\alpha_n = S^{-1}\big(\frac{1}{2}(2n+1)\big)}$, an 
 inverse problem needs to be solved. Function $S^{-1}(s)$ can be found by 
@@ -1253,12 +1260,12 @@ blue curves of Fig. \ref{fig:EllipticCurves}.
 
 Alternatively, constraint $\alpha=p^2+q^2-p^2 q^2$ suggests the form 
 of a quantum mechanical Hamiltonian matrix $H$, which may be written by exchanging 
-coordinate variables $p$ and $q$ for their corresponding matrix representations
-\footnote{see also: xxx.}. 
-Due to non-commutation of $p$ and $q$ matrices, quantization is a non-unique 
-procedure. Consequently, there are many different Hamiltonian matrices, whose 
-eigenvalues overlap $S(\alpha)$ within a similar range of error. We have 
-chosen, somewhat arbitrarily, the matrix $H$ with elements:
+coordinate variables $p$ and $q$ for their corresponding matrix 
+representations\footnote{Any textbook on Quantum Mechanics explains how to do so, 
+see e.g. \cite{GREINER1994} Ch. 4,7, \& 11.}. Due to non-commutation of $p$ and $q$ matrices, 
+quantization is a non-unique procedure. Consequently, there are many different 
+Hamiltonian matrices, whose eigenvalues overlap $S(\alpha)$ within a similar range 
+of error. We have chosen, somewhat arbitrarily, the matrix $H$ with elements:
 \begin{eqnarray}
 h_{i,j}= h_{j,i}= \begin{cases} 
       \frac{1 - 2 i - 2 i^2 + 40 (2 i + 1) \pi}{ 400 \pi^2} & i=j \\
@@ -1481,13 +1488,14 @@ During XVIII century, Latin was a \textit{lingua franca} between scientific rese
 throughout Europe. According to the Euler archive, Euler wrote at least nine articles 
 under titles starting with the word \textit{specimen}, two of which are immediate 
 to the analysis above. Around the same time, Carl Linnaeus (1707-1788) began to publish
-\textit{Systema Natur\ae} (1735-1758), one of the founding documents of the modern 
+\href{https://archive.org/details/CaroliLinnaeiSy00LinnA}{\textit{Systema Natur\ae}}
+(1735-1758), one of the founding documents of the modern 
 taxonomic system in biology. Presently, the word specimen is more familiar in the 
 Linnaen context, where it usually refers to a particular plant or animal, 
-as collected from the wild. In mathematics, translation of specimen to "example" 
-is now a ubiquitous preference, but we hope that the imperfect analogy between math 
-and biology will not be entirely forgotten, and that collection and analysis of 
-specimens will continue to contribute an important part to scientific research. 
+as collected from the wild. In other sciences, translation of specimen to "example" 
+is now a ubiquitous preference. We hope that the imperfect analogy will not be 
+entirely forgotten, and that collection and analysis of specimens will 
+continue to contribute an important part to scientific research. 
 
 
 \begin{figure}[p]
@@ -1511,7 +1519,7 @@ specimens will continue to contribute an important part to scientific research.
 
  \put (38,33) {\scriptsize Integrals, spp. ellipse area, circle arclength. }
  \put (43,26.75) {\scriptsize Series Expansions, sp. $4\arctan(1)$.  }
- \put (52,21) {\scriptsize sp. Euler's $\arctan$ identity.  }
+ \put (52,21) {\scriptsize spp. Euler's $\arctan$ identities.  }
  \put (50,15.5) {\scriptsize ODE's, sp. Legendre's identity.  }
  \put (51,8) { Algebraic Geometry }
  \put (26,38.75) { Physical Science  }
@@ -1658,8 +1666,10 @@ See also Appendix xxx.
  
 During antiquity, the ratio of a circle's circumference to it's diameter, the irrational number 
 $\pi$, caused much frustration and eluded reasonable description. Finally after centuries of Greek 
-thought, Circa 250 BC, the analysis of Archimedes's \textit{Measurement of a circle} determined 
-that $\frac{223}{71}< \pi <\frac{22}{7}$. 
+thought, Circa 250 BC, the analysis of Archimedes's 
+\textit{Measurement of a circle}\footnote{The original text is now nonextant, but a retrospective
+is given in \cite{AH2001} Ch. 13.} 
+determined that $\frac{223}{71}< \pi <\frac{22}{7}$. 
 This error bounded result can be refined to higher precision by choosing circumscribing 
 polygons with more than 96 sides; however, the task of doing so is prohibitively complicated. 
 By the time of Newton, Archimedes's technique eventually evolved to become arclength 
@@ -1667,10 +1677,12 @@ integration, so can be considered an ancestor to the more familiar ${\pi = \int_
 In the first generation of calculus, it was also possible to expand $\pi$ in 
 series, $\pi=4\sum_{n\ge0} \frac{(-1)^n}{2n+1}$, or alternatively to write $\pi=4 \arctan(1)$. 
 These definitions, though correct, are not very fit in the sense that they converge
-too slowly. Euler subsequently gave a series with improved convergence,
-${\pi = 4\Big(4\arctan\big(\tfrac{1}{5}\big)-\arctan\big(\tfrac{1}{70}\big)
-+\arctan\big(\tfrac{1}{99}\big)\Big)}$; however, even this approach was quickly 
-out-competed by another. The Legendre identity, 
+too slowly. Euler, in \href{http://eulerarchive.maa.org/pages/E074.html}{E74}, subsequently 
+gave numerous series approximations with improved convergence\footnote{Ed Sandifer gives 
+a retrospective in his column,  
+\href{http://eulerarchive.maa.org/hedi/HEDI-2009-02.pdf}{\textit{How Euler Did It}, Feb. 2009}. }, 
+e.g. ${\pi =16\arctan\big(\tfrac{1}{5}\big)-4\arctan\big(\tfrac{1}{239}\big)}$; however, 
+even this approach was quickly out-competed by another. The Legendre identity, 
 $K(\alpha)E(\rev{\alpha})+K(\rev{\alpha})E(\alpha)-K(\rev{\alpha})K(\alpha)=\frac{\pi}{2}$,
 underpins the current best-practice for computing digits of $\pi$, so falls on
 another branch of the evolutionary diagram in the upper portion of Fig. \ref{fig:specimens}.
@@ -1700,7 +1712,8 @@ approximation of $\pi$,
 with only the last digit incorrect due to truncation of the series after $60$ terms. 
 Choosing ${\alpha = 1/100}$ improves the approximation to accuracy beyond the fiftieth 
 decimal place. If more precision is necessary, it is usually better to calculate $T(\alpha)$ 
-and $S(\alpha)$ via the arithmetic-geometric mean (Cf. []). 
+and $S(\alpha)$ via the arithmetic-geometric mean, the Brent-Salamin algorithm, or similar 
+\cite{AH2001}. 
 
 The lineage of $\pi$ is also a good example for showing a fallacy of the analogy 
 between evolutionary trees. In zoology, it is never the case that a specimen of Coleoptera
@@ -1723,11 +1736,12 @@ of \textit{Integral Functions}. Here, Creative Telescoping algorithms are leadin
 We have already seen a few nice examples of historical importance, the well-known elliptic 
 integrals. These are not indicative of the entire range of possibilities. According to Lairez 
 and others, Creative Telescoping applies to any rational integral, after generalizing 
-Ostrogradsky-Hermite reduction to its multivariate form, the Griffiths-Dwork reduction. 
-Development of broadly general methods counts as progress made toward answering 
-big questions such as the Hodge conjecture or the Bombieri-Dwork conjecture\footnote{totaro ref?}.
+Ostrogradsky-Hermite reduction to its multivariate form, the Griffiths-Dwork reduction
+\cite{LAIREZ2016}. Development of broadly general methods counts as progress made toward answering 
+big questions such as the Hodge conjecture or the Bombieri-Dwork conjecture\footnote{These
+questions are somewhat above our pay grade, but interesting nonetheless, see also \cite{TOTARO2007}.}.
 Yet general progress comes at the expense of lost accessibility, and the general is not 
-always preferable to the special. For the purposes of widespread and public enlightenment, 
+always preferable to the special. For the purposes of widespread consumption and public enlightenment, 
 it is also worthwhile to ask: what are the most interesting examples where the simple 
 Ostrogradsky-Hermite reduction suffices? We will continue to explore this question through
  a dissertation in mathematical physics.
@@ -1744,9 +1758,9 @@ The German word "wohltemperierte" means well-tempered. It is a diagnostic term d
 quality and completeness of a particular musical sample. There is no reason to worry about
 the exact meaning of either term "well-tempered" or "well-integrable". 
 Instead, we give the examples of Fig. \ref{fig:specimens} and Tab. \ref{tab:specimens}, 
-and allow the observer to form his or her own opinions. It is tempting to wonder, do the 
+and allow the observer to form his or her own opinions. Isn't it easy to wonder if the 
 letters A-G have something to do with key signatures in western music? In good humor, the
-answer is yes, in sober scientific explanation, no. 
+answer could be yes, in sober scientific explanation, no. 
 
 Let us briefly explain one difference between musical and scientific indexing schemes. 
 According to the order of sharps, the musical keys have a second arrangement, FCGDAEB, which 
@@ -1755,13 +1769,14 @@ key of C is usually thought of as a starting place. Indeed, Bach chooses C Major
 the first prelude and fugue in \textit{Das wohltemperierte Klavier}. In our presentation of the 
 few well-integrable geometries, the initial example, chosen as A, is followed immediately 
 by similar examples B,C, and D, subsequently generalized by the examples of E\footnote{The 
-letters A-D were also used by Almkvist and von Straten.  Letter E is the first of Euler's family 
-name. Euler was among the first to study rigid body rotations, leading eventually to IV.E.3.}. 
-Only then is it possible for us to exceed the learning curve and complete skills development 
-by transferring analysis to examples F and G. Unlike the musical system, the letter
-indices are neither finite nor cyclic. There could be an VI.H.1 (not depicted in Fig. \ref{fig:specimens}) 
-for the mysterious geometry \textit{Hotaru mirabilis}. We might have listed a few more 
-in Tab. \ref{tab:specimens}, but simply ran out of room on the page.
+letters A-D were originally used by Almkvist and Zudilin, Cf. \cite{AZ2004} p. 20.  
+Letter E is the first of Euler's family name. Euler was among the first to study rigid body 
+rotations, leading eventually to IV.E.3.}. Only then is it possible for us to exceed the 
+learning curve and complete skills development by transferring analysis to examples F and G. 
+Unlike the musical system, the letter indices are neither finite nor cyclic. There could 
+have been an VI.H.1 (not depicted in Fig. \ref{fig:specimens}) for the mysterious 
+geometry \textit{Hotaru mirabilis}. After that, we might even have listed a few more in 
+Tab. \ref{tab:specimens}, but simply ran out of room on the page.
   
 All jokes aside, our chosen examples A-G must belong together. Many identities between them 
 support appropriateness of the arrangement, and relative completeness can be explored through 
@@ -1774,8 +1789,8 @@ annihilators of the respective period functions all have the form
 $\mathcal{A}_T=a_0(\alpha)+\big(\partial_{\alpha}a_2(\alpha)\big)\partial_{\alpha}+a_2(\alpha)\partial_{\alpha}^2$,
 with just two polynomial coefficients $a_0(\alpha)$ and $a_2(\alpha)$. This allows factoring
 of the corresponding ODE, as in Tab. \ref{tab:specimens}. Previously, Fritz Beukers and Don
-Zagier explored this form in connection with Ap\'{e}ry's proof of the irrationality of $\zeta(3)$. 
-Zagier also found the set A-D as complete, but the limited scope of his massive search precluded 
+Zagier explored this form in connection with Ap\'{e}ry's proof of the irrationality of $\zeta(3)$
+\cite{ZAGIER2009}. Zagier also found the set A-D as complete, but the finite scope of his massive search precluded 
 the possibility of finding any of the subsequent examples from Tab. \ref{tab:specimens}. 
 All of the geometries listed involve "integrality miracles", most notably 
 \textit{Hotaru mirabilis}\footnote{Nomenclature: This east-meets-west name commemorates 
@@ -1784,19 +1799,19 @@ miracles around all four finite-valued, regular singular points.}.
 
 Yet we must doubt our own bias, and act as potential naysayers to ourselves by 
 asking: Why the results of Fig. \ref{fig:specimens} and Tab. \ref{tab:specimens}? Granted, some 
-importance derives from relation to leading mathematical theories, such as the KZ-Period theory, 
-Creative Telescoping, Cohomology, etc. These theories are only part of the picture, high and far
-away from the concerns of most scientists. Ultimately our answer why derives from relation to 
-leading physical theories, where integral periods are also laboratory observables. This is true 
-throughout Hamiltonian classical mechanics, and more specifically in the subsequent theory
+importance derives from relation to leading mathematical theories, such as the KZ-Periods, Creative 
+Telescoping, Holonomic functions, lattice walk Combinatorics, Cohomology, etc. These theories are 
+only part of the picture, high and far away from the concerns of most scientists. Ultimately our answer why 
+derives from leading physical theories, where integral periods are also laboratory observables. 
+This is true throughout classical Hamiltonian mechanics, and more specifically in the subsequent theory
 of semi-classical quantum mechanics. Up until the present analysis it has not been very well
 understood that it is possible to calculate a semi-classical level spectrum by root-solving the
 solution to an ODE. This is a central "theorem" that will arise out of the subsequent exposition. 
 By developing the examples E, F, and G, we can improve upon the rigor of the original analysis 
-by Harter (cf. [] [] []), and set up the theory of Rotational Energy Surfaces to grow in 
-new directions parallel to those of pure mathematics. This will require a lot of hard work 
-and effort on the readers part, but the payoff is immense. Not only are the results useful
-in physics calculations, they are also beautiful in their own right!
+by Harter (cf. \cite{HP1984,HW1989,HARTER2006}), and set up the theory of Rotational Energy 
+Surfaces to grow in new directions parallel to those of pure mathematics. This will require 
+a lot of hard work and effort on the readers part, but the payoff is immense. Not only 
+are the results useful in physics calculations, they are also beautiful in their own right!
 
 This prelude already gives detailed analysis of I.A.1, and in the next article, we will start 
 the development of Hamiltonian mechanics in order to prove I.A.2 and I.A.3 equivalent to I.A.1. 
@@ -1810,14 +1825,12 @@ $\epsilon \rightarrow \frac{c-a}{c-b}$, the period constraint of examples III.E.
 to that of IV.E.3. Example IV.E.3 is the first case of sphere curves rather than plane curves, so 
 we will have to explain exactly how sphere curves relate rigid body or semi-rigid body rotation. More 
 symmetrical sphere curves are given in examples V.F.1 and V.G.1. These geometries should 
-be easy to master once the progression from A-E is complete. It will take more time and 
-effort. At the end of it, with time expiring, we will have to sit and watch the small mystery of 
-\textit{Hotaru mirabilis} drift away into the darkness around. Having even mentioned the 
-fireflies\textemdash actually they are usually beetles of the family Lampyridae\textemdash we 
-are already falling behind schedule! Let the voices of mathematics and physics intertwine. 
-Without further ado... 
+be easy to master once the progression from A-E is complete. Then we can sit and watch the small 
+mystery of \textit{Hotaru mirabilis} flash and blink and drift away into the darkness around.
+Without further ado, let the voices of science intertwine\ldots
 
-  
+\pagebreak  
+ 
 \bibliographystyle{unsrtnat}
 \bibliography{biblio}
 
