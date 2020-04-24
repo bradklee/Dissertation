@@ -827,7 +827,7 @@ Although the preceding derivation looks formidable, it is actually an
 easy, $n=2$ case of a general $n$-dimensional 
 method. Such calculations are not usually carried out by hand. In practice, a 
 computer algebra system such as Mathematica routinely automates the details 
-(Cf. Appendix). If there is any doubt about the veracity of an algorithmic 
+(Cf. Appendix A). If there is any doubt about the veracity of an algorithmic 
 derivation, the annihilating relation can be checked again on the output. 
 
 After centuries of development, analysis and solution of $\mathcal{A}_E$ 
@@ -1660,7 +1660,7 @@ $-\partial_{\alpha}\big(36 \;\alpha (1-\alpha) (7 - 27 \; \alpha) (5 - 54 \; \al
 Diagnostic Key: \texttt{Q}$=$\texttt{QuarticToODE},
 \texttt{H}$=$\texttt{HyperellipticToODE}, 
 \texttt{D}$=$\texttt{DihedralToODE}. 
-See also Appendix xxx.
+See also Appendix A.
 \end{center}
 \end{sidewaystable} 
  
@@ -1753,7 +1753,7 @@ Bach (1685-1750), the famous Baroque composer. Bach's masterwork \textit{Das woh
 Klavier} (1722) is a source for "pr\ae ludia und Fugen durch alle Tone und Semitonia"\footnote{Almost 
 beyond belief, Andr\'{a}s Schiff plays the entire Book I by memory on 
 \href{https://www.youtube.com/watch?v=Ugc5FZsycAw}{youtube}. This is good way
-to experience music that inspired many subsequent fugues, including Hofstatder's  \textit{Godel, Escher, Bach}.}. 
+to experience music that inspired many subsequent works, including Hofstatder's  \textit{Godel, Escher, Bach}.}. 
 The German word "wohltemperierte" means well-tempered. It is a diagnostic term describing 
 quality and completeness of a particular musical sample. There is no reason to worry about
 the exact meaning of either term "well-tempered" or "well-integrable". 
@@ -1793,7 +1793,7 @@ Zagier explored this form in connection with Ap\'{e}ry's proof of the irrational
 \cite{ZAGIER2009}. Zagier also found the set A-D as complete, but the finite scope of his massive search precluded 
 the possibility of finding any of the subsequent examples from Tab. \ref{tab:specimens}. 
 All of the geometries listed involve "integrality miracles", most notably 
-\textit{Hotaru mirabilis}\footnote{Nomenclature: This east-meets-west name commemorates 
+\textit{Hotaru mirabilis}\footnote{This east-meets-west name commemorates 
 discovery "by the light of the fireflies", and that the period ODE begets integrality 
 miracles around all four finite-valued, regular singular points.}.  
 
@@ -1804,34 +1804,90 @@ Telescoping, Holonomic functions, lattice walk Combinatorics, Cohomology, etc. T
 only part of the picture, high and far away from the concerns of most scientists. Ultimately our answer why 
 derives from leading physical theories, where integral periods are also laboratory observables. 
 This is true throughout classical Hamiltonian mechanics, and more specifically in the subsequent theory
-of semi-classical quantum mechanics. Up until the present analysis it has not been very well
-understood that it is possible to calculate a semi-classical level spectrum by root-solving the
-solution to an ODE. This is a central "theorem" that will arise out of the subsequent exposition. 
-By developing the examples E, F, and G, we can improve upon the rigor of the original analysis 
-by Harter (cf. \cite{HP1984,HW1989,HARTER2006}), and set up the theory of Rotational Energy 
-Surfaces to grow in new directions parallel to those of pure mathematics. This will require 
-a lot of hard work and effort on the readers part, but the payoff is immense. Not only 
-are the results useful in physics calculations, they are also beautiful in their own right!
+of semi-classical quantum mechanics. Up until now it has not been very well understood that it is 
+possible to calculate a semi-classical level spectrum by root-solving the solution to an ODE. This 
+is a central "theorem" that will arise out of the subsequent exposition. By developing the examples 
+E, F, and G, we can improve upon the rigor of the original analysis by Harter et al. 
+(cf. \cite{HP1984,HW1989,HARTER2006}). The theory of Rotational Energy Surfaces can then
+grow in new directions parallel to those of pure mathematics. The entire course will require 
+hard work and effort on the readers part, but the payoff is immense. Not only are the results 
+useful in physics calculations, they are also beautiful in their own right!
 
-This prelude already gives detailed analysis of I.A.1, and in the next article, we will start 
-the development of Hamiltonian mechanics in order to prove I.A.2 and I.A.3 equivalent to I.A.1. 
-The development of Hamiltonian mechanics continues with an analysis of examples II.B.1, II.C.1, 
-and II.D.1, which finds that the periods of each obey an analog of the Legendre identity associated
-to I.A.1. We will also show a remarkable set of identities, that the period constraints of II.B.2, 
-II.C.2 and II.D.2 relate to those of their predecessors by a change of variables 
-$\alpha \rightarrow \alpha^2$. Before verifying V.B.3 isoperiodic to II.B.2, it is pertinent to
-introduce the E examples, where another amazing isoperiodicity waits to be found. Under transformation 
-$\epsilon \rightarrow \frac{c-a}{c-b}$, the period constraint of examples III.E.1 and III.E.2 transforms 
-to that of IV.E.3. Example IV.E.3 is the first case of sphere curves rather than plane curves, so 
-we will have to explain exactly how sphere curves relate rigid body or semi-rigid body rotation. More 
-symmetrical sphere curves are given in examples V.F.1 and V.G.1. These geometries should 
-be easy to master once the progression from A-E is complete. Then we can sit and watch the small 
-mystery of \textit{Hotaru mirabilis} flash and blink and drift away into the darkness around.
-Without further ado, let the voices of science intertwine\ldots
+The reader may complain or protest, how dare we present results on Hamiltonian mechanics 
+without even defining terms? This is a fine objection, but in the end, not one that will
+successfully dispute validity. According to the supplemental materials described in Appendix A, 
+the entire Table IV is automatically proven correct in under five seconds. In this exsanguine 
+process, a "Hamiltonian function" is nothing more special than an input to a diagnostic algorithm 
+whose output is an ordinary differential equation\textemdash not too exciting. To answer the 
+objection, \textit{we do need to explain more} about what a Hamiltonian function is, and about
+how to build Hamiltonian mechanics until it is capable of describing rigid body and semi-rigid 
+body rotations. This is not possible in a prelude, nor in a fugue.  It will take the time and 
+space of a few more dissertation chapters.  Only then will the diagnostic algorithms, and the 
+resulting alphanumeric classification begin to make real sense. More importantly, only after 
+these next few chapters can we begin to understand, appreciate, and improve Harter's theory 
+of Rotational Energy Surfaces. There will be a few mathematical loose ends, but these too
+can be appreciated for what they are worth. We look forward to a conclusion where the small 
+mystery of \textit{Hotaru mirabilis} will flash and blink and drift away 
+into the darkness around. Without further ado, let the voices of science intertwine\ldots
+\pagebreak 
 
-\pagebreak  
- 
+\section*{Acknowledgements}
+The Online Encyclopedia of Integer Sequences was a source of inspiration, see for example: 
+\href{https://oeis.org/A002894}{A002894}, \href{https://oeis.org/A113424}{A113424}, 
+\href{https://oeis.org/A000897}{A000897}, \href{https://oeis.org/A006480}{A006480}, 
+\href{https://oeis.org/A318245}{A318245}, \href{https://oeis.org/A318495}{A318495}. 
+Interest and helpful comments of OEIS volunteer editors, especially through [seqfan] 
+mailing list, helped immensely in formulating this analysis. Related discussions on 
+[mathfun] mailing list also contributed positively, with motivation from Bill Gosper, and 
+references \cite{FRANTZ2006} and \cite{MEEUS1991} were given by Mike Stay and 
+Alan Wechsler, respectively. Don Zagier suggested Ref. \cite{ZAGIER2009}. All calculations 
+and explanations are the author's own work (usually with the aid of Mathematica). 
+
 \bibliographystyle{unsrtnat}
 \bibliography{biblio}
+
+\pagebreak
+
+\begin{appendices}
+\section{Supporting Documents}
+
+Creative Telescoping is and always has been an \textit{algorithmic theory}. The earliest 
+steps in \cite{GOSPER1978} were taken with the help of MACSYMA, and nowadays it is convenient 
+to use the descendant software Mathematica (or any other of the many available programming 
+languages with adequate polynomial handling). Many of the mathematical equations related above 
+are more accurately described as the throughput of of a symbolic algorithm. 
+\href{https://github.com/bradklee/Dissertation/tree/master/Prelude/notebooks}{Mathematica source 
+code} is available at github, and \href{https://github.com/bradklee/IntegralDiffEQ}{another implementation}
+is given in PARI/GP. The algorithm \texttt{QuarticToODE} is a special case of the more general \texttt{ExpToODE}, 
+which grew out of our analysis of Beukers's wonderful $\pi$ day lecture \cite{BEUKERS2000}. The interested reader 
+can find more of our notes at Wolfram Demonstrations Project, under the title 
+\href{https://demonstrations.wolfram.com/ApproximatingPiWithTrigonometricPolynomialIntegrals/}{Approximating 
+Pi with Trigonometric-Polynomial Integrals}. The not-so-interested reader can simply evaluate given 
+functions, for example,
+\begin{eqnarray}
+\texttt{In[]:=}& \texttt{CheckCert[Reap[QuarticToODE[$p^2+q^2-p^2 q^2$]]]} \nonumber \\
+\texttt{Out[]:=}&  \;\;\;\; \bigg\{\big\{1, 4 (-1 + 2 \alpha), 4 (-1 + \alpha) \alpha \big\}, 
+\frac{ i (-1 + z) (1 + z) (1 + z^2) (1 + z^4)}{8 z^4 (1 - \alpha \Phi)^{3/2}}, 0 \bigg\} \nonumber
+\end{eqnarray}
+The input is a Hamiltonian, and the output is a triple, the Annihilator coefficients, 
+a certificate function, and a dynamically-computed check value, which equals $0$ when 
+the proof is correct. Too bad the quartic algorithm doesn't work for all of the geometries
+of Table IV., but these are proven routinely in a 
+\href{https://github.com/bradklee/Dissertation/tree/master/Prelude/notebooks}{second notebook},
+using \texttt{HyperellipticToODE} and \texttt{DihedralToODE}. The three diagnostic algorithms 
+are the same in the end, but each has its own particular way of handling coordinate variables
+in the early stages. 
+The hope is to eventually find time to give a rigorous explanation in the style of 
+Algorithm-Theorem-Proof, but for now we are busy explaining the approach to overly-skeptical 
+physicists. 
+
+One last footnote. This article was slightly delayed due to COVID-19. While quarantining, we 
+also briefly explored the idea of using differential equations for data fitting in the Wolfram 
+Demonstration \href{https://demonstrations.wolfram.com/SummerInsectPandemicsInTheUnitedStates/}{Summer 
+Insect Pandemics in the United States}. Many other interesting and well-related example
+computations can be found through the Author's page at Wolfram Demonstrations:
+\href{https://demonstrations.wolfram.com/author.html?author=Brad\%20Klee}{https://demonstrations.wolfram.com/author.html?author=Brad\%20Klee}.
+
+\end{appendices} 
 
 \end{document}
