@@ -1,0 +1,2071 @@
+\documentclass[nofootinbib,preprint]{revtex4-1} 
+\usepackage[utf8]{inputenc}
+\usepackage[fleqn]{amsmath}
+\usepackage[title]{appendix}
+ \usepackage[none]{hyphenat}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\usepackage{skak}
+\usepackage{capt-of}
+\usepackage{afterpage}
+\usepackage{placeins}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,wrapfig} 
+\usepackage[percent]{overpic}
+\usepackage{tabularx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{makecell}
+\usepackage{setspace}
+\usepackage{rotating}
+%\usepackage{footmisc}
+\setdisplayskipstretch{}
+
+
+%\usepackage{footmisc}
+%\DefineFNsymbols{mySymbols}{{\ensuremath\dagger}{\ensuremath\ddagger}\S\P
+%   *{**}{\ensuremath{\dagger\dagger}}{\ensuremath{\ddagger\ddagger}}}
+%\setfnsymbol{mySymbols}
+
+\renewcommand{\arraystretch}{1.3}
+%\renewcommand\footnotelayout{\fontsize{10}{12}\selectfont}
+
+\newcommand{\tFo}[3]{\,_2F_1 \bigg[ 
+\genfrac..{0pt}{}{#1}{#2}\bigg| #3 \bigg]} 
+
+\newcommand{\tFoIn}[3]{\,_2F_1 \Big[ 
+\genfrac..{0pt}{}{#1}{#2}\Big| #3 \Big]} 
+
+\newcommand{\rev}[1]{\text{\reflectbox{$#1$}}} 
+
+
+\begin{document}
+
+\title{Geometric Interpretation of a few Hypergeometric Series}
+\author{Bradley Klee}
+\email{bjklee@email.uark.edu, bradklee@gmail.com} % optional
+\affiliation{Department of Physics, University of Arkansas, Fayetteville, AR 72701}
+
+\date{\today}
+
+\begin{abstract}
+Ramanujan's article ''Modular equations and approximations to $\pi$'' draws special attention 
+to three curious hypergeometric series. In mathematical physics, each series determines 
+periods along the elliptic level curves of an integrable Hamiltonian surface. We perform a 
+combinatorial search of Hamiltonian function space and find  a diverse collection of closely
+related species, some of which may have been unknown previously. The search is made rigorous 
+by here defined diagnostic algorithms \texttt{ExpToODE},
+\texttt{HyperelipticToODE} and \texttt{DihedralToODE}. All three take an input integral 
+function and output the relevant ordinary differential equation. Examples growing out of 
+Ramanujan's theory have intrinsic value, but they are not the only interesting use cases of the 
+diagnostic algorithms. What we can learn from this "walk through Ramanujan's garden" will 
+ultimately help us to extend systematic analysis elsewhere.  
+\end{abstract}
+
+\maketitle 
+
+\section{History and Introduction}
+The aphorism "history tends to favor those who wrote it" applies no less in particular
+to history of science. Ideally, science should be an apolitical process of finding out the 
+truth by reason and experimentation. Practically, we can always expect to hear another 
+anecdote of unfair practice and needless exclusion, even if we only listen to the inner 
+workings of the dominant western system. Eurocentrism and Anglocentrism present an even
+more significant problem to the world. Western scientists can, and often do, ignore developments and 
+contributions of non-western origin. Our discussion of classical science thus far repeats 
+the mistake of exclusive biasing by focusing solely on European lineages 
+\cite{KLEE2020Prelude,KLEE2020Pendulum}. We will now begin 
+to correct for this mistake by discussing a few earlier developments of India. 
+
+The biased\footnote{Compare with "Hsin Shin Ming", "Nagarjuna's four propositions
+and zen", available at
+\href{https://kansaszencenter.org/resources/}{https://kansaszencenter.org/resources/}.}
+ slogan \textit{Asian ideas matter} is especially relevant when we grapple with even a small 
+part of the theory of Srinivasa Ramanujan (1887-1920). From what we know about Ramanujan's heritage, 
+we can easily understand that his life and work built upon thousands of years of Indian 
+culture\footnote{Robert Kanigel has written a biography of Ramanujan's life, \textit{The man who knew infinity}.
+The book was recently adapted to full-length motion picture under the same title.}. 
+To buck Anglocentrism, we can look at Ramanujan's notebooks, and then ask, which of his basic 
+ideas and techniques were already known in India before the invasion of the British East India Trading Company? Less than two decades after Ramanujan's untimely death,  A.N. Singh published an 
+imminently useful, English-language review, "On the use of series in Hindu mathematics"\footnote{A 
+scan is available through Erv Wilson's electronic library, 
+\href{http://www.anaphoria.com/library.html}{http://www.anaphoria.com/library.html}.}\cite{SINGH1936}. 
+This article clearly shows that Ramanujan \textit{was not} the first Indian scientist to take
+an interest in binomial coefficients, series expansions, or the transcendental constant $\pi$. 
+That being said, Ramanujan \textit{was} among the first to work directly with 
+the western scientific world. Two histories need to be compared.
+
+The binomial coefficients are an irrevocably important set of numbers denoted $\binom{n}{k}$, usually 
+for integer $n$ and $k$ with $ 0 \le k \le n $. In combinatorics, $\binom{n}{k}$ determines
+the number of ways to choose $k$ distinct elements from a set of cardinality $n$, and the 
+identity $\binom{n}{k}=\frac{n!}{(n-k)!k!}$ counts out the answer in terms of the factorial function 
+$n!=n\times(n-1)\times(n-2)\times\ldots \times 1$ and $0!=1$. Algebra gives an alternative, additive definition,
+$\binom{n}{0}=\binom{n}{n}=1$ otherwise $ \binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k} $, which follows
+from the expansion $(1+z)^n=\sum_{k=0}^{n}\binom{n}{k}z^k=(1+z)\sum_{k=0}^{n-1}\binom{n-1}{k}z^k$. 
+It is quite natural to view the binomial coefficients as elements of a triangular array, as in Fig. 
+\ref{fig:Meru}. When the integers are arranged in this particular way, each row determines each next row by the
+addition rule. In the west, such an arrangement goes by the name "Pascal's triangle". A.N. Singh tells 
+us that the same tabulation was derived in India under a poetic heading, \textit{Meru Prast$\bar{a}$ra}, 
+"the Steps of Meru", possibly as early as Pingala's time circa 200 BC. In parts of the old Indian 
+cosmological system, Meru plays a role similar to that of Parnassus in the old Greek cosmology\textemdash 
+It is the center of the poetic universe. Pingala asked the question, given a verse of $n$ syllables divided
+into $k$ \textit{lagu}, meaning light, and $n-k$ \textit{guru}, meaning heavy, how many orderings
+are possible? Not only did Pingala know the answer in terms of \textit{Meru Prast$\bar{a}$ra}, he 
+also knew the row sums $\sum_{k=0}^n \binom{n}{k}=2^n$\cite{SINGH1936}. This was an important discovery for Indian 
+science, and thereafter Sanskrit prosody became a standard format. 
+
+
+\begin{wrapfigure}{R}{6cm}
+\begin{center}
+\begin{overpic}[width=0.3\textwidth]{./Figures/meru.eps}
+ \put (47,86) {\Large 1}
+ \put (37,66) {\Large 1}
+ \put (57,66) {\Large 1}
+ \put (27,46) {\Large 1}
+ \put (47,46) {\Large 2}
+ \put (67,46) {\Large 1}
+ \put (17,26) {\Large 1}
+ \put (37,26) {\Large 3}
+ \put (57,26) {\Large 3}
+ \put (77,26) {\Large 1}
+
+ \put (7,6)  {\Large 1}
+ \put (27,6) {\Large 4}
+ \put (47,6) {\Large 6}
+ \put (67,6) {\Large 4}
+ \put (87,6) {\Large 1}
+
+\end{overpic}
+\caption{Pingala's \textit{Meru Prast$\bar{a}$ra}.}
+  \label{fig:Meru}
+\end{center}
+\end{wrapfigure}
+
+Not much is known about the life of Pingala, but the fact that he wrote high-minded Sanskrit suggests 
+a northern origin, possibly in one of the larger cities on the Ganges river. The implicit
+allusion of \textit{Meru} to the Himalayan mountains seems to support this hypothesis; however, 
+conclusive evidence is lacking. During second and third century BC, the Maurya empire included 
+much of the Indian subcontinent, but did not extend all through the southern peninsula to the 
+Indian ocean. Excluded territory to the far south roughly aligns with two present-day states, 
+Kerala and Tamil Nadu. More is known about Pingala's follower, Halayudha. During X Century, he 
+lived in Karnataka, and later moved 1,000 kilometers northward to Ujjain, where he could accomplish 
+his important exposition of Pingala's earlier work on \textit{Meru Prast$\bar{a}$ra} 
+(again, see \cite{SINGH1936}). 
+This gives  some idea of the extent to which ideas could move on a hundred year time scale. After another 
+few centuries, an important mathematical school, versed in Sanskrit prosody, would finally 
+arise in the southernmost state of Kerala.
+
+Founding of the Kerala school of Astronomy and Mathematics is associated with the life and
+work Madhava of Sangamagrama (circa 1340-1425). It is now commonly accepted that Madhava originated 
+the poetic definition of series expansions for sine, cosine\cite{ROY1990}. At the time, the
+standard educational procedure was to transmit knowledge mainly by spoken word. The teacher would
+recite his verses directly to the students, and rigor would only be done if the listeners 
+could think of an objection to the master's teaching (S.P. Singh told me as much by email). 
+Due to this practice, the written record is not as helpful as we would like; although, over time, 
+more details became available through the notes of subsequent students working in the lineages at 
+Kerala\cite{MADHAVAVID}. Their accomplishment is too profound to belittle by imposing an exogenous 
+western bias. Without any notion of calculus, Indian mathematicians at Kerala preceeded the greatest 
+western scientists at the central task of exactly defining the transcendental constant $\pi$ in 
+terms of an infinite series expansion\cite{ROY1990}.
+
+Given that knowledge was already sufficiently mobile and moving southward, it is entirely probable 
+that Hindu science had reached Tamil Nadu by XIX Century. Ramanujan was born in Tamil Nadu on December 22, 
+1887, and attended primary school there. Were benevolent Hindu nationalists able to influence 
+Ramanujan's early development as a mathematician? We can only say that Ramanujan, as a 
+member of the Brahmin caste, had a right to receive Hindu science, not that he actually did. At 
+this time, the traditions of India became undermined by British interventionism, which included 
+a commandeering of the educational system. During the same years, Mahatma Gandhi (1869-1948)
+developed the strategy of \textit{Satyagraha}\footnote{In his monumental "I Have a Dream" speech, Martin 
+Luther King Jr. echoed Ghandi by saying \textit{"We must not allow our creative protest to degenerate into 
+physical violence. Again and again we must rise to the majestic heights of meeting physical force with soul 
+force."} }, which would eventually win back Indian independence, though not during Ramanujan's short 
+lifetime. Sadly, we do not know if Ramanujan was aware of Pingala or Madhava by the start of his 
+research into western mathematics. Regardless of what resources he could access in the material world, 
+Ramanujan became the natural successor of India's earlier number theorists. Instead of linguistic
+poetry, he wrote poetic equations. His Indian notebooks are filled with thousands of cryptic 
+entries, which have resisted attempts to translate or decipher. 
+
+The story about Ramanujan's ascendance is, as Hardy called it, romantic.
+It provides a stark contrast to other goings-on around Europe and the rest of the world. A few months 
+after Ramanujan's arrival in England, the Archduke Franz Ferdinand of Austria was assassinated on 
+28 June, 1914 by Gavrillo Princip, a murderous agitator fighting on behalf of the Bosnian 
+independence movement. There certainly were Hindu nationalists who advocated violent rebellion 
+against colonial forces (as did Americans during the earlier American revolution), but Ramanujan
+was not one of them. Having learned from the books of Cambridge mathematicians, and with encouragement
+from his countrymen, Ramanujan sought out approval from the Cambridge Dons. The Royal Society 
+answered Ramanujan's letters through the person of G.H. Hardy, himself an eccentric genius of 
+relatively modest upbringing. Ramanujan was invited to attend Cambridge, and after three days 
+meditating at a temple in Namakkal, he received permission to accept the invitation. His life 
+thereafter is more well documented. Some of his ideas were properly published, though not as 
+many as could have been. Posisbly during a brief stint as a mendicant, Ramanujan is 
+thought to have contracted a long lasting form of Dysentery. He later died a tragic and 
+untimely death at the young age of 32. 
+
+Regrettably, the effort to understand Ramanujan's educational circumstances started only after his death, 
+with the obituary of Seshu Aiyer and Ramachandra Rao, and Hardy's short biography 
+"The Indian mathematician Ramanujan"\cite{AIYARRAO1927,HARDY1937}. Neither article says anything about 
+Pingala or Madhava, but both mention Euler in connection with Ramanujan's early interest in sine and 
+cosine functions. Hardy's account also claims that "Carr's \textit{Synopsis}\ldots first aroused Ramanujan's 
+full powers". We don't know if this Hardy assertion is true, but it sounds possibly overstated due 
+to Anglocentric bias. Nevertheless, it is an important historical fact that Ramanujan studied Carr, 
+because \textit{Synopsis} defines figurate numbers next to hypergeometric function $\,_2F_1$ in 
+items 289-292. In fact, Item 290 gives a tabulation, in a slightly different form, of the first few 
+rows of Pascal's Triangle. Carr, an Englishman, mentions neither Pascal nor Pingala. Even if Ramanujan 
+was unaware of his own nation's historical contributions to science, he would have found the same ideas 
+in Carr; admittedly, with wrong attribution. 
+
+For a period of time, interest in Ramanujan languished. In the late 1970's, Bruce Berndt and coworkers 
+revived the mission of editing Ramanujan's notebooks. An overview of their work is given in 
+\cite{BERNDTOVERVIEW}. It shows that Ramanujan was interested in many topics, and that he paid 
+quite a lot of attention to the theory of elliptic functions. According to a bibliography of Ramanujan's primary 
+sources\cite{BERNDTBOOKLIST}, he had access to A.G. Greenhill's treatise on elliptic functions\footnote{Scans 
+are available online via \href{https://archive.org/details/asynopsiselemen00carrgoog}{archive.org},
+including \href{https://archive.org/details/asynopsiselemen00carrgoog}{Carr's \textit{Synopsis}}
+and \href{https://archive.org/details/cu31924001588395}{Greenhill's \textit{Elliptic Functions}}.
+}, and at first, found some interest in the period function of the simple pendulum, the complete elliptic integral of 
+the first kind\footnote{We have already rigorously defined $K(\alpha)$ in \cite{KLEE2020Prelude,KLEE2020Pendulum}. 
+Another certificate is given in Section IV.}, here denoted by symbol $K(\alpha)$.
+Legendre found an identity, $K\big(\sin(5\pi/12)^2\big)=\sqrt{3}K\big(\sin(\pi/12)^2\big)$, which 
+piqued Ramanujan's interest and led him to record a few original results in his notebooks\cite{VILLARINO2020}
+(and see also item 13 of Hardy's obituary \cite{HARDY1937}). Not only did Ramanujan at times exceed the preexisting 
+theory of elliptic integrals, he also broke completely free of its confines. Section 11 of Berndt's 
+overview pertains to Ramanujan's theory of alternative bases, which is also described in two full 
+length articles \cite{BERNDTALTERNATIVE,BARUAH2009}. An important takeaway from these accounts is that entries of 
+Ramanujan's notebooks show he had already discovered existence of the three alternative theories 
+\textit{while living in India}. This both does and does not help to explain how he could rapidly 
+publish the article "Modular Equations and approximations to $\pi$", much less than one year 
+after arriving at Cambridge University\footnote{A complete bibliography is available online at 
+\href{https://www.imsc.res.in/~rao/ramanujan/}{https://www.imsc.res.in/$\scriptstyle\sim$rao/ramanujan/}.}\cite{RAMANUJAN1914}.
+
+Following the poetry of Freeman Dyson (1923-2020), Berndt also wrote a lovely invitation 
+to catalogue the "Flowers which we cannot yet see growing in Ramanujan's 
+garden of hypergeometric series, elliptic functions, and q's"\footnote{Our own 
+thoughts are along the lines of "Parametric curves / which cannot yet be seen to grow / in a garden of Mystery",
+but we will defer to historical precedent until a better consensus can be reached.}
+\cite{BERNDTFLOWERS}. 
+In this work of outlook (or is it actually introspection?), mathematical loose ends 
+of Ramanujan's theory of alternative bases take eminent position in section 2. There it says,
+\begin{quote}
+In his famous paper [Modular equations and approximations to $\pi$], Ramanujan 
+records several elegant series for 1/$\pi$ and asserts "There are corresponding 
+theories in which $q$ is replace by one or other of the functions" 
+$$q_r:=q_r(x):=\exp\bigg(-\pi \csc(\pi/r)\frac{\,_2F_1(\frac{1}{r},\frac{r-1}{r};1;1-x)
+}{\,_2F_1(\frac{1}{r},\frac{r-1}{r};1;x)} \bigg),$$ where
+$r=3,4,$ or $6$ and where $\,_2F_1$ denotes the classical Gaussian hypergeometric 
+function.  
+\end{quote}
+Neither in the original notebooks, nor in the journal article, nor in subsequent 
+editing did explicit mention of elliptic curves play a very significant role. 
+However, Berndt and colleagues took a significant step in this direction by changing
+Ramanujan's Euler-inspired notation, 
+\begin{eqnarray}
+K_1 &=& 1 + \frac{1 \cdot 3}{4^2}k^2 + \frac{1 \cdot 3 \cdot 5 \cdot 7}{4^2 \cdot 8^2}k^4 
+          + \frac{1 \cdot 3 \cdot 5 \cdot 7 \cdot 9 \cdot 11}{4^2 \cdot 8^2 \cdot 12^2}k^6
+          + \ldots  \nonumber ,  \\
+K_2 &=& 1 + \frac{1 \cdot 2}{3^2}k^2 + \frac{1 \cdot 2 \cdot 4 \cdot 5}{3^2 \cdot 6^2}k^4 
+          + \frac{1 \cdot 2 \cdot 4 \cdot 5 \cdot 7 \cdot 8}{3^2 \cdot 6^2 \cdot 9^2}k^6
+          + \ldots  \nonumber ,  \\
+K_3 &=& 1 + \frac{1 \cdot 5}{6^2}k^2 + \frac{1 \cdot 5 \cdot 7 \cdot 11}{6^2 \cdot 12^2}k^4 
+          + \frac{1 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17}{6^2 \cdot 12^2 \cdot 18^2}k^6
+          + \ldots  \nonumber ,   , 
+\end{eqnarray}
+to that of the standard hypergeometric theory. Since we know that the hypergeometric function, 
+whether it is due to Gauss or Euler, is the solution of a second-order ordinary 
+differential equation(Cf. \cite{KZ2001}, Section 2), we can immediately hypothesize that 
+Ramanujan's original assertion is equivalent to an assertion that 
+\begin{quote}
+\textit{There are corresponding theories in which the underlying elliptic curve geometry 
+is replaced by one or other of the curve families $\mathcal{X}_3(\alpha)$, $\mathcal{X}_4(\alpha)$, 
+$\mathcal{X}_6(\alpha)$}.
+\end{quote}
+In this hypothesis the unknowns $\mathcal{X}_s(\alpha)$ are Riemann tori over the complex 
+numbers. As their shape varies with $\alpha$, the real and complex periods must 
+be solutions of the hypergeometric differential equation\footnote{Our notation is 
+different: $r$ is reserved for radius, $s$ is for signature, and $\alpha$ is the 
+default expansion parameter. For a detailed working of case $s=2$, see \cite{KLEE2020Prelude} 
+Section V and \cite{KLEE2020Pendulum}. },
+\begin{eqnarray}
+\mathcal{A}_s \circ T_s(\alpha) = 0, \;\;\text{where}\;\;\mathcal{A}_s
+=(s-1)-s^2(1-2\alpha)\partial_{\alpha}-s^2\alpha(1-\alpha)\partial_{\alpha}^2. \nonumber
+\end{eqnarray}
+For $s=2,4$ and $6$ geometric models were known classically, and maybe a model for the difficult 
+case $s=3$ was also known to a small cadre of European cognescenti(?). Nevertheless, a 
+systematic exposition was missing from the literature, until the issue was taken up 
+by L.C. Shen. In a series of articles \cite{SHEN1998,SHEN2013,SHEN2014,SHEN2017} 
+he revealed that the relevant 
+geometries could be obtained from the Chebyshev polynomials, amazing! We may not 
+be too surprised to find that the mysterious garden contains even more as 
+yet unseen. The unmentioned alternatives have different symmetries, different genera,
+and perhaps even different fragrances, so they are also deserving of correct and 
+individual diagnosis.
+
+Presently the theory of Creative Telescoping gives us new tools for systematizing
+and automating analysis of integrals taken along deformable curves\footnote{For a list of 
+relevant references, trackback from the list given in \cite{KLEE2020Prelude} and see also \cite{COMPLEXITY2010}.}. 
+In a most general form, as recently discussed by Bostan
+and Lairez, the complications are many\cite{BOSTAN2017,LAIREZ2016}. However, when it is possible 
+to reduce  a geometric integral to a univariate form, simple Hermite reduction can be used effectively.
+The goal is to take a curve, say $\mathcal{X}(\alpha)=\{(p,q) : 2H(p,q)=\alpha\}$, write 
+the period integral $T(\alpha)=\oint_{\mathcal{X}}dt$, and instead of evaluating $T(\alpha)$
+directly, to find an annihilating operator $\mathcal{A} \in \mathbb{Q}[\![\alpha,\partial_{\alpha}]\!]$
+(also called a telescoper) such that $\mathcal{A} \circ T(\alpha)=0$. Annihilation of the 
+period function happens when $\mathcal{A} \circ dt -\partial_t \Xi = 0$, with certificate
+$\Xi$ a function of $t$. If the annihilator and its certificate are known, the task of 
+evaluating the integral $T(\alpha)$ can be changed for a similar task of solving an
+ordinary differential equation. This is a much easier approach and allows us to efficiently
+search for special $\mathcal{X}(\alpha)$. 
+
+In two previous articles (or chapters), we have already discussed the standard case $s=2$ 
+in detail\cite{KLEE2020Prelude,KLEE2020Pendulum}. The appropriate period function, 
+$T_2(\alpha) = 4K(\alpha)=2\pi\tFoIn{\frac{1}{2},\frac{1}{2}}{1}{\alpha}$, can
+be written in terms of the central binomial coefficients 
+$T_2(\alpha) = 2\pi\sum_{n\ge 0} \frac{1}{16^n}\binom{2n}{n}^2 \alpha^n$. 
+If we throw away the denominators $\frac{1}{16^n}$, and search the Online Encyclopedia of Integer Sequences 
+(OEIS)\cite{SLOANE2020} for the integer expansion coefficients, then we find entry 
+\href{https://oeis.org/A002894}{A002894}. Clicking through the cross references, we might 
+also find  \href{https://oeis.org/A006480}{A006480} and \href{https://oeis.org/A000897}{A000897}, and both 
+entries cross reference to \href{https://oeis.org/A113424}{A113424}. Though historically unusual\footnote{When, 
+before now, have we ever made such interesting maths discoveries by clicking a hyperlink?}, this is still a great and 
+easy way to find out more about Ramanujan's alternative series, 
+\begin{eqnarray}
+T_3(\alpha)  &=&  \tFo{\frac{1}{3},\frac{2}{3}}{1}{\alpha} 
+= \sum_{n\ge 0} \frac{1}{27^n}\binom{3n}{n}\binom{2n}{n}\alpha^n, \nonumber \\ 
+T_4(\alpha)  &=&  \tFo{\frac{1}{4},\frac{3}{4}}{1}{\alpha} 
+= \sum_{n\ge 0} \frac{1}{64^n} \binom{2n}{n}\binom{4n}{2n}\alpha^n,  \nonumber \\ 
+\text{and} \;\;\;\;\;\;T_6(\alpha)  &=&  \tFo{\frac{1}{6},\frac{5}{6}}{1}{\alpha} 
+=  \sum_{n\ge 0}\frac{1}{432^n}\binom{3n}{n}\binom{6n}{3n}\alpha^n,  \nonumber 
+\end{eqnarray}
+in Ramanujan's notation $K_2$, $K_1$, and $K_3$ respectively. Written in this way, the 
+dependence on Pingala is clear, but mystery remains. Why should these particular 
+binomial products matter at all, and why only these three? These questions are motivation
+enough for the present work, but a little more will be said about $\pi$ and the Kerala connection.
+
+When calculating and storing proof data on a computer, we are not limited by paper shortages. 
+Nothing but time will prevent us from recording as many results as we can. The combinatorics of 
+Section II can be skipped, but it leads quite naturally into section III where most of the 
+rigorous analysis is done by a few different implementations of an algorithm \texttt{EasyCT}. 
+Requiring concordance between alternative implementations, not only do we easily find three 
+relevant families of elliptic curves, we find that these three are somehow the lone minimal 
+examples (except for a few higher-dimensional reflections). New geometric definitions allow
+quick and easy proof of Legendre-style identities, which gets us into Chapter 1 of  
+"$\pi$ and the AGM"\cite{BORWEIN1987}. It is tempting to keep going in a pure maths 
+direction, but by the end,
+we will need to steer ourselves back toward physics calculations. Again, mathematical loose
+ends may be appreciated for what they are worth. 
+
+\pagebreak
+
+\begin{figure}[t]
+\begin{center}
+\begin{overpic}[width=0.9\textwidth]{./Figures/FourGeos.eps}
+ \put (8.5,2) {$\mathcal{C}_2$}
+ \put (43,2) {$\mathcal{C}_3$}
+ \put (70,2) {$\mathcal{C}_4$}
+ \put (96,2) {$\mathcal{C}_6$}
+\end{overpic}
+\caption{Elliptic oscillation disks, with $T_s(\alpha)=2\pi \tFoIn{\frac{1}{s},\frac{s-1}{s}}{1}{\alpha}$ for $s=2,3,4,6$.}
+  \label{fig:EllDisks}
+\end{center}
+\end{figure}
+
+
+\section{Creative Combinatorics}
+We have already shown that a few different Hamiltonian functions determine the 
+simple pendulum's libration behavior, and that transformation theory accounts 
+for equivalence between the alternative forms\cite{KLEE2020Pendulum}. Now it is due time to continue
+developing Hamiltonian mechanics by considering oscillation disks in more generality. 
+As a breif reminder, an \textit{oscillation disk} is a topological disk taken from
+the phase plane, which is bounded at its center by a circular point, and bounded on 
+its outer edge(s) by a separatrix curve and at least one hyperbolic point\footnote{For 
+more definitions and theory, refer back to \cite{KLEE2020Pendulum} section III.}. Figure 
+\ref{fig:EllDisks} shows four examples with blue level curves,
+\begin{eqnarray}
+\mathcal{C}_s(\alpha)=\Big\{(p,q):\alpha=2H_s(p,q), \;\; s=2,3,4,\text{\;or\;}6\Big\}  
+\;\;\;\;\; \text{with} \;\;\;\;\; \alpha  \in (0,1).  \nonumber
+\end{eqnarray}
+The four geometries differ in symmetry; however, any curve $\mathcal{C}_s(\alpha)$ 
+is an elliptic curve of genus one. In fact, the curves $\mathcal{C}_2(\alpha)$ to 
+far left are determined by the physicist's version of Edwards's normal form\cite{EDWARDS2007}, 
+$2H_2=p^2+q^2-p^2q^2$. For other examples, the assertion of genus 1 can be proven a few different ways
+using the standard theory of elliptic curves\footnote{All non-singular cubic plane 
+curves are elliptic due to the existence of chord-and-tangent addition rule
+\cite{SILVERMAN1992,SILVERMAN2009}. The other quartic $H_4$ is birationally equivalent 
+to a cubic function, read on for more details.}. 
+
+Let us start with the more familiar cases where kinetic energy and potential energy are 
+separable, i.e. cases that have $H(p,q) = \frac{1}{2}p^2+V(q)$ in units where $m=1$. Choosing the 
+potential energy function $V(q)=\frac{1}{2}q^2 + \frac{1}{2}\sum_{n=3}^{N}v_n q^n$ 
+forces a circular limit, $2 H(p,q) \approx p^2 + q^2$, around the origin. The harmonic period
+at the circular point is $T_0=2\pi$, so the angular frequency scale is $\omega_0=1$ for 
+the entire oscillation disk. Two exceedingly simple examples of this form are the cubic and 
+quartic anharmonic oscillators,
+\begin{eqnarray}
+2H_6(p,q) = p^2 + q^2 -\frac{2\sqrt{3}}{9}q^3, 
+\;\;\;\;\;\;\;\;\;\; 
+2 H_4(p,q) = p^2 + q^2 -\frac{1}{4}q^4.  \nonumber
+\end{eqnarray}
+Coefficients $v_3=-\frac{2\sqrt{3}}{9}$ and $v_4=-\frac{1}{4}$ are chosen so that 
+$2V(\sqrt{3})=1$ for the cubic function, and $2V(\pm \sqrt{2})=1$ for the quartic. Values 
+$q=\sqrt{3}$ and $q=\pm \sqrt{2}$ determine the only local maxima of either potential.
+These conventions must have a separatrix curve at $\alpha = 1$ and an oscillation disk 
+with domain $\alpha \in [0,1)$. To distinguish that $H_6$ and $H_4$ are not equivalent 
+by canonical transformation, we need only calculate distinct period functions. 
+
+In action-angle coordinates the Hamiltonian function of the quartic anharmonic osicllator 
+is written as $2H_4(\lambda,\phi) = 2\lambda-\lambda^2\sin(\phi)^4$. 
+Solving $\alpha=2H_4(\lambda,\phi)$ for $\lambda = \frac{1-\sqrt{1-\alpha \sin(\phi)^4}}{\sin(\phi)^4} $ 
+then allows us to write the period integral, 
+$T_4(\alpha)=\oint 2(\partial_{\alpha}\lambda) d\phi =  \oint \frac{d\phi}{\sqrt{1-\alpha \sin(\phi)^4}}$. 
+We should already know how to solve this integral in series expansion, 
+\begin{eqnarray}
+T_4(\alpha)= \oint \frac{d\phi}{\sqrt{1-\alpha \sin(\phi)^4}}
+=\sum_{n=0}^{\infty}\frac{1}{4^n}\binom{2n}{n}\oint \sin(\phi)^{4n}d\phi
+=\sum_{n=0}^{\infty}\frac{2\pi}{64^n}\binom{2n}{n}\binom{4n}{2n}. \nonumber
+\end{eqnarray}
+As with the previous cases $E(\alpha)$ and $K(\alpha)$, the expansion 
+coefficients, call them $f_n$, satisfy a hypergeometric recursion, 
+\begin{eqnarray}
+f_0=1, \; (n+1)^2 f_{n+1} = (n+\tfrac{1}{4})(n+\tfrac{3}{4})f_n
+\iff f_n = \frac{1}{64^{n}}\binom{2n}{n}\binom{4n}{2n}, \nonumber 
+\end{eqnarray}
+which determines a standard expression, $T_4(\alpha) = 2\pi\tFoIn{\frac{1}{4},\frac{3}{4}}{1}{\alpha}$.
+It is instructive to compare $T_4(\alpha)$ with the earlier $T_2(\alpha)=4 K(\alpha)$ by 
+writing the Hadamard products, 
+\begin{eqnarray}
+\tFo{\frac{1}{2},\frac{1}{2}}{1}{\alpha}=\tFo{\frac{1}{2},\cdot}{\cdot}{\alpha}
+\star \tFo{\frac{1}{2},\cdot}{\cdot}{\alpha}
+\;\; \text{and} \;\;
+\tFo{\frac{1}{4},\frac{3}{4}}{1}{\alpha}=\tFo{\frac{1}{2},\cdot}{\cdot}{\alpha}
+\star \tFo{\frac{1}{4},\frac{3}{4}}{\frac{1}{2}}{\alpha}, \nonumber
+\end{eqnarray}
+where the $\star$ operator indicates multiplication of expansion 
+coefficients\footnote{When $F$ and $G$ are both hypergeometric functions: 
+join upper parameters, join lower parameters with an additional $1$, 
+and finally pairwise cancel parameters occurring in both upper and lower sets. }, 
+\begin{eqnarray}
+F(\alpha)\star G(\alpha) = \sum_{n=0}^{\infty} f_n\;\alpha^n \star \sum_{n=0}^{\infty} g_n\;\alpha^n 
+= \sum_{n=0}^{\infty} f_n \; g_n \; \alpha^n  \nonumber .
+\end{eqnarray}
+The shared form, $2H=2\lambda-\lambda^2 \Phi$, determines the equivalent first factor, and they 
+differ on the second factor $\sum \alpha^n \oint \Phi^n d\phi$. This observation suggests 
+a first combinatorial foray.
+
+\begin{figure}[t]
+\begin{center}
+\begin{overpic}[width=0.9\textwidth]{./Figures/ThreeGeos.eps}
+ \put (20,0) {$\mathcal{C}_3'$}
+ \put (51.5,0) {$\mathcal{C}_4'$}
+ \put (95,0) {$\mathcal{C}_6'$}
+\end{overpic}
+
+
+\phantom{\;}
+\caption{Higher genus oscillation disks with $T(\alpha)=T_s(\alpha^2)=2\pi \tFoIn{\frac{1}{s},\frac{s-1}{s}}{1}{\alpha^2}$ for $s=3,4,6$.}
+  \label{fig:NotEllDisks}
+\end{center}
+\end{figure}
+
+
+The condition of separable potential and kinetic energy requires $\Phi \propto \sin(\phi)^4$. If
+we loosen this condition, then $\Phi$ need only be a trigonometric polynomial of homogeneous 
+degree $4$, i.e. must have the form $\Phi = \sum_{n=0}^{4} c_n \cos(\phi)^n\sin(\phi)^{4-n}$.
+By searching the range of valid perturbations $\Phi$, it is possible to find at least one more 
+well-related case, 
+\begin{eqnarray}
+2H_4'=p^2 + q^2  - \frac{1}{4}(p^2 + q^2)^2 +2 p^2 q^2 \iff 
+\Phi=\cos(\phi)^4-6\cos(\phi)^2\sin(\phi)^2+\sin(\phi)^4. \nonumber
+\end{eqnarray}
+This case stands out because perturbing term reduces to $\Phi=\cos(4\phi)$. The oscillation 
+disk takes the shape of a square with concave edges, as in the center of Fig. \ref{fig:NotEllDisks}. 
+On the disk, time is measured by period function $T_4(\alpha^2)=2\pi\tFoIn{\frac{1}{4},\frac{3}{4}}{1}{\alpha^2}$. 
+To see why this coincidence should occur, observe that odd powers of $\Phi$ integrate to zero, 
+while $\oint\cos(4\phi)^{2n}d\phi\propto \binom{2n}{n}$. Relative to the case $\Phi=\sin(\phi)^4$, 
+left and right Hadamard factors of the period function transpose\textemdash an impressive 
+dance of parameters and exponents! We will encounter similar symmetry and similar maneuvers
+as we continue to study simple period functions. 
+
+The cubic oscillator is terribly more difficult to solve. In action-angle coordinates, the 
+definition $2H_6= 2\lambda -\frac{4\sqrt{6}}{9}\lambda^{3/2} \cos(\phi)^3$  is a 
+special case of $2H= 2\lambda -\lambda^{3/2}\Phi$. Constraint $\alpha=2H$ implies generally 
+that $\alpha \Phi^2 = 2x - x^{3/2}, x=\lambda\Phi^2$. Exact root-solving is too unwieldy 
+a process, so we have no better recourse than series reversion 
+(cf. \href{https://oeis.org/A214377}{A214377}). Here we will drop rigor, 
+skip the expansion of $\lambda$, and instead proceed directly to assert that,
+\begin{eqnarray}
+T_6(\alpha)=  \sum_{n=0}^{\infty}\frac{1}{8^n}\binom{3n}{n}\oint\bigg(\frac{4\sqrt{6}}{9} \cos(\phi)^3 \bigg)^{2n} d\phi
+= 2\pi \sum_{n=0}^{\infty}\frac{1}{432^{n}}\binom{3n}{n}\binom{6n}{3n}. \nonumber 
+\end{eqnarray}
+A relatively easy proof will be given in the next section. For now, let us note the similarities
+to previous examples. The standard expression $T_6(\alpha) = 2\pi\tFoIn{\frac{1}{6},\frac{5}{6}}{1}{\alpha}$ 
+follows from, 
+\begin{eqnarray}
+f_0=1, \; (n+1)^2 f_{n+1} = (n+\tfrac{1}{6})(n+\tfrac{5}{6})f_n
+\iff f_n = \frac{1}{432^{n}}\binom{3n}{n}\binom{6n}{3n}.\nonumber 
+\end{eqnarray}
+As before, Hadamard decomposition
+$\tFoIn{\frac{1}{6},\frac{5}{6}}{1}{\alpha}=
+\tFoIn{\frac{1}{3},\frac{2}{3}}{\frac{1}{2}}{\alpha}
+\star \,_3F_2 \Big[ 
+\genfrac..{0pt}{}{\frac{1}{6},\frac{1}{2},\frac{5}{6}}{\frac{1}{3},\frac{2}{3}}\Big| \alpha \Big]$
+combines a left factor determined from the general cubic constraint, $\alpha \Phi^2=2\lambda -\lambda^{3/2}$,
+with a right factor determined by integrating powers of $\Phi$. Again we can search valid
+choices of $\Phi$ to find another interesting case, $2H_3=p^2+q^2-(\frac{4}{27})^{\frac{1}{2}} \; ( q^3-3 p^2 q)$,
+with $\Phi=\frac{4\sqrt{6}}{9}\sin(3\phi)$. The period function can be calculated simply by changing 
+the right factor of the Hadamard product. That is,  
+$T_3(\alpha)=2\pi\tFoIn{\frac{1}{3},\frac{2}{3}}{1}{\alpha}$ follows from 
+$\tFoIn{\frac{1}{3},\frac{2}{3}}{1}{\alpha}=
+\tFoIn{\frac{1}{3},\frac{2}{3}}{\frac{1}{2}}{\alpha}
+\star \tFoIn{\frac{1}{2},\cdot}{\cdot}{\alpha}$.
+
+
+\begin{table}[p]
+\begin{center}
+\captionof{table}{Integral series $I(\alpha) =\oint\frac{d\phi}{1-\alpha\Phi}
+=\sum_{n=0}^{\infty} \oint (\alpha\Phi)^n  d\phi$ must satisfy $\mathcal{A} \circ I(\alpha)=0$.}  
+\label{tab:TrigPolys}
+\begin{tabularx}{\textwidth}{ c | c | c l | c   | c  }
+\hline \hline
+ \hspace{0.1cm}s\hspace{0.1cm}  & \hspace{0.4cm} $\Phi=$ \hspace{0.4cm} & \hspace{.2cm} 
+ &  $\mathcal{A}=$ \hspace{9cm} 
+ & $I(z)$ &  \hspace{0.03cm} $\,_pF_q$? \hspace{0.03cm}     \\
+\hline 
+2           &  $P^2 Q^2$  && $2-(1-4\alpha)\partial_{\alpha}$  
+            &\hspace{0.1cm} \href{https://oeis.org/A000984}{A000984} \hspace{0.1cm}
+            &   yes \\
+2           &  $I_2 Q^2$   && same as for $\Phi=P^2 Q^2$
+            & \href{https://oeis.org/A000984}{A000984} 
+            &   yes \\
+4           &  $Q^4$      && $6-(1-64)\alpha\partial_{\alpha}
+                             - 2 \alpha (1 - 16 \alpha)\partial_{\alpha}^2$  
+            & \href{https://oeis.org/A001448}{A001448} 
+            &  yes \\
+4           &  $(Q_4)^2$       && same as for $\Phi=P^2 Q^2$ 
+            & \href{https://oeis.org/A000984}{A000984} 
+            &  yes  \\            
+6           &  $(P Q^3)^2$    && $30 - 3 (1- 452 \alpha)\partial_{\alpha}
+                               - 8 \alpha (4 - 243 \alpha)\partial_{\alpha}^2$ 
+            & \href{https://oeis.org/A211419}{A211419} 
+            &  yes \\
+            & \tiny (cont.) && \hspace{0.5cm} $ -16 \alpha^2 (1 - 27 \alpha)\partial_{\alpha}^3$  &  &    \\            
+            &  $P_2 P^2$    && $2(1 + 4 \alpha)^2 
+                             -(1 - 32 \alpha -112 \alpha^2 - 160 \alpha^3)\partial_{\alpha}$ 
+                            %  -2 \alpha (1 + \alpha) (1 + 4 \alpha) (1 - 8 \alpha)\partial_{\alpha}^2$                   
+            & \href{https://oeis.org/A288470}{A288470} 
+            &  no \\
+                & \tiny (cont.)       && \hspace{0.5cm}  $ -2 \alpha (1 + \alpha) (1 + 4 \alpha) (1 - 8 \alpha)\partial_{\alpha}^2$                   
+            & &     \\
+            &  $P_3 P $    && $12 \alpha (4 + 9 \alpha)- 2 (1 -13 \alpha - 84 \alpha^2 - 270 \alpha^3) \partial_{\alpha}$ 
+            & \href{https://oeis.org/A092765}{A092765} 
+            &  no  \\
+                & \tiny (cont.)       && \hspace{0.5cm} $ -\alpha (1 - 4 \alpha) (1 + 6 \alpha) (4 + 9 \alpha)\partial_{\alpha}^2$                   
+            & &     \\
+            &  $(P_3 Q)^2$     && $12 (10 - 126 \alpha + 729 \alpha^2)$  
+            & \href{https://oeis.org/AXXXXXX}{nAn} 
+            &  no \\
+                & \tiny (cont.)       && \hspace{0.5cm} $ -6 (5 - 1093 \alpha + 7308 \alpha^2 - 13122 \alpha^3)\partial_{\alpha}$                   
+            & &     \\
+                & \tiny (cont.)       && \hspace{0.5cm} $ -\alpha (320 - 11043 \alpha + 85806 \alpha^2 - 69984 \alpha^3)\partial_{\alpha}^2$                   
+            & &     \\
+                & \tiny (cont.)       && \hspace{0.5cm} $ -2 \alpha^2 (5 - 54 \alpha) (16 - 207 \alpha + 108 \alpha^2)\partial_{\alpha}^3$                   
+            & &     \\
+\hline
+3           &  $(Q_3)^2$      && same as for $\Phi=P^2 Q^2$
+            & \href{https://oeis.org/A000984}{A000984} 
+            &  yes \\
+3           &  $(I_2 Q)^2$   && same as for $\Phi=P^2 Q^2$
+            & \href{https://oeis.org/A000984}{A000984} 
+            &  yes \\
+4           &  $(P Q^2)^2$  && $24-6 (1 - 136 \alpha)\partial_{\alpha}-18 \alpha (3 - 64 \alpha)\partial_{\alpha}^2$ 
+            & \href{https://oeis.org/A005810}{A005810} 
+            &  yes \\
+            & \tiny (cont.)       && \hspace{0.5cm} $ -\alpha^2 (27 - 256 \alpha)\partial_\alpha^3$                   
+            & &     \\
+6           &  $(Q^3)^2$        && $40 - 2 (1 - 904 \alpha)\partial_{\alpha} - 18 \alpha (1 - 144 \alpha)\partial_{\alpha}^2$  
+            & \href{https://oeis.org/A066802}{A066802} 
+            &  yes \\
+            & \tiny (cont.)       && \hspace{0.5cm} $ -9 \alpha^2 (1 - 64 \alpha)\partial_{\alpha}^3$                   
+            & &    \\
+            &  $(P_2 Q)^2$  && $24 (1 - 16 \alpha)^2 $ 
+            & \href{https://oeis.org/A005721}{A005721} 
+            &  no \\           
+            & \tiny (cont.)       && \hspace{0.5cm} $ -6 (1 - 248 \alpha + 2688 \alpha^2 - 9216 \alpha^3)\partial_{\alpha}$                   
+            & &     \\
+            & \tiny (cont.)       && \hspace{0.5cm} $ -6 \alpha (1 - 16 \alpha) (9 - 276 \alpha + 512 \alpha^2)\partial_{\alpha}^2$                   
+            & &     \\
+            & \tiny (cont.)       && \hspace{0.5cm} $ -\alpha^2 (1 - 16 \alpha)^2 (27 - 32 \alpha)\partial_{\alpha}^3$                   
+            & &    \\
+            \hline
+            &  $I_2 Q^4$      && same as for $\Phi=Q^4$   
+            & \href{https://oeis.org/A001448}{A001448} 
+            &  yes \\
+3           &  $I_2 P^2 Q^2$  && same as for $\Phi=P^2 Q^2$ 
+            & \href{https://oeis.org/A000984}{A000984} 
+            &  yes\\
+\hline
+            &  $(P^5 Q)^2$        && $7560-30(3-184504\alpha)\partial_{\alpha}-30\alpha(459-1076000\alpha)\partial_{\alpha}^2 $
+            & \href{https://oeis.org/AXXXXXX}{nAn}  
+            &  yes \\
+            & \tiny (cont.)       && \hspace{0.5cm} $-423\alpha^2(99-80000\alpha)\partial_\alpha^3-32\alpha^3 (729 - 312500 \alpha)\partial_{\alpha}^4$                   
+            & &    \\
+            & \tiny (cont.)       && \hspace{0.5cm} $- 4 {\alpha}^4 (729 - 200000 \alpha)\partial_{\alpha}^5$                   
+            & &    \\
+6           &  $(P_2 Q_2^2)^2$    && same as for $\Phi=(P Q^2)^2$
+            & \href{https://oeis.org/A005810}{A005810} 
+            &  yes  \\
+ \vdots   &  \vdots          &&   & \vdots  & \vdots   \\
+\hline            
+\end{tabularx}
+\phantom{\;}
+$P_n=2\cos(n\phi),\;Q_n=2\sin(n\phi),\;P=P_1,\;Q=Q_1, \;I_2=\frac{1}{4}(P^2+Q^2)=1$. 
+
+See Appendix A for computer proofs.
+\end{center}
+\end{table} 
+
+By the most expedient, intuitive analysis, we have already uncovered a secret that 
+is well within the reaches of what Ramanujan himself could have known and calculated:
+\begin{quote}
+\textit{The three alternatives to $K(\alpha)$ all obey a Hadamard decomposition to two hypergeometric
+factors. One factor is determined by the general choice of a degree, either quartic or cubic. 
+The other factor is then determined by the special choice of a trigonometric polynomial, 
+homogeneous in the chosen degree.} 
+\end{quote}
+We will never know exactly how Ramanujan found $K_1$, $K_2$, and $K_3$, but his notebooks 
+do evidence a propensity for exhaustive searches. In any case, the statement is not lacking 
+insight, but certainly needs more rigor. We can do incrementally better by using Creative 
+Telescoping to print and verify Table \ref{tab:TrigPolys}. Here, right factors are written as 
+$I(\alpha)=\oint\frac{d\phi}{1-\alpha\Phi}$ and given alongside an annihilator 
+$\mathcal{A}$ such that $\mathcal{A} \circ I(\alpha)=0$. 
+When annihilator $\mathcal{A}$ determines a hypergeometric $I(\alpha)$, the 
+coefficient recursion can be found by the Frobenius method. We will now give 
+a brief, easy example of how this works in practice.  
+
+The most simple choice, $\Phi=4\sin(\phi)^2$, recalls earlier calculations\footnote{Cf. 
+[1] sec. 1-2. In fact, up to scale of $\alpha$, the same matrix invariants can be used again.} 
+of $E(\alpha)$ and $K(\alpha)$. The integral function 
+$I(\alpha)=\oint\frac{d\phi}{1-4\alpha\sin(\phi)^2}$
+has no square root, so details work out with even less effort. The identity,
+\begin{eqnarray}
+\mathcal{A}\circ \frac{dI}{d\phi}-\partial_{\phi}\Xi
+=\Big(2-(1-4\alpha)\partial_{\alpha} \Big) \circ \frac{1}{1-4 \alpha \sin(\phi)^2}
+-\partial_{\phi}\bigg( \frac{2\cos(\phi)\sin(\phi)}{1-4 \alpha \sin(\phi)^2}\bigg) = 0.
+\nonumber
+\end{eqnarray}
+utilizes certificate $\Xi$ to prove that $\mathcal{A}$ almost annihilates
+$\frac{dI}{d\phi}$. Again, exact differentials integrate to zero on a closed 
+contour, thus $\mathcal{A}$ completely annihilates $I(\alpha)$, or $\mathcal{A} \circ I(\alpha)=0$.  
+When solving for a coefficient recursion, it is also useful to view 
+$\mathcal{A}$ as a coefficient matrix, $\mathcal{A}\sim \big(\;^{2}_{0}\;^{-1}_{\;4}\big)$, 
+where powers of $\alpha$ increase by row, and powers of $\partial_{\alpha}$ increase by
+column. The matrix encoding of $\mathcal{A}$ allows algorithmic streamlining of the Frobenius method,
+\begin{eqnarray}
+\frac{a_{n+1}}{a_n} = \frac{(2,4)\cdot(1,n)}{(1)\cdot(1+n)} = 4\frac{(n+\tfrac{1}{2})}{(n+1)} \implies
+I(\alpha)=\oint\frac{d\phi}{1-4 \alpha \sin(\phi)^2}=\tFo{\frac{1}{2},\cdot}{\cdot}{4 \alpha}. \nonumber
+\end{eqnarray}
+In case it is not already clear, dots in the arguments of a $\,_2F_1$ function indicate 
+canceled parameters, so the evaluation is more precisely to a $\,_1F_0$ function. 
+\FloatBarrier
+
+The main virtue of Table \ref{tab:TrigPolys} is \textit{systematism}. Rather than searching
+by intuition through the space of valid $\Phi$, we develop a comprehensive list of monomials,
+and use the diagnostic \texttt{ExpToODE} to distinguish cases. We include any
+monomial of the variables $Q_n=2\sin(n\phi)$,  $P_n=2\cos(n\phi)$, and $I_2=\frac{1}{4}(P^2+Q^2)=1$, 
+which satisfies the degree constraint that ${d=\sum \text{subscript} \times \text{exponent}}$, with $d=4$ 
+or $d=3$, and summing over all multiplicands. For the quartic case, we 
+find only 6 distinct cases,  and only 4 distinct cases for cubic functions. These 
+appear in the first and second divisions of Table \ref{tab:TrigPolys}. Perturbations 
+$\Phi$ appear with an extra square when odd powers would otherwise integrate 
+to zero. This is true for all cubic perturbations, and also for a few of the quartic
+perturbations, as we have already seen.
+
+Given the data of Table \ref{tab:TrigPolys}, matrix encodings of each 
+annihilator can be inspected to determine whether or not $I(\alpha)$ is a hypergeometric
+function. If the matrix has non-zero values only on the central diagonal and the 
+first upper diagonal, then it is hypergeometric and gets a "yes" in the last column. 
+Otherwise if the matrix form of $\mathcal{A}$ contains non-zero values on $k>2$ diagonals, 
+the Frobenius recursion will relate $a_n, a_{n+1},\ldots,a_{n+k-1}$, so it cannot be 
+hypergeometric.\footnote{There is a sometimes a caveat about "minimal telescopers", but 
+all "no" cases of Table \ref{tab:TrigPolys} have been double checked for the minimal property by guess 
+and check, and by referencing with OEIS.} We should not be too surprised to find a few 
+more interesting models for the series called by Ramanujan $K_1$, $K_2$ and $K_3$. 
+However it is somewhat amazing that all "yes" hits lead to one of these periods. 
+
+The asymmetric alternatives are also worth a look. Reading down the table, we first 
+find the pertubation $\Phi=I_2Q^2=Q^2$, and can recognize the corresponding Hamiltonian
+function, $2H_{\varphi}=(p^2+q^2)(1-\frac{1}{4}q^2)$, as the algebraic form that describes simple 
+pendulum libration. The first unknown is $\Phi=(PQ^3)^2$, or in the full notation, 
+$2H_6''=p^2+q^2-\frac{4\sqrt{3}}{9}p q^3$. The period function, 
+$T_6(\alpha^2)=2\pi\tFoIn{\frac{1}{6},\frac{5}{6}}{1}{\alpha^2}$,
+follows from the Hadamard decomposition,
+\begin{eqnarray}
+\tFo{\frac{1}{6},\frac{5}{6}}{1}{\alpha^2}=
+\tFo{\frac{1}{4},\frac{3}{4}}{\frac{1}{2}}{\alpha^2}
+\star\,_3F_2 \bigg[ \genfrac..{0pt}{}{\frac{1}{6},\frac{1}{2},\frac{5}{6}}{\frac{1}{4},\frac{3}{4}}\Big| \alpha^2 \bigg]
+ \nonumber.
+\end{eqnarray}
+Comparison with the similar cubic period reveals more than dancing parameters,
+\begin{eqnarray}
+\binom{4n}{2n}\sum_{k=0}^n \binom{6 n}{k}\binom{5 n - k - 1}{n-k}=\binom{3n}{n}\binom{6n}{3n}. \nonumber
+\end{eqnarray}
+a seemingly improbable, nonetheless true, binomial identity! Another way to prove the identity 
+is to observe that the shear transformation $p \rightarrow p+\frac{2\sqrt{3}}{9}q^3$ takes 
+quartic $H_6''$ to sextic $2H_6'=p^2+q^2-\frac{4}{27}q^6$. All such shears have Jacobian 
+determinant $1$, so they are canonical transformations, thus preserve periods of oscillation.
+As it must, $H_6'$ also follows  from $\Phi=(Q^3)^2$ applied to the general sextic form.  
+Another similar example for signature $4$ is found from $H_4''=p^2+q^2-pq^2$, by applying 
+the shear $p \rightarrow p+\frac{1}{2}p^2$. This canonical transformation again obtains $H_4$,
+thus $\binom{3n}{n}\binom{4n}{n}=\binom{2n}{n}\binom{4n}{2n}$, another unexpected 
+identity!
+
+The only cases left are those marked as $s=3$ in Table \ref{tab:TrigPolys}. Applying
+an Abel-Wick rotation, $p\rightarrow i p, q\rightarrow \sqrt{3}-q$ to $1-H_3$ obtains 
+$\widetilde{H}_3=(3p^2+q^2)(1-\frac{2\sqrt{3}}{9}q)$. Up to a factor $\sqrt{3}$ on 
+the frequency scale $\omega_0$, $\widetilde{H}_3 \approx (p^2+q^2)(1-\frac{2\sqrt{3}}{9}q)$,
+what we obtain by applying ${\Phi=I_2Q}$ to the general cubic form. Isoperiodicity follows
+from the fact that $\alpha \rightarrow 1-\alpha$ acts invariantly on the annihilator 
+$\mathcal{A}_s$. The last essential case is $\Phi=Q_3^2$, 
+with Hamiltonian form, ${2H_3'=p^2+q^2-\frac{4}{27}( q^3-3 p^2 q)^2}$. 
+By now, the derivation $H_3'$ and its period function $T_3(\alpha^2)$
+should be quite obvious. If not, we assert that sextic anharmonic 
+oscillators of the form  $\alpha = 2H(\lambda,\phi)=2\lambda-\lambda^3\Phi$ 
+are measured by the period function, 
+\begin{eqnarray}
+T(\alpha) = \sum_{n=0}^{\infty} \frac{1}{8^n}\binom{3n}{n}\alpha^{2n} \oint \Phi^n d\phi 
+= \tFo{\frac{1}{3},\frac{2}{3}}{\frac{1}{2}}{\alpha^2}\star\oint\frac{d\phi}{1-\frac{27}{32}\alpha^2\Phi} . \nonumber
+\end{eqnarray}
+Consequently, when a cubic function $\alpha=2H=2\lambda -\lambda^{\frac{3}{2}}\Phi$ has period $T(\alpha)$, 
+the corresponding sextic function $\alpha=2H=2\lambda -\lambda^{3}\Phi^2$ has period $T(\alpha^2)$. 
+
+Having done so much more analysis, we can now strengthen the earlier theorem:
+\begin{quote}
+\textit{Assuming either form, $\alpha=2H=2\lambda-\lambda^{\frac{3}{2}}\Phi$ or 
+$\alpha=2H=2\lambda-\lambda^2\Phi$, a valid choice of monomial $\Phi$ determines 
+a hypergeometric period $T(\alpha)$ if and only if $\mathcal{A}_s \circ T(\alpha)=0$
+for $s=2,3,4$ or $6$. Canonical models $H_s$ all have elliptic level curves $\mathcal{C}_{s}(\alpha)$
+for $\alpha \in (0,1)$. Except for $s=2$, each $H_s$ has a higher-genus analog, and 
+a canonical set of $H_s'$ for $s=3,4,6$ can be chosen to maximize symmetry.}
+\end{quote}
+Take a step back and think about what the strengthened result says. Not only is it possible 
+to find Ramanujan's set $K_1$,$K_2$, and $K_3$ by searching a space of geometric models;
+if we place mild constraints on the search space, we will only find the set 
+$K_1$,$K_2$, and $K_3$! In that sense Ramanujan's presentation is \textit{complete} if not 
+\textit{comprehensive}. This curious case of good insight blurs the line between 
+fortune and genius, but not between apathy and work. Don't forget, Ramanujan did not have a computer 
+to generate and check results!
+
+\begin{table}[t]
+\begin{center}
+\captionof{table}{Sextic Hamiltonians and their period functions, $T(\alpha) =
+\,_4F_3 \Big[ \genfrac..{0pt}{}{\frac{1}{6},\frac{1}{3},\frac{2}{3},\frac{5}{6}
+}{\frac{1}{4},\frac{1}{2},\frac{3}{4}}\Big| \alpha^4 \Big]
+\star I(\alpha)$.}  
+\label{tab:HypSextics}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabularx}{\textwidth}{ c l | c l | c l }
+\hline \hline
+\hspace{0.1cm} & 
+$\alpha = 2H =$ & \hspace{0.1cm} 
+& $I(\alpha)=$ &\hspace{0.1cm} & $T(\alpha)=$ \\
+\hline
+& $p^2 + q^2 - \frac{8}{9}( p^5 q -\frac{10}{3}p^3q^3 +q^5 p)$ \hspace{0.5cm} & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{2},\cdot
+}{\cdot}\Big| \alpha^4 \Big]$   & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{1}{3},\frac{2}{3},\frac{5}{6}
+}{\frac{1}{4},\frac{3}{4},1}\Big| \alpha^4 \Big]$     \\
+& $p^2 + q^2 - \frac{4 \sqrt{3}}{9} p q (p^2 - q^2)^2$  & &
+$2\pi\,_3F_2 \Big[ \genfrac..{0pt}{}{
+\frac{1}{4},\frac{1}{2},\frac{3}{4}
+}{\frac{1}{3},\frac{2}{3}}\Big| \alpha^4 \Big]$   & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{5}{6}
+}{1}\Big| \alpha^4 \Big]$     \\
+& $p^2 + q^2 - \frac{4}{27}(p^2-q^2)^3$  & &
+$2\pi\,_3F_2 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{1}{2},\frac{5}{6}
+}{\frac{1}{3},\frac{2}{3}}\Big| \alpha^4 \Big]$   & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{1}{6},\frac{5}{6},\frac{5}{6}
+}{\frac{1}{4},\frac{3}{4},1}\Big| \alpha^4 \Big]$     \\
+& $\big(p^2 + q^2\big)\big(1 - \frac{64\sqrt{3}}{243} p q^3\big)$  & &
+$2\pi\,_3F_2 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{1}{2},\frac{5}{6}
+}{\frac{1}{4},\frac{3}{4}}\Big| \alpha^4 \Big]$   & &
+$2\pi\,_6F_5 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{1}{6},\frac{1}{3},\frac{2}{3},\frac{5}{6},\frac{5}{6}
+}{\frac{1}{4},\frac{1}{4},\frac{3}{4},\frac{3}{4},1}\Big| \alpha^4 \Big]$     \\
+& $p^2 + q^2 - \frac{32\sqrt{5}}{125} p q^5$  & &
+$2\pi\,_5F_4 \Big[ \genfrac..{0pt}{}{
+\frac{1}{10},\frac{3}{10},\frac{1}{2},\frac{7}{10},\frac{9}{10}
+}{\frac{1}{6},\frac{1}{3},\frac{2}{3},\frac{5}{6}}\Big| \alpha^4 \Big]$ \hspace{0.5cm}  & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{10},\frac{3}{10},\frac{7}{10},\frac{9}{10}
+}{\frac{1}{4},\frac{3}{4},1}\Big| \alpha^4 \Big]$     \\
+\end{tabularx}}
+\rule{\textwidth}{.01cm}
+\end{center}
+\end{table}
+
+So long as we don't pay too much attention to the particulars of series reversion, 
+there is no reason to cease the search at quartic degree. Given that $H_3'$ and $H_6'$ are sextic 
+functions, it is natural to wonder: what happens generally for quintics and higher? 
+Using \texttt{ExpToODE} we are able to perform an exhaustive search up to octic degree, 
+over 200 choices of $\Phi$. Most frequently the annihilators are not hypergeometric,
+but we also found many hypergeometric cases, including those of Table \ref{tab:HypSextics}. 
+In the subset of hypergeometric search results, we do not find any surprising examples 
+where $T(\alpha^n)=\tFoIn{a,b}{c}{\alpha^n}$ with 
+$(a,b) \neq (s,\frac{s-1}{s})$ or $c \neq 1$. For $s=6$, the search uncovers another 
+sextic model, though with period $T_6(\alpha^4)$. 
+In a narrow search above $d=8$, we find $\alpha =2H=p^2 + q^2 - \frac{64}{27} p ^4 q^6$, 
+again with period $T_6(\alpha^4)$. 
+
+The two extra  occurrences of $T_6(\alpha)$ both entail freak-accident parameter cancellations. 
+More commonly, Hadamard products involve little-to-no cancellation. For $d=7$ or $d=8$ it is 
+already possible to find periods of the form $\,_{10}F_8$ or $\,_{10}F_9$. The search results 
+show a clear average pattern: as degree increases, complexity of the period function increases,
+and simple examples become sparsely distributed, if at all. We could continue to make
+observations and hypotheses, but again these would depend on unproven assertions. 
+To prove claims more surely, we will now delve deeper into the algorithmic theory 
+of Creative Telescoping. 
+
+\pagebreak
+
+\begin{table*}
+\begin{tabularx}{\textwidth}{l l}
+\hline
+\multicolumn{2}{l}{\textbf{Algorithm 1.} Simple Creative Telescoping via Hermite-Ostrogradsky reduction. }  \\
+\hline
+\textbf{Input:}  & An integrand $dI\big(\alpha,z(\alpha,t)\big)$, 
+                   denominator $\rho$, and differentials $\partial_{\alpha}z$, and $\partial_{t}z$.   \\
+\textbf{Output:} \hspace{0.5cm} & Annihilator $\mathcal{A}$ and certificate $\Xi$ 
+                                  such that $\mathcal{A}\circ \frac{dI}{dt} - \partial_t\Xi=0$. \\
+\hline
+\end{tabularx}
+\begin{algorithmic}[1]
+\Function{EasyCT}{$dI$,$\rho$,$\partial_{\alpha} z$,$\partial_{t} z$}:
+\hspace{2.6cm} \texttt{\#(Ha, ha, ha! Have Fun!)$>$\;\big(\rotatebox{-90}{\!\!\!\!\small \texttt{8D}}\big)}
+\State $ d \gets \Call{Deg}{\rho}$; $\Delta \gets \Call{Deg}{\partial_{t} z}-1$; 
+\State $u\gets  \sum_{n=0}^{d+\Delta-1}u_{n}z^n$; $v \gets \sum_{n=0}^{d-1}v_{n}z^n $;
+\State $ \mathbf{G} \gets \Call{CoefficientMatrix}{\rho u - (\partial_{t} z)(\partial_z\rho) v,2d+\Delta }$; 
+\If {$\Call{Det}{\mathbf{G}}=0$} \Return "Error: no inverse for $\mathbf{G}$.";
+\Else \; $ (\mathbf{U},\mathbf{V}) \gets$ decomposition of $\mathbf{G}^{-1}$; $\dot{\mathbf{V}} \gets (\partial_t z )\partial_z\mathbf{V}$;
+\EndIf
+\State $n\gets 0$; $x_0\gets\frac{dI}{dt}$; $ \mathbf{x}_0 \gets \Call{CoefficientVector}{\rho x_0 ,d+\Delta}$;  
+\State $\mathbf{A}\gets\Call{NullSpace}{\{\mathbf{x}_0\}^T}$;
+\While{$\Call{Empty}{\mathbf{A}}$}  $n\gets n+1$; $\mathbf{x}_n=0$;
+\State $x_n\gets\partial_{\alpha}x_{n-1}+(\partial_{\alpha}z)\partial_z x_{n-1} $;
+\If {$!\Call{Reducible}{\rho, x_n,n}$ } 
+     \State \Return "Error: $\rho/dI$ mismatch."; \EndIf
+\State $\mathbf{w}=\{w_0,w_1,\ldots,w_n\} \gets \Call{PartialFractions}{x_n,\rho} $;
+      \For{$m=0,1,\ldots,n$}
+        \State $\mathbf{w}_m \gets \Call{CoefficientVector}{w_m,d+\Delta}$;
+        \State $\mathbf{x}_n \gets \mathbf{x}_n 
+        + \Call{VectorReduce}{\mathbf{U},\mathbf{V},\dot{\mathbf{V}},m,\mathbf{w}_m,d-1} $;
+      \EndFor
+\State $\mathbf{A}\gets\Call{NullSpace}{\{\mathbf{x}_0,\ldots,\mathbf{x}_n\}^T}$;
+\EndWhile
+\State $\mathbf{\Xi} \gets \Call{Reap}{\;\!}$; 
+\Return $\big(\mathbf{A}\cdot\{1,\partial_{\alpha},\ldots,\partial_{\alpha}^n\},
+\mathbf{A}\cdot\Call{SubTotal}{\mathbf{\Xi}}\big)$;
+\EndFunction
+
+\Function{VectorReduce}{$\mathbf{U},\mathbf{V},\dot{\mathbf{V}},k,\mathbf{w},l$}:
+\While{$k>0$} 
+\State $\Call{Sow}{\frac{1}{k \rho^k}\{1,z,\ldots,z^l\} \cdot \textbf{V} \cdot \mathbf{w} }$;
+\State $\mathbf{w} \gets (\mathbf{U} +\frac{1}{k} \dot{\textbf{V}}) \cdot \mathbf{w}$;
+\State $k \gets k-1 $;
+\EndWhile
+\State \Return $\textbf{w}$;
+\EndFunction
+\end{algorithmic}
+\rule{\textwidth}{.01cm}
+\end{table*}
+\section{Diagnostic Algorithms}
+Creative Telescoping is an algorithmic theory that aims to assist in the process 
+of redefining functions according to the ordinary differential equations they satisfy.
+We have already made use of \texttt{ExpToODE}, with input/output map 
+$I(\alpha) \rightarrow \mathcal{A}$. Soon we will introduce two more 
+algorithms, \texttt{hyperellipticToODE} and \texttt{DihedralToODE}. 
+Despite differing input domains, all three algorithms follow the same pseudocode, 
+as written in Alg. 1. This pseudocode is a template for a range of C.T. algorithms 
+that rely on degree-bounded Hermite-Ostrogradsky reduction\cite{BRONSTEIN2005}. Such algorithms
+are the simplest possible, while still meeting minimum rigor. They make a good
+starting place for curious beginners. 
+
+Hermite-Ostrogradsky reduction is essentially limited to univariate cases; however,
+for the sake of versatility, it is useful to assume a chain-rule structure. The 
+integral $I(\alpha) = \oint \frac{dI}{dt}dt$ requires a period $T$ such that 
+$t\rightarrow t+T$ leaves $\frac{dI}{dt}$ invariant, so most likely, $t$ will not
+make a good basis for reductions. We need an algebraic variable $z(\alpha,t)$. 
+A good choice for $z$ is often determined by inspection of $\rho$, for typically 
+$\rho \in \mathbb{Q}[\![i,\alpha,z]\!]$. In fact, the algorithm assumes $\rho$ is a 
+degree-$d$ polynomial of $z$, i.e. $\rho = \sum_{n=0}^d c_n z^n$, and the $c_n$ 
+themselves are usually rational functions or polynomials in the variable $\alpha$. 
+Subsequently we must also require 
+$\dot{\rho}=(\partial_t z) \sum_{n=0}^d n c_n z^{n-1}=\sum_{n=0}^{d+\Delta}c_n'z^n$, 
+i.e. that $\dot{\rho}$ is a $z$-polynomial. We will discuss in detail the obvious 
+examples $z=e^{it}$ and $z(t)=q(t)$, as well as a non-obvious, more difficult case,
+$z(t)=\lambda(t)$. Since these three cases are all strongly related, it should help
+to start with an overview of Alg. 1 including what it does, why it works, and when 
+it can possibly fail. 
+
+The first few lines 2-4 determine the dimensionality of the reduction process, but 
+do not guarantee success. Once variables are chosen, a feasibility analysis needs to 
+be performed relative to the central statement of Hermite-Ostrogradsky reduction 
+from $w$ to $[w]$, 
+\begin{eqnarray}
+\frac{[w]}{\rho^{m}}=\Big(u-\frac{1}{m}\dot{v}\Big)\frac{1}{\rho^{m}} = 
+\frac{w}{\rho^{m+1}}-\partial_t\bigg( \frac{v}{m\rho^{m}}\bigg) 
+\;\;\; \iff \;\;\; 
+ w = \rho u -\dot{\rho} v \nonumber.
+\end{eqnarray}
+That such a reduction exists is itself an improbable assumption. The variables $u$, 
+$v$, and $w$ must be polynomials in the variable $z$ with consistent degrees, i.e. 
+$\deg(w)=\deg(u)+\deg(\rho)$ and $\deg(w)=\deg(v)+\deg(\dot{\rho})$. Polynomials $u$ and $v$ are 
+treated as unknowns with many degrees of freedom, $\text{dof}(v)=\deg(v)+1$ and 
+$\text{dof}(u)=\deg(u)+1$. Solving the degree bound, $\deg(w)=\text{dof}(u)+\text{dof}(v)$,
+we obtain that $\deg(u)=\deg(\dot{\rho})-1$ and $\deg(v)=\deg(\rho)-1$. We can also state that 
+$\deg(u)=\deg(\dot{v})=d+\Delta-1$ in terms of $d=\deg(\rho)$ and  ${\Delta = \deg(\partial_t z)-1}$. 
+This restricts all functions $w(z)$ with implicit $\deg(w)=2d+\Delta-1$ to have non-zero $w_n$ only 
+from $n=0$ to $n=d+\Delta-1$. When all of these conditions are met, it is possible to proceed 
+to line 5 of Alg. 1, where the first critical error could possibly occur. 
+
+The $\mathbf{G}$ matrix is constructed relative to spanning vectors 
+$\mathbf{z}=\{1,z,z^2,\ldots,z^{2d+\Delta}\}$ and  
+$\mathbf{uv}=\{u_0,u_1,\ldots,u_{d+\Delta-1},v_0,v_1,\ldots,v_{d-1} \}$. 
+It encodes the essentials of the right hand
+side of $w=\rho u - \dot{\rho} v$. Introducing another coefficient vector $\mathbf{w}$ such that 
+$w=\mathbf{z}\cdot\mathbf{w}$, we can rewrite the reduction constraint as 
+$\mathbf{w}=\mathbf{G} \cdot \mathbf{uv}$. If and only if $\det(\mathbf{G})\neq0$, the linear equation 
+is uniquely solveable. If $\det(\mathbf{G}) = 0$, an error is thrown on line 5 and Alg. 1 fails. For 
+some choices of $z$ and $\rho$, it is possible to prove that $\det(\mathbf{G})$ never equals to zero,
+and this marks an important distinction between \textit{proveable} and \textit{effective} algorithms.
+Proveable algorithms are preferable because they will always work, whereas effective algorithms can
+only be guaranteed case-by-case. Absolute rigor is never necessary, and as long as possible errors 
+are well-understood, it is not always desirable\footnote{Our view is that extra rigor must sometimes be 
+sacrificed to explore more deeply.}.
+
+Line 5 is a major milestone for the algorithm, and passing it strongly suggests that the a positive 
+result will be obtained upon halting. To explain subsequent line 6, we must split apart 
+vector $\mathbf{uv}$ to $\mathbf{u}$ and $\mathbf{v}$, lengths $d+\Delta$ and $d$ respectively,
+while dropping zeros of $\mathbf{w}$ to obtain $\mathbf{w}'$, another vector of length $d+\Delta$. 
+Then we can define matrices $\mathbf{U}$ and $\mathbf{V}$ such that $\mathbf{u}=\mathbf{U}\cdot \mathbf{w}'$
+and $\mathbf{v}=\mathbf{V}\cdot \mathbf{w}'$. Given that $\mathbf{uv}=\mathbf{G}^{-1}\cdot\mathbf{w}$,
+matrices $\mathbf{U}$ and $\mathbf{V}$ must be submatrices of $\mathbf{G}^{-1}$, so the first part 
+of line 6 is no more complex than matrix inversion. Once the matrix $\mathbf{V}$ is known, the 
+function $v(w)$ is known, as is $\dot{v}(w)$, as is the matrix $\dot{\mathbf{V}}$. Both $\mathbf{U}$
+and $\dot{\mathbf{V}}$ are square matrices, so we can finally achieve the goal of writing 
+Hermite-Ostrogradsky reduction in terms of linear algebra, 
+$[\mathbf{w}']=(\mathbf{U}+\frac{1}{m}\dot{\mathbf{V}})\cdot\mathbf{w}'$,
+as in line 22 of Alg. 1.  The halting condition is already in sight, but there is at least 
+one more significant chance of failure.
+
+
+Lines 11-12 validate that $\rho$ is well-chosen with regard to integrand $dI$. As the 
+length of $\mathbf{x}_0$ is $d+\Delta$, we can anticipate needing to calculate no more 
+than $D=d+\Delta$ reductions, before the set $\{\mathbf{x}_0,\mathbf{x}_1,\ldots,\mathbf{x}_D\}$
+must contain at least one linear dependency. Depending on symmetry, the first linear dependency
+may occur for $D'+1$ vectors, with $D'<D$. For this reason, we compute and validate derivatives 
+on the fly. To reach $n=D'$ and exit the loop after line 17, we must always find, for each $n \le D'$, 
+that $\partial_{\alpha}^n\frac{dI}{dt}=\sum_{m=0}^n\frac{w_m}{\rho^{m+1}}$. In other words,
+the partial fraction decomposition of $\partial_{\alpha}^n\frac{dI}{dt}$ must yield no more 
+than $n+1$ degree-bounded numerators $w_m=\sum_{k=0}^{d+\Delta}w_{m,k}z^k$. During each
+loop, if the check on line 11 passes, then the numerators $w_m$ are calculated on line 13. 
+The algorithm enters a second loop on line 14, and calculates the coefficients $w_{m,k}$ on 
+line 15. A third loop is entered on line 20 via line 16, and fourth loops occur on lines 
+21 and 22 as matrix multiplication. When this process repeats without error, the algorithm
+approaches halting on success. Eventually, on line 17, a linear dependence between the 
+$\mathbf{x_n}$ will be found and set to $\mathbf{A}$. The loop breaks, and shortly 
+thereafter, the function returns a positive result. 
+
+The subfunction defined on line 19 deserves a closer look. It manages the iterative part 
+of Hermite-Ostrogradsky reduction by taking a $\mathbf{w}_m\sim \frac{w_m}{\rho^{m+1}}$ from
+its initial form to its minimal form  $\mathbf{w}_f\sim \frac{w_f}{\rho}$. Lines 21-22 involve
+$2m$ matrix multiplications, only $m$ of which are strictly necessary. The sow step on line 
+21 keeps track of partial certificates by hiding them in the memory. Later, on line 18,
+they can be retrieved and summed. When subtotaled by index $n$ and dotted with 
+$\mathbf{A}$, the partial certificates $\mathbf{\Xi}$ determine a total certificate 
+$\Xi$ such that ${\mathcal{A} \circ \frac{dI}{dt}-\partial_t \Xi=0} $. If the reduction 
+reaches large recursion depth, speed and memory usage can suffer, so sometimes we choose to
+run the algorithm without calculating certificates. However, if there is any doubt or misunderstanding, 
+having a certificate assures quality. 
+ 
+In practice, we also care about the complexity of Alg. 1. How does it scale relative to the 
+degree bound $D$? Naively, the answer is that Alg. 1 is polynomial-time, roughly
+$\mathcal{O}(D^{3+\omega})$, where $1<\omega<3$ is the complexity cost of matrix multiplication. 
+In many cases three loops are not necessary, and the figure without partial fraction
+decomposition  $\mathcal{O}(D^{2+\omega})$ looks even better\footnote{Both complexity 
+estimates are comparable to estimates for similar algorithms \cite{COMPLEXITY2010}.}. The problem is that 
+matrix multiplication generates larger and larger polynomial data as recursion depth of 
+the $k$-loop increases. This causes slow-down during the reduction phase, 
+and eventually makes nullspace calculation prohibitively slow. If $2<\omega'<3$ is the complexity 
+of finding a null vector, then $\mathcal{O}(D^{1+\omega'})\sim \mathcal{O}(D^{2+\omega})$, 
+and we could expect this step to dominate time dynamics. In many calculations, indeed it does. 
+Heuristically, the complexity of Alg. 1 is much better described by an exponential or 
+super exponential figure. If necessary, more accurate estimates can follow from
+testing on random inputs. Of course, this requires an implementation for some particular
+choice of inputs. 
+
+In the previous section, we have already revealed that functions $\sin(t)$ and $\cos(t)$ make 
+a good basis for an application of Creative Telescoping. The choice $z(t)= \cos(t)+i \sin(t)$ 
+is even better because $\partial_t z = i z$. If we allow negative powers of $z$ by requiring
+that ${\rho \in Q\mathbb[\![i,\alpha,z,z^{-1}]\!]}$ then we can represent $\sin(t)$ and 
+$\cos(t)$ as $\frac{1}{2i}(z-\frac{1}{z})$ and $\frac{1}{2}(z+\frac{1}{z})$ respectively.
+When $\rho$ is chosen as $\rho = 1-\alpha \Phi$ with $\Phi \in Q\mathbb[\![i,z,z^{-1}]\!]$,
+and when $\frac{dI}{dt}=\frac{1}{\rho}$ we can make slight edits to Alg. 1 and arrive at 
+the algorithm \texttt{ExpToODE}. In fact, we need only make changes to account for negative 
+powers. Assuming that $\Phi=\sum_{\tilde{d}}^{d}c_n z^n$ then $\text{bideg}(\rho)=(\tilde{d},d)$. 
+As $\Delta=0$, we can set $\text{bideg}(u)=\text{bideg}(v)=\text{bideg}(\rho)$,
+which implies $\text{bideg}(w)=(2\tilde{d},2d)$
+and $\text{dof}(u)+\text{dof}(v)=2(d+\tilde{d})+1$ when $v$ has no constant term. Thus 
+the reduction constraint $w=\rho u -\dot{\rho}v$ leads to a square matrix $\mathbf{G}$
+of size $2(d+\tilde{d})+1$. After line 5 the algorithm is much the same, except that 
+the degree bound is changed to $D=d+\tilde{d}+1$.
+
+\newpage
+\begin{figure}[t]
+$\mathbf{G}=\begin{bmatrix}
+\begin{array}{c  |c c }
+   &  \phantom{\;0\;}  & \phantom{\;0\;}  \\
+\hline
+    \;\; \mathbf{I} \;\;\;   &   &   \\
+\hline   
+     &   &   
+\end{array}
+\end{bmatrix}
++\alpha \begin{bmatrix}
+\begin{array}{c |c c }
+  \phantom{\;x\;}  &  LT &   \\
+\hline
+   &      & \\
+\hline   
+   &     &   UT
+\end{array}
+\end{bmatrix},
+\;\;\;
+\mathbf{G}=
+\begin{bmatrix}
+\begin{array}{c |c c }
+  LT &  LT   \\
+\hline
+ UT  &     UT 
+\end{array}
+\end{bmatrix}
++\alpha \begin{bmatrix}
+\begin{array}{c  |c  }
+ \mathbf{\;\;I\;\;}  & \phantom{\;0\;}    \\
+\hline
+     & 
+\end{array}
+\end{bmatrix}$
+\begin{center}
+UT for upper triangle, LT for lower triangular.
+\end{center}
+\label{fig:gmatrices}
+\caption{Forms for $\mathbf{G}$ matrices: \texttt{ExpToODE} (left), \texttt{HyperellipticToODE} (right).}
+\end{figure}
+
+The form $\rho = 1-\alpha \Phi$ is simple enough to prove that \texttt{ExpToODE} halts
+on success for any valid input $\Phi$. As in Fig. \ref{fig:gmatrices}, decompose $\mathbf{G}$ by 
+$\mathbf{G}=\mathbf{G}_0+\alpha\mathbf{G}_{\alpha}$, with both $\mathbf{G}_{0}$ and
+$\mathbf{G}_{\alpha}$ members of $\mathbb{Q}[\![i]\!]$. Under its first 
+$\text{dof}(u)=d+\tilde{d}+1$ columns, matrix $\mathbf{G}_{0}$ contains an
+identity submatrix, $\mathbf{I}$, and these are the only non-zero values of $\mathbf{G}_{0}$. 
+Expanding the determinant by minors determines a bound that 
+$\det(\mathbf{G})=\det(\mathbf{D})+\mathcal{O}(\alpha^{d+\tilde{d}+1})$, 
+with $\mathbf{D}$ a $\mathbf{G}$-submatrix on the space complement to
+that of $\mathbf{I}$. In the $\mathbf{D}$ subspace, $\mathbf{G}_{0}=0$, so 
+$\mathbf{D} \subset \alpha \mathbf{G}_{\alpha}$. Matrix $\mathbf{D}$
+has only one non-zero diagonal, and it is possible to identify that 
+$\det(\mathbf{D}/\alpha)=d^d \tilde{d}^{\tilde{d}} a b$
+when $\Phi = a z^{-\tilde{d}} + \ldots + b z^d$. Finally we obtain 
+$\det(\mathbf{G})\propto \alpha^{d+\tilde{d}}$ or $\det(\mathbf{G})\neq 0$,
+thus an inversion error is never thrown. As for derivatives, they can be written 
+naively in terms of the central binomial coefficients 
+$\partial_{\alpha}^n\frac{dI}{dt}=\binom{2n-2}{n-1}\frac{\Phi^n}{\rho^{n+1}}$. 
+A valid partial fraction decomposition must always exist, and a mismatch error between 
+$dI$ and $\rho$ is never thrown. 
+
+With a little more effort, it is possible to obtain a closed form,
+$\partial_{\alpha}^n\frac{dI}{dt}=\frac{n!}{\alpha^n}\sum_{k=0}^n\binom{n}{k}\frac{(-1)^{n+k}}{\rho^{k+1}}$,
+for the partial fraction expansion. This particular form is an amazing fortuity because it allows 
+elimination of the loop on line 14. Once we have computed the reduction of $\frac{1}{\rho^{n}}$, 
+we do not need to calculate it again during subsequent iteration of the $n$ loop. In the optimized
+algorithm, each $\mathbf{x}_n$ can be calculated as the reduction of $\frac{1}{\rho^n}$. Once a 
+linear dependency is found, it must exist in any linear transformation $\mathbf{x}'=\mathbf{M}\cdot \mathbf{x} $
+so long as $\det(\mathbf{M}) \neq 0$. In this case, $\mathbf{M}$ is a lower triangular matrix
+with non-zero elements $m_{n,k}=n!\binom{n}{k}\frac{(-1)^{n+k}}{\alpha^n}$, so $\det(\mathbf{M})\neq0$
+always holds true. The coefficients $\mathbf{A}$ can then be found from the nullspace of 
+$\mathbf{x}'$ and returned as usual. This is a nice optimization that helps \texttt{ExpToODE} 
+to be an extremely successful workhorse, as we have already seen in the preceding section.
+ 
+The other easy choice, not so obvious, is that $z(t)=q(t)$ with $\partial_t z(t)=p(t)$,
+where $q(t)$ and $p(t)$ are solutions to Hamilton's equations given a hyperelliptic
+form $\alpha=2H=p^2+2V(q)$, and $V(q)=\sum_{n=1}^{d}c_n q^n$ The period is not a single 
+number, but a function $T(\alpha)=\oint dt = \oint \frac{dq}{p}$, with derivatives 
+$\partial_{\alpha}^n\frac{dI}{dt} = p \;\partial_{\alpha}^n \frac{1}{p}= \frac{(2n-1)!!}{(-2)^n}\frac{1}{p^{2n}}$,
+as is proven using the chain rule with $\partial_{\alpha}p=\frac{1}{2p}$. Even though 
+$p$ is not a polynomial of $q$ we can choose $\rho=p$ if we rewrite that,
+\begin{eqnarray}
+\frac{[w]}{\rho^{2n}}=\Big(u-\frac{1}{2n+1}\partial_q v\Big)\frac{1}{\rho^{2n}} = 
+\frac{w}{\rho^{2n+2}}-\partial_t\bigg( \frac{v}{(2n+1)\rho^{2n+1}}\bigg) 
+\;\;\; \iff \;\;\; 
+ w = \rho^2 u -\dot{\rho} v \nonumber.
+\end{eqnarray}
+This statement is not as straightforward. After applying chain rule,
+${\partial_t v = (\partial_t q) \partial_q v= \rho \partial_q v}$, the factor $\rho$ 
+cancels with the extra $+1$ power in the denominator. The degree bounding behaves 
+as if $\Delta=-1$, and all reductions must be carried out to the zeroth power 
+of $\rho$. Also, the denominators in lines 21-22 need to be changed to replace 
+$k$ with $2k+1$. Other than these few minor changes, the resulting algorithm
+\texttt{HyperellipticToODE} exactly follows the template of Alg. 1.
+ 
+For essentially the same reason as before, \texttt{HyperellipticToODE} is also a
+rigorously proveable algorithm. However, in this case the decomposition 
+$\mathbf{G}=\mathbf{G}_0+\alpha \mathbf{G}_{\alpha}$ has its identity submatrix
+in $\mathbf{G}_{\alpha}$, consequently $\det(\mathbf{G})=\alpha^{d-1}+$
+smaller powers of $\alpha$. The case $d=1$ is of no interest, and the case $d=2$
+always results in $\mathcal{A} = \partial_{\alpha}$, as it must. In the quadratic
+case, the Riemann surface associated to $2H=p^2+a q+b q^2$ is the genus zero 
+harmonic hyperboloid, with $T(\alpha)=T_0=$ constant. For $d=3$ and $d=4$, usually
+the level curves of $H$ are elliptic and $\mathcal{A}\circ T(\alpha)=0$ has 
+two solutions, corresponding to orthogonal periods along real and complex time 
+dimensions. For $d>4$, $\mathcal{A}$ typically contains 2$g$+1 terms, with 
+genus $g=\lfloor (d-1)/2 \rfloor>1$. These cases are the proper hyperelliptic 
+curves, whose Riemann surfaces admit $g$ distinct real periods and 
+$g$ distinct complex periods. In this sense, the proof of algorithm 
+\texttt{HyperellipticToODE} is also a reproof of Fuchs's theorem on the 
+periods of hyperelliptic curves\cite{GRAY2010}, 
+though with slightly different conventions.
+
+Last but not least, we have the case of $\texttt{DihedralToODE}$, a very effective 
+algorithm, but not entirely proveable. For inputs we assume a form,
+\begin{eqnarray}
+\alpha=2H = \bigg(\sum_{n=1}^{d_1}c_{1,n}\lambda^{n}\bigg)
++\bigg(\sum_{n=0}^{d_2}c_{2,n}\lambda^{n}\bigg)\lambda^{\frac{m}{2}}\cos(m\phi)
+= h_1+h_2\cos(m\phi),  \nonumber 
+\end{eqnarray}
+so chosen because it can easily be solved to eliminate $\phi$ dependence,
+$\cos(m\phi)=\frac{\alpha-h_1}{h_2}$. Relative to Alg. 1, the choice 
+$z=\lambda$ is somewhat surprising, but it follows follows from the observation
+that $\dot{\lambda}^2$ and $\ddot{\lambda}$ can both be written as $\lambda$ 
+polynomials, 
+\begin{eqnarray}
+\dot{\lambda}^2 = \frac{-m^2}{4}(\alpha-h_1-h_2)(\alpha-h_1+h_2) \nonumber
+\;\;\;\;\;\; \text{and} \;\;\;\;\;\;
+\ddot{\lambda} = \frac{m^2}{4}\big((\alpha-h_1)(\partial_{\lambda}h_1)+h_2(\partial_{\lambda}h_2)\big) \nonumber.
+\end{eqnarray}
+Similarly, the angular derivative  
+$\dot{\phi}=\big(h_2(\partial_{\lambda}h_1)+(\alpha-h_1)(\partial_{\lambda}h_2)\big)/(2 h_2)$
+works out to be a rational function of $\lambda$ polynomials, and we can usually choose 
+$\rho=\big(h_2(\partial_{\lambda}h_1)+(\alpha-h_1)(\partial_{\lambda}h_2)\big)$. 
+Again, the basic assumption of Hermite-Ostrogradsky reduction must be rewritten,
+\begin{eqnarray}
+\frac{[w]}{\rho^{n}}
+=\Big(u-\frac{1}{n}(\ddot{\lambda}+\dot{\lambda}^2\partial_q v)\Big)\frac{1}{\rho^{n}} 
+= \frac{w}{\rho^{n+1}}-\partial_t\bigg( \frac{\dot{\lambda}v}{n\rho^{n}}\bigg) 
+\;\;\; \iff \;\;\; 
+ w = \rho u -\dot{\lambda}^2 v (\partial_{\lambda}\rho) \nonumber.
+\end{eqnarray}
+As before $\frac{dI}{dt}=1$ and subsequent derivatives are calculated as 
+$\partial_{\alpha}^n\frac{dI}{dt} = \dot{\phi}\partial_{\alpha}^n\dot{\phi}^{-1}$
+via the chain rule with $\partial_{\alpha}\lambda = (2\dot{\phi})^{-1}$. Degree
+bounding is possible with $d=\deg(\rho)$ and $\Delta=\deg(\dot{\lambda}^2)-1$. 
+Thereafter, the best practice is to check for errors while computing and 
+to require \textit{post hoc} quality analysis on the outputs. When 
+$\mathcal{A}\circ\frac{dI}{dt}-\partial_t \Xi=0$, minimum rigor is still achieved.
+
+Something very interesting happens with the I/O map of \texttt{DihedralToODE}. For a
+typical input with $d_1=\lfloor m/2 \rfloor$, $d_2=0$, and $d=\lfloor (m-2)/2 \rfloor$,
+the ouput $\mathcal{A}$ has $2d+1$ terms. We are tempted to identify $g'=d=\lfloor(m-2)/2\rfloor$
+as the genus of the Riemann surfaces associated with $\alpha=2H$. This would foolishly contradict
+old and well-known theorems, which typically predict genus as a quadratic function of 
+degree. Instead, what appears to happen is that the choice of dihedral symmetry gives 
+the Riemann surface unexpected isoperiodicities, thus the number of distinct periods is 
+fewer than the number of distinct homology classes. Since the dimension of $\mathcal{A}$ 
+counts periods, it cannot yield the genus without a complementary symmetry analysis.
+We do not necessarily need homology/cohomology to complete the proof of Section II, 
+but will continue working toward these advanced topics anyways. 
+
+% Finalize algorithms. Output data.
+
+\section{Finishing the Proof}
+\begin{table}[t]
+\begin{center}
+\captionof{table}{Period analysis of a few simple hyperelliptic Hamiltonians.}  
+\label{tab:Hyperelliptic}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabularx}{\textwidth}{ c l | c l | c l | c }
+\hline \hline
+\hspace{0.1cm} & 
+$2V(q)=$ & \hspace{0.1cm} 
+& $\mathcal{A}=$\hspace{7cm} &\hspace{0.1cm} & $T(\alpha)=$ & \;\;$s$\; \\
+\hline
+& $-\frac{2\sqrt{3}}{3}q^3$ \hspace{0.5cm} & &
+$5 - 36 (1 - 2 \alpha)\partial_{\alpha}- 36  \alpha(1 - \alpha)\partial_{\alpha}^2$   & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{5}{6}
+}{1}\Big| \alpha \Big]$  & $6$    \\
+& $-\frac{1}{4}q^4$  & &
+$3 - 16 (1 - 2 \alpha)\partial_{\alpha}- 16  \alpha(1 - \alpha)\partial_{\alpha}^2$   & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{4},\frac{3}{4}
+}{1}\Big| \alpha  \Big]$  & $4$   \\
+& $-\frac{6\sqrt{15}}{125}q^5$  & &
+$1701 - 2000 (10 - 207 \gamma)\partial_{\gamma}$ 
+  & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{10},\frac{3}{10},\frac{7}{10},\frac{9}{10}
+}{\frac{1}{3},\frac{2}{3},1}\Big| \alpha^3 \Big]$ &     \\
+& \;\;\;\tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - 90000 \gamma^3 (1 - \gamma) \partial_{\gamma}^4 $
+  & & &     \\
+& $-\frac{4}{27}q^6$  & &
+$5 - 36 (1 - 2 \beta)\partial_{\beta}- 36\beta(1 - \beta)\partial_{\beta}^2$  & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{5}{6}
+}{1}\Big| \alpha^2 \Big]$    & $6$  \\
+& $-\frac{50\sqrt{35}}{2401}q^7$  & &
+$12065625 - 57624 (3136 - 815625 \epsilon)\partial_{\epsilon}$  & &
+$2\pi\,_6F_5 \Big[ \genfrac..{0pt}{}{
+\frac{1}{14},\frac{3}{14},\frac{5}{14},\frac{9}{14},\frac{11}{14},\frac{13}{14}
+}{\frac{1}{5},\frac{2}{5},\frac{3}{5},\frac{4}{5},1}\Big| \alpha^5 \Big]$ \;    \\
+& \;\;\;\tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - \ldots - \ldots $
+  & & &     \\
+& \;\;\;\tiny(cont.)  & & \hspace{1.0cm}
+$ - 4705960000\epsilon^5 (1 - \epsilon)\partial_{\epsilon}^6 $
+  & & &     \\
+& $-\frac{27}{256}q^8$  & &
+ $945 -256 (32 - 675 \gamma)\partial_{\gamma} $ & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{8},\frac{3}{8},\frac{5}{8},\frac{7}{8}
+}{\frac{1}{3},\frac{2}{3},1}\Big| \alpha^3 \Big]$     \\
+& \;\;\;\tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - 36864 \gamma^3 (1 - \gamma)\partial_{\gamma}^4  $
+  & & &     \\
+\end{tabularx}}
+\rule{\textwidth}{.01cm}
+Dots indicate dropped terms. Variables are $\beta=\alpha^2, \gamma=\alpha^3, \epsilon=\alpha^5$. 
+\end{center}
+\end{table}
+
+Recall that in Section II, we treated the problem of series reversion as too difficult, 
+and simply accepted assertions for period function left factors. How can we be sure 
+that such a factorization even exists? Consider the general form 
+$\alpha=2H=2\lambda - \lambda^{d/2} \Phi$, or if you like, 
+$\alpha \Phi^{\frac{2}{d-2}} = 2x+x^{d/2}$ with $x=\lambda \Phi^{\frac{2}{d-2}}$.
+The formal solution is either, 
+\begin{eqnarray}
+x=\alpha \Phi^{\frac{2}{d-2}}\bigg(\frac{1}{2}
++\sum_{n=1}^{\infty}c_n(\alpha^{\frac{d-2}{2}} \Phi )^{n} \bigg) 
+\;\;\;\; \text{or} \;\;\;\;
+\lambda = \alpha \bigg(\frac{1}{2} +\sum_{n=1}^{\infty}c_n(\alpha^{\frac{d-2}{2}} \Phi )^{n} \bigg), \nonumber
+\end{eqnarray}
+so that chosen exponents $j=\frac{d-2}{2}$ and $k=1$ satisfy 
+$\alpha^{1+j n}\Phi^{\frac{2}{d-2}+kn}=\alpha^{\frac{d}{2}+j(n-1)}\Phi^{\frac{d}{d-2}+k(n-1)}$. 
+Then we can solve either constraint on coefficients of $\alpha^{\frac{d-2}{2}}\Phi$ to obtain 
+$c_n$ as a function of $c_{n-1}$ with terminal $c_0$. It is possible, not guaranteed that the $c_n$
+obey a hypergeometric recursion, but that property is not necessary to proceed. We only need to 
+understand that the $c_n$ \textit{do not} depend on choice of $\Phi$ and that they \textit{do} 
+depend on a choice of $d$. This allows us to produce a factored from for the period function, 
+\begin{eqnarray}
+T(\alpha) =\oint 2\partial_{\alpha}\lambda d\phi = \oint\bigg(\sum_{n=0}^{\infty} a_n(\alpha^{\frac{d-2}{2}} \Phi)^{n} \bigg)d\phi
+=L_d\Big(\alpha\Big) \star I_d\Big(\alpha\Big), \nonumber  
+\end{eqnarray} 
+with $I_d(\alpha) = \oint (1-\alpha^{\frac{d-2}{2}} \Phi)^{-1}d\phi$. For odd powers of
+$d$, odd powers of $\Phi$ integrate to zero, thus $T(\alpha)$ always expands in whole powers of $\alpha$.
+The right factor is analyzable via \texttt{ExpToODE}. We have already seen that $\Phi=Q^{2}$ leads 
+to hypergeometric $I_d(\alpha)$, and we can also calculate the hypergeometric parameters of the $I(\alpha)$ arising
+from $\Phi=Q^{2n}$, for any $n$. This allows proof by concordance 
+between \texttt{ExpToODE} and \texttt{HyperellipticToODE}. If $2H=p^2+q^2-c_d q^d$ has 
+hypergeometric $T(\alpha)$, then the left factor $L$ must also be hypergeometric. We can find its 
+parameters easily by comparing the parameters of $I_d(\alpha)$ and $T(\alpha)$. Admittedly, the 
+strategy is convoluted, but it trades the difficulties of series reversion for a routine 
+algorithmic calculation. Ultimately, the main reason to prefer this constructive, data driven 
+proof is that it allows us to gain more familiarity with the algorithms of Section III. 
+
+Now we just turn on the computer, instantiate the algorithms, calculate a few differential 
+equations, and list them in Table \ref{tab:Hyperelliptic}.  They are all hypergeometric, and 
+they should\footnote{Unfortunately when typing out long equations typos are often made. Write
+the author if you notice any!} exactly match previously asserted forms. As an example to show how the Hadamard factoring 
+actually works, we use the output of \texttt{ExpToODE}[$\sin(\phi)^{10}$] to determine that 
+ \begin{eqnarray}
+I_5(\alpha) = \oint \frac{d\phi}{1-\alpha^3\sin(\phi)^{10}} = 
+2\pi\,_5F_4 \bigg[ \genfrac..{0pt}{}{
+\frac{1}{10},\frac{3}{10},\frac{1}{2},\frac{7}{10},\frac{9}{10}
+}{\frac{1}{5},\frac{2}{5},\frac{3}{5},\frac{4}{5}}\bigg| \alpha^3 \bigg]
+= 2\pi \sum_{n=0}^{\infty} \frac{1}{2^{10n}}\binom{10n}{5n}\alpha^{3n}.
+\nonumber
+\end{eqnarray}
+The complement $\{\frac{1}{10},\frac{3}{10},\frac{1}{2},\frac{7}{10},\frac{9}{10}\}/
+\{\frac{1}{10},\frac{3}{10},\frac{7}{10},\frac{9}{10}\}=\{\frac{1}{2}\}$ determines
+a lower parameter $\frac{1}{2}$ to go along with $\{\frac{1}{3},\frac{2}{3}\}$ from 
+$T(\alpha)$. The extra parameter $1$ we get for free, which leaves the upper parameters
+only. Since no cancellation occurs, they will just be the lower parameters of $I_5(\alpha)$.
+Now better than assertion, for $d=5$, we derive that
+\begin{eqnarray}
+L_d(\alpha)= \,_4F_3 \bigg[ \genfrac..{0pt}{}{
+\frac{1}{5},\frac{2}{5},\frac{3}{5},\frac{4}{5}
+}{\frac{1}{3},\frac{1}{2},\frac{2}{3}}\bigg| \alpha^3 \bigg]
+=  \sum_{n=0}^{\infty} \bigg(\frac{2^{2}3^3}{5^5}\bigg)^n\binom{5n}{2n}\alpha^{3n}.
+\nonumber
+\end{eqnarray}   
+A similar explicit calculation proves for any odd $d$ that $a_n \propto \binom{d n}{2n}$ and 
+for any even $d$ that $a_n \propto \binom{d n/2}{n}$. It would be nice to have a second proof  
+(perhaps using series reversion) especially as calculating Annihilators becomes time intensive
+as $d$ increases. However, it is no bother to do the work up to $d=8$. We have done this 
+work, so we can assure the wide results of Section II.
+
+\begin{table}[t]
+\begin{center}
+\captionof{table}{Period analysis of a few simple dihedral Hamiltonians.}  
+\label{tab:Dihedral}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabularx}{\textwidth}{ c | c | c l | c l | c }
+\hline \hline
+\;$m$\; &  \;\;\;$c_m$\;\;\; & \hspace{0.1cm} 
+& $\mathcal{A}=$\hspace{7.7cm} &\hspace{0.1cm} & $T(\alpha)=$ & \;\;$s$\;\; \\
+\hline
+\multicolumn{7}{c}{$\alpha = 2H = 2\lambda - c_m \lambda^{m/2}\cos(m\phi) $ } \\
+\hline
+3 & $\frac{4\sqrt{6}}{9}$ & &
+$2 - 9 (1 - 2 \alpha)\partial_{\alpha}- 9  \alpha(1 - \alpha)\partial_{\alpha}^2$   & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{3},\frac{2}{3}
+}{1}\Big| \alpha \Big]$  & 3    \\
+4 & $1$  & &
+$3 - 16 (1 - 2 \beta)\partial_{\beta}- 16  \beta(1 - \beta)\partial_{\beta}^2$   & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{4},\frac{3}{4}
+}{1}\Big| \alpha^2  \Big]$  & 4   \\
+5 & $\frac{24\sqrt{30}}{125}$  & &
+$216 - 250 (5 - 108 \gamma)\partial_{\gamma}$ 
+  & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{5},\frac{2}{5},\frac{3}{5},\frac{4}{5}
+}{\frac{1}{3},\frac{2}{3},1}\Big| \alpha^3 \Big]$ &     \\
+ & \tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - 5625 \gamma^3 (1 - \gamma) \partial_{\gamma}^4 $
+  & & &     \\
+6 & $\frac{32}{27}$  & &
+$40 - 9 (27 - 680 \delta)\partial_{\delta}$  & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{6},\frac{1}{3},\frac{2}{3},\frac{5}{6}
+}{\frac{1}{4},\frac{3}{4},1}\Big| \alpha^4 \Big]$   &   \\
+ & \tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - 1296 \delta^3 (1 - \delta) \partial_{\delta}^4 $
+  & & &     \\
+7 & \;$\frac{400\sqrt{70}}{2401}$\;  & &
+$450000 - 8232 (343 - 93750 \epsilon)\partial_{\epsilon}$  & &
+$2\pi\,_6F_5 \Big[ \genfrac..{0pt}{}{
+\frac{1}{7},\frac{2}{7},\frac{3}{7},\frac{4}{7},\frac{5}{7},\frac{6}{7}
+}{\frac{1}{5},\frac{2}{5},\frac{3}{5},\frac{4}{5},1}\Big| \alpha^5 \Big]$ \;    \\
+ & \tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - \ldots - \ldots $
+  & & &     \\
+ & \tiny(cont.)  & & \hspace{1.0cm}
+$ - 73530625 \epsilon^5 (1 - \epsilon)\partial_{\epsilon}^6 $
+  & & &     \\
+8 & $\frac{27}{16}$  & &
+ $25515 -160 (1024 - 341901 \zeta)\partial_{\zeta} $ & &
+$2\pi\,_6F_5 \Big[ \genfrac..{0pt}{}{
+\frac{1}{8},\frac{1}{4},\frac{3}{8},\frac{5}{8},\frac{3}{4},\frac{7}{8}
+}{\frac{1}{6},\frac{1}{3},\frac{2}{3},\frac{5}{6},1}\Big| \alpha^6 \Big]$     \\
+ & \tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - \ldots - \ldots  $
+  & & &     \\
+ & \tiny(cont.)  & & \hspace{1.0cm}
+$ - 5308416\zeta^5 (1 - \zeta)\partial_{\zeta}^6 $
+  & & &     \\ \hline 
+\multicolumn{7}{c}{$\alpha = 2H = 2\lambda - c_m \lambda^{m}\big(1+\cos(2m\phi)\big) $ } \\  
+\hline
+2 & $\frac{1}{2}$  & &
+$1 - 4 (1 - 2 \alpha)\partial_{\alpha}- 4  \alpha(1 - \alpha)\partial_{\alpha}^2$   & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{2},\frac{1}{2}
+}{1}\Big| \alpha \Big]$  & $2$    \\
+3 & $\frac{16}{27}$  & &
+$2 - 9 (1 - 2 \beta)\partial_{\beta}- 9  \beta(1 - \beta)\partial_{\beta}^2$   & &
+$2\pi\,_2F_1 \Big[ \genfrac..{0pt}{}{
+\frac{1}{3},\frac{2}{3}
+}{1}\Big| \alpha  \Big]$  & $3$   \\
+4 & $\frac{27}{32}$  & &
+$27 - 8 (16 - 351 \gamma)\partial_{\gamma}$ 
+  & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{4},\frac{1}{2},\frac{1}{2},\frac{3}{4}
+}{\frac{1}{3},\frac{2}{3},1}\Big| \alpha^3 \Big]$ &     \\
+ & \tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - 576 \gamma^3 (1 - \gamma) \partial_{\gamma}^4 $
+  & & &     \\
+5 & $\frac{4096}{3125}$  & &
+$384 - 375 (5 - 128 \delta)\partial_{\delta}$ 
+  & &
+$2\pi\,_4F_3 \Big[ \genfrac..{0pt}{}{
+\frac{1}{5},\frac{2}{5},\frac{3}{5},\frac{4}{5}
+}{\frac{1}{4},\frac{3}{4},1}\Big| \alpha^4 \Big]$ &     \\
+ & \tiny(cont.)  & & \hspace{0.5cm}
+$-\ldots - \ldots - 10000 \delta^3 (1 - \delta) \partial_{\delta}^4 $
+  & & &     \\
+\end{tabularx}}
+\rule{\textwidth}{.01cm}
+Dots indicate dropped terms. Variables are 
+$\beta=\alpha^2, \gamma=\alpha^3, \delta=\alpha^4, 
+\epsilon=\alpha^5, \zeta=\alpha^6$. 
+
+See Appendix A for computer proofs.
+\end{center}
+\end{table}
+
+
+The outstanding case $\alpha=2H=p^2+q^2-\frac{64}{27}p^{4}q^{6}$ should not 
+be forgotten. It involves a difficult decic perturbation, which we will deal with 
+circuitously. Again, start instead with a simple hyperelliptic decic, 
+$\alpha =2H=p^2+q^2-\frac{256}{2135}q^{10}$. The computer tells us via 
+\texttt{HyperellipticToODE} that the period function is annihilated by
+\begin{eqnarray}
+\mathcal{A}=189 - 125 (15 - 368 \delta)\partial_{\delta} - 125 \delta (335 - 1144 \delta)\partial_{\delta}^2 
+- 10^4 \delta^2 (5 - 8 \delta)\partial_{\delta}^3 - 10^4 \delta^3(1 - \delta)\partial_{\delta}^4, \nonumber 
+\end{eqnarray}
+with $\delta=\alpha^4$, and we can check the certificate if doubt about $\mathcal{A}$ 
+persists\footnote{The certificate sums terms up to $q^{35}$ in its numerator,
+so a computer will probably be necessary.}. The hypergeometric parameters of $T(\alpha)$ are $\{\frac{1}{10},\frac{3}{10},\frac{7}{10},\frac{9}{10}\}$ upper and 
+$\{\frac{1}{4},\frac{3}{4},1\}$ lower. Meanwhile, the parameters of right
+factor $I_{10}$ are the same as $I_5$, so by cancellation, we calculate
+parameters for the shared left factor $L_{10}$. They are 
+$\{\frac{1}{5},\frac{2}{5},\frac{3}{5},\frac{4}{5}\}$ upper and
+$\{\frac{1}{4},\frac{1}{2},\frac{3}{4}\}$ lower. According to 
+$\texttt{ExpToODE}$ with $\Phi=(z+\frac{1}{z})^5 z^3$ these parameters also 
+determine the $L_{10}$ expansion coefficients $a_n\propto\binom{5n}{n}$, 
+up to choice of scale for $\alpha$. Writing the right factor as,
+\begin{eqnarray}
+I(\alpha) = \oint \frac{d\phi}{1-\alpha^4(2^{10}\cos(\phi)^6\sin(\phi)^4)}
+=\sum_{n=0}^{\infty}\sum_{k=0}^{4n} \binom{6n}{n+k}\binom{4n}{k}(-1)^k \alpha^{4n}, \nonumber
+\end{eqnarray}\FloatBarrier 
+\noindent allows us to uncover yet another unexpected binomial identity,
+\begin{eqnarray}
+\binom{3n}{n}\binom{6n}{3n}
+=\binom{5n}{n}\sum_{k=0}^{4n} \binom{6n}{n+k}\binom{4n}{k}(-1)^k. \nonumber
+\end{eqnarray}
+This identity essentially explains why $\alpha=2H=p^2+q^2-\frac{64}{27}p^{4}q^{6}$ 
+should have period $T_6(\alpha^4)$. If there is any doubt about veracity, 
+the identity can be double checked using Zielberger's algorithm for 
+hypergeometric summations. 
+
+\begin{table}[t]
+\begin{center}
+\captionof{table}{Canonical models $H_s$ for which 
+$\mathcal{A}_s=(s-1)-s^2(1-2\alpha)\partial_{\alpha}-s^2\alpha(1-\alpha)\partial_{\alpha}^2 $.}  
+\label{tab:Canonical}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabularx}{\textwidth}{c  l  l | c l  l | l}
+\hline \hline
+\;\;\;&$2H_2=$ & $p^2+q^2-p^2 q^2$ & \;\;\;\; & $T_2(\alpha)=$ &
+$2\pi\,\tFoIn{\frac{1}{2},\frac{1}{2}}{1}{\alpha}$ \hspace{1.0cm} & \;\;\; genus 1   \\
+\;\;\;&$2H_3=$ & $p^2+q^2-(\frac{4}{27})^{\frac{1}{2}} \; ( q^3-3 p^2 q)$ \hspace{1.0cm} 
+&& $T_3(\alpha)=$ &
+$2\pi\,\tFoIn{\frac{1}{3},\frac{2}{3}}{1}{\alpha}$  & \;\;\; genus 1 \\
+\;\;\;&$2H_4=$ & $p^2 + q^2 -\frac{1}{4}q^4$ 
+&& $T_4(\alpha)=$ &   
+$2\pi\,\tFoIn{\frac{1}{4},\frac{3}{4}}{1}{\alpha}$  & \;\;\; genus 1 \\
+\;\;\;&$2H_6=$ & $p^2 + q^2 -\frac{2\sqrt{3}}{9}q^3$ 
+&& $T_6(\alpha)=$ &
+$2\pi\,\tFoIn{\frac{1}{6},\frac{5}{6}}{1}{\alpha}$  & \;\;\; genus 1 \\
+%\end{tabularx}}
+%{\renewcommand{\arraystretch}{2}%
+%\begin{tabularx}{\textwidth}{ l  l | l   l }
+\hline
+\;\;\;&$2H_3'=$ & $p^2+q^2-\frac{4}{27}( q^3-3 p^2 q)^2$ 
+&& $T_3(\alpha^2)=$ &
+$2\pi\,\tFoIn{\frac{1}{3},\frac{2}{3}}{1}{\alpha^2}$  & \;\;\; genus 4 \\
+\;\;\;&$2H_4'=$ & $p^2 + q^2  - \frac{1}{4}(p^2 + q^2)^2 +2 p^2 q^2 $ 
+&& $T_4(\alpha^2)=$ &
+$2\pi\,\tFoIn{\frac{1}{4},\frac{3}{4}}{1}{\alpha^2}$  & \;\;\; genus 3 \\
+\;\;\;&$2H_6'=$ & $p^2+q^2-\frac{4}{27}q^6$ 
+&& $T_6(\alpha^2)=$ &
+$2\pi\,\tFoIn{\frac{1}{6},\frac{5}{6}}{1}{\alpha^2}$   & \;\;\; genus 2
+\end{tabularx}}
+\rule{\textwidth}{.01cm}
+Transforming $\alpha \rightarrow \beta=\alpha^2$ reduces 
+$\mathcal{A}_s'= 4(s-1)-s^2(1-3\alpha^2)\partial_{\alpha}-s^2\alpha(1-\alpha^2)\partial_{\alpha}^2 
+\rightarrow \mathcal{A}_s $. 
+\end{center}
+\end{table}
+
+
+The general strategy of concordance is effective though convoluted. We would 
+like to have more direct proofs, especially for the seven cases depicted in {Fig. \ref{fig:EllDisks}} and Fig. \ref{fig:NotEllDisks}. These cases divide neatly 
+into two classes: simple hyperelliptic or simple dihedral. Table \ref{tab:Hyperelliptic} 
+already contains three annihilators with identifiable signature. This is no surprise, 
+as we already know that $H_6$, $H_4$, and $H_6'$ have the required hyperelliptic form.
+The remaining $H_2$, $H_3$, $H_3'$ and $H_4'$ all have simple dihedral symmetry, 
+so their period functions can be proven more directly using 
+\texttt{DihedralToODE}. We instantiate an implementation, map 
+across a small search space, and in Table \ref{tab:Dihedral} list the four 
+hits alongside a few other negatives. Since \texttt{DihedralToODE} is only 
+an effective algorithm, we also list certificates, 
+\begin{eqnarray}
+\Xi_3=\frac{4\sqrt{6}\lambda^{5/2}\sin(3\phi)}{(3\alpha-2\lambda)^3}, 
+\;\;\Xi_4'=\frac{\lambda^{3}\sin(4\phi)}{4(\alpha-\lambda)^3}, 
+\;\;\Xi_2=\frac{\lambda^{3}\sin(4\phi)}{8(\alpha-\lambda)^3}, 
+\;\;\text{and}\;\; 
+\Xi_3'=\frac{32\lambda^{4}\sin(6\phi)}{3(3\alpha-4\lambda)^3},
+\nonumber
+\end{eqnarray}
+for $H_2$, $H_4'$, $H_2$ and $H_3'$ respectively. The results of 
+\texttt{DihedralToODE} listed in Table \ref{tab:Canonical} can be checked 
+against these certificates. By judicious use of the chain rule, we simply by 
+calculate a zero value, $\mathcal{A}_s \circ dt \pm \partial_t \Xi_s=0$, where 
+choice of either $+$ or $-$ accounts for the possibility of a sign error (
+whether accidental or not, sign errors do sometimes happen). The other three 
+results of \texttt{HyeperellipticToODE} involve longer 
+certificates, here omitted. Those annihilation relations can also 
+be checked post computation if necessary (cf. Appendix A).
+
+The last step of the proof involves verifying the genus figures quoted in 
+Table \ref{tab:Canonical}, column three. According to well-known genus degree 
+bounds, we expect $g=\lfloor (d-1)/2 \rfloor$ for hyperelliptic cases and 
+$g=\frac{1}{2}(d-1)(d-2)$ for dihedral cases. The upper bound is only 
+met for $H_3$, $H_4$, $H_6$, $H_4'$, and $H_6'$. The other models, $H_2$, 
+and $H_3'$, involve hidden symmetries, which require a corrective term 
+$\Delta = -\sum_{n}\frac{1}{2}r_n(r_n+1)$. The correction $\Delta$ characterizes 
+behavior of singular points at infinity. As early as 1884, Max Noether gave a 
+procedure for calculating $\Delta$\cite{POPESCU2016}. The same basic idea of 
+counting genus as $g=\frac{1}{2}(d-1)(d-2)+\Delta$ is nowadays built into standard algorithms 
+of algebraic geometry\cite{GENUS1988}. In this case, we do not need to reinvent the wheel, 
+so simply input $2H_s-\frac{1}{2}=0$ or $2H_s'-\frac{1}{2}=0$ into Singular
+software, and use the built-in genus function to output the correct integer\cite{SINGULAR2020}. 
+In principle, this I/O approach only tells us the genus of a curve 
+$\mathcal{C}_s(\frac{1}{2})$ or $\mathcal{C}_s'(\frac{1}{2})$.
+The domain of the oscillation disk is unobstructed by critical points, so it 
+is safe to assume\footnote{Perhaps this point could use more rigor eventually, 
+but presently we take it as common sense.} that 
+$g\big(\mathcal{C}(\frac{1}{2})\big)=g\big(\mathcal{C}(\alpha)\big)$ when 
+$\alpha \in (0,1)$. The strong statement of Section II stands true.
+
+For most purposes, the first four rows of Table \ref{tab:Canonical} are a 
+good-enough starting place. If not, a next step into the territory of higher 
+genus takes into consideration the models listed in the final three rows. 
+We have already found more exotic species, and are not quite done with the 
+task of cataloging. One glaring omission on our part is that we have yet to mention 
+${2H=p^2 + 12 q^2 + 8 q^3 -36 q^4 -48 q^5 -16 q^6}$, a genus 2 hyperelliptic model 
+with period $T(\alpha) \propto T_3(\alpha)$. It belongs to an infinite class
+of hyperelliptic models, indexed by degree $d=3,4,5...$, each having a potential
+ ${V_d(q)=\frac{1}{4}\big(1-\mathcal{T}_d(q)\big)}$, where $\mathcal{T}_d(q)$ stands for the 
+$d^{th}$ Chebyshev polynomial of the first kind\footnote{There are many different kinds of 
+Chebyshev polynomials, here we mean $\mathcal{T}_n\big(\cos(x)\big)=\cos(nx)$.}. 
+Using \texttt{HyperellipticToODE} it is possible to prove that 
+$\mathcal{A}_d=\frac{d^2-4}{4d^2}-(1-2\alpha)\partial_{\alpha}
+-\alpha(1-\alpha)\partial_{\alpha}^2$, say for the first ten or twenty cases. 
+It would be interesting to determine a $d$-dependent form for certificates
+$\Xi_d$, but not strictly necessary since one proof of $\mathcal{A}_d$ has 
+already been given. This family of Chebyshev potentials is truly amazing in 
+terms of hidden symmetry, but it doesn't yield any new cases with $g=1$ 
+after $d=4$, nor does it yield any more cases of identifiable signature 
+after $d=6$.
+
+\begin{figure}[t]
+\begin{overpic}[width=0.9\textwidth]{./Figures/ExtraGeos.eps}
+ \put (12.25,-2.5) {$s=4$}
+ \put (47.5,-2.5) {$s=6$}
+\end{overpic}
+\end{figure}
+\begin{table}[t]
+\begin{center}
+\captionof{table}{A few more use cases for \texttt{DihedralToODE}.}  
+\label{tab:MoreCases}
+\begin{tabularx}{\textwidth}{ c l | c l | c }
+\hline \hline
+\multicolumn{2}{c|}{Input: $2H=$} & \multicolumn{2}{c|}{Output: $\mathcal{A}=$}  & \;\;\; $s$ \;\;\; \\
+\hline
+\;\;\;& $\lambda^2-\frac{1}{8}\lambda^4\big(1-\cos(8\phi)\big)$ 
+& \;\;\;\; & 
+$(4 - 15 \alpha) + 16 \alpha (2 -     3 \alpha)\partial_{\alpha}$ \hspace{1.0cm} &  4   \\
+& &   & \hspace{2.0cm}  $ +16 \alpha^2 (1 - \alpha) \partial_{\alpha}^2$  &  \\
+\;\;\;& $\lambda^2-\frac{2\sqrt{3}}{9}\lambda^3\cos(6\phi)$  
+&&
+$(9-32\alpha)+36\alpha(2-3\alpha)\partial_{\alpha}$  &  6 \\
+& &   & \hspace{2.0cm}  $ +36 \alpha^2 (1 - \alpha) \partial_{\alpha}^2$  &  \\
+\;\;\;& $2\lambda-\frac{32}{27}\lambda^2+\frac{16}{729}\lambda^3\big(9-\cos(6\phi)\big)$
+\hspace{0.5cm} 
+&&    
+$8(18 - 25 \alpha) 
+- 9 (27 - 104 \alpha + 75 \alpha^2)\partial_{\alpha}$ \hspace{0.6cm} &  \\
+& &   & \hspace{2.0cm}  $ -9 \alpha (1 - \alpha) (27 - 25 \alpha)\partial_{\alpha}^2$  &  \\
+\end{tabularx}
+\rule{\textwidth}{.01cm}
+\end{center}
+\end{table}
+
+One last construction is worth mentioning. Both $H_3'$ and $H_4'$
+feature a factorizable separatrix that decomposes to a product of hyperbolas. Generalizing 
+on this form and performing analysis via \texttt{DihedralToODE}, we find a few more interesting 
+cases to take note of, as in Table \ref{tab:MoreCases} and depicted above. The first two
+rows list Hamiltonians with identifiable signature. The corresponding curve geometries 
+are not oscillation disks in the strict sense because leading term $\lambda^2$ does not 
+allow for a harmonic limit at the origin. Yet period functions still exist,
+and they can be written as $T(\alpha)=T_s(\alpha)/\sqrt{\alpha}$ for $s=4$ or $6$.
+In the third row, the annihilator is not hypergeometric, but it does have the special 
+property\footnote{Compare with the "well-integrable" geometries of the Prospectus \cite{KLEE2020Prelude}.} 
+that $\partial_{\alpha}(\alpha(1-\alpha)(27-25\alpha))=(27-104\alpha+75\alpha^2)$.  
+Remarkably, this operator also shows up in a completely different combinatorial 
+search performed by Bostan et al. \cite{DIAGONALS2015}. 
+
+Even more waits to be discovered and explained. It would be nice to develop 
+a constructive theory for explaining all higher-genus models in terms of the genus 1 
+examples given in Table \ref{tab:Canonical}, but we cannot do so presently. Instead of 
+digging deeper into questions of existence and equivalence, next we will return to the 
+practical task of using period functions to calculate numerical values. 
+
+\section{Periods and Solutions}
+Physicists recognize hyperelliptic Hamiltonians without any qualms because the assumed 
+form requires separability, with kinetic energy $\frac{1}{2}p^2$. Indeed, 
+the simplest cases, $H_6$ and $H_4$, are textbook examples often found under the heading
+of anharmonic oscillation or perturbation theory\cite{LL1960}. As models for data, $H_6$ and $H_4$
+work well in situations where a period varies linearly around a harmonic limit. In this
+context, local analysis of $H_6$ and $H_4$ generalizes the simple harmonic approximation 
+to the \textit{simple anharmonic approximation}. If the data is precise enough, more terms 
+can be added to the potential $V(q)$ until the corresponding function $T(\alpha)$ sufficiently 
+matches data\footnote{Although, there is one caveat. Period function $T(\alpha)$ does not 
+uniquely determine potential $V(q)$ \cite{LL1960}.}. Sometimes it may be possible to measure a period 
+function over an entire oscillation disk. These circumstances motivate us to develop an entire 
+theory for solving period functions. An important question is: what can we exclude?
+
+Our own prejudices may tempt us to discard any functions not conforming to the seperable 
+form $H=\frac{1}{2}p^2 + V(q)$. This would be a crime of oversimplification and an unnecessary 
+handicap to analysis in general. Hamiltonian $H_2$ is a perfect example in support of inclusiveness,
+because the corresponding oscillation disk exactly models the libration motion of a simple pendulum.
+The role of transformation theory can not be ignored. It allows us to change a seemingly 
+malformed perturbing term, $p^2 q^2$, into something more familiar, $V(q)=\sin(q)^2$. We have 
+no catalogue of all such transforms, but expect more to be discovered soon. The point is that 
+even though dihedral models look funny compared to their hyperelliptic counterparts, they may 
+eventually facilitate analysis. As nature produces a variety of forms, so should we.
+
+When formulating a space of viable models for anharmonic oscillation, a permissive attitude allows us to 
+include any oscillation disk that we can manage to integrate. Algorithms of the previous sections 
+allow a great many integral period functions to be calculated as solutions to output ordinary differential 
+equations. Instead of evaluating an integral every time we need a value of function $T(\alpha)$, we only 
+need to calculate integrals for a small set of initial data, say  
+$T_1=T(\alpha_1), \; T_2=T(\alpha_2),\;\ldots,\; T_n=T(\alpha_n)$.
+When $n$ equals to the order of $\mathcal{A}$, the system of equations 
+should be uniquely solvable for $T(\alpha)$ as a proper function. Our preference
+is for piecewise series solutions, but completely numerical solutions also work. 
+
+To show how solutions are carried out in practice, we will now solve $T_s(\alpha)=\partial_{\alpha}S_s(\alpha)$
+for each of $s=2,3,4$ and $6$. The four cases are similar enough to proceed with variable  $s$,
+except when determining initial data. Recall that action function $S_s(\alpha)$ has a natural geometric 
+interpretation as the area enclosed by curve $\mathcal{C}_s(\alpha)$. For this reason, $S_s(\alpha)$ makes 
+a better starting place than $T_s(\alpha)$, but first we need to transform the period annihilator
+into an action annihilator. Assume that $\mathcal{A}_S \circ S(\alpha)=0$, then 
+$\partial_{\alpha} \circ \big(\mathcal{A}_S \circ S(\alpha)\big)=0$ can be rewritten as 
+$\mathcal{A}_T \circ T(\alpha)=0$, and the identity $\mathcal{A}_T=\mathcal{A}_s$ determines that 
+$\mathcal{A}_S=(s-1)-s^2\alpha(1-\alpha)\partial_{\alpha}^2$. It is again hypergeometric, 
+but the missing middle term causes lower parameter $c$ to equal zero. The usual coefficient 
+recursion would have $f_1 \propto f_0/0$. This solution does not work, so another must 
+be found. In general, $\mathcal{A}_S \circ S_s(\alpha)=0$ is solved 
+by\footnote{Recall \cite{KLEE2020Prelude} Sec. IV-V, or see again: \href{http://mathworld.wolfram.com/HypergeometricFunction.html}{Hypergeometric Function}, 
+\href{http://mathworld.wolfram.com/Second-OrderOrdinaryDifferentialEquationSecondSolution.html}{Second-Order ODE Second Solution}. },
+\begin{eqnarray}
+S_s(\alpha) &=& C_1 \alpha \tFo{\frac{1}{s},\frac{s-1}{s}}{2}{\alpha}
+- C_0 \alpha \tFo{\frac{1}{s},\frac{s-1}{s}}{2}{\alpha}
+\int  \bigg(\alpha \tFo{\frac{1}{s},\frac{s-1}{s}}{2}{\alpha}\bigg)^{-2}d\alpha  \nonumber \\
+ &=& C_0\bigg(1 +\Big(\frac{s-1}{2\;s^2}\Big)\alpha\bigg)
++ \bigg(C_1+C_0\Big(\frac{s-1}{2\;s^2}\Big)\log(\alpha) \bigg) \alpha 
+\tFo{\frac{1}{s},\frac{s-1}{s}}{2}{\alpha}
++ \sum_{n>1}C_n\;\alpha^n. \nonumber  
+\end{eqnarray}
+The first line is perfectly valid, but may be doubted. The second line gives an Ansatz,
+which is already correct up to a set of undetermined coefficients. The condition,
+\begin{eqnarray}
+0&=&\mathcal{A}_S \circ S_s(\alpha) = \sum_{n>0}a_n \alpha^n = \Big((s-1)(s^2-s+1)C_0-2s^4 C_2\Big)\alpha  \nonumber \\ 
+&&\hspace{2.0cm}
++ \Big( (s-1)^2(5-5s+8s^2)C_0 + 12 s^4 (1 + s) (2s -1)C_2 -72 s^6 C_3\Big)\alpha^2 + \ldots, \nonumber
+\end{eqnarray}
+sets up a recursion on the coefficients $a_n$. As the summation continues to 
+higher powers of $\alpha$, the pattern continues, and the first appearance 
+of $C_n$ always occurs in coefficient $a_{n-1}$. The system of equations can 
+be solved sequentially to determine $C_n \propto C_0$, but they are just 
+the expansion coefficients of the integral on the preceding line. 
+
+The expansion around $\alpha=0$ requires $C_0=0$, for 
+$\partial_{\alpha}(\alpha\log(\alpha))=1+\log(\alpha)$, but $T(\alpha)$ is finite 
+valued at the origin. The harmonic limit $T(0)=2\pi$ also determines $C_1=\pi$, 
+so we need only one initial condition rather than two. With the solution 
+$S_s(\alpha)=\pi \alpha \tFoIn{\frac{1}{s},\frac{s-1}{s}}{2}{\alpha}$,
+very slow convergence becomes a problem as $\alpha$ approaches 1. 
+Fortunately, symmetry allows for a second expansion, which converges rapidly where 
+the first diverges and \textit{vice versa}.
+Annihilator $\mathcal{A}_S$ transforms invariantly by 
+$\alpha \rightarrow \rev{\alpha}=1-\alpha$, so we can write a reversed 
+expansion $\rev{S_s(\alpha)}$ around $\alpha=1$ by simply taking $S_s(\alpha)$
+and reversing $C_n \rightarrow \rev{C}_n$ and $\alpha \rightarrow \rev{\alpha}$.
+The identity $\mathcal{A}_S \circ \rev{S_s(\alpha)} = 0$ holds through reversal 
+of $\alpha$, thus the solution is correct up to determination of $\rev{C}_0$ 
+and $\rev{C}_1$. These initial data depend on the behavior near $\alpha=1$, which in 
+turn depends on the choice of $s$. The zeroth coefficient is just the area enclosed by the separatrix, 
+$ \rev{C}_0 = \text{area}\big(\mathcal{C}_s(1)\big)$. Determination of 
+$\rev{C}_0$ requires case by case integration. Curves $\mathcal{C}_2(1)$ 
+and $\mathcal{C}_3(1)$ bound equilateral polygons, so the corresponding 
+interior areas can be calculated proportional to squared side lengths.
+Separatrices  $\mathcal{C}_4(1)$ and $\mathcal{C}_3(1)$ are not polygon 
+boundaries, but the area can be calculated by $2\int p\; dq$ across
+the maximum width of the oscillation disk. When $\rev{C}_0$ is known exactly,
+then $\rev{C}_1$ can be determined to arbitrary precision by solving 
+$S_s(\alpha)=\rev{S_s(\alpha)}$ at the midpoint $\alpha=\rev{\alpha}=\frac{1}{2}$.
+Table \ref{tab:InitDat} collects the results of our numerical calculations. 
+
+
+\begin{table}[t]
+\begin{center}
+\captionof{table}{Initial data of reversed action functions.}  
+\label{tab:InitDat}
+\begin{tabularx}{0.9 \textwidth}{ c |  c l | c l  c l }
+\hline \hline
+ \;\;\;$s$\;\;\;&\multicolumn{2}{l|}{ \; $\rev{C}_0=$} & \multicolumn{2}{l}{\; $\rev{C}_1=$} 
+ &  \\
+\hline
+2 &\;\;\;\;& $4$ & \;\;\;\; 
+         & $-4.2725887222397812\ldots$ &  & $ = -\frac{3}{2} - 4 \log(2)$   \\
+3 &\;\;\;& $9\frac{\sqrt{3}}{4}$ \hspace{0.5cm} & \;\;\; 
+         & $-4.1533165583656958\ldots$ &  & $ = -\frac{3}{4}\sqrt{3}\big(1+2\log(3)\big)$   \\
+4 &\;\;\;& $8\frac{\sqrt{2}}{3}$ & \;\;\; 
+         & $-4.0014346021854628\ldots$ &  & $ = -\frac{3}{4}\sqrt{2}\big(1+4\log(2)\big)$   \\
+6 &\;\;\;& $\frac{18}{5}$ & \;\;\; 
+         & $-3.7842127941220551\ldots$ & \;\;\;\; & $ = - \frac{1}{4}\big(3+8\log(2)+6\log(3)\big)$
+\\ \hline
+\end{tabularx}
+\end{center}
+\end{table}
+
+The two solutions are equivalent, so they can be stitched together at $\alpha=\rev{\alpha}=\frac{1}{2}$ 
+to form a piecewise solution $\underset{^{pw}}{S_s}(\alpha)$, which equals $S_s(\alpha)$ 
+when $0 \le \alpha \le \frac{1}{2}$, otherwise it equals $\rev{S_s(\alpha)}$ when 
+$\frac{1}{2}<\alpha \le 1$. As a \textit{computable function}, $\underset{^{pw}}{S_s}(\alpha)$ 
+implicitly relies on a truncation parameter $N$, which controls how many terms are summed in 
+both expansions. Choosing $N=60$ is good enough to guarantee double precision, according to the error bound
+$\mathcal{A}_s \circ \underset{^{pw}}{S_s}(\alpha) < 10^{-16}$ when $\alpha \in [0,1]$.
+Precision can always be increased by retaining more summation terms, but don't forget,  
+a reconstruction of $\underset{^{pw}}{S_s}(\alpha)$ with more terms also requires 
+recalculation of the coefficient $\rev{C}_1$. This is only a slight annoyance, one we 
+must live with for now. We still don't know of a reasonable method to obtain exact solutions 
+for the four values $\rev{C}_1$, but strongly suspect the guesses\footnote{The computer program RIES
+accepts numerical values as input and returns probable closed forms as output. It is 
+free software and available online at  \href{https://mrob.com/pub/ries/}{https://mrob.com/pub/ries/}.}
+in Table \ref{tab:InitDat} are correct. As error reaches a maximum at the boundary, a less 
+conservative error estimate is obtained by subtracting the numerical value from the (assumed 
+correct) exact value. When this is done for the $N=60$ approximation, we can estimate 
+the error of $\underset{^{pw}}{S_s}(\alpha)$ less than $10^{-20}$ on the entire 
+oscillation disk.  Having defined a set of computable functions with error bounds, we 
+can now begin to calculate. 
+
+
+\begin{figure}[t]
+\begin{overpic}[width=0.95\textwidth]{./Figures/SFuns.eps}
+ \put (-0.2,-2.5) {$0$}
+ \put (27.0,-2.5) {$0$}
+ \put (54.1,-2.5) {$0$}
+ \put (81.1,-2.5) {$0$}
+
+
+ \put (17.5,-2.5) {$1$}
+ \put (44.8,-2.5) {$1$}
+ \put (72,-2.5) {$1$}
+ \put (99,-2.5) {$1$}
+
+ \put (0.8,29)  {$S_2$}
+ \put (28.0,29) {$S_3$}
+ \put (55.1,29) {$S_4$}
+ \put (82.2,29) {$S_6$}
+
+ \put (-2.0,3.1)   {$\frac{1}{2}$}
+ \put (-2.0,10.7)  {$\frac{3}{2}$}
+ \put (-2.0,18.2)  {$\frac{5}{2}$}
+ \put (-2.0,25.9)  {$\frac{7}{2}$}
+
+
+ \put (17.7,1.3) {$\alpha$}
+ \put (45,1.3) {$\alpha$}
+ \put (72.2,1.3)   {$\alpha$}
+ \put (99.2,1.3)   {$\alpha$}
+
+\end{overpic}
+
+\phantom{\;}
+
+\caption{Root solving computable functions, 
+$\underset{^{pw}}{S_s}(\alpha_n)
+=\frac{1}{4}(n+\frac{1}{2})\underset{^{pw}}{S_s}(1)$ 
+with $n=0,1,2,$ and $3$.}  
+\label{fig:SFuns}
+\end{figure}
+
+\begin{table}[t]
+\begin{center}
+\captionof{table}{Semiclassical quantum values for $h=S_s(1)$ and $N=4$, as in Fig. \ref{fig:SFuns}.}  
+\label{tab:QVals}
+\begin{tabularx}{0.95 \textwidth}{ c |  c l | c l | c l | c l }
+\hline \hline
+ \;\;\;$s$\;\;\;
+ &  \multicolumn{2}{l|}{ \; $\alpha_0=$} 
+ &  \multicolumn{2}{l|}{ \; $\alpha_1=$} 
+ &  \multicolumn{2}{l|}{ \; $\alpha_2=$} 
+ &  \multicolumn{2}{l}{ \; $\alpha_3=$} 
+    \\
+\hline
+2 &\;\;\;& $0.15592230\ldots$ \;\;\; & \;\;\;  & $0.44694844\ldots$ \;\;\; &  
+   \;\;\;& $0.70571106\ldots$ \;\;\; &  \;\;\; & $0.92129983\ldots$ \;\;\; \\  
+3 &\;\;\;& $0.15232502\ldots$ & \;\;\; & $0.43916833\ldots$ &  
+   \;\;\; & $0.69785371\ldots$ &  \;\;\; & $0.91761719\ldots$ \\  
+4 &\;\;\;& $0.14788266\ldots$ & \;\;\; & $0.42934933\ldots$ &  
+   \;\;\; & $0.68764827\ldots$ &  \;\;\; & $0.91260116\ldots$ \\  
+6 &\;\;\;&  $0.14176761\ldots$ & \;\;\; & $0.41544690\ldots$ &  
+   \;\;\; & $0.67263195\ldots$ &  \;\;\; & $0.90470726\ldots$ \\
+\hline
+\end{tabularx}
+\end{center}
+\end{table}
+
+
+
+Plots of functions $S_s(\alpha)$, as in Fig. \ref{fig:SFuns}, allow us to see 
+with our eyes how similar the alternatives are. All four have the same 
+small-amplitude limit ${S_s(\alpha) \approx \pi \alpha}$, but begin to diverge
+from one another as $\alpha$ approaches $1$. Maximum difference occurs at $\alpha=1$.
+An easy bound, $\frac{2(4-18/5)}{(4+18/5)}=\frac{2}{19}$, says that, at most, 
+the value of one action function differs from the value of another by 
+about $10\%$. In addition to the graphs, we also want to calculate a few 
+special "quantum values"\footnote{It is left as an exercise:
+find matrices with comparable eigenvalues, see also \cite{KLEE2020Prelude} Sec. VI.}. 
+In principle, the action functions could be inverted to find energy  
+${\alpha = S_s^{-1}(S)}$ as a function of action $S$.  However, when only 
+a few values $\alpha_n$ are needed, it is much more efficient to simply root 
+solve $\underset{^{pw}}{S_s}(\alpha_n)-h_n=0$, say by Newton's method. Calculating 
+the so-called quantum values requires special choice of a density $N/h$, which 
+in turn determines $h_n=\frac{h}{N}(n+\frac{1}{2})$ for $n=0,1,\ldots,N-1$. In Figure \ref{fig:SFuns} we set the action scale as $h=\rev{C}_0$, choose $N=4$. The values 
+of Table \ref{tab:QVals} then determine the blue curves of Fig. \ref{fig:EllDisks}. 
+In those graphs, the area contained by any central $n=0$ blue curve is 
+$\frac{1}{8}\rev{C}_0$, as is the area between any $n=3$ curve and the separatrix. 
+The area between any two consecutive blue curves equals to $\frac{1}{4}\rev{C}_0$.
+Thus the total area enclosed by the separatrix is 
+$\big(\frac{1}{8}+\frac{1}{8}+3\frac{1}{4}\big)\rev{C}_0=\rev{C}_0$ as necessary. 
+The quantum theory will contribute more significantly to followup articles. Before
+then, we have a few other classical calculations to discuss.
+
+\begin{figure}[t]
+\begin{overpic}[width=0.9\textwidth]{./Figures/ToricSections.eps}
+ \put (75,25) {$s=2,\;\;\;3,$}
+ \put (83.5,22) {$4,\;\;\;6.$} 
+\end{overpic}
+\caption{Toric cross sections with real/complex contours in blue/green. }
+\label{fig:ToricSections}
+\end{figure}
+
+
+Computable instances of the alternative period functions, allow us to calculate
+alternative nomes, the $q$'s mentioned in the introduction. Yet the $q$'s seem to 
+stand for \textit{questions unanswered}, and 
+we are left to wonder. What should we make of them? How are they used in the theory of 
+elliptic curves? They are not the $q$'s of Hamiltonian mechanics, rather, they are \textit{nomes}, 
+which conform to the general expression $q=e^{i \tau}$, with 
+$\tau = T_{\mathfrak{I}}/T_{\mathfrak{R}}$,
+the ratio between real and complex periods. Thus far, we have only dealt with 
+real periods, but for the set of basic $H_s$ the real periods are the complex periods,
+up to a change of Harmonic frequency and inversion of the energy scale $\alpha \rightarrow 1-\alpha$. 
+The annihilator $\mathcal{A}_s$ transforms invariantly by $\alpha \rightarrow 1- \alpha$, so we 
+can write $T_{\mathfrak{I}}=i(\omega_s/\widetilde{\omega}_s)T_s(1-\alpha)$. To obtain the frequency ratios, 
+simply apply an Abel-Wick rotation\footnote{Refer back to \cite{KLEE2020Pendulum} Sec. IV. A rotational axis must be chosen to 
+intersect a hyperbolic point on the separatrix.} from $H_s \rightarrow \widetilde{H}_s$,
+as in Fig. \ref{fig:ToricSections}, and find the harmonic frequency around a circular point of $\widetilde{H}_s$. 
+For signatures $s=2,3,4,6$, we calculate the corresponding complex-time frequencies $\widetilde{\omega}_s$ as 
+$\widetilde{\omega}_2 = 2$, $\widetilde{\omega}_3 = \sqrt{3}$, $\widetilde{\omega}_4 = \sqrt{2}$, 
+and $\widetilde{\omega}_6=1$. By convention, $\omega_s = 1$, then follows 
+$\omega_s/\widetilde{\omega}_s = \frac{1}{2}\csc(\pi/s)$, as quoted in the introduction. 
+In the case $s=2$, we have already shown how the nome $q$ contributes to an exact solution
+using Harold Edwards's alternative theory \cite{EDWARDS2007}. More work needs to be done 
+using other $q$'s to solve the time parameterization problem on other $H_s$, especially case $s=3$.
+
+\pagebreak 
+\section{A Few Binomial Series for $\pi$}
+A very special feature of $S_s(\alpha)$ and $T_s(\alpha)$ is that they satisfy 
+a Legendre-style identity, 
+$S_s(\alpha)T_s(\rev{\alpha})+S_s(\rev{\alpha})T_s(\alpha)=2\pi\;\rev{C}_0$. 
+It follows from $T_s(\alpha)=2\partial_{\alpha}S_s(\alpha)$ and 
+$\mathcal{A}_S \circ S_s(\alpha)=0$, after taking either limit 
+$\alpha \rightarrow 0$ or $\alpha \rightarrow 1$. First observe,
+\begin{eqnarray}
+ \partial_{\alpha}\big(S_s(\alpha)T_s(\rev{\alpha})+S_s(\rev{\alpha})T_s(\alpha)\big)=
+ -S_s(\alpha) S_s''(\rev{\alpha})+S_s(\rev{\alpha})S_s''(\alpha) =  0, \nonumber
+\end{eqnarray}
+because solving either $\mathcal{A}_S \circ S_s(\alpha) = 0$ or 
+$\mathcal{A}_S \circ S_s(\rev{\alpha})=0$ 
+produces $S_s''(z)=\frac{s-1}{s^2\alpha(1-\alpha)}S_s(z)$ with 
+either $z=\alpha$ or $z=\rev{\alpha}$. Next take the limit, 
+\begin{eqnarray}
+\lim_{\alpha \rightarrow 0} S_s(\alpha)T_s(\rev{\alpha})+S_s(\rev{\alpha})T_s(\alpha)
+= \text{constant} \times \lim_{\alpha \rightarrow 0} \big( \alpha  
+\times  \log(1-\alpha)  \big)
++ \rev{C}_0 \times 2 \pi = 2 \pi \; \rev{C}_0,  \nonumber 
+\end{eqnarray}
+and the identity is already proven, no problem! Choosing $\alpha=\rev{\alpha}=\frac{1}{2}$ 
+and dividing both sides by $2\pi^2$, we obtain a few summations for $\rev{C}_0/\pi$,
+\begin{eqnarray}
+\frac{4}{\pi} &=& \sum_{n=0}^{\infty}\sum_{k=0}^{n}
+\frac{1}{32^n}\frac{1}{(k+1)}\binom{2(n-k)}{n-k}^2\binom{2k}{k}^2, \nonumber \\
+\frac{9\sqrt{3}}{4\pi} &=&  \sum_{n=0}^{\infty}\sum_{k=0}^{n}
+\frac{1}{54^n}\frac{1}{(k+1)}\binom{3(n-k)}{n-k}\binom{2(n-k)}{n-k} \binom{3k}{k} \binom{2k}{k}, 
+   \nonumber  \\
+\frac{8\sqrt{2}}{3\pi} &=&  \sum_{n=0}^{\infty}\sum_{k=0}^{n}
+\frac{1}{128^n}\frac{1}{(k+1)}\binom{2(n-k)}{n-k}\binom{4(n-k)}{2(n-k)} \binom{2k}{k} \binom{4k}{2k}, 
+   \nonumber  \\
+\frac{18}{5\pi} &=&  \sum_{n=0}^{\infty}\sum_{k=0}^{n}
+\frac{1}{864^n}\frac{1}{(k+1)}\binom{3(n-k)}{n-k}\binom{6(n-k)}{3(n-k)} \binom{3k}{k} \binom{6k}{3k}. 
+   \nonumber     
+\end{eqnarray}
+After dropping denominators, the corresponding integer sequences, 
+\begin{eqnarray}
+s=2 &:& 1, 6, 56, 620, 7512, 96208, 1279168, 17471448,243509720, 3447792656, \ldots  \nonumber  \\
+s=3 &:& 1, 9, 138, 2550, 51840, 1116612, 24999408, 575368596,13518747000, \ldots  \nonumber  \\
+s=4 &:& 1, 18, 632, 27300, 1306200, 66413424, 3515236032, 191434588488, \ldots  \nonumber  \\
+s=6 &:& 1, 90, 20280, 5798100, 1854085464, 632693421360, 225235329359040, \ldots  \nonumber  
+\end{eqnarray}
+are not found in OEIS as of June 16, 2020. These are not exactly what Ramanujan had in 
+mind for Section 14 of \cite{RAMANUJAN1914}, but they appear similar. Perhaps they are too straightforward 
+or not rapidly convergent enough, but at least they are easy to derive. We would like to carry 
+this idea farther, but simply do not have time or space. Interested readers are refered to 
+Jonathan and Peter Borwein's "Pi and the AGM"\cite{BORWEIN1987}.
+
+
+\section{Conclusion}
+Famously, G.N. Watson (1886-1965) compared Ramanujan with the Italian renaissance
+by saying, 
+\begin{quote}
+\textit{Ramanujan's formula gave me a thrill which is indistinguishable from the thrill
+which I feel when I enter the Sagrestia Nuova of the Capille Midicee and see 
+before me the austere beauty of the four statues representing Day, Night, 
+Evening, and Dawn, which Michelangelo has set over the tombs of the Medicis.} 
+\end{quote}
+We don't want to take away Watson's imminent and lordly right to a personal opinion. 
+This sort of high praise is appropriate, but is it another example of 
+Eurocentric bias from a leader of an Anglocentric society? Even to this day, 
+the question of how we should view Ramanujan and his work remains persistently 
+difficult. An antithesis is to compare with the temple architecture at Namakkal. This 
+could be more appropriate considering the profound importance of place in Ramanujan's 
+life. Such a comparison misses the point of Watson's appraisal, which is to 
+say that Ramanujan became a solid contributor to Western culture.
+
+There is a middle way and a synthesis of perspectives, perhaps not known only 
+to the author, where Ramanujan's works are described as a type of music that 
+came into existence before it could even be properly heard. Although Pandit 
+Ravi Shankar and Ustad Zakir Hussain do not hail from Tamil Nadu, they are 
+also natural Indian citizens who used their work to transcend national 
+boundaries. In Watson's day the idea of a world harmony was 
+only a promise, one made amidst the machinations of World War. Later it 
+did come to pass that Ravi Shankar and Zakir Hussain helped to invent the 
+audible genre of world music. The rest is on records, tapes, CDs, 
+DVDs and probably a few youtube videos\footnote{Listen 
+also: \textit{West Meets East Volumes I \& II}, 
+Ravi Shankar and Yehudi Menuhin; \textit{Passages}, Ravi Shankar and 
+Phillip Glass; \textit{Remember Shakti Live at Jazz a Vienne}, Zakir Hussain, 
+John McLaughlin et al. And here's one more, 
+\textit{Tala Matrix}, Zakir Hussain, Bill Laswell, et al.}.
+
+The musicality of Ramanujan's mathematics bears some relation to the prosody of earlier Indian
+scientists. First the Pingala wrote sayings for binomial 
+coefficients, then Madhava for trigonometric functions, and after Ramanujan, now there is even a saying 
+for elliptic integrals. Is Ramanujan's famous assertion of alternatives $K_1$, $K_2$, and $K_3$ 
+a product of the East or of the West? And whose hearing is it meant to reach? The chosen language
+is not Sanskrit, nor Latin. Nor are alternatives $K_1$, $K_2$, and $K_3$ otherwise hidden from 
+lower classes or less privileged castes. Mahatma Ghandi and his followers won their engagements worldwide. 
+The future is not the exclusive property of any trading company, and the Brahmin's exclusive right 
+to practice Hindu science has also been released. It has never been easier for anyone to find out about 
+Ramanujan's theory, or any theory thereafter! 
+
+How can we all come to appreciate Ramanujan? We don't know, but continue 
+to spend our efforts unfolding what we can from ideas he left behind. The ideas are difficult,
+but as we have seen, computing power makes them more readily accessible. Already,
+billions and trillions of digits of $\pi$ have been computed using his insight. 
+Too bad we do not have time to develop more about $1/\pi$, but it is not the only
+place where Ramanujan's presence can be felt. The preceding analysis of geometric 
+models means to open up a whole new plot in the Mysetrious garden. What else 
+grows in this pleasant and peaceful space? Are there perhaps beetles and 
+butterflies practicing symbiosis with the flora? Poetics aside, at least we have a program for 
+extending systematic analysis\footnote{Again refer back to the Prospectus of \cite{KLEE2020Prelude}.}.  
+
+Science is a process of developing bias, and in the end, science will defeat 
+itself unless the practice of \textit{branching out} is maintained. One weakness
+of the present article is that we have focused mostly on hypergeometric cases 
+in order to suggest that only four achieve a minimal form. This point is at once 
+worthwhile and irrelevant. We should, and we will, spend more time analyzing geometries 
+such as case 3 of Table \ref{tab:MoreCases}. It \textit{is not} a hypergeometric
+case, so the Hadamard factor analysis does not even apply! Yet the periods 
+of this geometry, and of other similar geometries, are still differentiably-finite.
+That is, the period and action functions are the solutions of ordinary differentiable
+equations. The analysis is not much more difficult, and we can make more progress
+easily.
+
+In Section V, Table \ref{tab:QVals} is really more profound than it seems. The 
+semiclassical eigenvalues do more than enable harmonic proportions in drawn 
+figures. In physics, they provide a bridge between the classical theory and 
+the quantum theory. Similar values can be calculated by matrix methods, but 
+tunneling between states also needs to be accounted for. This is one focus
+of a planned followup article, where we will also include a brief explanation
+as to how differential equations can be used for classical data analysis.  
+This effort will build upon algorithms defined in this article, so we have 
+already completed much of the work necessary. Physics and math, practice 
+non-duality and the way is clear.
+
+\pagebreak
+
+\section*{Acknowledgements}
+Neil Sloane and Joerg Arndt were persistent opponents whose antagonism 
+helped to improve rigor. Both of them work \textit{pro bono publico}, 
+and correspond through [seqfan] and [mathfun] mailing lists. Bill Gosper 
+knew the phrase "singular modulus", leading to reference \cite{VILLARINO2020}.
+Peter Paule provided the author access to the RISC Mathematica implementation 
+of Zeilberger's algorithm for hypergeometric summation, which is packaged 
+with Koutschan's Holonomic Functions. In applicable cases, these tools 
+have been used to double check results obtained by \texttt{EasyCT} 
+implementations. Other calculations and explanations herein are the 
+author's own work (with the aid of Mathematica and Singular). 
+
+\bibliographystyle{unsrtnat}
+\bibliography{biblio}
+
+\pagebreak 
+
+\begin{appendices}
+\section{Supporting Documents}
+The three implementations for \texttt{EasyCT} discussed above were given ahead of schedule 
+as \href{https://github.com/bradklee/Dissertation/tree/master/Prelude/notebooks}{supplementary material} 
+for the dissertation prelude, and in fact, all results of Table \ref{tab:Canonical} have been 
+proven correct since the release of the Wolfram Demonstration \href{https://demonstrations.wolfram.com/AFewMoreGeometriesAfterRamanujan/}{A few more geometries after Ramanujan}. Similarly, analysis of right 
+factors has been possible since the earlier release of, 
+\href{https://demonstrations.wolfram.com/ApproximatingPiWithTrigonometricPolynomialIntegrals/}{Approximating 
+Pi with Trigonometric-Polynomial Integrals}. For Section II, a bit of extra programming was done to 
+create a large search space and analyze results found. Another notebook containing this search 
+is available via github. The search is fast enough to rerun in under an hour(?). We have also created
+an extensive set of I/O records, each of which is trivial to validate using the CheckCert notebook. For 
+section IV, more searching was done using \texttt{HyperellipticToODE} and \texttt{DihedralToODE}.
+Those searches are also given (with certificate checking turned on) in another supplementary notebook at
+github.  
+
+As is typically the case, this article was slightly delayed by another branching-out opportunity that we 
+decided to take seriously. An argument on the [math-fun] mailing list eventually led us all to consider
+how simple knots such as the trefoil might be represented as algebraic varieties. Following a suggestion of 
+Cris Moore, we quickly found a seemingly minimal solution for the trefoil, and also managed to integrate 
+its natural period function, essentially using an \texttt{EasyCT} algorithm. The certified result, along 
+with a few plots, was then published on Wolfram Demonstrations under the title,
+ \href{https://demonstrations.wolfram.com/AlgebraicFamilyOfTrefoilCurves/}{Algebraic Family of Trefoil Curves}.
+It is relatively easy to generalize the calculation to other similar torus knots, so there is certainly 
+room for growth and more comparative analysis. After all, why should we spend all of our thoughts and efforts on 
+integrating unknots?   
+\end{appendices}
+
+\end{document}
+
